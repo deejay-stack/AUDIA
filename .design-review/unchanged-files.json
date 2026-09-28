@@ -1,0 +1,27 @@
+[
+    {
+        "Algorithm":  "SHA256",
+        "Hash":  "38C02A669A860ECADA990D5B09E8784B834D193430282EF8C93FB8F295856FFD",
+        "Path":  "C:\\Users\\daniel jay bernadas\\Desktop\\AUDIA_V2\\backend\\app.py"
+    },
+    {
+        "Algorithm":  "SHA256",
+        "Hash":  "E6AEBD735E42C39FE8629AA7122768C06572DF3C161C14F4245D378348BFE8F1",
+        "Path":  "C:\\Users\\daniel jay bernadas\\Desktop\\AUDIA_V2\\package.json"
+    },
+    {
+        "Algorithm":  "SHA256",
+        "Hash":  "B8FBEBB61CB408686D61D0B9B5B09E8E98770EA2D5328F63AD3E51261832626A",
+        "Path":  "C:\\Users\\daniel jay bernadas\\Desktop\\AUDIA_V2\\package-lock.json"
+    },
+    {
+        "Algorithm":  "SHA256",
+        "Hash":  "6D4B5F969A9034838B74568929B19384F6AF03BA9390633FD43DC4DA16722B44",
+        "Path":  "C:\\Users\\daniel jay bernadas\\Desktop\\AUDIA_V2\\src\\App.jsx"
+    },
+    {
+        "Algorithm":  "SHA256",
+        "Hash":  "A3F7BED3A24AD4B70DBB1C5EB1C6AF436D7201DFAB17B9559D614DFD5E8769FA",
+        "Path":  "C:\\Users\\daniel jay bernadas\\Desktop\\AUDIA_V2\\src\\data.js"
+    }
+]

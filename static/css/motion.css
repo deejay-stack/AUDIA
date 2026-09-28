@@ -1,0 +1,7 @@
+/* Native animation support. All layout, color, and typography rules are in styles.css. */
+[hidden] { display: none !important; }
+[data-hover] { transition: transform .25s ease; }
+@media (prefers-reduced-motion: no-preference) {
+  .category-card:hover { transform: translateY(-7px); }
+  .stat-card:hover { transform: translateY(-4px); }
+}
