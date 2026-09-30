@@ -1,95 +1,114 @@
-# AUDIA — Guitar E-Commerce Platform
+# AUDIA
 
-AUDIA uses Flask, HTML templates, plain CSS, and vanilla JavaScript. Flask serves the website and the existing `/api` endpoints together. React, Vite, and a frontend build are no longer required.
+A Flask storefront and administration workspace with HTML templates, CSS, and vanilla JavaScript. Run the application from the root `app.py`; no frontend build is required.
 
 ## Run locally
 
-From the project root:
-
-```bash
-python -m venv .venv
-```
-
-Activate the environment on Windows PowerShell:
-
 ```powershell
+python -m venv .venv
 .venv\Scripts\Activate.ps1
-```
-
-Or on macOS/Linux:
-
-```bash
-source .venv/bin/activate
-```
-
-Then install the Python dependencies and start Flask:
-
-```bash
 python -m pip install -r requirements.txt
 python app.py
 ```
 
-Open **http://localhost:5000**. The existing `python backend/app.py` entry point also works. HTML must be served through Flask so its template includes and static asset URLs are rendered.
+Open **http://localhost:5000**. Without `DATABASE_URL`, the catalog, Guitar Finder, and shopping guide can be previewed using the catalog seed. Account creation, authentication, saved instruments, and orders require a database. There are no demo login bypasses or default administrator credentials.
 
-## Project structure
+**The real PostgreSQL connection is intentionally deferred.** The application is configured for PostgreSQL; SQLite is used only by isolated tests.
 
-```text
-app.py                  Root Flask entry point
-backend/app.py          Existing API logic and Flask configuration
-backend/requirements.txt
-requirements.txt        Root dependency-install entry point
-templates/
-  index.html            Document served by Flask
-  fragments.html        Native HTML template declarations
-  partials/             Storefront, sign-in, admin, dialogs, rows, and SVG icons
-static/
-  css/styles.css        Existing design compiled into ordinary CSS
-  css/motion.css        Native animation and visibility support
-  js/app.js             Screen navigation and theme switching
-  js/storefront.js      Catalog, cart, finder, tracking, chat, and audio
-  js/auth.js            Existing login rules and fallback behavior
-  js/admin.js           Admin navigation, sales filtering, and customer views
-  js/dom.js             Template cloning and browser animation helpers
-  js/data.js            Original fallback catalog and sales data
-  js/theme.js           Saved theme applied before rendering
-tests/                  Flask and browser regression checks
+## Connect PostgreSQL when ready
+
+1. Create a dedicated PostgreSQL database and application user.
+2. Copy `.env.example` to `.env`, set `DATABASE_URL`, and replace `SECRET_KEY` with a long random secret. Keep `.env` private.
+3. Initialize the schema and catalog, then create an administrator:
+
+```powershell
+python -m flask --app app init-db
+python -m flask --app app create-admin
 ```
 
-All HTML lives in `templates/`. JavaScript clones native `<template>` elements and uses DOM events and `textContent` to update them. Styles are editable CSS; no Tailwind compiler or npm install is needed. Icons are inline SVG, with their license in `static/icons-LICENSE.txt`. Animations use Web Animations and IntersectionObserver, with reduced-motion support.
+The administrator command prompts for an email, name, and password. Public registration always creates a customer. `init-db` creates missing tables and seeds an empty catalog; it does not delete existing records or overwrite products. Future changes to an existing schema should use explicit database migrations rather than dropping tables.
 
-## Preserved behavior
+For an HTTPS deployment, set `COOKIE_SECURE=true` and set `APP_URL` to the public origin. `FLASK_DEBUG` defaults to off. Use a production WSGI server for deployment.
 
-- Responsive catalog, search, categories, sorting, ratings, stock, wishlist toggles, and synthesized sound previews.
-- Four-step Guitar Finder with the same API requests, ranking, answer retention, and local fallback.
-- Cart additions, quantities, removal, item count, and subtotal.
-- AUDI chat presets, conversation state, API replies, and fallback replies.
-- Demo order tracking, customer/admin sign-in, password visibility, and role-aware navigation.
-- Admin overview, products, customers, and searchable/filterable sales directory.
-- Persistent light/dark theme, mobile navigation, and the existing layout, colors, fonts, images, and icons.
+## Modules
 
-Existing API functions and catalog/sales data are unchanged. Store, cart, and account state retain their original in-memory lifetime; only the theme persists across reloads. Existing display-only controls (including checkout, bundle details, account creation, password recovery, admin edits, CSV export, and pagination) remain display-only. This migration does not add business behavior to those controls.
+| Area | Implemented flows |
+| --- | --- |
+| Authentication | Customer registration, customer/admin sign-in, remembered sessions, logout, current-session restoration, password changes, recovery and single-use reset links |
+| Account | Profile and delivery details, saved instruments, saved Finder preferences, order history and order details |
+| Storefront | Search, categories, sorting, stock availability, sound previews, cart quantities, bundles, accessories, and support information |
+| Checkout | Cash on delivery orders, server-calculated prices, transactional inventory checks, and duplicate-request protection |
+| Tracking | Signed-in customers can retrieve only their own orders; administrators can inspect store orders |
+| Administration | Inventory create/edit/archive/restore, customer directory/search, sales search/filter/pagination, CSV export, fulfillment status changes, store settings, and stock/order notifications |
+| Reporting | Revenue from delivered orders, date-range totals, category totals, recent orders, and low stock |
+| Assistance | Four-step Guitar Finder and a rule-based guitar shopping guide |
 
-Product images and fonts retain their original external URLs. Local catalog, finder, sign-in, sales, and chat fallbacks remain available when an API request fails.
+Payments are **cash on delivery**. There is no online payment gateway or carrier integration. Admin delivery and refund statuses record the store's actions; they do not charge cards, transfer funds, or call a shipping carrier. Cancellation and refund return the recorded quantities to inventory.
 
-## Demo accounts
+The interface follows the retained design references in `docs/design-reference/`: violet/mint accents, light/dark themes, responsive catalog and administration layouts, and the split sign-in screen. Existing photographs are served locally from `assets/images/`. New inventory can use HTTPS image URLs, with a local placeholder if a remote image fails.
 
-- Customer: `user@audia.ph` / `audia123`
-- Administrator: `admin@audia.ph` / `admin123`
+## Password recovery
 
-These accounts are demonstration-only. The existing customer API accepts an email containing `@` and a password of at least six characters. Replace demo authentication with database-backed users, password hashing, and secure sessions before production use.
+Configure one of these mail backends in `.env`:
+
+- `MAIL_BACKEND=smtp`: supply `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD`, and `SMTP_FROM`. Delivery uses STARTTLS.
+- `MAIL_BACKEND=file`: local development only. Reset messages appear in `instance/mail/*.eml`; they are not exposed through the website.
+- `MAIL_BACKEND=disabled`: recovery reports that the service is unavailable. This is the default until mail is configured.
+
+Reset requests use a generic response for unknown accounts. Links expire after 30 minutes and work once. Changing or resetting a password revokes other sessions. Passwords are hashed with scrypt; session tokens and reset tokens are stored as hashes. API mutations require a CSRF token. Login and recovery attempts are rate-limited in the database. Administration is authorized on the server.
+
+## Structure
+
+```text
+app.py                       Application factory, configuration, CLI, root entry point
+modules/
+  auth.py                    Authentication and request security
+  mail.py                    Password reset delivery
+  catalog.py                 Catalog, recommendations, saved instruments, support
+  orders.py                  Customer checkout and order access
+  admin.py                   Protected store operations and reporting
+  database.py                Connection lifecycle and initial schema setup
+  models.py                  Database records
+database/catalog.json        Initial catalog and read-only preview data
+templates/
+  layouts/                   Document and template registry
+  storefront/ auth/ account/ Feature screens and components
+  cart/ finder/ chat/        Shopping dialogs and assistance
+  admin/                     Overview, products, sales, customers, settings, alerts
+  shared/                    Reusable dialog and runtime SVG icons
+assets/
+  css/                       Template-named styles and shared design rules
+  js/                        Feature controllers and shared helpers
+  images/                    Local reference photographs and fallback image
+docs/design-reference/       Original visual references retained for maintenance
+tests/                       API/security and browser integration checks
+instance/                    Ignored local secret key and development mail outbox
+.env.example                 PostgreSQL, session, and mail configuration example
+requirements.txt             Python runtime dependencies
+```
+
+Flask serves assets at `/static/`. `assets/css/index.css` imports the stylesheets; new feature styles use the corresponding template filename. Templates do not contain inline CSS. Shared animation helpers use runtime styles for movement.
 
 ## Verification
 
-Run the Flask tests without a running server:
+Server tests create and delete their own database; they never use `DATABASE_URL` from `.env`:
 
-```bash
+```powershell
 python -m unittest discover -s tests -v
 ```
 
-For the optional browser regression suite, start Flask, make Playwright available to Node, and run:
+For browser tests, run the disposable fixture server in one terminal:
 
-```bash
+```powershell
+python tests/serve.py
+```
+
+In a second terminal, with Playwright and Chromium available:
+
+```powershell
 node tests/browser.cjs
 ```
 
-`PLAYWRIGHT_MODULE` can point to an existing Playwright installation. `AUDIA_BASE_URL` defaults to `http://127.0.0.1:5000`. The suite checks catalog actions, cart totals, finder answers, chat, authentication, sales filters, theme persistence, API failure fallbacks, and responsive layouts from 320px to 1440px.
+`PLAYWRIGHT_MODULE` can point to an existing Playwright installation. `AUDIA_BASE_URL` defaults to the fixture at `http://127.0.0.1:5056`. Start a fresh fixture server for each full run. Set `SCREENSHOT_DIR=test-results` to save UI captures. Fixture credentials exist only in the disposable test database.
+
+The tests cover authentication, authorization, CSRF, reset links, session revocation, inventory, idempotent checkout, order ownership, reporting, exports, and the customer/admin browser flows. PostgreSQL-specific deployment and concurrency checks remain part of the deferred database connection work.

@@ -1,0 +1,345 @@
+@keyframes note-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes signal {
+  from {
+    transform: scaleY(.5);
+  }
+
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@media (min-width: 1600px) {
+  .hero-layout {
+    min-height: 770px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .hero-layout {
+    gap: 40px;
+    padding-top: 56px;
+    padding-bottom: 46px;
+  }
+
+  .hero-copy {
+    max-width: 650px;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(4.8rem, 10vw, 6.8rem);
+  }
+
+  .hero-visual {
+    min-height: 510px;
+    width: 100%;
+    max-width: 650px;
+    margin-inline: auto;
+  }
+
+  .hero-photo {
+    inset: 15px 24px 32px;
+  }
+
+  .hero-photo img {
+    -o-object-position: center 45%;
+       object-position: center 45%;
+  }
+
+  .sound-orbit {
+    max-width: 100%;
+  }
+
+  .category-card {
+    height: 310px;
+  }
+
+  .auth-panel {
+    min-height: 100dvh;
+  }
+}
+
+@media (max-width: 639px) {
+  .shell {
+    padding-inline: 20px;
+  }
+
+  .announcement {
+    padding-inline: 16px;
+    font-size: 8px;
+    letter-spacing: .09em;
+  }
+
+  .store-header .shell {
+    height: 68px;
+    gap: 8px;
+  }
+
+  .store-header .audia-mark {
+    font-size: 16px;
+    letter-spacing: .22em;
+  }
+
+  .store-header .icon-btn, .store-header .theme-toggle {
+    width: 36px;
+    height: 38px;
+  }
+
+  .hero-layout {
+    padding-top: 38px;
+    gap: 30px;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(3.6rem, 14vw, 5.5rem);
+  }
+
+  .hero-copy > p:not(.section-label) {
+    font-size: 14px;
+  }
+
+  .hero-copy > .mt-9 {
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .hero-copy .primary-btn, .hero-copy .secondary-btn {
+    padding: 13px 14px;
+    font-size: 11px;
+    gap: 7px;
+  }
+
+  .hero-stats {
+    margin-top: 30px;
+    gap: 10px;
+  }
+
+  .hero-stats > div + div {
+    padding-left: 15px;
+  }
+
+  .hero-stats .font-display {
+    font-size: 22px;
+  }
+
+  .hero-visual {
+    min-height: 410px;
+  }
+
+  .hero-photo {
+    inset: 22px 9px 38px;
+    border-width: 4px;
+    transform: rotate(-2deg);
+  }
+
+  .hero-photo-caption {
+    left: 17px;
+    right: 17px;
+    bottom: 58px;
+  }
+
+  .hero-photo-caption h2 {
+    font-size: 20px;
+  }
+
+  .hero-photo-caption p:last-child {
+    font-size: 10px;
+  }
+
+  .hero-photo-caption button {
+    padding-inline: 10px;
+  }
+
+  .setup-note {
+    padding: 12px;
+    top: 0;
+  }
+
+  .sound-signature {
+    left: 0;
+    bottom: 5px;
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .hero-bottom .shell {
+    font-size: 8px;
+    gap: 13px;
+  }
+
+  #categories, #shop, #track {
+    padding-block: 64px;
+  }
+
+  #categories > .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .category-card {
+    height: 245px;
+  }
+
+  .category-card .p-6 {
+    padding: 14px;
+  }
+
+  .category-card h3 {
+    font-size: 20px;
+  }
+
+  .category-card .p-6 > span {
+    height: 27px;
+    width: 27px;
+    flex-shrink: 0;
+  }
+
+  .category-card .p-6 p {
+    font-size: 8px;
+    letter-spacing: .04em;
+  }
+
+  #shop .input-shell {
+    min-width: 0;
+  }
+
+  #shop .mt-9.grid {
+    gap: 20px;
+  }
+
+  .product-image {
+    aspect-ratio: 1.2;
+  }
+
+  .finder-banner {
+    padding: 36px 24px;
+  }
+
+  .finder-banner > .relative {
+    gap: 32px;
+  }
+
+  .finder-profile {
+    transform: none;
+  }
+
+  #bundles {
+    padding-bottom: 64px;
+  }
+
+  #bundles > div > div:first-child {
+    min-height: 290px;
+  }
+
+  #bundles h2 {
+    font-size: 32px;
+  }
+
+  .storefront main > section:has(.finder-banner) {
+    padding-block: 64px;
+  }
+
+  .admin-page main {
+    padding: 20px 16px;
+  }
+
+  .admin-page header {
+    padding-inline: 12px;
+  }
+
+  .admin-page main > div > .flex {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .admin-page .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stat-card {
+    padding: 16px;
+  }
+
+  .stat-card > div {
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .stat-card > p:last-child {
+    font-size: 23px;
+  }
+
+  .revenue-chart > div:first-child {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .auth-panel h1 {
+    font-size: 34px;
+  }
+}
+
+@media (max-width: 359px) {
+  .shell {
+    padding-inline: 16px;
+  }
+
+  .hero-copy .primary-btn, .hero-copy .secondary-btn {
+    padding-inline: 10px;
+    font-size: 10px;
+  }
+
+  .category-card .p-6 {
+    padding: 10px;
+  }
+
+  .category-card h3 {
+    font-size: 18px;
+  }
+
+  .category-card .p-6 > span {
+    width: 23px;
+    height: 23px;
+  }
+
+  .stat-card {
+    padding: 12px;
+  }
+
+  .stat-card > p:last-child {
+    font-size: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *, *::before, *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Retain content without movement when browser animation is reduced. */
+
+  .storefront main [style], .auth-page [style]:not(img), .admin-page main [style], .finder-modal[style], .chat-panel[style], .cart-panel[style], #root > div > div[style] {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  .auth-art img {
+    transform: none !important;
+  }
+}
+

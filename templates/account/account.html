@@ -1,0 +1,16 @@
+<div class="account-page min-h-screen">
+  <header class="account-header shell"><button class="audia-mark" data-action="store">AUDIA</button><div class="flex items-center gap-3"><button class="secondary-btn" data-action="store">Back to store</button><button class="icon-btn" data-action="theme" aria-label="Change theme"></button><button class="secondary-btn" data-action="logout">Sign out</button></div></header>
+  <main class="shell account-main">
+    <p class="section-label">Your AUDIA</p><h1 class="font-display text-4xl font-semibold mt-3" data-field="greeting"></h1><p class="mt-3 text-sm text-zinc-500">Your instruments, orders, and account details, together.</p>
+    <div class="account-grid">
+      <section class="surface-card account-section"><h2 class="font-display text-xl font-semibold">Profile &amp; delivery</h2>
+        <form class="stack-form mt-6" data-form="profile"><label>Full name<input name="name" required minlength="2" maxlength="100" autocomplete="name"></label><label>Email address<input name="email" type="email" disabled></label><label>Phone number<input name="phone" maxlength="30" autocomplete="tel"></label><label>Delivery address<textarea name="address" maxlength="500" autocomplete="street-address"></textarea></label><p class="form-error" role="alert" data-field="form-error" hidden></p><button class="primary-btn" type="submit">Save profile</button></form>
+      </section>
+      <section class="surface-card account-section"><h2 class="font-display text-xl font-semibold">Account security</h2><p class="form-hint mt-3">Changing your password signs out your other sessions.</p>
+        <form class="stack-form mt-6" data-form="password"><label>Current password<input name="current_password" type="password" required autocomplete="current-password" maxlength="128"></label><label>New password<input name="password" type="password" required minlength="10" maxlength="128" autocomplete="new-password"></label><label>Confirm new password<input name="confirm" type="password" required minlength="10" maxlength="128" autocomplete="new-password"></label><p class="form-error" role="alert" data-field="form-error" hidden></p><button class="primary-btn" type="submit">Update password</button></form>
+      </section>
+    </div>
+    <section class="surface-card account-section mt-7"><div class="flex items-center justify-between gap-4"><h2 class="font-display text-xl font-semibold">Your orders</h2><button class="secondary-btn" data-action="refresh-orders">Refresh</button></div><div class="account-orders" data-field="orders"><p class="empty-state">Loading your orders…</p></div></section>
+    <section class="surface-card account-section mt-7"><h2 class="font-display text-xl font-semibold">Saved instruments</h2><div class="saved-grid" data-field="saved"><p class="empty-state">Loading your saved instruments…</p></div><div class="finder-profile-summary"><p class="form-hint" data-field="finder-profile"></p><button class="secondary-btn" data-action="find-guitar">Open Guitar Finder</button></div></section>
+  </main>
+</div>

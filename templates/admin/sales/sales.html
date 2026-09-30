@@ -1,0 +1,67 @@
+<div data-motion="{&quot;initial&quot;:{&quot;opacity&quot;:0,&quot;y&quot;:10},&quot;animate&quot;:{&quot;opacity&quot;:1,&quot;y&quot;:0},&quot;viewport&quot;:false}">
+  <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+    <div>
+      <p class="text-sm text-zinc-500">All storefront transactions</p>
+      <h2 class="mt-1 font-display text-3xl font-semibold tracking-tight">Sales directory</h2>
+    </div>
+    <button class="secondary-btn self-start" data-action="export-sales"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download" aria-hidden="true"><path d="M12 15V3"></path><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="m7 10 5 5 5-5"></path></svg> Export CSV</button>
+  </div>
+  <div class="surface-card mt-7 overflow-hidden">
+    <div class="flex flex-col gap-3 border-b border-zinc-200 p-5 dark:border-white/10 sm:flex-row">
+      <label class="input-shell flex-1">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search" aria-hidden="true">
+          <path d="m21 21-4.34-4.34"></path>
+          <circle cx="11" cy="11" r="8"></circle>
+        </svg>
+        <input class="w-full bg-transparent py-3 text-sm outline-none" placeholder="Search order, customer, email, or product" value="" data-field="sales-query" aria-label="Search sales">
+      </label>
+      <label class="input-shell">
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sliders-horizontal" aria-hidden="true">
+          <path d="M10 5H3"></path>
+          <path d="M12 19H3"></path>
+          <path d="M14 3v4"></path>
+          <path d="M16 17v4"></path>
+          <path d="M21 12h-9"></path>
+          <path d="M21 19h-5"></path>
+          <path d="M21 5h-7"></path>
+          <path d="M8 10v4"></path>
+          <path d="M8 12H3"></path>
+        </svg>
+        <select class="appearance-none bg-transparent py-3 pr-6 text-sm outline-none" data-field="sales-status" aria-label="Order status">
+          <option selected="">All</option>
+          <option>Shipped</option><option>Delivered</option><option>Cancelled</option>
+          <option>Processing</option>
+          <option>Pending</option>
+          <option>Refunded</option>
+        </select>
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down" aria-hidden="true">
+          <path d="m6 9 6 6 6-6"></path>
+        </svg>
+      </label>
+    </div>
+    <div class="overflow-x-auto">
+      <table class="w-full min-w-[900px] text-left">
+        <thead>
+          <tr class="bg-zinc-50 text-[9px] uppercase tracking-[.15em] text-zinc-400 dark:bg-white/[.025]">
+            <th class="px-5 py-4">Order ID</th>
+            <th class="px-5 py-4">Customer</th>
+            <th class="px-5 py-4">Product</th>
+            <th class="px-5 py-4">Date</th>
+            <th class="px-5 py-4">Payment</th>
+            <th class="px-5 py-4">Status</th>
+            <th class="px-5 py-4 text-right">Total</th>
+            <th class="w-12"></th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-zinc-100 dark:divide-white/5" data-field="sales-rows"></tbody>
+      </table><p class="empty-state" data-field="sales-empty" hidden>No orders match your search.</p>
+    </div>
+    <div class="flex items-center justify-between border-t border-zinc-200 px-5 py-4 text-xs text-zinc-500 dark:border-white/10">
+      <span data-field="sales-count">Showing 6 of 6 sales</span>
+      <div class="flex gap-2">
+        <button class="rounded-lg border border-zinc-200 px-3 py-2 dark:border-white/10" data-action="sales-previous">Previous</button>
+        <button class="rounded-lg border border-zinc-200 px-3 py-2 dark:border-white/10" data-action="sales-next">Next</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+.finder-modal {
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+

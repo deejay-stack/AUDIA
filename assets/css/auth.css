@@ -1,0 +1,43 @@
+/* Sign-in and administration use quieter versions of the storefront accents. */
+
+.auth-art {
+  margin: 18px;
+  border-radius: 12px;
+  border: 1px solid #b99ddd33;
+}
+
+.auth-art > img {
+  filter: saturate(.6);
+}
+
+.auth-art::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(135deg, #7136af33, transparent 60%);
+}
+
+.auth-art .mark-a {
+  color: #b8f5d0;
+}
+
+.auth-panel {
+  background-image: radial-gradient(ellipse at 80% 20%, #a77ce312, transparent 60%);
+}
+
+.auth-panel > div {
+  max-width: 470px;
+}
+
+.auth-panel h1 {
+  letter-spacing: -.05em;
+}
+
+.auth-panel form + div {
+  background: var(--soft);
+  border-color: var(--line);
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+

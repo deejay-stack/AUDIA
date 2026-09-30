@@ -1,0 +1,16 @@
+<form class="form-grid" data-form="product">
+  <label class="form-wide">Product name<input name="name" required minlength="2" maxlength="150"></label>
+  <label>Brand<input name="brand" required maxlength="80"></label>
+  <label>Category<select name="category"><option>Electric</option><option>Acoustic</option><option>Bass</option><option>Classical</option><option>Accessories</option><option>Bundles</option></select></label>
+  <label>Price (PHP)<input name="price" type="number" min="0.01" max="10000000" step="0.01" required></label>
+  <label>Stock quantity<input name="stock" type="number" min="0" max="100000" step="1" required></label>
+  <label>Experience level<select name="level"><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select></label>
+  <label>Color<input name="color" maxlength="60"></label>
+  <label>Badge<input name="badge" maxlength="40" placeholder="Optional"></label>
+  <label class="checkbox-label"><input type="checkbox" name="active" checked> Visible in store</label>
+  <label class="form-wide">Image URL<input name="image" type="url" required maxlength="2000" placeholder="https://…"></label>
+  <label class="form-wide">Description<textarea name="description" required maxlength="3000"></textarea></label>
+  <label class="form-wide">Specifications, one per line<textarea name="specs" maxlength="4000"></textarea></label>
+  <p class="form-error form-wide" data-field="form-error" role="alert" hidden></p>
+  <div class="form-actions form-wide"><button type="button" class="danger-btn" data-action="archive-product" hidden>Archive product</button><button type="submit" class="primary-btn">Save product</button></div>
+</form>

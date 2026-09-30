@@ -1,0 +1,15 @@
+.account-header { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-block: 24px; border-bottom: 1px solid var(--line); }
+.account-main { padding-block: 48px 80px; }
+.account-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 24px; margin-top: 32px; }
+.account-section { padding: 28px; min-width: 0; }
+.account-orders { margin-top: 20px; }
+.account-order { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+.account-order:last-child { border: 0; }
+.account-order-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 16px; font-size: 14px; }
+.saved-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 24px; margin-top: 24px; }
+.saved-item { display: flex; gap: 16px; align-items: center; min-width: 0; }
+.saved-item img { width: 80px; height: 110px; object-fit: cover; border-radius: 9px; }
+.saved-item > div { min-width: 0; }
+.saved-item .form-actions { justify-content: flex-start; }
+.finder-profile-summary { margin-top: 28px; display: flex; gap: 20px; align-items: center; justify-content: space-between; border-top: 1px solid var(--line); padding-top: 24px; }
+@media (max-width: 639px) { .account-header { align-items: start; flex-direction: column; } .account-header .secondary-btn { font-size: 11px; padding: 10px; } .account-grid, .saved-grid { grid-template-columns: 1fr; } .account-section { padding: 20px; } .account-order, .finder-profile-summary { align-items: start; flex-direction: column; } }

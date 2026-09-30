@@ -1,0 +1,5 @@
+.status-delivered { color: var(--mint); }
+.status-cancelled, .status-refunded { color: #be123c; background: #fb71851a; }
+.dark .status-cancelled, .dark .status-refunded { color: #fda4af; }
+.status-pending { color: #a16207; background: #fbbf241a; }
+.dark .status-pending { color: #fde68a; }

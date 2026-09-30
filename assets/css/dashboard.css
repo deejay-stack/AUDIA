@@ -1,0 +1,40 @@
+.admin-page {
+  background-image: radial-gradient(ellipse at 95% 0%, #a77ce310, transparent 50%);
+}
+
+.admin-page aside {
+  border-color: var(--line);
+  background: var(--surface);
+}
+
+.admin-page aside nav button {
+  border-radius: 7px;
+}
+
+.admin-page aside nav button.bg-zinc-950 {
+  color: var(--accent);
+  background: var(--soft);
+  box-shadow: inset 3px 0 var(--accent);
+}
+
+.admin-page main {
+  max-width: 1760px;
+  margin-inline: auto;
+}
+
+.admin-page main > div, .admin-page .grid > *, .admin-page .surface-card {
+  min-width: 0;
+}
+
+.admin-page thead {
+  background: var(--soft);
+}
+
+.admin-page th {
+  color: var(--muted);
+}
+
+.admin-page td {
+  font-variant-numeric: tabular-nums;
+}
+

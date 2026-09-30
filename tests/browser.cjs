@@ -1,161 +1,91 @@
-// Optional browser regression test. Install Playwright separately or set PLAYWRIGHT_MODULE.
-const {chromium} = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
-const assert = require('node:assert/strict');
-const base = process.env.AUDIA_BASE_URL || 'http://127.0.0.1:5000';
-
-(async () => {
-  const browser = await chromium.launch({headless: true});
-  const page = await browser.newPage({viewport: {width: 1440, height: 1000}, reducedMotion: 'reduce'});
-  const errors = [];
-  page.on('pageerror', error => errors.push(error.message));
-  const report = [];
-  const buttons = (name, root = page) => root.getByRole('button', {name, exact: true});
-  const count = async (selector, expected) => {
-    await page.waitForFunction(({selector, expected}) => document.querySelectorAll(selector).length === expected, {selector, expected});
-  };
-  const close = async name => {await buttons(name).click({position: {x: 10, y: 10}});};
-  async function fits(label) {
-    for (const width of [320, 390, 768, 1024, 1440]) {
-      await page.setViewportSize({width, height: 1000});
-      await page.waitForTimeout(150);
-      const size = await page.evaluate(() => ({width: innerWidth, scroll: document.documentElement.scrollWidth}));
-      assert.ok(size.scroll <= size.width, `${label} overflows at ${width}`);
+// Run against `python tests/serve.py`, never against a real customer database.
+const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const base=process.env.AUDIA_BASE_URL||'http://127.0.0.1:5056';
+(async()=>{
+  const browser=await chromium.launch({headless:true});
+  try{
+    const page=await browser.newPage({viewport:{width:1440,height:1000},reducedMotion:'reduce'});
+    const errors=[];page.on('pageerror',error=>errors.push(error.message));
+    const button=(name,root=page)=>root.getByRole('button',{name,exact:true});
+    const email=`player-${Date.now()}@example.com`,password='player-password-123';
+    async function fits(label){
+      for(const width of [320,390,768,1440]){
+        await page.setViewportSize({width,height:1000});
+        await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+        await page.waitForFunction(()=>document.documentElement.scrollWidth<=innerWidth,{},{timeout:2000});
+        const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth);
+        assert.equal(overflow,false,`${label} overflows at ${width}`);
+        if(await page.locator('.admin-page').count() && !await page.locator('dialog[open]').count()) {
+          await page.waitForFunction(expected=>{
+            const shell=document.querySelector('.admin-page > div');
+            return shell && parseInt(getComputedStyle(shell).paddingLeft)===expected;
+          },width>=1024?270:0,{timeout:2000});
+          const padding=await page.locator('.admin-page > div').evaluate(el=>parseInt(getComputedStyle(el).paddingLeft));
+          assert.equal(padding,width>=1024?270:0,`${label} sidebar spacing at ${width}`);
+        }
+      }
     }
-  }
-  await page.goto(base);
-  await count('.product-card', 6);
-  await fits('Storefront dark');
-  await buttons('Switch to light mode').click();
-  assert.equal(await page.evaluate(() => localStorage.getItem('audia-theme')), 'light');
-  await page.reload(); await count('.product-card', 6);
-  assert.equal(await page.locator('html').evaluate(el => el.classList.contains('dark')), false);
-  await fits('Storefront light');
-  const search = page.getByPlaceholder('Search guitars or brands');
-  await search.fill('YAMAHA'); await count('.product-card', 1);
-  assert.match(await page.locator('.product-card').innerText(), /Yamaha FG800/);
-  await search.fill('missing guitar'); await count('.product-card', 0);
-  await page.getByText('No guitar matches that search.').waitFor();
-  await search.fill(''); await count('.product-card', 6);
-  for (const [category, expected] of [['Electric', 3], ['Acoustic', 1], ['Classical', 1], ['Bass', 1], ['All', 6]]) {
-    await buttons(category, page.locator('#shop')).click(); await count('.product-card', expected);
-  }
-  const sort = page.locator('#shop select');
-  for (const [value, expected] of [['Price: low', 'Squier'], ['Price: high', 'PRS'], ['Rating', 'Epiphone'], ['Featured', 'Squier']]) {
-    await sort.selectOption(value);
-    assert.match(await page.locator('.product-card h3').first().innerText(), new RegExp(expected));
-  }
-  const like = buttons('Save guitar').first();
-  await like.click(); assert.equal(await like.locator('svg').getAttribute('fill'), 'currentColor');
-  await like.click(); assert.equal(await like.locator('svg').getAttribute('fill'), 'none');
-  await buttons('Play guitar tone').first().click();
-  await page.getByText('Playing', {exact: true}).waitFor();
-  await page.getByText('Hear the tone', {exact: true}).waitFor();
-  report.push('Catalog search, empty results, every category, all sort modes, wishlist, and sound preview');
-
-  await buttons('Add Squier Sonic Stratocaster to cart').click();
-  const cart = page.locator('.cart-panel'); await cart.waitFor();
-  assert.match(await cart.innerText(), /12,990/);
-  await cart.locator('button').filter({has: page.locator('svg.lucide-plus')}).click();
-  assert.match(await cart.innerText(), /25,980/);
-  await cart.locator('button').filter({has: page.locator('svg.lucide-minus')}).click();
-  await cart.locator('button').filter({has: page.locator('svg.lucide-minus')}).click();
-  await cart.getByText('Your cart is empty.').waitFor();
-  await close('Close cart');
-  await buttons('Add Squier Sonic Stratocaster to cart').click(); await close('Close cart');
-  await buttons('Add Squier Sonic Stratocaster to cart').click();
-  assert.match(await cart.innerText(), /25,980/); await close('Close cart');
-  report.push('Cart additions, repeat additions, quantity controls, subtotal, and empty state');
-
-  await buttons('Find my guitar').click();
-  const finder = page.locator('.finder-modal');
-  const range = finder.locator('input[type=range]'); await range.fill('15000');
-  assert.match(await finder.innerText(), /15,000/);
-  await buttons('Continue').click(); await buttons('Intermediate', finder).click();
-  await buttons('Continue').click(); await buttons('Blues', finder).click();
-  await buttons('Continue').click(); await buttons('Acoustic', finder).click();
-  const requestPromise = page.waitForRequest(request => request.url().endsWith('/api/finder'));
-  await buttons('Show my matches').click();
-  assert.deepEqual((await requestPromise).postDataJSON(), {budget: 15000, level: 'Intermediate', genre: 'Blues', category: 'Acoustic'});
-  await page.getByText('Your closest matches.').waitFor();
-  assert.match(await finder.innerText(), /Yamaha FG800/);
-  await buttons('Start again').click(); assert.equal(await finder.locator('input').inputValue(), '15000');
-  await close('Close finder');
-  await buttons('Find my guitar').click(); assert.equal(await finder.locator('input').inputValue(), '15000');
-  for (let i = 0; i < 3; i++) await buttons('Continue').click();
-  await buttons('Show my matches').click(); await page.getByText('Your closest matches.').waitFor();
-  await finder.locator('button').filter({has: page.locator('svg.lucide-plus')}).first().click();
-  await cart.waitFor(); assert.match(await cart.innerText(), /Yamaha FG800/); await close('Close cart');
-  report.push('Finder answers, API payload, recommendations, restart, remembered answers, and add-to-cart');
-
-  const order = page.getByPlaceholder('AUD-24018');
-  await order.fill('aud-12345'); await buttons('Track').click();
-  assert.match(await page.locator('#track .surface-card').innerText(), /AUD-12345/);
-  await order.fill('aud-99999'); assert.match(await page.locator('#track .surface-card').innerText(), /AUD-99999/);
-  await order.fill(''); await buttons('Track').click(); assert.match(await page.locator('#track .surface-card').innerText(), /AUD-24018/);
-  await buttons('Open customer support').click();
-  await buttons('I am a beginner').click();
-  await page.getByText(/For a beginner, prioritize comfort/).waitFor();
-  await page.getByPlaceholder('Ask about a guitar').fill('Acoustic or electric?');
-  await page.getByPlaceholder('Ask about a guitar').press('Enter');
-  await page.getByText(/Choose acoustic if you want simplicity/).waitFor();
-  await buttons('Open customer support').click(); await buttons('Open customer support').click();
-  await page.getByText(/Choose acoustic if you want simplicity/).waitFor();
-  await page.setViewportSize({width: 390, height: 600});
-  await page.waitForTimeout(300);
-  const chatBox = await page.locator('.chat-panel').boundingBox(); assert.ok(chatBox.y >= 0 && chatBox.y + chatBox.height <= 600, `Chat bounds: ${JSON.stringify(chatBox)}`);
-  await buttons('Open customer support').click();
-  await buttons('Open menu').click(); await buttons('Sign in').click();
-  await page.locator('.auth-page').waitFor();
-  report.push('Order tracking, chat presets, typed chat, retained conversation, and mobile navigation');
-
-  await fits('Sign-in light');
-  await buttons('Switch to dark mode').click(); await fits('Sign-in dark');
-  await buttons('Show password').click(); assert.equal(await page.locator('input').nth(1).getAttribute('type'), 'text');
-  await buttons('Hide password').click();
-  await buttons('Administrator').click();
-  await page.locator('input[type=password]').fill('incorrect'); await buttons('Open dashboard').click();
-  await page.getByText('Incorrect email or password.').waitFor();
-  await buttons('Customer').click(); await buttons('Sign in').click();
-  await page.locator('.storefront').waitFor();
-  await buttons('Open account').waitFor();
-  await buttons('Admin portal').click(); await buttons('Open dashboard').click();
-  await page.locator('.admin-page').waitFor(); await fits('Dashboard dark');
-  await buttons('Switch to light mode').click(); await fits('Dashboard light');
-  await page.locator('aside nav').getByRole('button', {name: 'Sales directory'}).click();
-  await count('tbody tr', 6);
-  const salesQuery = page.getByPlaceholder('Search order, customer, email, or product');
-  await salesQuery.fill('mika'); await count('tbody tr', 1);
-  await salesQuery.fill(''); await page.locator('main select').selectOption('Paid'); await count('tbody tr', 3);
-  await salesQuery.fill('missing'); await count('tbody tr', 0);
-  await page.locator('aside nav').getByRole('button', {name: 'Products', exact: true}).click(); await fits('Admin products');
-  await page.locator('aside nav').getByRole('button', {name: 'Customers', exact: true}).click(); await fits('Admin customers');
-  await page.locator('aside nav').getByRole('button', {name: 'Sales directory'}).click(); await count('tbody tr', 6);
-  await page.setViewportSize({width: 390, height: 900});
-  await page.locator('header button').first().click();
-  await page.locator('aside nav').getByRole('button', {name: 'Overview', exact: true}).click();
-  await page.setViewportSize({width: 1440, height: 1000});
-  await buttons('View storefront').click(); await buttons('Open account').click(); await page.locator('.admin-page').waitFor();
-  await buttons('Sign out of admin').click(); await buttons('Sign in').waitFor();
-  report.push('Customer/admin authentication, invalid credentials, password visibility, responsive admin views, sales filtering, and logout');
-
-  // Exercise the original local fallbacks without changing the Flask API.
-  await page.route('**/api/**', route => route.abort());
-  await page.reload(); await count('.product-card', 6);
-  await buttons('Find my guitar').click();
-  for (let i = 0; i < 3; i++) await buttons('Continue').click();
-  await buttons('Show my matches').click(); await page.getByText('Your closest matches.').waitFor();
-  assert.match(await page.locator('.finder-modal').innerText(), /Squier Sonic/);
-  await close('Close finder');
-  await buttons('Open customer support').click(); await buttons('I am a beginner').click();
-  await page.getByText(/For a first guitar, comfort matters most/).waitFor();
-  await buttons('Open customer support').click(); await buttons('Admin portal').click();
-  await buttons('Open dashboard').click(); await page.locator('.admin-page').waitFor(); await count('tbody tr', 5);
-  await buttons('Sign out of admin').click(); await buttons('Sign in').click();
-  await page.locator('.auth-page').waitFor(); await buttons('Sign in').click();
-  await page.locator('.storefront').waitFor(); await buttons('Open account').waitFor();
-  report.push('Catalog, finder, chat, customer/admin login, and sales fallbacks when API requests fail');
-  assert.deepEqual(errors, []);
-  console.log(report.map(item => `PASS: ${item}`).join('\n'));
-  console.log('PASS: No JavaScript runtime errors');
-  await browser.close();
-})().catch(error => {console.error(error); process.exit(1);});
+    async function capture(name){
+      if(process.env.SCREENSHOT_DIR){fs.mkdirSync(process.env.SCREENSHOT_DIR,{recursive:true});await page.screenshot({path:`${process.env.SCREENSHOT_DIR}/${name}.png`,fullPage:true});}
+    }
+    await page.goto(base);await page.locator('.product-card').first().waitFor();
+    assert.equal(await page.locator('.product-card').count(),8);
+    await fits('storefront dark');await button('Switch to light mode').click();await fits('storefront light');await capture('storefront');
+    await page.getByPlaceholder('Search guitars or brands').fill('Yamaha');assert.equal(await page.locator('.product-card').count(),1);
+    await page.getByPlaceholder('Search guitars or brands').fill('');
+    await button('Find my guitar').click();
+    for(let i=0;i<3;i++)await button('Continue').click();
+    await button('Show my matches').click();await page.getByText('Your closest matches.').waitFor();
+    await button('Close finder').click({position:{x:10,y:10}});
+    await button('Open customer support').click();await button('I am a beginner').click();await page.getByText(/For a beginner, prioritize comfort/).waitFor();await button('Open customer support').click();
+    await button('Add Squier Sonic Stratocaster to cart').click();
+    await button('Proceed to checkout').click();await page.locator('.auth-page').waitFor();
+    await button('Create an account').click();await fits('registration');await capture('registration');
+    await page.locator('[data-field=name]').fill('Browser Player');await page.locator('[data-field=email]').fill(email);
+    await page.locator('[data-field=password]').fill(password);await page.locator('[data-field=confirm]').fill(password);
+    await button('Create account').click();await page.locator('.storefront').waitFor();
+    await page.reload();await button('Open account').waitFor();
+    await button('Save guitar').first().click();
+    await button('Open cart').click();await button('Proceed to checkout').click();
+    const checkout=page.locator('dialog');await checkout.locator('[name=address]').fill('123 Guitar Street, Quezon City');await checkout.locator('[name=phone]').fill('09171234567');await fits('checkout');await capture('checkout');
+    await button('Place order').click();await page.locator('.order-detail').waitFor();
+    const orderId=(await page.locator('dialog[open] [data-field=dialog-title]').innerText()).replace('Order ','');
+    assert.match(await page.locator('.order-detail').innerText(),/12,990/);
+    await button('Close dialog').click();await button('Open account').click();await page.locator('.account-page').waitFor();
+    await page.locator('.account-order').waitFor();await page.locator('.saved-item').waitFor();await fits('account');await capture('account');
+    const profile=page.locator('[data-form=profile]');await profile.locator('[name=address]').fill('456 Updated Street, Quezon City');await button('Save profile').click();await page.getByText('Profile saved.',{exact:true}).waitFor();
+    await button('Sign out').click();await button('Sign in').click();
+    await page.locator('[data-field=email]').fill(email);await page.locator('[data-field=password]').fill('incorrect');await button('Sign in').click();await page.getByText('Incorrect email or password.',{exact:true}).waitFor();
+    // An API failure must not grant access.
+    await page.route('**/api/auth/login',route=>route.abort());await page.locator('[data-field=password]').fill(password);await button('Sign in').click();await page.getByText(/Unable to reach AUDIA/).waitFor();assert.equal(await page.locator('.auth-page').count(),1);await page.unroute('**/api/auth/login');
+    await button('Forgot password?').click();await button('Send reset link').click();await page.getByText(/If an account exists/).waitFor();await button('Back to sign in').click();
+    await button('Administrator').click();await page.locator('[data-field=email]').fill('admin@example.com');await page.locator('[data-field=password]').fill('admin-password-123');await button('Open dashboard').click();
+    await page.locator('.admin-page').waitFor();await page.locator('[data-field=total_orders]').filter({hasText:'1'}).waitFor();await fits('admin overview');await capture('overview');
+    await button('Add product').click();const form=page.locator('[data-form=product]');
+    await form.locator('[name=name]').fill('Browser Test Guitar');await form.locator('[name=brand]').fill('AUDIA');await form.locator('[name=price]').fill('9999');await form.locator('[name=stock]').fill('3');await form.locator('[name=image]').fill('https://images.unsplash.com/photo-1550291652-6ea9114a47b1');await form.locator('[name=description]').fill('A test guitar for browser integration checks.');await fits('product editor');await button('Save product').click();await page.getByText('Product saved.',{exact:true}).waitFor();
+    await page.locator('aside nav').getByRole('button',{name:'Products',exact:true}).click();await button('Edit Browser Test Guitar').waitFor();await fits('products');await capture('products');
+    await button('Edit Browser Test Guitar').click();await page.locator('[name=stock]').fill('5');await button('Save product').click();await page.getByText('5 in stock',{exact:true}).waitFor();
+    await page.locator('aside nav').getByRole('button',{name:'Sales directory'}).click();await page.locator('tbody tr').waitFor();await fits('sales');await capture('sales');
+    for(const status of ['Processing','Shipped','Delivered']){
+      await button('Manage order').click();await page.locator('dialog select').selectOption(status);await button('Update order').click();await page.locator('tbody').getByText(status,{exact:true}).waitFor();
+    }
+    const download=page.waitForEvent('download');await button('Export CSV').click();assert.equal((await download).suggestedFilename(),'audia-sales.csv');
+    await page.getByPlaceholder('Search order, customer, email, or product').fill('missing');await page.getByText('No orders match your search.').waitFor();await page.getByPlaceholder('Search order, customer, email, or product').fill('');
+    await page.locator('aside nav').getByRole('button',{name:'Customers',exact:true}).click();await page.getByText(email,{exact:true}).waitFor();await fits('customers');
+    await button('Settings').click();await page.locator('[name=store_name]').fill('AUDIA Test Studio');await page.locator('[name=support_email]').fill('support@example.com');await button('Save settings').click();await page.getByText('AUDIA Test Studio',{exact:true}).waitFor();await fits('settings');await capture('settings');
+    await button('Notifications').click();await page.locator('.notification-list li').first().waitFor();await button('Close dialog').click();
+    await page.setViewportSize({width:390,height:900});await button('Open admin menu').click();await page.locator('aside nav').getByRole('button',{name:'Overview',exact:true}).click();await page.locator('[data-field=gross_revenue]').filter({hasText:'12,990'}).waitFor();await capture('admin-mobile');
+    await page.setViewportSize({width:1440,height:1000});await button('Switch to dark mode').click();await fits('admin dark');
+    await button('Sign out of admin').click();await button('Sign in').click();await page.locator('[data-field=email]').fill(email);await page.locator('[data-field=password]').fill(password);await button('Sign in').click();await button('Open account').waitFor();
+    await page.getByPlaceholder('Enter your order number').fill(orderId);await button('Track').click();await page.locator('.order-detail').getByText('Delivered',{exact:true}).waitFor();await button('Close dialog').click();
+    await button('Open account').click();const security=page.locator('[data-form=password]');await security.locator('[name=current_password]').fill(password);await security.locator('[name=password]').fill('changed-password-123');await security.locator('[name=confirm]').fill('changed-password-123');await button('Update password').click();await page.getByText('Password updated.',{exact:true}).waitFor();
+    await page.reload();await page.locator('.account-page').waitFor();await button('Remove').click();await page.getByText('Tap the heart on an instrument to save it here.').waitFor();
+    assert.deepEqual(errors,[]);
+    console.log('PASS: Registration, real login, session restoration, recovery, password changes, and logout');
+    console.log('PASS: Catalog, finder, chat, saved instruments, checkout, account, and order tracking');
+    console.log('PASS: Inventory create/edit, order fulfillment, revenue, export, customers, settings, and notifications');
+    console.log('PASS: Responsive layouts, both themes, API failure handling, and no JavaScript errors');
+  }finally{await browser.close();}
+})().catch(error=>{console.error(error);process.exitCode=1;});

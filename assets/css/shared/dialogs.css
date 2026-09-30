@@ -1,0 +1,5 @@
+.cart-panel, .chat-panel, .finder-modal {
+  background: var(--surface);
+  color: var(--text);
+}
+
