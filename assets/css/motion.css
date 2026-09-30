@@ -1,7 +1,15 @@
 /* Shared native animation and visibility support, loaded by index.css. */
-[hidden] { display: none !important; }
-[data-hover] { transition: transform .25s ease; }
+[hidden] {
+  display: none !important;
+}
+[data-hover] {
+  transition: transform 0.25s ease;
+}
 @media (prefers-reduced-motion: no-preference) {
-  .category-card:hover { transform: translateY(-7px); }
-  .stat-card:hover { transform: translateY(-4px); }
+  .category-card:hover {
+    transform: translateY(-7px);
+  }
+  .stat-card:hover {
+    transform: translateY(-4px);
+  }
 }

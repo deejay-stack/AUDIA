@@ -1,6 +1,7 @@
 /* Styles for layouts/index.html. Keep this order to preserve the existing cascade. */
 @import url('./shared/base.css');
 @import url('./storefront.css');
+@import url('./landing.css');
 @import url('./product-card.css');
 @import url('./shared/dialogs.css');
 @import url('./finder.css');

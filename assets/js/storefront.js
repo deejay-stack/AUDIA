@@ -19,7 +19,7 @@ export function mountStore(page, app) {
   let saved = new Set();
   const storedCart = readCart();
   let cart = [];
-  let filter = 'All';
+  let filter = app.catalogCategory || 'All'; app.catalogCategory = '';
   let search = app.searchProduct || ''; app.searchProduct = '';
   field(page, 'search').value = search;
   let sort = 'Featured';
@@ -272,6 +272,7 @@ export function mountStore(page, app) {
 
   page.addEventListener('click', async event => {
     const button = event.target.closest('[data-action]'); if (!button) return;
+    if (!app.user) {app.navigate('auth');return;}
     if (button.tagName === 'A') event.preventDefault();
     const id = Number(button.closest('[data-product-id]')?.dataset.productId);
     switch (button.dataset.action) {
@@ -346,10 +347,13 @@ export function mountStore(page, app) {
   field(page,'no-products').hidden=false; field(page,'no-products').textContent='Loading instruments…';
   api('/products').then(data=>{
     if(!alive)return;products=data.products;
+    $$(page, '[data-category-count]').forEach(node => {
+      node.textContent = products.filter(product => product.category === node.dataset.categoryCount).length;
+    });
     cart=storedCart.map(item=>{const product=products.find(p=>p.id===item.id);return product?{...product,qty:item.qty}:null;}).filter(Boolean);
     field(page,'no-products').textContent='No guitar matches that search.';renderProducts();renderCart();
     if(app.openFinder){app.openFinder=false;openFinder();}
-    if(search) $(page,'#shop').scrollIntoView();
+    if(search || filter !== 'All') $(page,'#shop').scrollIntoView();
   }).catch(error=>{if(alive){field(page,'no-products').hidden=false;field(page,'no-products').textContent=error.message;}});
   if(app.user)api('/account/saved').then(data=>{if(alive){saved=new Set(data.products.map(p=>p.id));if(data.profile)answers=data.profile;renderProducts();}}).catch(error=>notice(error.message));
   return {destroy() {alive = false; timers.forEach(clearTimeout);}};

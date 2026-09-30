@@ -3,7 +3,7 @@ import re
 import tempfile
 import unittest
 from pathlib import Path
-from sqlalchemy import select
+from sqlalchemy import URL, select
 from werkzeug.security import generate_password_hash
 from app import create_app
 from modules.database import db, initialize
@@ -49,7 +49,7 @@ class AudiaTests(unittest.TestCase):
     def test_assets_and_template_registry(self):
         response=self.client.get('/')
         self.assertEqual(response.status_code,200)
-        for name in ('account','auth','checkout','product-form','settings','notifications'):
+        for name in ('landing','account','auth','checkout','product-form','settings','notifications'):
             self.assertIn(f'id="{name}-template"'.encode(),response.data)
         self.assertNotRegex(response.get_data(as_text=True),r'<style\b|\sstyle=')
         for asset in Path(self.app.static_folder).rglob('*'):
@@ -57,10 +57,10 @@ class AudiaTests(unittest.TestCase):
                 with self.client.get('/static/'+asset.relative_to(self.app.static_folder).as_posix()) as result:
                     self.assertEqual(result.status_code,200,str(asset))
 
-    def test_unconfigured_preview_has_no_fake_authentication(self):
+    def test_unconfigured_landing_has_no_catalog_or_fake_authentication(self):
         preview=create_app({'TESTING':True,'SECRET_KEY':'preview','DATABASE_URL':''}).test_client()
-        self.assertEqual(preview.get('/api/products').status_code,200)
-        self.assertTrue(preview.get('/api/products').json['preview'])
+        self.assertEqual(preview.get('/').status_code,200)
+        self.assertEqual(preview.get('/api/products').status_code,401)
         self.assertEqual(preview.get('/api/health').status_code,503)
         token=preview.get('/api/auth/session').json['csrf_token']
         response=self.send('/auth/login',dict(email='admin@audia.ph',password='admin123'),client=preview,csrf=token)
@@ -130,12 +130,12 @@ class AudiaTests(unittest.TestCase):
         self.assertEqual(response.status_code,429)
 
     def test_catalog_finder_and_wishlist(self):
-        self.assertEqual(self.client.get('/api/products?category=acoustic&q=yamaha').json['count'],1)
-        self.assertEqual(self.client.get('/api/products/999').status_code,404)
         self.register()
+        self.assertEqual(self.client.get('/api/products?category=acoustic&q=ACOUSTIC_001').json['count'],1)
+        self.assertEqual(self.client.get('/api/products/999').status_code,404)
         profile=dict(budget=20000,category='Electric',level='Beginner',genre='Rock')
         result=self.send('/finder',profile)
-        self.assertEqual(result.json['recommendations'][0]['id'],1)
+        self.assertEqual(result.json['recommendations'][0]['name'],'ELECTRIC_010')
         self.assertEqual(self.send('/finder',dict(profile,budget='bad')).status_code,400)
         self.assertEqual(self.send('/account/saved/1',method='PUT').status_code,200)
         self.assertEqual(self.send('/account/saved/1',method='PUT').status_code,200)
@@ -198,6 +198,86 @@ class AudiaTests(unittest.TestCase):
         data=self.client.get('/api/products/1').json
         for changes in [dict(price='NaN'),dict(stock=-1),dict(image='javascript:alert(1)'),dict(category='Unknown')]:
             self.assertEqual(self.send('/admin/products',dict(data,**changes)).status_code,400)
+
+    def test_uploaded_catalog_codes_categories_and_files(self):
+        self.register()
+        products=self.client.get('/api/products').json['products']
+        guitars=[p for p in products if p['category'] in ('Electric','Acoustic','Bass','Classical')]
+        self.assertEqual(len(guitars),40)
+        self.assertEqual(len({p['image'] for p in guitars}),40)
+        for category in ('Electric','Acoustic','Bass','Classical'):
+            group=[p for p in guitars if p['category']==category]
+            self.assertEqual([p['name'] for p in group],[f'{category.upper()}_{i:03d}' for i in range(1,11)])
+            for product in group:
+                self.assertTrue(product['image'].startswith(f'/static/images/{category.lower()}/'))
+                self.assertIsInstance(product['id'],int)
+                self.assertGreater(product['stock'],0)
+                self.assertGreater(product['price'],0)
+                self.assertTrue(product['description'])
+                self.assertTrue(product['specs'])
+                self.assertEqual(product['reviews'],0)
+        self.assertIn('images/guitar_performance.jpg',self.client.get('/').get_data(as_text=True))
+
+    def test_initialization_preserves_inventory_and_does_not_duplicate_catalog(self):
+        self.register()
+        with self.app.app_context():
+            product=db().get(Product,1)
+            product.stock=2
+            product.price=5432
+            db().commit()
+        initialize(self.app)
+        response=self.client.get('/api/products').json
+        self.assertEqual(response['count'],42)
+        first=next(p for p in response['products'] if p['id']==1)
+        self.assertEqual((first['stock'],first['price']),(2,5432))
+
+    def test_local_and_https_inventory_images(self):
+        self.admin()
+        product=self.client.get('/api/products/1').json
+        for path in ('/static/images/electric/Amber_Flame.png','https://example.com/guitar.png'):
+            result=self.send('/admin/products/1',dict(product,image=path),method='PUT')
+            self.assertEqual(result.status_code,200,result.json)
+            self.assertEqual(result.json['product']['image'],path)
+        for path in ('/static/images/missing.png','/static/images/../../.env',
+                     '/static/images/../icons/play.svg','//example.com/guitar.png',
+                     'data:image/svg+xml,<svg/>','/static/images/%2e%2e/.env'):
+            self.assertEqual(self.send('/admin/products/1',dict(product,image=path),method='PUT').status_code,400,path)
+
+    def test_sqlalchemy_url_object_configuration(self):
+        app=create_app({'TESTING':True,'SECRET_KEY':'url-test',
+                        'DATABASE_URL':URL.create('sqlite',database=':memory:')})
+        try:
+            initialize(app)
+            self.assertEqual(app.test_client().get('/api/products').status_code,401)
+            with app.app_context():
+                self.assertEqual(db().query(Product).count(),42)
+        finally:
+            app.extensions['engine'].dispose()
+
+    def test_guests_cannot_read_catalog_find_products_or_checkout(self):
+        for path in ('/api/products','/api/products?category=Electric','/api/products/1',
+                     '/api/account/saved','/api/orders'):
+            response=self.client.get(path)
+            self.assertEqual(response.status_code,401,path)
+            self.assertNotIn('products',response.json)
+        self.assertEqual(self.send('/finder',dict(budget=20000,category='Electric',level='Beginner')).status_code,401)
+        self.assertEqual(self.order().status_code,401)
+        self.assertEqual(self.send('/account/saved/1',method='PUT').status_code,401)
+        self.register()
+        self.assertEqual(self.client.get('/api/products').json['count'],42)
+        self.send('/auth/logout')
+        self.assertEqual(self.client.get('/api/products').status_code,401)
+        self.assertEqual(self.client.get('/api/products/1').status_code,401)
+
+    def test_expired_session_cannot_read_products(self):
+        from datetime import timedelta
+        from modules.models import now
+        self.register()
+        with self.app.app_context():
+            for login in db().scalars(select(LoginSession)):
+                login.expires_at=now()-timedelta(seconds=1)
+            db().commit()
+        self.assertEqual(self.client.get('/api/products').status_code,401)
 
 
 if __name__=='__main__':

@@ -11,14 +11,14 @@ python -m pip install -r requirements.txt
 python app.py
 ```
 
-Open **http://localhost:5000**. Without `DATABASE_URL`, the catalog, Guitar Finder, and shopping guide can be previewed using the catalog seed. Account creation, authentication, saved instruments, and orders require a database. There are no demo login bypasses or default administrator credentials.
+Open **http://localhost:5000**. Visitors see a public landing page with a system overview, four guitar-family previews, and a short guide to using AUDIA. The full catalog, Guitar Finder, cart and checkout are available after sign-in. PostgreSQL credentials are required for account creation and shopping; the public overview still works without a database. There are no demo login bypasses or default administrator credentials.
 
-**The real PostgreSQL connection is intentionally deferred.** The application is configured for PostgreSQL; SQLite is used only by isolated tests.
+PostgreSQL is the application database. Configuration is loaded from the root `.env`; SQLite is used only by isolated tests.
 
-## Connect PostgreSQL when ready
+## PostgreSQL setup
 
 1. Create a dedicated PostgreSQL database and application user.
-2. Copy `.env.example` to `.env`, set `DATABASE_URL`, and replace `SECRET_KEY` with a long random secret. Keep `.env` private.
+2. Copy `.env.example` to `.env` and set `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER` and `DB_PASSWORD`. Alternatively, leave those credentials unset and use `DATABASE_URL`. The separate fields safely handle special characters in passwords. Set `SECRET_KEY` to a long random secret, or leave it empty to use the persistent local key in `instance/`. Keep `.env` private.
 3. Initialize the schema and catalog, then create an administrator:
 
 ```powershell
@@ -36,7 +36,8 @@ For an HTTPS deployment, set `COOKIE_SECURE=true` and set `APP_URL` to the publi
 | --- | --- |
 | Authentication | Customer registration, customer/admin sign-in, remembered sessions, logout, current-session restoration, password changes, recovery and single-use reset links |
 | Account | Profile and delivery details, saved instruments, saved Finder preferences, order history and order details |
-| Storefront | Search, categories, sorting, stock availability, sound previews, cart quantities, bundles, accessories, and support information |
+| Public landing | System overview, category studio photos, how it works, and account entry points |
+| Storefront (sign-in required) | Search, categories, sorting, stock availability, sound previews, cart quantities, bundles, accessories, and support information |
 | Checkout | Cash on delivery orders, server-calculated prices, transactional inventory checks, and duplicate-request protection |
 | Tracking | Signed-in customers can retrieve only their own orders; administrators can inspect store orders |
 | Administration | Inventory create/edit/archive/restore, customer directory/search, sales search/filter/pagination, CSV export, fulfillment status changes, store settings, and stock/order notifications |
@@ -45,7 +46,17 @@ For an HTTPS deployment, set `COOKIE_SECURE=true` and set `APP_URL` to the publi
 
 Payments are **cash on delivery**. There is no online payment gateway or carrier integration. Admin delivery and refund statuses record the store's actions; they do not charge cards, transfer funds, or call a shipping carrier. Cancellation and refund return the recorded quantities to inventory.
 
-The interface follows the retained design references in `docs/design-reference/`: violet/mint accents, light/dark themes, responsive catalog and administration layouts, and the split sign-in screen. Existing photographs are served locally from `assets/images/`. New inventory can use HTTPS image URLs, with a local placeholder if a remote image fails.
+The interface uses violet/mint accents, light/dark themes, responsive catalog and administration layouts, and a split sign-in screen. The uploaded guitars are served locally from `assets/images/{electric,acoustic,bass,classical}/`; `guitar_performance.jpg` appears on the authentication screen. `guitar_front.jpg` is the landing image, and the four `*_studio.jpg` files illustrate guitar families. Inventory accepts existing `/static/images/` paths and HTTPS image URLs. If an image fails, an uploaded studio photograph is shown with alternative text explaining that it is illustrative.
+
+Guests do not fetch the full catalog. Opening `/#storefront` while signed out leads to sign-in; signing in opens the shop, and signing out returns to the landing page and clears the local cart. Server authorization also protects product lists, individual products, recommendations and checkout, including expired sessions. Category previews can carry the selected category through sign-in.
+
+## School-project catalog
+
+`database/catalog.json` contains 40 guitars (10 per category), the starter bundle and the accessory pack. Guitar product names use `ELECTRIC_001` through `ELECTRIC_010`, `ACOUSTIC_001` through `ACOUSTIC_010`, `BASS_001` through `BASS_010` and `CLASSICAL_001` through `CLASSICAL_010`. The existing integer primary keys remain unchanged in structure for cart, order and saved-item relationships. Search by these codes in the store or inventory screen.
+
+`AUDIA Demo` is an illustrative brand. Prices, stock and experience tiers are school-project sample data, not real inventory. Descriptions identify each image's appearance and suggest general playing uses; manufacturer, construction and performance specifications have not been verified. Replace the demo values through **Administration > Products** before real use. Image-to-code mappings are listed in `assets/images/SOURCES.md`; existing codes should not be renumbered when adding products.
+
+The initial import uses the existing `init-db` command. Re-running it preserves an existing catalog, including edited prices and stock. Editing the JSON after initialization does not overwrite database records; use the inventory editor for subsequent updates. Check `/api/health` for database connectivity; `/api/products`, individual product endpoints and `/api/finder` require an authenticated session. No administrator account is created automatically.
 
 ## Password recovery
 
@@ -69,9 +80,10 @@ modules/
   admin.py                   Protected store operations and reporting
   database.py                Connection lifecycle and initial schema setup
   models.py                  Database records
-database/catalog.json        Initial catalog and read-only preview data
+database/catalog.json        School-project catalog seed
 templates/
   layouts/                   Document and template registry
+  landing/                   Public overview and account entry points
   storefront/ auth/ account/ Feature screens and components
   cart/ finder/ chat/        Shopping dialogs and assistance
   admin/                     Overview, products, sales, customers, settings, alerts
@@ -79,8 +91,7 @@ templates/
 assets/
   css/                       Template-named styles and shared design rules
   js/                        Feature controllers and shared helpers
-  images/                    Local reference photographs and fallback image
-docs/design-reference/       Original visual references retained for maintenance
+  images/                    Uploaded guitar and studio photos, plus source notes
 tests/                       API/security and browser integration checks
 instance/                    Ignored local secret key and development mail outbox
 .env.example                 PostgreSQL, session, and mail configuration example
@@ -111,4 +122,4 @@ node tests/browser.cjs
 
 `PLAYWRIGHT_MODULE` can point to an existing Playwright installation. `AUDIA_BASE_URL` defaults to the fixture at `http://127.0.0.1:5056`. Start a fresh fixture server for each full run. Set `SCREENSHOT_DIR=test-results` to save UI captures. Fixture credentials exist only in the disposable test database.
 
-The tests cover authentication, authorization, CSRF, reset links, session revocation, inventory, idempotent checkout, order ownership, reporting, exports, and the customer/admin browser flows. PostgreSQL-specific deployment and concurrency checks remain part of the deferred database connection work.
+The tests cover authentication, authorization, CSRF, reset links, session revocation, inventory, idempotent checkout, order ownership, reporting, exports, and the customer/admin browser flows. Core API integration cases have also been checked against PostgreSQL using disposable schemas, with no test users or orders retained in the application tables. Production deployment and load testing are separate from these local checks.

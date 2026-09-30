@@ -2,11 +2,12 @@
 import csv
 import io
 import json
+from pathlib import Path
 from collections import defaultdict
 from datetime import timedelta
 from decimal import Decimal, InvalidOperation
 from urllib.parse import urlparse
-from flask import Blueprint, jsonify, request, Response
+from flask import Blueprint, current_app, jsonify, request, Response
 from sqlalchemy import select
 from .auth import payload, require_user, string, validate_email
 from .database import db
@@ -84,8 +85,14 @@ def product_values(data):
     if values['level'] not in ('Beginner', 'Intermediate', 'Advanced'):
         raise ValueError('Choose a valid experience level.')
     url = urlparse(values['image'])
-    if url.scheme != 'https' or not url.netloc:
-        raise ValueError('Use an HTTPS image URL.')
+    is_local = False
+    if values['image'].startswith('/static/images/'):
+        image_root = (Path(current_app.static_folder) / 'images').resolve()
+        local_image = (image_root / values['image'].removeprefix('/static/images/')).resolve()
+        is_local = (local_image.is_relative_to(image_root) and local_image.is_file()
+                    and local_image.suffix.lower() in ('.png', '.jpg', '.jpeg', '.webp', '.svg'))
+    if not is_local and (url.scheme != 'https' or not url.netloc):
+        raise ValueError('Use an HTTPS image URL or an existing /static/images/ file.')
     try:
         price = Decimal(str(data.get('price')))
     except InvalidOperation as error:

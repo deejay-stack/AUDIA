@@ -3,6 +3,8 @@ import {mountStore} from './storefront.js';
 import {mountAuth} from './auth.js';
 import {mountAdmin} from './admin.js';
 import {mountAccount} from './account.js';
+import {mountLanding} from './landing.js';
+import {writeCart} from './cart-storage.js';
 import {api} from './api.js';
 import {notice} from './ui.js';
 
@@ -26,14 +28,15 @@ const app = {
   set user(value) { user = value; },
   navigate(screen, role = 'customer') {
     if (screen === 'dashboard' && user?.role !== 'admin') {screen = 'auth'; role = 'admin';}
-    if (screen === 'account' && !user) screen = 'auth';
+    if (['storefront', 'account'].includes(screen) && !user) screen = 'auth';
     document.querySelectorAll('dialog[open]').forEach(dialog => dialog.close());
-    history.replaceState(null, '', screen === 'storefront' ? '/' : `/#${screen}`);
+    history.replaceState(null, '', screen === 'landing' ? '/' : `/#${screen}`);
     current?.destroy?.();
     disposeAnimations(root);
     const page = clone(screen);
     root.replaceChildren(page);
-    current = screen === 'storefront' ? mountStore(page, app)
+    current = screen === 'landing' ? mountLanding(page, app)
+      : screen === 'storefront' ? mountStore(page, app)
       : screen === 'auth' ? mountAuth(page, app, role)
       : screen === 'account' ? mountAccount(page, app) : mountAdmin(page, app);
     updateTheme();
@@ -45,10 +48,19 @@ const app = {
   },
   login(account) { user = account; app.navigate(account.role === 'admin' ? 'dashboard' : 'storefront'); },
   async logout() {
-    try {await api('/auth/logout', {method:'POST'}); user = null; app.navigate('storefront');}
+    try {await api('/auth/logout', {method:'POST'}); user = null; writeCart([]); app.navigate('landing');}
     catch (error) {notice(error.message);}
   },
 };
+
+// Return to sign-in when a protected API reports an expired or revoked session.
+window.addEventListener('audia:unauthorized', () => {
+  if (!user) return;
+  user = null;
+  writeCart([]);
+  app.navigate('auth');
+  notice('Your session expired. Please sign in again.');
+});
 
 root.addEventListener('click', event => {
   if (event.target.closest('[data-action="theme"]')) {
@@ -57,6 +69,14 @@ root.addEventListener('click', event => {
 });
 const initialHash = location.hash;
 try {user = (await api('/auth/session')).user;} catch (error) {notice(error.message);}
-if (initialHash.startsWith('#reset/')) {
-  app.resetToken = initialHash.slice(7); app.navigate('auth', 'reset');
-} else app.navigate(['#dashboard', '#account', '#auth'].includes(initialHash) ? initialHash.slice(1) : 'storefront');
+const screenHashes = ['#dashboard', '#account', '#auth', '#storefront', '#landing'];
+function openRoute(hash) {
+  if (hash.startsWith('#reset/')) {
+    app.resetToken = hash.slice(7); app.navigate('auth', 'reset');
+  } else app.navigate(screenHashes.includes(hash) ? hash.slice(1) : user ? 'storefront' : 'landing');
+}
+openRoute(initialHash);
+window.addEventListener('hashchange', () => {
+  const hash = location.hash;
+  if (!hash || screenHashes.includes(hash) || hash.startsWith('#reset/')) openRoute(hash);
+});

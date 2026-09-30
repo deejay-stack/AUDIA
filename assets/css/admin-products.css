@@ -1,4 +1,19 @@
-.admin-section-heading { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-[data-field="admin-products"] .secondary-btn { padding: 9px 12px; font-size: 11px; }
-[data-field="admin-products"] h3 { overflow-wrap: anywhere; }
-@media (max-width: 639px) { .admin-section-heading { align-items: start; flex-wrap: wrap; } }
+.admin-section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+[data-field="admin-products"] .secondary-btn {
+  padding: 9px 12px;
+  font-size: 11px;
+}
+[data-field="admin-products"] h3 {
+  overflow-wrap: anywhere;
+}
+@media (max-width: 639px) {
+  .admin-section-heading {
+    align-items: start;
+    flex-wrap: wrap;
+  }
+}

@@ -13,6 +13,9 @@ export async function api(path, options = {}) {
   }
   const data = await response.json().catch(() => ({}));
   if (!response.ok) {
+    if (response.status === 401 && !path.startsWith('/auth/')) {
+      window.dispatchEvent(new Event('audia:unauthorized'));
+    }
     const error = new Error(data.error || 'We could not complete that request. Please try again.');
     error.status = response.status;
     throw error;

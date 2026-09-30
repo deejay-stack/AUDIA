@@ -85,7 +85,7 @@
           <div class="sound-orbit orbit-one" aria-hidden="true"></div>
           <div class="sound-orbit orbit-two" aria-hidden="true"></div>
           <div class="hero-photo absolute overflow-hidden bg-zinc-900">
-            <img class="h-full w-full object-cover object-center transition duration-1000 hover:scale-[1.025]" src="{{ url_for('static', filename='images/photo-1516924962500-2b4b3b99ea02.jpg') }}" alt="Guitarist performing with an electric guitar">
+            <img class="h-full w-full object-cover object-center transition duration-1000 hover:scale-[1.025]" src="{{ url_for('static', filename='images/guitar_front.jpg') }}" alt="Guitars and amplifiers in a studio">
             <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/5"></div>
             <div class="hero-photo-caption absolute bottom-6 left-6 right-6 flex items-end justify-between gap-3 text-white sm:left-8 sm:right-8">
               <div>
@@ -168,11 +168,11 @@
       <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <div class="" data-motion="{&quot;initial&quot;:{&quot;opacity&quot;:0,&quot;y&quot;:28},&quot;animate&quot;:{&quot;opacity&quot;:1,&quot;y&quot;:0},&quot;transition&quot;:{&quot;duration&quot;:0.7,&quot;delay&quot;:0,&quot;ease&quot;:[0.22,1,0.36,1]},&quot;viewport&quot;:true}">
           <button class="category-card group relative h-[390px] w-full overflow-hidden rounded-2xl bg-zinc-900 text-left shadow-sm" data-hover="{&quot;y&quot;:-7}" data-action="category" data-category="Electric">
-            <img src="{{ url_for('static', filename='images/photo-1564186763535-ebb21ef5277f.jpg') }}" alt="Electric guitar" class="h-full w-full object-cover transition duration-700 group-hover:scale-105">
+            <img src="{{ url_for('static', filename='images/electric_studio.jpg') }}" alt="Electric guitar" class="h-full w-full object-cover transition duration-700 group-hover:scale-105">
             <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/15 to-transparent"></div>
             <div class="absolute inset-x-0 bottom-0 flex items-end justify-between p-6 text-white">
               <div>
-                <p class="text-[10px] uppercase tracking-[.16em] text-white/55">01 · 48 models</p>
+                <p class="text-[10px] uppercase tracking-[.16em] text-white/55">01 · <span data-category-count="Electric">10</span> models</p>
                 <h3 class="mt-2 font-display text-2xl font-semibold">Electric</h3>
               </div>
               <span class="grid h-10 w-10 place-items-center rounded-full border border-white/30 bg-white/10 backdrop-blur transition group-hover:bg-white group-hover:text-zinc-950">
@@ -186,11 +186,11 @@
         </div>
         <div class="" data-motion="{&quot;initial&quot;:{&quot;opacity&quot;:0,&quot;y&quot;:28},&quot;animate&quot;:{&quot;opacity&quot;:1,&quot;y&quot;:0},&quot;transition&quot;:{&quot;duration&quot;:0.7,&quot;delay&quot;:0.07,&quot;ease&quot;:[0.22,1,0.36,1]},&quot;viewport&quot;:true}">
           <button class="category-card group relative h-[390px] w-full overflow-hidden rounded-2xl bg-zinc-900 text-left shadow-sm" data-hover="{&quot;y&quot;:-7}" data-action="category" data-category="Acoustic">
-            <img src="{{ url_for('static', filename='images/photo-1525201548942-d8732f6617a0.jpg') }}" alt="Acoustic guitar" class="h-full w-full object-cover transition duration-700 group-hover:scale-105">
+            <img src="{{ url_for('static', filename='images/acoustic_studio.jpg') }}" alt="Acoustic guitar" class="h-full w-full object-cover transition duration-700 group-hover:scale-105">
             <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/15 to-transparent"></div>
             <div class="absolute inset-x-0 bottom-0 flex items-end justify-between p-6 text-white">
               <div>
-                <p class="text-[10px] uppercase tracking-[.16em] text-white/55">02 · 36 models</p>
+                <p class="text-[10px] uppercase tracking-[.16em] text-white/55">02 · <span data-category-count="Acoustic">10</span> models</p>
                 <h3 class="mt-2 font-display text-2xl font-semibold">Acoustic</h3>
               </div>
               <span class="grid h-10 w-10 place-items-center rounded-full border border-white/30 bg-white/10 backdrop-blur transition group-hover:bg-white group-hover:text-zinc-950">
@@ -204,11 +204,11 @@
         </div>
         <div class="" data-motion="{&quot;initial&quot;:{&quot;opacity&quot;:0,&quot;y&quot;:28},&quot;animate&quot;:{&quot;opacity&quot;:1,&quot;y&quot;:0},&quot;transition&quot;:{&quot;duration&quot;:0.7,&quot;delay&quot;:0.14,&quot;ease&quot;:[0.22,1,0.36,1]},&quot;viewport&quot;:true}">
           <button class="category-card group relative h-[390px] w-full overflow-hidden rounded-2xl bg-zinc-900 text-left shadow-sm" data-hover="{&quot;y&quot;:-7}" data-action="category" data-category="Classical">
-            <img src="{{ url_for('static', filename='images/photo-1510915361894-db8b60106cb1.jpg') }}" alt="Classical guitar" class="h-full w-full object-cover transition duration-700 group-hover:scale-105">
+            <img src="{{ url_for('static', filename='images/classical_studio.jpg') }}" alt="Classical guitar" class="h-full w-full object-cover transition duration-700 group-hover:scale-105">
             <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/15 to-transparent"></div>
             <div class="absolute inset-x-0 bottom-0 flex items-end justify-between p-6 text-white">
               <div>
-                <p class="text-[10px] uppercase tracking-[.16em] text-white/55">03 · 18 models</p>
+                <p class="text-[10px] uppercase tracking-[.16em] text-white/55">03 · <span data-category-count="Classical">10</span> models</p>
                 <h3 class="mt-2 font-display text-2xl font-semibold">Classical</h3>
               </div>
               <span class="grid h-10 w-10 place-items-center rounded-full border border-white/30 bg-white/10 backdrop-blur transition group-hover:bg-white group-hover:text-zinc-950">
@@ -222,11 +222,11 @@
         </div>
         <div class="" data-motion="{&quot;initial&quot;:{&quot;opacity&quot;:0,&quot;y&quot;:28},&quot;animate&quot;:{&quot;opacity&quot;:1,&quot;y&quot;:0},&quot;transition&quot;:{&quot;duration&quot;:0.7,&quot;delay&quot;:0.21000000000000002,&quot;ease&quot;:[0.22,1,0.36,1]},&quot;viewport&quot;:true}">
           <button class="category-card group relative h-[390px] w-full overflow-hidden rounded-2xl bg-zinc-900 text-left shadow-sm" data-hover="{&quot;y&quot;:-7}" data-action="category" data-category="Bass">
-            <img src="{{ url_for('static', filename='images/photo-1550985616-10810253b84d.jpg') }}" alt="Bass guitar" class="h-full w-full object-cover transition duration-700 group-hover:scale-105">
+            <img src="{{ url_for('static', filename='images/bass_studio.jpg') }}" alt="Bass guitar" class="h-full w-full object-cover transition duration-700 group-hover:scale-105">
             <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/15 to-transparent"></div>
             <div class="absolute inset-x-0 bottom-0 flex items-end justify-between p-6 text-white">
               <div>
-                <p class="text-[10px] uppercase tracking-[.16em] text-white/55">04 · 24 models</p>
+                <p class="text-[10px] uppercase tracking-[.16em] text-white/55">04 · <span data-category-count="Bass">10</span> models</p>
                 <h3 class="mt-2 font-display text-2xl font-semibold">Bass</h3>
               </div>
               <span class="grid h-10 w-10 place-items-center rounded-full border border-white/30 bg-white/10 backdrop-blur transition group-hover:bg-white group-hover:text-zinc-950">
@@ -246,6 +246,7 @@
           <div>
             <p class="section-label">Curated instruments</p>
             <h2 class="section-title">Guitars worth playing.</h2>
+            <p class="form-hint mt-3">School project catalog: illustrative brands, prices and stock.</p>
           </div>
           <div class="flex flex-col gap-3 sm:flex-row">
             <label class="input-shell min-w-[270px]">
@@ -329,7 +330,7 @@
     <section id="bundles" class="shell pb-24 sm:pb-28">
       <div class="grid overflow-hidden rounded-[2rem] border border-zinc-200 bg-white shadow-sm dark:border-white/10 dark:bg-panel lg:grid-cols-2" data-motion="{&quot;initial&quot;:{&quot;opacity&quot;:0,&quot;y&quot;:28},&quot;animate&quot;:{&quot;opacity&quot;:1,&quot;y&quot;:0},&quot;transition&quot;:{&quot;duration&quot;:0.7,&quot;delay&quot;:0,&quot;ease&quot;:[0.22,1,0.36,1]},&quot;viewport&quot;:true}">
         <div class="relative min-h-[430px] overflow-hidden">
-          <img src="{{ url_for('static', filename='images/photo-1519892300165-cb5542fb47c7.jpg') }}" alt="Complete guitar bundle" class="absolute inset-0 h-full w-full object-cover transition duration-1000 hover:scale-105">
+          <img src="{{ url_for('static', filename='images/electric_studio.jpg') }}" alt="Electric guitar beside a practice amplifier" class="absolute inset-0 h-full w-full object-cover transition duration-1000 hover:scale-105">
           <span class="absolute left-6 top-6 rounded-full bg-white px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest text-zinc-950">Save ₱3,500</span>
         </div>
         <div class="flex flex-col justify-center p-8 sm:p-12 lg:p-16">

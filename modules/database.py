@@ -3,18 +3,18 @@ import json
 from pathlib import Path
 from flask import current_app, g
 from sqlalchemy import create_engine
+from sqlalchemy.engine import make_url
 from sqlalchemy.orm import sessionmaker
 from .models import Base, Product, Setting
 
 
 def init_database(app):
     url = app.config['DATABASE_URL']
-    if url.startswith('postgres://'):
-        url = url.replace('postgres://', 'postgresql+psycopg://', 1)
-    elif url.startswith('postgresql://'):
-        url = url.replace('postgresql://', 'postgresql+psycopg://', 1)
     if url:
-        if not app.testing and not url.startswith('postgresql+psycopg://'):
+        url = make_url(url)
+        if url.drivername in ('postgres', 'postgresql'):
+            url = url.set(drivername='postgresql+psycopg')
+        if not app.testing and url.drivername != 'postgresql+psycopg':
             raise ValueError('DATABASE_URL must point to PostgreSQL.')
         engine = create_engine(url, pool_pre_ping=True)
         app.extensions['engine'] = engine

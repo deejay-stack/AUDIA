@@ -1,1 +1,6 @@
-.bundle-image { width: 100%; height: 230px; object-fit: cover; border-radius: 12px; }
+.bundle-image {
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+  border-radius: 12px;
+}

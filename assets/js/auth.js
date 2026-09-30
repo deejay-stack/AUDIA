@@ -6,7 +6,7 @@ const plainRole = 'flex items-center justify-center gap-2 rounded-xl px-4 py-3 t
 
 export function mountAuth(page, app, initialRole) {
   let role = initialRole === 'admin' ? 'admin' : 'customer';
-  let mode = initialRole === 'reset' ? 'reset' : 'login';
+  let mode = initialRole === 'reset' ? 'reset' : initialRole === 'register' ? 'register' : 'login';
   let loading = false, alive = true;
   const titles = {login:'Welcome to AUDIA.', register:'Find your people. Find your sound.', forgot:'Let’s get you back in.', reset:'A fresh start.'};
   const subtitles = {login:'Sign in to your account or open the store administration workspace.', register:'Create your account to save instruments, place orders, and keep track of your gear.', forgot:'Enter your account email and we’ll send you a password reset link.', reset:'Choose a new password for your AUDIA account.'};
@@ -35,7 +35,10 @@ export function mountAuth(page, app, initialRole) {
   function change(next) {mode=next; error(''); success(''); render();}
   page.addEventListener('click', event => {
     const action=event.target.closest('[data-action]')?.dataset.action;
-    if (action==='home'||action==='store') app.navigate('storefront');
+    if (action==='home'||action==='store') {
+      app.catalogCategory = '';
+      app.navigate(app.user ? 'storefront' : 'landing');
+    }
     if (loading) return;
     if (action==='role-customer'||action==='role-admin') {role=action.slice(5); error(''); render();}
     if (action==='register') {role='customer'; change('register');}

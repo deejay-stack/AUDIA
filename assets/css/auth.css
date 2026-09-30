@@ -41,3 +41,7 @@
   overflow-wrap: anywhere;
 }
 
+.auth-page > div > img {
+  object-position: 68% center;
+}
+

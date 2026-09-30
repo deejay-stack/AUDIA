@@ -25,6 +25,7 @@ def products_data():
 
 
 @catalog.get('/products')
+@require_user()
 def products():
     category = request.args.get('category', 'all').lower()
     query = request.args.get('q', '').lower()
@@ -34,12 +35,14 @@ def products():
 
 
 @catalog.get('/products/<int:product_id>')
+@require_user()
 def product(product_id):
     item = next((p for p in products_data() if p['id'] == product_id), None)
     return jsonify(item) if item else (jsonify(error='Product not found.'), 404)
 
 
 @catalog.post('/finder')
+@require_user()
 def finder():
     data = payload()
     budget = data.get('budget', 20000)

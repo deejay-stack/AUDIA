@@ -1,0 +1,85 @@
+<div class="landing-page">
+  <header class="landing-header">
+    <div class="shell landing-nav">
+      <a class="audia-mark" href="#welcome" aria-label="AUDIA home"><span class="mark-a">A</span>UDI<span class="mark-a">A</span></a>
+      <nav aria-label="About AUDIA">
+        <a href="#about-audia">About</a>
+        <a href="#guitar-families">Guitar families</a>
+        <a href="#how-it-works">How it works</a>
+      </nav>
+      <div class="landing-nav-actions">
+        <button class="landing-theme" data-action="theme" aria-label="Switch to light mode"></button>
+        <button class="secondary-btn" data-action="sign-in" data-auth-entry>Sign in</button>
+        <button class="secondary-btn" data-action="browse" data-member-entry hidden>Browse guitars</button>
+      </div>
+    </div>
+  </header>
+  <main>
+    <section id="welcome" class="shell landing-hero">
+      <div class="landing-hero-copy">
+        <p class="section-label">Meet AUDIA</p>
+        <h1>Your sound.<br><span class="hero-gradient">Your starting point.</span></h1>
+        <p>A place to discover guitars and find what fits your music. AUDIA brings instrument details, guided recommendations, and a simple shopping experience together in one account.</p>
+        <div class="landing-actions">
+          <button class="primary-btn" data-action="register" data-auth-entry>Create an account <span aria-hidden="true">↗</span></button>
+          <button class="primary-btn" data-action="browse" data-member-entry hidden>Explore the catalog <span aria-hidden="true">↗</span></button>
+          <a class="landing-text-link" href="#about-audia">Take a quick look <span aria-hidden="true">↓</span></a>
+        </div>
+        <p class="landing-access-note">Sign in to browse all instruments, save favorites, and shop.</p>
+        <div class="landing-hero-details"><span>Four guitar families</span><span>One place to find your sound</span></div>
+      </div>
+      <figure class="landing-hero-photo">
+        <img src="{{ url_for('static', filename='images/guitar_front.jpg') }}" alt="Acoustic guitar in a studio with instruments and amplifiers" fetchpriority="high">
+        <figcaption><span>A little inspiration</span><strong>Every player starts somewhere.</strong></figcaption>
+      </figure>
+    </section>
+    <section id="about-audia" class="landing-about">
+      <div class="shell">
+        <div class="landing-section-heading">
+          <div><p class="section-label">The system at a glance</p><h2 class="section-title">Less guesswork.<br>More making music.</h2></div>
+          <p>Whether you are picking up your first guitar or exploring a different style, AUDIA helps you compare your options and keep your choices in one place.</p>
+        </div>
+        <div class="landing-features">
+          <article><span class="landing-step">01 / DISCOVER</span><h3>Know what you are choosing.</h3><p>See each instrument's photo, description, price, and availability. Browse by guitar family or search for a specific catalog code.</p></article>
+          <article><span class="landing-step">02 / FIND YOUR FIT</span><h3>A little guidance goes a long way.</h3><p>Guitar Finder uses your budget, experience, and preferred guitar type to suggest instruments. Save the ones you want to revisit.</p></article>
+          <article><span class="landing-step">03 / KEEP IT TOGETHER</span><h3>From your shortlist to your doorstep.</h3><p>Add instruments to your cart, check out with your delivery details, and follow your order status from your account.</p></article>
+        </div>
+      </div>
+    </section>
+    <section id="guitar-families" class="shell landing-collections">
+      <div class="landing-section-heading">
+        <div><p class="section-label">A quick introduction</p><h2 class="section-title">Choose your voice.</h2></div>
+        <p>Get to know the four guitar families. Sign in when you are ready to explore individual instruments.</p>
+      </div>
+      <div class="landing-collection-grid">
+        {% for category, caption, description in [
+          ('Electric', 'Plug into possibility.', 'Explore amplified sounds, effects, and styles from clean pop to rock.'),
+          ('Acoustic', 'Let the song lead.', 'A familiar starting point for unplugged strumming and fingerpicking.'),
+          ('Classical', 'Make room for the details.', 'Discover traditional shapes suited to classical and fingerstyle study.'),
+          ('Bass', 'Give the music its pulse.', 'Build the low-end foundation and connect melody with rhythm.')
+        ] %}
+        <button class="landing-collection" data-action="browse" data-category="{{ category }}" aria-label="Explore {{ category|lower }} guitars">
+          <span class="landing-collection-photo">
+            <img src="{{ url_for('static', filename='images/' ~ category|lower ~ '_studio.jpg') }}" alt="{{ category }} guitar in a studio" loading="lazy" decoding="async">
+            <span class="landing-collection-label"><strong>{{ category }}</strong><span aria-hidden="true">↗</span></span>
+          </span>
+          <span class="landing-collection-copy"><strong>{{ caption }}</strong><span>{{ description }}</span></span>
+        </button>
+        {% endfor %}
+      </div>
+    </section>
+    <section id="how-it-works" class="shell landing-how">
+      <div><p class="section-label">Your next step</p><h2 class="section-title">A simple path<br>to your next guitar.</h2><p class="landing-how-intro">Your account opens the full AUDIA experience.</p></div>
+      <ol class="landing-steps">
+        <li><span>01</span><div><h3>Create your account.</h3><p>Sign up or sign in to unlock the catalog and your personal workspace.</p></div></li>
+        <li><span>02</span><div><h3>Explore and compare.</h3><p>Browse guitar families, try Guitar Finder, and save your favorites.</p></div></li>
+        <li><span>03</span><div><h3>Shop when you are ready.</h3><p>Add your selections to the cart, check out, and track your order.</p></div></li>
+      </ol>
+    </section>
+    <section class="shell landing-join">
+      <div><p class="section-label">Find your sound</p><h2 class="section-title">Ready to take a closer look?</h2><p>The full collection is waiting inside.</p></div>
+      <button class="primary-btn" data-action="browse">Explore the catalog <span aria-hidden="true">↗</span></button>
+    </section>
+  </main>
+  <footer class="shell landing-footer"><a class="audia-mark" href="#welcome">AUDIA</a><p>Discover. Compare. Find your sound.</p><span>School project · Demo catalog</span></footer>
+</div>
