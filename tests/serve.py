@@ -5,9 +5,9 @@ import tempfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from app import create_app
+from support import create_app
 from modules.database import db, initialize
-from modules.models import User
+from modules.database.models import User
 from werkzeug.security import generate_password_hash
 
 if __name__ == '__main__':

@@ -1,0 +1,459 @@
+{
+  "routes": [
+    {
+      "endpoint": "account_page",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/account"
+    },
+    {
+      "endpoint": "admin.add_product",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "rule": "/api/admin/products"
+    },
+    {
+      "endpoint": "admin.archive_product",
+      "methods": [
+        "DELETE",
+        "OPTIONS"
+      ],
+      "rule": "/api/admin/products/<int:product_id>"
+    },
+    {
+      "endpoint": "admin.customers",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/admin/customers"
+    },
+    {
+      "endpoint": "admin.edit_product",
+      "methods": [
+        "OPTIONS",
+        "PUT"
+      ],
+      "rule": "/api/admin/products/<int:product_id>"
+    },
+    {
+      "endpoint": "admin.export_sales",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/admin/sales/export"
+    },
+    {
+      "endpoint": "admin.products",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/admin/products"
+    },
+    {
+      "endpoint": "admin.sales",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/admin/sales"
+    },
+    {
+      "endpoint": "admin.settings",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS",
+        "PUT"
+      ],
+      "rule": "/api/admin/settings"
+    },
+    {
+      "endpoint": "admin.summary",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/admin/summary"
+    },
+    {
+      "endpoint": "admin.update_order",
+      "methods": [
+        "OPTIONS",
+        "PATCH"
+      ],
+      "rule": "/api/admin/sales/<order_id>"
+    },
+    {
+      "endpoint": "auth.change_password",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "rule": "/api/auth/password"
+    },
+    {
+      "endpoint": "auth.current_session",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/auth/session"
+    },
+    {
+      "endpoint": "auth.forgot_password",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "rule": "/api/auth/forgot-password"
+    },
+    {
+      "endpoint": "auth.login",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "rule": "/api/auth/login"
+    },
+    {
+      "endpoint": "auth.logout",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "rule": "/api/auth/logout"
+    },
+    {
+      "endpoint": "auth.profile",
+      "methods": [
+        "OPTIONS",
+        "PATCH"
+      ],
+      "rule": "/api/auth/profile"
+    },
+    {
+      "endpoint": "auth.register",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "rule": "/api/auth/register"
+    },
+    {
+      "endpoint": "auth.reset_password",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "rule": "/api/auth/reset-password"
+    },
+    {
+      "endpoint": "catalog.finder",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "rule": "/api/finder"
+    },
+    {
+      "endpoint": "catalog.product",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/products/<int:product_id>"
+    },
+    {
+      "endpoint": "catalog.products",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/products"
+    },
+    {
+      "endpoint": "catalog.save",
+      "methods": [
+        "OPTIONS",
+        "PUT"
+      ],
+      "rule": "/api/account/saved/<int:product_id>"
+    },
+    {
+      "endpoint": "catalog.saved",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/account/saved"
+    },
+    {
+      "endpoint": "catalog.store_info",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/store"
+    },
+    {
+      "endpoint": "catalog.unsave",
+      "methods": [
+        "DELETE",
+        "OPTIONS"
+      ],
+      "rule": "/api/account/saved/<int:product_id>"
+    },
+    {
+      "endpoint": "chatbot.chat",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "rule": "/api/chat"
+    },
+    {
+      "endpoint": "chatbot.chat_status",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/chat"
+    },
+    {
+      "endpoint": "dashboard",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/admin"
+    },
+    {
+      "endpoint": "health",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/health"
+    },
+    {
+      "endpoint": "index",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/"
+    },
+    {
+      "endpoint": "lessons.chord_detail",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/lessons/chords/<slug>"
+    },
+    {
+      "endpoint": "lessons.chords",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/lessons/chords"
+    },
+    {
+      "endpoint": "lessons.getting_started",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/lessons/getting-started"
+    },
+    {
+      "endpoint": "lessons.index",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/lessons"
+    },
+    {
+      "endpoint": "lessons.strumming",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/lessons/strumming"
+    },
+    {
+      "endpoint": "login_page",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/login"
+    },
+    {
+      "endpoint": "orders.checkout",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "rule": "/api/orders"
+    },
+    {
+      "endpoint": "orders.detail",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/orders/<order_id>"
+    },
+    {
+      "endpoint": "orders.history",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/orders"
+    },
+    {
+      "endpoint": "register_page",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/register"
+    },
+    {
+      "endpoint": "reset_password_page",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/reset-password"
+    },
+    {
+      "endpoint": "shop",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/shop"
+    },
+    {
+      "endpoint": "static",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/static/<path:filename>"
+    },
+    {
+      "endpoint": "tuner.index",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/tuner"
+    }
+  ],
+  "blueprints": [
+    "auth",
+    "catalog",
+    "orders",
+    "admin",
+    "chatbot",
+    "tuner",
+    "lessons"
+  ],
+  "preserved_original_files": 123,
+  "moves": {
+    "modules/auth/routes.py": "modules/auth/auth.py",
+    "modules/auth/mail.py": "modules/auth/auth_mail.py",
+    "modules/admin/routes.py": "modules/admin/admin.py",
+    "modules/orders/routes.py": "modules/orders/orders.py",
+    "modules/catalog/routes.py": "modules/catalog/catalog.py",
+    "modules/chatbot/routes.py": "modules/chatbot/chatbot.py",
+    "modules/ai/__init__.py": "modules/chatbot/ai/__init__.py",
+    "modules/ai/services.py": "modules/chatbot/ai/ai.py",
+    "modules/ai/rag_sync.py": "modules/chatbot/ai/ai_rag_sync.py",
+    "modules/tuner/routes.py": "modules/tuner/tuner.py",
+    "modules/lessons/routes.py": "modules/lessons/lessons.py",
+    "modules/lessons/data.py": "modules/lessons/lessons_data.py",
+    "templates/catalog/storefront.html": "templates/catalog/catalog.html",
+    "assets/css/catalog/storefront.css": "assets/css/catalog/catalog.css",
+    "assets/js/catalog/storefront.js": "assets/js/catalog/catalog.js",
+    "assets/js/chatbot/chatbot-api.js": "assets/js/chatbot/chatbot_api.js",
+    "assets/js/chatbot/chatbot-ui.js": "assets/js/chatbot/chatbot_ui.js",
+    "assets/js/tuner/pitch.js": "assets/js/tuner/tuner_pitch.js",
+    "templates/lessons/index.html": "templates/lessons/lessons.html",
+    "templates/lessons/getting_started.html": "templates/lessons/lessons_getting_started.html",
+    "templates/lessons/chords.html": "templates/lessons/lessons_chords.html",
+    "templates/lessons/chord_detail.html": "templates/lessons/lessons_chord_detail.html",
+    "templates/lessons/strumming.html": "templates/lessons/lessons_strumming.html",
+    "templates/lessons/_chord_diagram.html": "templates/lessons/lessons_chord_diagram.html"
+  },
+  "extracted_runtime_files": [
+    "modules/search_filter/__init__.py",
+    "modules/search_filter/search_filter.py",
+    "templates/search_filter/search_filter.html",
+    "templates/search_filter/search_filter_types.html",
+    "templates/search_filter/search_filter_finder_banner.html",
+    "templates/catalog/catalog_product_card.html",
+    "templates/catalog/catalog_navigation.html",
+    "templates/catalog/catalog_bundle.html",
+    "templates/catalog/catalog_support.html",
+    "templates/catalog/catalog_cart.html",
+    "templates/catalog/catalog_checkout.html",
+    "templates/search_filter/search_filter_finder.html",
+    "assets/css/search_filter/search_filter.css",
+    "assets/css/chatbot/chatbot.css",
+    "assets/js/search_filter/search_filter.js"
+  ],
+  "verification": {
+    "server_tests": 29,
+    "before_after_screenshot_cases": 56,
+    "practice_layout_theme_cases": 130,
+    "harmonic_pitch_cases": 90,
+    "browser_suites": [
+      "browser.cjs",
+      "chatbot.cjs",
+      "practice.cjs"
+    ],
+    "ai_provider": "mocked; actual retrieval/SQL/enrichment pipeline exercised"
+  }
+}

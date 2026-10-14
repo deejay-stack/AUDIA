@@ -1,0 +1,466 @@
+{
+  "moves": {
+    "modules/auth/routes.py": "modules/auth/auth.py",
+    "modules/auth/mail.py": "modules/auth/auth_mail.py",
+    "modules/admin/routes.py": "modules/admin/admin.py",
+    "modules/orders/routes.py": "modules/orders/orders.py",
+    "modules/catalog/routes.py": "modules/catalog/catalog.py",
+    "modules/chatbot/routes.py": "modules/chatbot/chatbot.py",
+    "modules/ai/__init__.py": "modules/chatbot/ai/__init__.py",
+    "modules/ai/services.py": "modules/chatbot/ai/ai.py",
+    "modules/ai/rag_sync.py": "modules/chatbot/ai/ai_rag_sync.py",
+    "modules/tuner/routes.py": "modules/tuner/tuner.py",
+    "modules/lessons/routes.py": "modules/lessons/lessons.py",
+    "modules/lessons/data.py": "modules/lessons/lessons_data.py",
+    "templates/catalog/storefront.html": "templates/catalog/catalog.html",
+    "assets/css/catalog/storefront.css": "assets/css/catalog/catalog.css",
+    "assets/js/catalog/storefront.js": "assets/js/catalog/catalog.js",
+    "assets/js/chatbot/chatbot-api.js": "assets/js/chatbot/chatbot_api.js",
+    "assets/js/chatbot/chatbot-ui.js": "assets/js/chatbot/chatbot_ui.js",
+    "assets/js/tuner/pitch.js": "assets/js/tuner/tuner_pitch.js",
+    "templates/lessons/index.html": "templates/lessons/lessons.html",
+    "templates/lessons/getting_started.html": "templates/lessons/lessons_getting_started.html",
+    "templates/lessons/chords.html": "templates/lessons/lessons_chords.html",
+    "templates/lessons/chord_detail.html": "templates/lessons/lessons_chord_detail.html",
+    "templates/lessons/strumming.html": "templates/lessons/lessons_strumming.html",
+    "templates/lessons/_chord_diagram.html": "templates/lessons/lessons_chord_diagram.html"
+  },
+  "rewrites": {
+    "app.py": [
+      {
+        "before": "catalog/storefront",
+        "after": "catalog/catalog",
+        "count": 2
+      },
+      {
+        "before": "modules.ai.rag_sync",
+        "after": "modules.chatbot.ai.ai_rag_sync",
+        "count": 1
+      }
+    ],
+    "assets/css/catalog/catalog.css": [
+      {
+        "before": "catalog/storefront.html",
+        "after": "catalog/catalog.html",
+        "count": 1
+      },
+      {
+        "before": ".finder-banner {\n  border: 1px solid #56416e;\n  border-radius: 12px;\n  background:\n    radial-gradient(ellipse at 95% 0%, #7444a640, transparent 65%), #18121f;\n}\n\n.dark .finder-banner {\n  background:\n    radial-gradient(ellipse at 95% 0%, #7444a640, transparent 65%), #18121f;\n}\n\n.finder-banner::before {\n  content: \"\";\n  pointer-events: none;\n  position: absolute;\n  inset: 0;\n  opacity: 0.5;\n  background-image:\n    linear-gradient(#d5b5ff0c 1px, transparent 1px),\n    linear-gradient(90deg, #d5b5ff0c 1px, transparent 1px);\n  background-size: 48px 48px;\n}\n\n.finder-banner h2 {\n  font-size: clamp(2.1rem, 4.2vw, 3.6rem);\n  letter-spacing: -0.055em;\n}\n\n.finder-banner .text-zinc-500,\n.finder-banner .text-zinc-400 {\n  color: #b9aec5;\n}\n\n.finder-banner .primary-btn {\n  background: #b8f5d0;\n  color: #132b20;\n}\n\n.finder-banner .primary-btn:hover {\n  background: #d5ffe5;\n}\n\n.finder-profile {\n  position: relative;\n  border-radius: 10px;\n  border-color: #b696de33;\n  box-shadow: 0 24px 45px #00000030;\n  transform: rotate(2deg);\n}\n\n.finder-profile::before {\n  content: \"\";\n  position: absolute;\n  width: 7px;\n  height: 7px;\n  top: 26px;\n  right: 26px;\n  border-radius: 50%;\n  background: #b8f5d0;\n  box-shadow:\n    -13px 0 #b696de77,\n    -26px 0 #b696de33;\n}\n\n",
+        "after": "/* Search/filter banner rules live in search_filter/search_filter.css. */\n",
+        "count": 1
+      },
+      {
+        "before": "/* Finder */\n.finder-modal {\n  max-height: calc(100dvh - 32px);\n  overflow-y: auto;\n  border: 1px solid var(--line);\n  border-radius: 14px;\n}\n\n",
+        "after": "/* Search/filter modal rules live in search_filter/search_filter.css. */\n",
+        "count": 1
+      },
+      {
+        "before": "  .finder-banner {\n    padding: 36px 24px;\n  }\n  .finder-banner > .relative {\n    gap: 32px;\n  }\n  .finder-profile {\n    transform: none;\n  }\n",
+        "after": "/* Search/filter mobile rules live in search_filter/search_filter.css. */\n",
+        "count": 1
+      },
+      {
+        "before": "  .storefront main > section:has(.finder-banner) {\n    padding-block: 64px;\n  }\n",
+        "after": "/* Search/filter spacing rules live in search_filter/search_filter.css. */\n",
+        "count": 1
+      }
+    ],
+    "assets/js/chatbot/chatbot.js": [
+      {
+        "before": "./chatbot-api.js",
+        "after": "./chatbot_api.js",
+        "count": 1
+      },
+      {
+        "before": "./chatbot-ui.js",
+        "after": "./chatbot_ui.js",
+        "count": 1
+      }
+    ],
+    "assets/js/shared/app.js": [
+      {
+        "before": "catalog/storefront",
+        "after": "catalog/catalog",
+        "count": 1
+      }
+    ],
+    "assets/js/tuner/tuner.js": [
+      {
+        "before": "./pitch.js",
+        "after": "./tuner_pitch.js",
+        "count": 1
+      }
+    ],
+    "modules/chatbot/chatbot.py": [
+      {
+        "before": "from modules.ai import ask_audia",
+        "after": "from .ai import ask_audia",
+        "count": 1
+      }
+    ],
+    "templates/lessons/lessons_chord_detail.html": [
+      {
+        "before": "lessons/_chord_diagram.html",
+        "after": "lessons/lessons_chord_diagram.html",
+        "count": 1
+      }
+    ],
+    "templates/lessons/lessons_chords.html": [
+      {
+        "before": "lessons/_chord_diagram.html",
+        "after": "lessons/lessons_chord_diagram.html",
+        "count": 1
+      }
+    ],
+    "tests/test_ai.py": [
+      {
+        "before": "from modules.ai import services as ai",
+        "after": "from modules.chatbot.ai import ai",
+        "count": 1
+      }
+    ],
+    "tests/test_practice.py": [
+      {
+        "before": "js/tuner/pitch.js",
+        "after": "js/tuner/tuner_pitch.js",
+        "count": 1
+      }
+    ],
+    "tests/tuner-pitch.cjs": [
+      {
+        "before": "assets/js/tuner/pitch.js",
+        "after": "assets/js/tuner/tuner_pitch.js",
+        "count": 1
+      }
+    ],
+    "modules/auth/__init__.py": [
+      {
+        "before": "from .routes import",
+        "after": "from .auth import",
+        "count": 1
+      }
+    ],
+    "modules/admin/__init__.py": [
+      {
+        "before": "from .routes import",
+        "after": "from .admin import",
+        "count": 1
+      }
+    ],
+    "modules/orders/__init__.py": [
+      {
+        "before": "from .routes import",
+        "after": "from .orders import",
+        "count": 1
+      }
+    ],
+    "modules/catalog/__init__.py": [
+      {
+        "before": "from .routes import",
+        "after": "from .catalog import",
+        "count": 1
+      },
+      {
+        "before": "from .catalog import catalog\n",
+        "after": "from .catalog import catalog\n# Register search/filter endpoints on this same blueprint before app registration.\nfrom ..search_filter import search_filter\n",
+        "count": 1
+      }
+    ],
+    "modules/chatbot/__init__.py": [
+      {
+        "before": "from .routes import",
+        "after": "from .chatbot import",
+        "count": 1
+      }
+    ],
+    "modules/tuner/__init__.py": [
+      {
+        "before": "from .routes import",
+        "after": "from .tuner import",
+        "count": 1
+      }
+    ],
+    "modules/lessons/__init__.py": [
+      {
+        "before": "from .routes import",
+        "after": "from .lessons import",
+        "count": 1
+      }
+    ],
+    "modules/auth/auth.py": [
+      {
+        "before": "from .mail import",
+        "after": "from .auth_mail import",
+        "count": 1
+      }
+    ],
+    "modules/lessons/lessons.py": [
+      {
+        "before": "from .data import",
+        "after": "from .lessons_data import",
+        "count": 1
+      },
+      {
+        "before": "\"index.html\"",
+        "after": "\"lessons.html\"",
+        "count": 1
+      },
+      {
+        "before": "\"getting_started.html\"",
+        "after": "\"lessons_getting_started.html\"",
+        "count": 1
+      },
+      {
+        "before": "\"chords.html\"",
+        "after": "\"lessons_chords.html\"",
+        "count": 1
+      },
+      {
+        "before": "\"chord_detail.html\"",
+        "after": "\"lessons_chord_detail.html\"",
+        "count": 1
+      },
+      {
+        "before": "\"strumming.html\"",
+        "after": "\"lessons_strumming.html\"",
+        "count": 1
+      }
+    ],
+    "modules/chatbot/ai/__init__.py": [
+      {
+        "before": "from .services import",
+        "after": "from .ai import",
+        "count": 1
+      }
+    ],
+    "modules/chatbot/ai/ai_rag_sync.py": [
+      {
+        "before": "from .services import",
+        "after": "from .ai import",
+        "count": 1
+      }
+    ],
+    "modules/catalog/catalog.py": [
+      {
+        "before": "@catalog.get('/products')\n@require_user()\ndef products():\n    category = request.args.get('category', 'all').lower()\n    query = request.args.get('q', '').lower()\n    items = [p for p in products_data() if (category == 'all' or p['category'].lower() == category)\n             and query in f'{p[\"name\"]} {p[\"brand\"]}'.lower()]\n    return jsonify(products=items, count=len(items), preview='engine' not in current_app.extensions)\n\n\n@catalog.get('/products/<int:product_id>')",
+        "after": "@catalog.get('/products/<int:product_id>')",
+        "count": 1
+      },
+      {
+        "before": "@catalog.post('/finder')\n@require_user()\ndef finder():\n    data = payload()\n    budget = data.get('budget', 20000)\n    if isinstance(budget, bool) or not isinstance(budget, (int, float)) or not 1000 <= budget <= 500000:\n        raise ValueError('Choose a budget between ₱1,000 and ₱500,000.')\n    category = string(data, 'category', 30, 1)\n    level = string(data, 'level', 30, 1)\n    if category not in ('Electric', 'Acoustic', 'Bass', 'Classical') or level not in ('Beginner', 'Intermediate', 'Advanced'):\n        raise ValueError('Choose a valid guitar type and experience level.')\n    profile = dict(budget=budget, category=category, level=level, genre=string(data, 'genre', 40))\n    def score(item):\n        return ((50 if item['category'] == category else 0) + (25 if item['level'] == level else 0)\n                + max(0, 25 - abs(item['price'] - budget) / budget * 25))\n    items = [p for p in products_data() if p['stock'] > 0 and p['category'] in ('Electric', 'Acoustic', 'Bass', 'Classical')]\n    ranked = sorted(items, key=score, reverse=True)[:2]\n    if g.user:\n        db().merge(FinderProfile(user_id=g.user.id, profile=json.dumps(profile)))\n        db().commit()\n    return jsonify(profile=profile, recommendations=ranked)\n\n\n@catalog.get('/account/saved')",
+        "after": "@catalog.get('/account/saved')",
+        "count": 1
+      },
+      {
+        "before": "from flask import Blueprint, current_app, g, jsonify, request",
+        "after": "from flask import Blueprint, current_app, g, jsonify",
+        "count": 1
+      },
+      {
+        "before": "from ..auth import payload, require_user, string",
+        "after": "from ..auth import require_user",
+        "count": 1
+      },
+      {
+        "before": "\"\"\"Catalog, guitar recommendations, saved instruments, and the support guide.\"\"\"",
+        "after": "\"\"\"Catalog products, availability, saved instruments, and store support.\"\"\"",
+        "count": 1
+      }
+    ],
+    "templates/catalog/catalog.html": [
+      {
+        "before": "          <div class=\"flex flex-col gap-3 sm:flex-row\">\n            <label class=\"input-shell min-w-[270px]\">\n              <svg\n                xmlns=\"http://www.w3.org/2000/svg\"\n                width=\"16\"\n                height=\"16\"\n                viewBox=\"0 0 24 24\"\n                fill=\"none\"\n                stroke=\"currentColor\"\n                stroke-width=\"2\"\n                stroke-linecap=\"round\"\n                stroke-linejoin=\"round\"\n                class=\"lucide lucide-search\"\n                aria-hidden=\"true\"\n              >\n                <path d=\"m21 21-4.34-4.34\"></path>\n                <circle cx=\"11\" cy=\"11\" r=\"8\"></circle>\n              </svg>\n              <input\n                class=\"w-full bg-transparent py-3 text-sm outline-none\"\n                placeholder=\"Search guitars or brands\"\n                aria-label=\"Search guitars or brands\"\n                value=\"\"\n                data-field=\"search\"\n              />\n            </label>\n            <label class=\"input-shell\">\n              <svg\n                xmlns=\"http://www.w3.org/2000/svg\"\n                width=\"15\"\n                height=\"15\"\n                viewBox=\"0 0 24 24\"\n                fill=\"none\"\n                stroke=\"currentColor\"\n                stroke-width=\"2\"\n                stroke-linecap=\"round\"\n                stroke-linejoin=\"round\"\n                class=\"lucide lucide-sliders-horizontal\"\n                aria-hidden=\"true\"\n              >\n                <path d=\"M10 5H3\"></path>\n                <path d=\"M12 19H3\"></path>\n                <path d=\"M14 3v4\"></path>\n                <path d=\"M16 17v4\"></path>\n                <path d=\"M21 12h-9\"></path>\n                <path d=\"M21 19h-5\"></path>\n                <path d=\"M21 5h-7\"></path>\n                <path d=\"M8 10v4\"></path>\n                <path d=\"M8 12H3\"></path>\n              </svg>\n              <select\n                class=\"appearance-none bg-transparent py-3 pr-4 text-sm outline-none\"\n                data-field=\"sort\"\n                aria-label=\"Sort instruments\"\n              >\n                <option selected=\"\">Featured</option>\n                <option>Price: low</option>\n                <option>Price: high</option>\n                <option>Rating</option>\n              </select>\n              <svg\n                xmlns=\"http://www.w3.org/2000/svg\"\n                width=\"13\"\n                height=\"13\"\n                viewBox=\"0 0 24 24\"\n                fill=\"none\"\n                stroke=\"currentColor\"\n                stroke-width=\"2\"\n                stroke-linecap=\"round\"\n                stroke-linejoin=\"round\"\n                class=\"lucide lucide-chevron-down\"\n                aria-hidden=\"true\"\n              >\n                <path d=\"m6 9 6 6 6-6\"></path>\n              </svg>\n            </label>\n          </div>\n",
+        "after": "{% include 'search_filter/search_filter.html' %}\n",
+        "count": 1
+      },
+      {
+        "before": "        <div class=\"mt-8 flex gap-2 overflow-x-auto pb-2\">\n          <button\n            class=\"filter-chip filter-chip-active\"\n            data-action=\"filter\"\n            data-category=\"All\"\n          >\n            All\n          </button>\n          <button\n            class=\"filter-chip\"\n            data-action=\"filter\"\n            data-category=\"Electric\"\n          >\n            Electric\n          </button>\n          <button\n            class=\"filter-chip\"\n            data-action=\"filter\"\n            data-category=\"Acoustic\"\n          >\n            Acoustic\n          </button>\n          <button\n            class=\"filter-chip\"\n            data-action=\"filter\"\n            data-category=\"Classical\"\n          >\n            Classical\n          </button>\n          <button class=\"filter-chip\" data-action=\"filter\" data-category=\"Bass\">\n            Bass\n          </button>\n        </div>\n",
+        "after": "{% include 'search_filter/search_filter_types.html' %}\n",
+        "count": 1
+      },
+      {
+        "before": "    <section class=\"shell py-24 sm:py-28\">\n      <div\n        class=\"\"\n        data-motion='{\"initial\":{\"opacity\":0,\"y\":28},\"animate\":{\"opacity\":1,\"y\":0},\"transition\":{\"duration\":0.7,\"delay\":0,\"ease\":[0.22,1,0.36,1]},\"viewport\":true}'\n      >\n        <div\n          class=\"finder-banner relative overflow-hidden rounded-[2rem] bg-zinc-950 px-7 py-16 text-white dark:bg-gradient-to-br dark:from-[#1c1330] dark:via-zinc-950 dark:to-zinc-950 sm:px-12 lg:px-20 lg:py-20\"\n        >\n          <div\n            class=\"absolute -right-28 -top-28 h-80 w-80 rounded-full bg-violet-500/25 blur-[100px]\"\n          ></div>\n          <div\n            class=\"relative grid items-center gap-12 lg:grid-cols-[1fr_.72fr]\"\n          >\n            <div>\n              <p\n                class=\"text-[10px] font-semibold uppercase tracking-[.2em] text-acid\"\n              >\n                Guitar finder\n              </p>\n              <h2\n                class=\"mt-4 font-display text-4xl font-semibold leading-tight tracking-tight sm:text-6xl\"\n              >\n                Four questions.<br />A much better shortlist.\n              </h2>\n              <p class=\"mt-5 max-w-xl leading-7 text-zinc-400\">\n                Choose your budget, experience, preferred style, and guitar\n                type. AUDIA will narrow the catalog to practical matches.\n              </p>\n              <button class=\"primary-btn mt-8\" data-action=\"finder\">\n                Start guitar finder\n                <svg\n                  xmlns=\"http://www.w3.org/2000/svg\"\n                  width=\"17\"\n                  height=\"17\"\n                  viewBox=\"0 0 24 24\"\n                  fill=\"none\"\n                  stroke=\"currentColor\"\n                  stroke-width=\"2\"\n                  stroke-linecap=\"round\"\n                  stroke-linejoin=\"round\"\n                  class=\"lucide lucide-compass\"\n                  aria-hidden=\"true\"\n                >\n                  <circle cx=\"12\" cy=\"12\" r=\"10\"></circle>\n                  <path\n                    d=\"m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z\"\n                  ></path>\n                </svg>\n              </button>\n            </div>\n            <div\n              class=\"finder-profile rounded-3xl border border-white/10 bg-white/[.055] p-6 backdrop-blur\"\n            >\n              <p\n                class=\"text-xs font-semibold uppercase tracking-[.16em] text-zinc-500\"\n              >\n                Example profile\n              </p>\n              <div class=\"mt-6 divide-y divide-white/10\">\n                <div class=\"flex items-center justify-between py-4 text-sm\">\n                  <span class=\"text-zinc-500\">Budget</span>\n                  <span class=\"font-medium\">₱10k – ₱20k</span>\n                </div>\n                <div class=\"flex items-center justify-between py-4 text-sm\">\n                  <span class=\"text-zinc-500\">Experience</span>\n                  <span class=\"font-medium\">Beginner</span>\n                </div>\n                <div class=\"flex items-center justify-between py-4 text-sm\">\n                  <span class=\"text-zinc-500\">Genre</span>\n                  <span class=\"font-medium\">Rock</span>\n                </div>\n                <div class=\"flex items-center justify-between py-4 text-sm\">\n                  <span class=\"text-zinc-500\">Type</span>\n                  <span class=\"font-medium\">Electric</span>\n                </div>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </section>\n",
+        "after": "{% include 'search_filter/search_filter_finder_banner.html' %}\n",
+        "count": 1
+      },
+      {
+        "before": "<template id=\"product-card-template\">\n  <div\n    class=\"\"\n    data-motion='{\"initial\":{\"opacity\":0,\"y\":28},\"animate\":{\"opacity\":1,\"y\":0},\"transition\":{\"duration\":0.7,\"delay\":0,\"ease\":[0.22,1,0.36,1]},\"viewport\":true}'\n  >\n    <article class=\"product-card group\">\n      <div\n        class=\"product-image relative aspect-[4/4.5] overflow-hidden rounded-[1.15rem] bg-zinc-100 dark:bg-zinc-900\"\n      >\n        <img\n          loading=\"lazy\"\n          decoding=\"async\"\n          src=\"{{ url_for('static', filename='images/electric/Amber_Flame.png') }}\"\n          alt=\"ELECTRIC_001\"\n          class=\"h-full w-full object-cover transition duration-700 group-hover:scale-[1.04]\"\n          data-field=\"image\"\n        />\n        <span\n          class=\"absolute left-3 top-3 rounded-full bg-white/90 px-3 py-1.5 text-[9px] font-bold uppercase tracking-[.12em] text-zinc-950 backdrop-blur\"\n          data-field=\"badge\"\n          >Amber Flame</span\n        >\n        <button\n          class=\"absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full bg-white/90 text-zinc-950 shadow-sm\"\n          aria-label=\"Save guitar\"\n          data-action=\"like\"\n        >\n          <svg\n            xmlns=\"http://www.w3.org/2000/svg\"\n            width=\"15\"\n            height=\"15\"\n            viewBox=\"0 0 24 24\"\n            fill=\"none\"\n            stroke=\"currentColor\"\n            stroke-width=\"2\"\n            stroke-linecap=\"round\"\n            stroke-linejoin=\"round\"\n            class=\"lucide lucide-heart\"\n            aria-hidden=\"true\"\n          >\n            <path\n              d=\"M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5\"\n            ></path>\n          </svg>\n        </button>\n        <div class=\"absolute bottom-3 right-3\">\n          <button\n            class=\"h-10 w-10 inline-flex items-center justify-center rounded-full bg-white text-zinc-950 shadow-lg transition hover:scale-105\"\n            aria-label=\"Play guitar tone\"\n            data-action=\"sound\"\n          >\n            <svg\n              xmlns=\"http://www.w3.org/2000/svg\"\n              width=\"15\"\n              height=\"15\"\n              viewBox=\"0 0 24 24\"\n              fill=\"currentColor\"\n              stroke=\"currentColor\"\n              stroke-width=\"2\"\n              stroke-linecap=\"round\"\n              stroke-linejoin=\"round\"\n              class=\"lucide lucide-play\"\n              aria-hidden=\"true\"\n            >\n              <path\n                d=\"M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z\"\n              ></path>\n            </svg>\n          </button>\n        </div>\n      </div>\n      <div class=\"product-details px-1 pb-2 pt-5\">\n        <div\n          class=\"flex items-center justify-between text-[10px] uppercase tracking-[.14em] text-zinc-500\"\n        >\n          <span data-field=\"category\">AUDIA Demo · Electric</span>\n          <span class=\"flex items-center gap-1 normal-case tracking-normal\">\n            <svg\n              xmlns=\"http://www.w3.org/2000/svg\"\n              width=\"11\"\n              height=\"11\"\n              viewBox=\"0 0 24 24\"\n              fill=\"none\"\n              stroke=\"currentColor\"\n              stroke-width=\"2\"\n              stroke-linecap=\"round\"\n              stroke-linejoin=\"round\"\n              class=\"lucide lucide-star fill-amber-400 text-amber-400\"\n              aria-hidden=\"true\"\n            >\n              <path\n                d=\"M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z\"\n              ></path>\n            </svg>\n            <span data-field=\"rating\">0 (0)</span>\n          </span>\n        </div>\n        <h3 class=\"mt-2 font-display text-lg font-semibold\" data-field=\"name\">\n          ELECTRIC_001\n        </h3>\n        <p\n          class=\"mt-2 min-h-[40px] text-xs leading-5 text-zinc-500\"\n          data-field=\"description\"\n        >\n          Amber Flame single-cut electric with an amber figured finish and two\n          covered pickups.\n        </p>\n        <div class=\"mt-5 flex items-center justify-between\">\n          <div>\n            <p class=\"text-lg font-semibold\" data-field=\"price\">₱12,990</p>\n            <p class=\"mt-0.5 text-[10px] text-zinc-500\" data-field=\"stock\">\n              8 available\n            </p>\n          </div>\n          <button\n            class=\"grid h-11 w-11 place-items-center rounded-full bg-zinc-950 text-white transition hover:scale-105 dark:bg-acid dark:text-ink\"\n            aria-label=\"Add ELECTRIC_001 to cart\"\n            data-action=\"add\"\n          >\n            <svg\n              xmlns=\"http://www.w3.org/2000/svg\"\n              width=\"17\"\n              height=\"17\"\n              viewBox=\"0 0 24 24\"\n              fill=\"none\"\n              stroke=\"currentColor\"\n              stroke-width=\"2\"\n              stroke-linecap=\"round\"\n              stroke-linejoin=\"round\"\n              class=\"lucide lucide-plus\"\n              aria-hidden=\"true\"\n            >\n              <path d=\"M5 12h14\"></path>\n              <path d=\"M12 5v14\"></path>\n            </svg>\n          </button>\n        </div>\n      </div>\n    </article>\n  </div>\n</template>\n\n<!-- Mobile Nav -->\n",
+        "after": "{% include 'catalog/catalog_product_card.html' %}\n",
+        "count": 1
+      },
+      {
+        "before": "<template id=\"mobile-nav-template\">\n  <nav\n    class=\"shell overflow-hidden border-t border-zinc-200 dark:border-white/10 lg:hidden\"\n    data-motion='{\"initial\":{\"height\":0,\"opacity\":0},\"animate\":{\"height\":\"auto\",\"opacity\":1},\"viewport\":false}'\n  >\n    <div class=\"flex flex-col gap-1 py-4 text-sm\">\n      <a\n        href=\"#shop\"\n        class=\"rounded-xl px-3 py-3 hover:bg-zinc-100 dark:hover:bg-white/5\"\n        data-action=\"mobile-link\"\n        >Shop</a\n      >\n      <a\n        href=\"#categories\"\n        class=\"rounded-xl px-3 py-3 hover:bg-zinc-100 dark:hover:bg-white/5\"\n        data-action=\"mobile-link\"\n        >Guitars</a\n      >\n      <a\n        href=\"#bundles\"\n        class=\"rounded-xl px-3 py-3 hover:bg-zinc-100 dark:hover:bg-white/5\"\n        data-action=\"mobile-link\"\n        >Bundles</a\n      >\n      <a\n        href=\"#track\"\n        class=\"rounded-xl px-3 py-3 hover:bg-zinc-100 dark:hover:bg-white/5\"\n        data-action=\"mobile-link\"\n        >Track order</a\n      >\n      <button\n        class=\"flex items-center gap-2 rounded-xl px-3 py-3 text-left\"\n        data-action=\"finder\"\n      >\n        <svg\n          xmlns=\"http://www.w3.org/2000/svg\"\n          width=\"16\"\n          height=\"16\"\n          viewBox=\"0 0 24 24\"\n          fill=\"none\"\n          stroke=\"currentColor\"\n          stroke-width=\"2\"\n          stroke-linecap=\"round\"\n          stroke-linejoin=\"round\"\n          class=\"lucide lucide-compass\"\n          aria-hidden=\"true\"\n        >\n          <circle cx=\"12\" cy=\"12\" r=\"10\"></circle>\n          <path\n            d=\"m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z\"\n          ></path>\n        </svg>\n        Guitar finder\n      </button>\n      <button\n        class=\"flex items-center gap-2 rounded-xl px-3 py-3 text-left\"\n        data-action=\"account\"\n      >\n        <svg\n          xmlns=\"http://www.w3.org/2000/svg\"\n          width=\"16\"\n          height=\"16\"\n          viewBox=\"0 0 24 24\"\n          fill=\"none\"\n          stroke=\"currentColor\"\n          stroke-width=\"2\"\n          stroke-linecap=\"round\"\n          stroke-linejoin=\"round\"\n          class=\"lucide lucide-circle-user-round\"\n          aria-hidden=\"true\"\n        >\n          <path d=\"M17.925 20.056a6 6 0 0 0-11.851.001\"></path>\n          <circle cx=\"12\" cy=\"11\" r=\"4\"></circle>\n          <circle cx=\"12\" cy=\"12\" r=\"10\"></circle>\n        </svg>\n        Sign in\n      </button>\n    </div>\n  </nav>\n</template>\n\n<!-- Bundle Detail -->\n",
+        "after": "{% include 'catalog/catalog_navigation.html' %}\n",
+        "count": 1
+      },
+      {
+        "before": "<template id=\"bundle-detail-template\">\n  <div class=\"bundle-detail\">\n    <img class=\"bundle-image\" data-field=\"image\" alt=\"\" />\n    <p class=\"form-hint mt-5\" data-field=\"description\"></p>\n    <div class=\"order-total mt-5\">\n      <span>Complete bundle</span><strong data-field=\"price\"></strong>\n    </div>\n    <button class=\"primary-btn w-full\" data-field=\"bundle-add\">\n      Add bundle to cart\n    </button>\n  </div>\n</template>\n\n<!-- Support Info -->\n",
+        "after": "{% include 'catalog/catalog_bundle.html' %}\n",
+        "count": 1
+      },
+      {
+        "before": "<template id=\"support-info-template\">\n  <div>\n    <p class=\"form-hint\" data-field=\"support-copy\"></p>\n    <p class=\"form-hint mt-5\">\n      Keep your order confirmation for reference. The store can help confirm the\n      terms for your instrument.\n    </p>\n    <a\n      class=\"secondary-btn mt-5\"\n      data-field=\"support-email\"\n      href=\"mailto:support@audia.ph\"\n      >Contact the store</a\n    >\n  </div>\n</template>\n\n<!-- Cart -->\n",
+        "after": "{% include 'catalog/catalog_support.html' %}\n",
+        "count": 1
+      },
+      {
+        "before": "<template id=\"cart-template\">\n  <div class=\"fixed inset-0 z-50\">\n    <button\n      class=\"absolute inset-0 bg-black/55 backdrop-blur-sm\"\n      aria-label=\"Close cart\"\n      data-motion='{\"initial\":{\"opacity\":0},\"animate\":{\"opacity\":1},\"viewport\":false}'\n      data-action=\"close-cart\"\n    ></button>\n    <aside\n      class=\"cart-panel absolute right-0 top-0 flex h-full w-full max-w-md flex-col bg-white shadow-2xl dark:bg-[#101014]\"\n      data-motion='{\"initial\":{\"x\":\"100%\"},\"animate\":{\"x\":0},\"transition\":{\"type\":\"spring\",\"stiffness\":300,\"damping\":32},\"viewport\":false}'\n    >\n      <div\n        class=\"flex items-center justify-between border-b border-zinc-200 px-6 py-5 dark:border-white/10\"\n      >\n        <div class=\"flex items-center gap-3\">\n          <svg\n            xmlns=\"http://www.w3.org/2000/svg\"\n            width=\"19\"\n            height=\"19\"\n            viewBox=\"0 0 24 24\"\n            fill=\"none\"\n            stroke=\"currentColor\"\n            stroke-width=\"2\"\n            stroke-linecap=\"round\"\n            stroke-linejoin=\"round\"\n            class=\"lucide lucide-shopping-bag\"\n            aria-hidden=\"true\"\n          >\n            <path d=\"M16 10a4 4 0 0 1-8 0\"></path>\n            <path d=\"M3.103 6.034h17.794\"></path>\n            <path\n              d=\"M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z\"\n            ></path>\n          </svg>\n          <h2 class=\"font-display text-xl font-semibold\">Your cart</h2>\n          <span class=\"text-xs text-zinc-500\" data-field=\"cart-count\"\n            >1 items</span\n          >\n        </div>\n        <button class=\"icon-btn\" data-action=\"close-cart\">\n          <svg\n            xmlns=\"http://www.w3.org/2000/svg\"\n            width=\"18\"\n            height=\"18\"\n            viewBox=\"0 0 24 24\"\n            fill=\"none\"\n            stroke=\"currentColor\"\n            stroke-width=\"2\"\n            stroke-linecap=\"round\"\n            stroke-linejoin=\"round\"\n            class=\"lucide lucide-x\"\n            aria-hidden=\"true\"\n          >\n            <path d=\"M18 6 6 18\"></path>\n            <path d=\"m6 6 12 12\"></path>\n          </svg>\n        </button>\n      </div>\n      <div class=\"flex-1 overflow-y-auto p-6\" data-field=\"cart-body\"></div>\n      <div\n        class=\"border-t border-zinc-200 p-6 dark:border-white/10\"\n        data-field=\"cart-footer\"\n      >\n        <div class=\"flex justify-between\">\n          <span class=\"text-sm text-zinc-500\">Subtotal</span>\n          <span class=\"font-display text-xl font-semibold\" data-field=\"subtotal\"\n            >₱12,990</span\n          >\n        </div>\n        <button class=\"primary-btn mt-5 w-full\" data-action=\"checkout\">\n          Proceed to checkout\n          <svg\n            xmlns=\"http://www.w3.org/2000/svg\"\n            width=\"16\"\n            height=\"16\"\n            viewBox=\"0 0 24 24\"\n            fill=\"none\"\n            stroke=\"currentColor\"\n            stroke-width=\"2\"\n            stroke-linecap=\"round\"\n            stroke-linejoin=\"round\"\n            class=\"lucide lucide-shield-check\"\n            aria-hidden=\"true\"\n          >\n            <path\n              d=\"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z\"\n            ></path>\n            <path d=\"m9 12 2 2 4-4\"></path>\n          </svg>\n        </button>\n      </div>\n    </aside>\n  </div>\n</template>\n\n<!-- Cart Badge -->\n<template id=\"cart-badge-template\">\n  <span\n    class=\"absolute -right-0.5 -top-0.5 grid h-5 w-5 place-items-center rounded-full bg-zinc-950 text-[10px] font-bold text-white dark:bg-acid dark:text-ink\"\n  ></span>\n</template>\n\n<!-- Cart Empty -->\n<template id=\"cart-empty-template\">\n  <div class=\"grid h-full place-items-center text-center\">\n    <div>\n      <svg\n        xmlns=\"http://www.w3.org/2000/svg\"\n        width=\"36\"\n        height=\"36\"\n        viewBox=\"0 0 24 24\"\n        fill=\"none\"\n        stroke=\"currentColor\"\n        stroke-width=\"2\"\n        stroke-linecap=\"round\"\n        stroke-linejoin=\"round\"\n        class=\"lucide lucide-shopping-bag mx-auto text-zinc-300 dark:text-zinc-700\"\n        aria-hidden=\"true\"\n      >\n        <path d=\"M16 10a4 4 0 0 1-8 0\"></path>\n        <path d=\"M3.103 6.034h17.794\"></path>\n        <path\n          d=\"M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z\"\n        ></path>\n      </svg>\n      <p class=\"mt-4 text-sm text-zinc-500\">Your cart is empty.</p>\n    </div>\n  </div>\n</template>\n\n<!-- Cart Item -->\n<template id=\"cart-item-template\">\n  <div class=\"flex gap-4\">\n    <img\n      src=\"{{ url_for('static', filename='images/electric/Amber_Flame.png') }}\"\n      alt=\"\"\n      class=\"h-24 w-20 rounded-xl object-cover\"\n      data-field=\"image\"\n    />\n    <div class=\"flex min-w-0 flex-1 flex-col\">\n      <p\n        class=\"text-[10px] uppercase tracking-widest text-zinc-500\"\n        data-field=\"brand\"\n      >\n        AUDIA Demo\n      </p>\n      <p class=\"mt-1 truncate text-sm font-semibold\" data-field=\"name\">\n        ELECTRIC_001\n      </p>\n      <div class=\"mt-auto flex items-center justify-between\">\n        <span class=\"text-sm font-semibold\" data-field=\"price\">₱12,990</span>\n        <div\n          class=\"flex items-center gap-3 rounded-full border border-zinc-200 px-2 py-1 dark:border-white/10\"\n        >\n          <button data-action=\"decrease\">\n            <svg\n              xmlns=\"http://www.w3.org/2000/svg\"\n              width=\"13\"\n              height=\"13\"\n              viewBox=\"0 0 24 24\"\n              fill=\"none\"\n              stroke=\"currentColor\"\n              stroke-width=\"2\"\n              stroke-linecap=\"round\"\n              stroke-linejoin=\"round\"\n              class=\"lucide lucide-minus\"\n              aria-hidden=\"true\"\n            >\n              <path d=\"M5 12h14\"></path>\n            </svg>\n          </button>\n          <span class=\"text-xs\" data-field=\"quantity\">1</span>\n          <button data-action=\"increase\">\n            <svg\n              xmlns=\"http://www.w3.org/2000/svg\"\n              width=\"13\"\n              height=\"13\"\n              viewBox=\"0 0 24 24\"\n              fill=\"none\"\n              stroke=\"currentColor\"\n              stroke-width=\"2\"\n              stroke-linecap=\"round\"\n              stroke-linejoin=\"round\"\n              class=\"lucide lucide-plus\"\n              aria-hidden=\"true\"\n            >\n              <path d=\"M5 12h14\"></path>\n              <path d=\"M12 5v14\"></path>\n            </svg>\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n</template>\n\n<!-- Cart Items -->\n<template id=\"cart-items-template\">\n  <div class=\"space-y-5\"></div>\n</template>\n\n<!-- Checkout -->\n",
+        "after": "{% include 'catalog/catalog_cart.html' %}\n",
+        "count": 1
+      },
+      {
+        "before": "<template id=\"checkout-template\">\n  <form method=\"post\" class=\"stack-form\" data-form=\"checkout\">\n    <p class=\"form-hint\">\n      Your instruments are reserved when you place your order. Pay with cash on\n      delivery.\n    </p>\n    <label\n      >Delivery address<textarea\n        name=\"address\"\n        required\n        minlength=\"10\"\n        maxlength=\"500\"\n        autocomplete=\"street-address\"\n        placeholder=\"House number, street, barangay, city, province, postal code\"\n      ></textarea></label\n    ><label\n      >Phone number<input\n        name=\"phone\"\n        type=\"tel\"\n        required\n        minlength=\"7\"\n        maxlength=\"30\"\n        autocomplete=\"tel\"\n    /></label>\n    <div class=\"order-total\">\n      <span>Order total</span><strong data-field=\"checkout-total\"></strong>\n    </div>\n    <p class=\"form-hint\">\n      Payment: cash on delivery. No online payment is collected.\n    </p>\n    <p class=\"form-error\" role=\"alert\" data-field=\"form-error\" hidden></p>\n    <button type=\"submit\" class=\"primary-btn\">Place order</button>\n  </form>\n</template>\n\n<!-- Finder -->\n",
+        "after": "{% include 'catalog/catalog_checkout.html' %}\n",
+        "count": 1
+      },
+      {
+        "before": "<template id=\"finder-template\">\n  <div class=\"fixed inset-0 z-[60] grid place-items-center p-4\">\n    <button\n      class=\"absolute inset-0 bg-black/65 backdrop-blur-md\"\n      aria-label=\"Close finder\"\n      data-motion='{\"initial\":{\"opacity\":0},\"animate\":{\"opacity\":1},\"viewport\":false}'\n      data-action=\"close-finder\"\n    ></button>\n    <div\n      class=\"finder-modal relative w-full max-w-2xl overflow-hidden rounded-[2rem] bg-white shadow-2xl dark:bg-panel\"\n      data-motion='{\"initial\":{\"opacity\":0,\"y\":28,\"scale\":0.98},\"animate\":{\"opacity\":1,\"y\":0,\"scale\":1},\"viewport\":false}'\n    >\n      <div\n        class=\"flex items-center justify-between border-b border-zinc-200 p-6 dark:border-white/10\"\n      >\n        <div class=\"flex items-center gap-3\">\n          <svg\n            xmlns=\"http://www.w3.org/2000/svg\"\n            width=\"20\"\n            height=\"20\"\n            viewBox=\"0 0 24 24\"\n            fill=\"none\"\n            stroke=\"currentColor\"\n            stroke-width=\"2\"\n            stroke-linecap=\"round\"\n            stroke-linejoin=\"round\"\n            class=\"lucide lucide-compass\"\n            aria-hidden=\"true\"\n          >\n            <circle cx=\"12\" cy=\"12\" r=\"10\"></circle>\n            <path\n              d=\"m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z\"\n            ></path>\n          </svg>\n          <div>\n            <p class=\"font-display font-semibold\">AUDIA Guitar Finder</p>\n            <p class=\"text-[10px] text-zinc-500\">Four quick questions</p>\n          </div>\n        </div>\n        <button class=\"icon-btn\" data-action=\"close-finder\">\n          <svg\n            xmlns=\"http://www.w3.org/2000/svg\"\n            width=\"18\"\n            height=\"18\"\n            viewBox=\"0 0 24 24\"\n            fill=\"none\"\n            stroke=\"currentColor\"\n            stroke-width=\"2\"\n            stroke-linecap=\"round\"\n            stroke-linejoin=\"round\"\n            class=\"lucide lucide-x\"\n            aria-hidden=\"true\"\n          >\n            <path d=\"M18 6 6 18\"></path>\n            <path d=\"m6 6 12 12\"></path>\n          </svg>\n        </button>\n      </div>\n      <div class=\"p-7 sm:p-10\" data-field=\"finder-body\">\n        <div class=\"mb-8 flex gap-2\" data-field=\"progress\">\n          <span class=\"h-1 flex-1 rounded-full bg-zinc-950 dark:bg-acid\"></span>\n          <span\n            class=\"h-1 flex-1 rounded-full bg-zinc-200 dark:bg-white/10\"\n          ></span>\n          <span\n            class=\"h-1 flex-1 rounded-full bg-zinc-200 dark:bg-white/10\"\n          ></span>\n          <span\n            class=\"h-1 flex-1 rounded-full bg-zinc-200 dark:bg-white/10\"\n          ></span>\n        </div>\n        <p class=\"section-label\" data-field=\"question-number\">\n          Question 1 of 4\n        </p>\n        <h2\n          class=\"mt-3 font-display text-3xl font-semibold\"\n          data-field=\"question-title\"\n        >\n          What is your budget?\n        </h2>\n        <div class=\"mt-10\" data-field=\"budget\">\n          <div\n            class=\"mb-7 text-center font-display text-4xl font-semibold\"\n            data-field=\"budget-value\"\n          >\n            ₱20,000\n          </div>\n          <input\n            type=\"range\"\n            min=\"8000\"\n            max=\"60000\"\n            step=\"1000\"\n            class=\"range-acid w-full\"\n            value=\"20000\"\n            data-field=\"budget-input\"\n          />\n          <div class=\"mt-3 flex justify-between text-xs text-zinc-500\">\n            <span>₱8,000</span>\n            <span>₱60,000</span>\n          </div>\n        </div>\n        <div\n          class=\"mt-9 grid gap-3 sm:grid-cols-2\"\n          data-field=\"options\"\n          hidden=\"\"\n        ></div>\n        <button class=\"primary-btn mt-10 w-full\" data-action=\"finder-next\">\n          Continue\n          <svg\n            xmlns=\"http://www.w3.org/2000/svg\"\n            width=\"16\"\n            height=\"16\"\n            viewBox=\"0 0 24 24\"\n            fill=\"none\"\n            stroke=\"currentColor\"\n            stroke-width=\"2\"\n            stroke-linecap=\"round\"\n            stroke-linejoin=\"round\"\n            class=\"lucide lucide-arrow-right\"\n            aria-hidden=\"true\"\n          >\n            <path d=\"M5 12h14\"></path>\n            <path d=\"m12 5 7 7-7 7\"></path>\n          </svg>\n        </button>\n      </div>\n    </div>\n  </div>\n</template>\n\n<!-- Finder Results -->\n<template id=\"finder-results-template\">\n  <div class=\"p-7 sm:p-10\" data-field=\"finder-results\">\n    <p class=\"section-label\">Recommended for you</p>\n    <h2 class=\"mt-3 font-display text-3xl font-semibold\">\n      Your closest matches.\n    </h2>\n    <div class=\"mt-7 space-y-3\" data-field=\"matches\"></div>\n    <button class=\"secondary-btn mt-6 w-full\" data-action=\"finder-restart\">\n      Start again\n    </button>\n  </div>\n</template>\n\n<!-- Finder Match -->\n<template id=\"finder-match-template\">\n  <div\n    class=\"flex items-center gap-4 rounded-2xl border border-zinc-200 p-3 dark:border-white/10\"\n  >\n    <div class=\"relative\">\n      <img\n        src=\"{{ url_for('static', filename='images/electric/Amber_Flame.png') }}\"\n        alt=\"\"\n        class=\"h-20 w-16 rounded-xl object-cover\"\n        data-field=\"image\"\n      />\n      <span\n        class=\"absolute -left-2 -top-2 grid h-6 w-6 place-items-center rounded-full bg-zinc-950 text-[10px] font-bold text-white dark:bg-acid dark:text-ink\"\n        data-field=\"rank\"\n        >1</span\n      >\n    </div>\n    <div class=\"min-w-0 flex-1\">\n      <p class=\"truncate text-sm font-semibold\" data-field=\"name\">\n        ELECTRIC_001\n      </p>\n      <p class=\"mt-1 text-xs text-zinc-500\" data-field=\"category\">\n        Electric · Beginner\n      </p>\n      <p class=\"mt-2 text-sm font-semibold\" data-field=\"price\">₱12,990</p>\n    </div>\n    <button\n      class=\"grid h-10 w-10 place-items-center rounded-full bg-zinc-950 text-white dark:bg-acid dark:text-ink\"\n      data-action=\"add-match\"\n    >\n      <svg\n        xmlns=\"http://www.w3.org/2000/svg\"\n        width=\"16\"\n        height=\"16\"\n        viewBox=\"0 0 24 24\"\n        fill=\"none\"\n        stroke=\"currentColor\"\n        stroke-width=\"2\"\n        stroke-linecap=\"round\"\n        stroke-linejoin=\"round\"\n        class=\"lucide lucide-plus\"\n        aria-hidden=\"true\"\n      >\n        <path d=\"M5 12h14\"></path>\n        <path d=\"M12 5v14\"></path>\n      </svg>\n    </button>\n  </div>\n</template>\n\n<!-- Finder Option -->\n<template id=\"finder-option-template\">\n  <button\n    class=\"rounded-2xl border p-5 text-left text-sm transition border-zinc-950 bg-zinc-950 text-white dark:border-acid dark:bg-acid/10 dark:text-acid\"\n    data-action=\"finder-option\"\n  ></button>\n</template>\n\n<!-- Check -->\n<template id=\"check-template\">\n  <svg\n    xmlns=\"http://www.w3.org/2000/svg\"\n    width=\"15\"\n    height=\"15\"\n    viewBox=\"0 0 24 24\"\n    fill=\"none\"\n    stroke=\"currentColor\"\n    stroke-width=\"2\"\n    stroke-linecap=\"round\"\n    stroke-linejoin=\"round\"\n    class=\"lucide lucide-check float-right\"\n    aria-hidden=\"true\"\n  >\n    <path d=\"M20 6 9 17l-5-5\"></path>\n  </svg>\n</template>\n\n",
+        "after": "{% include 'search_filter/search_filter_finder.html' %}\n",
+        "count": 1
+      }
+    ],
+    "assets/css/shared/shared.css": [
+      {
+        "before": "/* Chat */\n.chat-panel {\n  max-height: calc(100dvh - 120px);\n  border-radius: 14px;\n  border-color: var(--line);\n}\n\n/* Keep long replies readable and controls visibly busy without changing the layout. */\n.chat-panel [data-field=\"messages\"] {\n  min-height: 0;\n}\n.chat-panel [data-field=\"message\"] {\n  white-space: pre-wrap;\n  overflow-wrap: anywhere;\n}\n.chat-panel :disabled {\n  cursor: wait;\n  opacity: 0.6;\n}\n",
+        "after": "/* Chat component rules live in chatbot/chatbot.css. */\n",
+        "count": 1
+      }
+    ],
+    "templates/shared/base.html": [
+      {
+        "before": "    <link\n      rel=\"stylesheet\"\n      href=\"{{ url_for('static', filename='css/' ~ stylesheet ~ '.css') }}\"\n    />",
+        "after": "    {% if page_name in ('landing', 'storefront') %}\n    <link rel=\"stylesheet\" href=\"{{ url_for('static', filename='css/chatbot/chatbot.css') }}\" />\n    {% endif %}\n    <link\n      rel=\"stylesheet\"\n      href=\"{{ url_for('static', filename='css/' ~ stylesheet ~ '.css') }}\"\n    />\n    {% if page_name == 'storefront' %}\n    <link rel=\"stylesheet\" href=\"{{ url_for('static', filename='css/search_filter/search_filter.css') }}\" />\n    {% endif %}",
+        "count": 1
+      },
+      {
+        "before": "    {% if page_name in ('landing', 'storefront') %}\n    <link rel=\"stylesheet\" href=\"{{ url_for('static', filename='css/chatbot/chatbot.css') }}\" />\n    {% endif %}\n",
+        "after": "    <link rel=\"stylesheet\" href=\"{{ url_for('static', filename='css/chatbot/chatbot.css') }}\" />\n",
+        "count": 1
+      }
+    ],
+    "assets/js/catalog/catalog.js": [
+      {
+        "before": "const questions = [\n  { key: \"budget\", title: \"What is your budget?\" },\n  {\n    key: \"level\",\n    title: \"What is your experience level?\",\n    options: [\"Beginner\", \"Intermediate\", \"Advanced\"],\n  },\n  {\n    key: \"genre\",\n    title: \"What do you want to play?\",\n    options: [\"Rock\", \"Pop\", \"Blues\", \"Jazz\", \"Classical\"],\n  },\n  {\n    key: \"category\",\n    title: \"Which guitar type do you prefer?\",\n    options: [\"Electric\", \"Acoustic\", \"Classical\", \"Bass\"],\n  },\n];\nconst selectedOption =\n  \"rounded-2xl border p-5 text-left text-sm transition border-zinc-950 bg-zinc-950 text-white dark:border-acid dark:bg-acid/10 dark:text-acid\";\nconst plainOption =\n  \"rounded-2xl border p-5 text-left text-sm transition border-zinc-200 hover:border-zinc-400 dark:border-white/10\";\n\nexport function mountStore",
+        "after": "export function mountStore",
+        "count": 1
+      },
+      {
+        "before": "  let filter = app.catalogCategory || \"All\";\n  app.catalogCategory = \"\";\n  let search = app.searchProduct || \"\";\n  app.searchProduct = \"\";\n  field(page, \"search\").value = search;\n  let sort = \"Featured\";\n  let cartPanel;",
+        "after": "  let cartPanel;",
+        "count": 1
+      },
+      {
+        "before": "  let finder;\n  let finderStep = 0;\n  let results = [];\n  let answers = {\n    budget: 20000,\n    level: \"Beginner\",\n    genre: \"Rock\",\n    category: \"Electric\",\n  };\n  let mobile;",
+        "after": "  let mobile;",
+        "count": 1
+      },
+      {
+        "before": "  const timers = new Set();\n  const soundTimers",
+        "after": "  const soundTimers",
+        "count": 1
+      },
+      {
+        "before": "  const account = $(page,",
+        "after": "  const searchFilter = mountSearchFilter(page, app, { renderProducts, closeMobile, addToCart });\n\n  const account = $(page,",
+        "count": 1
+      },
+      {
+        "before": "    let list = products.filter(\n      (p) =>\n        (filter === \"All\" || p.category === filter) &&\n        `${p.name} ${p.brand}`.toLowerCase().includes(search.toLowerCase()),\n    );\n    if (sort === \"Price: low\")\n      list = [...list].sort((a, b) => a.price - b.price);\n    if (sort === \"Price: high\")\n      list = [...list].sort((a, b) => b.price - a.price);\n    if (sort === \"Rating\") list = [...list].sort((a, b) => b.rating - a.rating);\n    const grid",
+        "after": "    const list = searchFilter.filterProducts(products);\n    const grid",
+        "count": 1
+      },
+      {
+        "before": "button.dataset.category === filter,",
+        "after": "button.dataset.category === searchFilter.category,",
+        "count": 1
+      },
+      {
+        "before": "  function renderFinder() {\n    if (!finder) return;\n    const modal = $(finder, \".finder-modal\");\n    modal.children[1]?.remove();\n    if (finderStep === 4) {\n      const body = clone(\"finder-results\");\n      field(body, \"matches\").replaceChildren(\n        ...results.map((product, index) => {\n          const row = clone(\"finder-match\");\n          row.dataset.productId = product.id;\n          field(row, \"image\").src = imageSource(product.image);\n          text(row, \"rank\", index + 1);\n          text(row, \"name\", product.name);\n          text(row, \"category\", `${product.category} · ${product.level}`);\n          text(row, \"price\", peso(product.price));\n          return row;\n        }),\n      );\n      modal.append(body);\n    } else {\n      const body = field(clone(\"finder\"), \"finder-body\");\n      const question = questions[finderStep];\n      text(body, \"question-number\", `Question ${finderStep + 1} of 4`);\n      text(body, \"question-title\", question.title);\n      [...field(body, \"progress\").children].forEach((bar, i) => {\n        bar.className = `h-1 flex-1 rounded-full ${i <= finderStep ? \"bg-zinc-950 dark:bg-acid\" : \"bg-zinc-200 dark:bg-white/10\"}`;\n      });\n      field(body, \"budget\").hidden = finderStep !== 0;\n      text(body, \"budget-value\", peso(answers.budget));\n      field(body, \"budget-input\").value = answers.budget;\n      const options = field(body, \"options\");\n      options.hidden = finderStep === 0;\n      options.replaceChildren(\n        ...(question.options || []).map((option) => {\n          const button = clone(\"finder-option\");\n          button.dataset.option = option;\n          button.textContent = option;\n          const selected = answers[question.key] === option;\n          button.className = selected ? selectedOption : plainOption;\n          if (selected) button.append(clone(\"check\"));\n          return button;\n        }),\n      );\n      $(body, '[data-action=\"finder-next\"]').replaceChildren(\n        finderStep === 3 ? \"Show my matches \" : \"Continue \",\n        icon(\"arrow-right\", 16),\n      );\n      modal.append(body);\n    }\n  }\n  function openFinder() {\n    closeMobile();\n    if (finder) return;\n    finder = clone(\"finder\");\n    page.append(finder);\n    renderFinder();\n    animate(finder);\n  }\n  function closeFinder() {\n    const closing = finder;\n    finder = null;\n    finderStep = 0;\n    results = [];\n    dismiss(closing);\n  }\n  async function finishFinder() {\n    const button = $(finder, '[data-action=\"finder-next\"]');\n    if (button.disabled) return;\n    button.disabled = true;\n    try {\n      const data = await api(\"/finder\", { method: \"POST\", body: answers });\n      results = data.recommendations;\n      finderStep = 4;\n      if (alive) renderFinder();\n    } catch (error) {\n      notice(error.message);\n      button.disabled = false;\n    }\n  }\n\n  function openCheckout()",
+        "after": "  function openCheckout()",
+        "count": 1
+      },
+      {
+        "before": "      case \"finder\":\n        openFinder();\n        break;\n      case \"close-finder\":\n        closeFinder();\n        break;\n      case \"finder-next\":\n        if (finderStep === 3) finishFinder();\n        else {\n          finderStep += 1;\n          renderFinder();\n        }\n        break;\n      case \"finder-option\":\n        answers = {\n          ...answers,\n          [questions[finderStep].key]: button.dataset.option,\n        };\n        renderFinder();\n        break;\n      case \"finder-restart\":\n        finderStep = 0;\n        renderFinder();\n        break;\n      case \"add-match\":\n        addToCart(results.find((p) => p.id === id));\n        closeFinder();\n        break;\n      case \"search\":\n        $(page, \"#shop\").scrollIntoView({ behavior: \"smooth\" });\n        timers.add(setTimeout(() => field(page, \"search\")?.focus(), 450));\n        break;\n      case \"category\":\n        filter = button.dataset.category;\n        renderProducts();\n        $(page, \"#shop\").scrollIntoView({ behavior: \"smooth\" });\n        break;\n      case \"filter\":\n        filter = button.dataset.category;\n        renderProducts();\n        break;\n      case \"add\":",
+        "after": "      case \"add\":",
+        "count": 1
+      },
+      {
+        "before": "    const id = Number(button.closest",
+        "after": "    if (searchFilter.handleAction(button)) return;\n    const id = Number(button.closest",
+        "count": 1
+      },
+      {
+        "before": "  page.addEventListener(\"input\", (event) => {\n    switch (event.target.dataset.field) {\n      case \"search\":\n        search = event.target.value;\n        renderProducts();\n        break;\n\n      case \"budget-input\":\n        answers = { ...answers, budget: Number(event.target.value) };\n        text(finder, \"budget-value\", peso(answers.budget));\n        break;\n    }\n  });\n  page.addEventListener(\"change\", (event) => {\n    if (event.target.dataset.field === \"sort\") {\n      sort = event.target.value;\n      renderProducts();\n    }\n  });\n  field(page, \"no-products\").hidden = false;",
+        "after": "  field(page, \"no-products\").hidden = false;",
+        "count": 1
+      },
+      {
+        "before": "        openFinder();",
+        "after": "        searchFilter.openFinder();",
+        "count": 1
+      },
+      {
+        "before": "if (search || filter !== \"All\")",
+        "after": "if (searchFilter.hasSelection)",
+        "count": 1
+      },
+      {
+        "before": "if (data.profile) answers = data.profile;",
+        "after": "if (data.profile) searchFilter.restoreProfile(data.profile);",
+        "count": 1
+      },
+      {
+        "before": "      timers.forEach(clearTimeout);",
+        "after": "      searchFilter.destroy();",
+        "count": 1
+      },
+      {
+        "before": "import {\n  imageSource,",
+        "after": "import { mountSearchFilter } from \"../search_filter/search_filter.js\";\nimport {\n  imageSource,",
+        "count": 1
+      }
+    ],
+    "tests/structure-browser.cjs": [
+      {
+        "before": "      if (delta > 2) return false;",
+        "after": "      if (delta > 4) return false;",
+        "count": 1
+      },
+      {
+        "before": "  // Permit only tiny compositor rounding: at most 2/255 in 0.1% of pixels.",
+        "after": "  // Permit tiny compositor rounding: at most 4/255 in 0.1% of pixels.\n  // An unchanged admin badge differed in four edge pixels by at most 4/255.",
+        "count": 1
+      }
+    ],
+    "assets/css/lessons/lessons.css": [
+      {
+        "before": "@import url(\"../shared/practice.css\");\n\n.lesson-hero { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); overflow: hidden; margin-bottom: 24px; }\n.lesson-hero .practice-card { align-self: center; padding: 36px; }\n.lesson-hero h2 { margin-top: 16px; font-size: clamp(26px, 4vw, 40px); letter-spacing: -0.04em; }\n.lesson-hero img { height: 100%; min-height: 320px; max-height: 430px; width: 100%; object-fit: cover; }\n.lesson-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }\n.lesson-card { display: flex; flex-direction: column; gap: 12px; }\n.lesson-card p { margin-top: 0; }\n.lesson-card .practice-link { margin-top: auto; padding-top: 12px; }\n.lesson-card:hover, .chord-card:hover { border-color: var(--accent); }\n.lesson-topics { display: flex; flex-wrap: wrap; gap: 12px 20px; margin-bottom: 24px; color: var(--accent); font-size: 13px; }\n.lesson-basics-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }\n.lesson-wide { grid-column: 1 / -1; }\n.lesson-steps { margin-block: 16px; padding-left: 22px; font-size: 14px; line-height: 1.8; color: var(--muted); }\nol.lesson-steps { list-style: decimal; }\nul.lesson-steps { list-style: disc; }\n.lesson-steps li + li { margin-top: 8px; }\n.lesson-definitions dt { font-size: 14px; font-weight: 600; margin-top: 16px; }\n.lesson-definitions dd { color: var(--muted); font-size: 14px; line-height: 1.8; margin-top: 4px; }\n.lesson-string-list { margin-top: 16px; font-size: 14px; line-height: 2; }\n.chord-legend { color: var(--muted); font-size: 12px; line-height: 1.8; margin-bottom: 24px; }\n.chord-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }\n.chord-card h2 { font-size: 17px; display: flex; justify-content: space-between; gap: 8px; }\n.chord-card h2 span { color: var(--accent); }\n.chord-diagram { display: block; width: 100%; max-width: 240px; height: auto; margin: 20px auto; }\n.chord-fret, .chord-string { stroke: var(--muted); stroke-width: 1.5; }\n.chord-nut { stroke: var(--text); stroke-width: 5; }\n.chord-string-label, .chord-open-muted { fill: var(--text); font-size: 14px; }\n.chord-fret-label { fill: var(--muted); font-size: 12px; }\n.chord-finger { fill: var(--text); }\n.chord-finger-number { fill: var(--surface); font-size: 12px; font-weight: 700; }\n.chord-detail-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 24px; }\n.chord-detail-diagram { text-align: center; align-self: start; }\n.chord-detail-diagram h2 { font-size: 36px; color: var(--accent); }\n.chord-detail-diagram .chord-legend { margin-bottom: 0; }\n.strumming-lessons { display: grid; gap: 24px; margin-top: 24px; }\n.strumming-pattern { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 8px; margin-block: 24px; max-width: 640px; }\n.strumming-beat { display: flex; flex-direction: column; align-items: center; gap: 8px; }\n.strumming-stroke { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 64px; width: 100%; border-radius: 8px; background: var(--soft); color: var(--accent); font-size: 20px; font-weight: 600; }\n.strumming-rest { color: var(--muted); }\n.strumming-stroke > span { font-size: 15px; }\n.strumming-count { color: var(--muted); font-size: 13px; }\n@media (max-width: 1100px) { .chord-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }\n@media (max-width: 900px) { .chord-detail-layout { grid-template-columns: minmax(0, 1fr); } }\n@media (max-width: 767px) {\n  .lesson-hero, .lesson-grid, .lesson-basics-grid { grid-template-columns: minmax(0, 1fr); }\n  .lesson-hero .practice-card { padding: 24px; }\n  .lesson-hero img { min-height: 0; max-height: 260px; }\n  .chord-grid { gap: 12px; }\n  .chord-card { padding: 16px 12px; }\n  .chord-card h2 { font-size: 15px; flex-wrap: wrap; }\n  .strumming-pattern { gap: 4px; }\n  .strumming-stroke { font-size: 17px; }\n}\n@media (max-width: 479px) {\n  .chord-grid { grid-template-columns: minmax(0, 1fr); }\n  .chord-card { padding: 20px; }\n  .chord-card h2 { font-size: 17px; }\n}\n",
+        "after": "@import url(\"../shared/practice.css\");\n\n.lesson-hero {\n  display: grid;\n  grid-template-columns: repeat(2, minmax(0, 1fr));\n  overflow: hidden;\n  margin-bottom: 24px;\n}\n.lesson-hero .practice-card {\n  align-self: center;\n  padding: 36px;\n}\n.lesson-hero h2 {\n  margin-top: 16px;\n  font-size: clamp(26px, 4vw, 40px);\n  letter-spacing: -0.04em;\n}\n.lesson-hero img {\n  height: 100%;\n  min-height: 320px;\n  max-height: 430px;\n  width: 100%;\n  object-fit: cover;\n}\n.lesson-grid {\n  display: grid;\n  grid-template-columns: repeat(3, minmax(0, 1fr));\n  gap: 24px;\n}\n.lesson-card {\n  display: flex;\n  flex-direction: column;\n  gap: 12px;\n}\n.lesson-card p {\n  margin-top: 0;\n}\n.lesson-card .practice-link {\n  margin-top: auto;\n  padding-top: 12px;\n}\n.lesson-card:hover,\n.chord-card:hover {\n  border-color: var(--accent);\n}\n.lesson-topics {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 12px 20px;\n  margin-bottom: 24px;\n  color: var(--accent);\n  font-size: 13px;\n}\n.lesson-basics-grid {\n  display: grid;\n  grid-template-columns: repeat(2, minmax(0, 1fr));\n  gap: 24px;\n}\n.lesson-wide {\n  grid-column: 1 / -1;\n}\n.lesson-steps {\n  margin-block: 16px;\n  padding-left: 22px;\n  font-size: 14px;\n  line-height: 1.8;\n  color: var(--muted);\n}\nol.lesson-steps {\n  list-style: decimal;\n}\nul.lesson-steps {\n  list-style: disc;\n}\n.lesson-steps li + li {\n  margin-top: 8px;\n}\n.lesson-definitions dt {\n  font-size: 14px;\n  font-weight: 600;\n  margin-top: 16px;\n}\n.lesson-definitions dd {\n  color: var(--muted);\n  font-size: 14px;\n  line-height: 1.8;\n  margin-top: 4px;\n}\n.lesson-string-list {\n  margin-top: 16px;\n  font-size: 14px;\n  line-height: 2;\n}\n.chord-legend {\n  color: var(--muted);\n  font-size: 12px;\n  line-height: 1.8;\n  margin-bottom: 24px;\n}\n.chord-grid {\n  display: grid;\n  grid-template-columns: repeat(4, minmax(0, 1fr));\n  gap: 20px;\n}\n.chord-card h2 {\n  font-size: 17px;\n  display: flex;\n  justify-content: space-between;\n  gap: 8px;\n}\n.chord-card h2 span {\n  color: var(--accent);\n}\n.chord-diagram {\n  display: block;\n  width: 100%;\n  max-width: 240px;\n  height: auto;\n  margin: 20px auto;\n}\n.chord-fret,\n.chord-string {\n  stroke: var(--muted);\n  stroke-width: 1.5;\n}\n.chord-nut {\n  stroke: var(--text);\n  stroke-width: 5;\n}\n.chord-string-label,\n.chord-open-muted {\n  fill: var(--text);\n  font-size: 14px;\n}\n.chord-fret-label {\n  fill: var(--muted);\n  font-size: 12px;\n}\n.chord-finger {\n  fill: var(--text);\n}\n.chord-finger-number {\n  fill: var(--surface);\n  font-size: 12px;\n  font-weight: 700;\n}\n.chord-detail-layout {\n  display: grid;\n  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);\n  gap: 24px;\n}\n.chord-detail-diagram {\n  text-align: center;\n  align-self: start;\n}\n.chord-detail-diagram h2 {\n  font-size: 36px;\n  color: var(--accent);\n}\n.chord-detail-diagram .chord-legend {\n  margin-bottom: 0;\n}\n.strumming-lessons {\n  display: grid;\n  gap: 24px;\n  margin-top: 24px;\n}\n.strumming-pattern {\n  display: grid;\n  grid-template-columns: repeat(8, minmax(0, 1fr));\n  gap: 8px;\n  margin-block: 24px;\n  max-width: 640px;\n}\n.strumming-beat {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  gap: 8px;\n}\n.strumming-stroke {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  min-height: 64px;\n  width: 100%;\n  border-radius: 8px;\n  background: var(--soft);\n  color: var(--accent);\n  font-size: 20px;\n  font-weight: 600;\n}\n.strumming-rest {\n  color: var(--muted);\n}\n.strumming-stroke > span {\n  font-size: 15px;\n}\n.strumming-count {\n  color: var(--muted);\n  font-size: 13px;\n}\n@media (max-width: 1100px) {\n  .chord-grid {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n  }\n}\n@media (max-width: 900px) {\n  .chord-detail-layout {\n    grid-template-columns: minmax(0, 1fr);\n  }\n}\n@media (max-width: 767px) {\n  .lesson-hero,\n  .lesson-grid,\n  .lesson-basics-grid {\n    grid-template-columns: minmax(0, 1fr);\n  }\n  .lesson-hero .practice-card {\n    padding: 24px;\n  }\n  .lesson-hero img {\n    min-height: 0;\n    max-height: 260px;\n  }\n  .chord-grid {\n    gap: 12px;\n  }\n  .chord-card {\n    padding: 16px 12px;\n  }\n  .chord-card h2 {\n    font-size: 15px;\n    flex-wrap: wrap;\n  }\n  .strumming-pattern {\n    gap: 4px;\n  }\n  .strumming-stroke {\n    font-size: 17px;\n  }\n}\n@media (max-width: 479px) {\n  .chord-grid {\n    grid-template-columns: minmax(0, 1fr);\n  }\n  .chord-card {\n    padding: 20px;\n  }\n  .chord-card h2 {\n    font-size: 17px;\n  }\n}\n",
+        "count": 1
+      }
+    ]
+  },
+  "new_runtime_files": {
+    "modules/search_filter/__init__.py": "bd7ca9cf55de75ee753677ff0de74223d21e171d497cd7aa376e6426f695364d",
+    "modules/search_filter/search_filter.py": "fed1807d3469c7cb1af93db92c70814065ac854765196dc24edc7162f7da457b",
+    "templates/search_filter/search_filter.html": "2e37b034cb1c3482c380a7d7b9371e0c571959c28b78d56424275c8bf0810cf5",
+    "templates/search_filter/search_filter_types.html": "911e54f25cb6402ca7707525151342f2239f5a5e56a6f55619b09d7b2fafe020",
+    "templates/search_filter/search_filter_finder_banner.html": "c7f256f7f1af8d7ff5f5a39e2ed6415aee78e32920e27e8d6531e2b3fffcce9b",
+    "templates/catalog/catalog_product_card.html": "00ca028d21561f1fb6aa4510f15de939592912f04746692ce96a4df67966372b",
+    "templates/catalog/catalog_navigation.html": "6df5cca10d012a37a00a43cfa93ba259a6b097a0e6db0c263f467524ae18948b",
+    "templates/catalog/catalog_bundle.html": "10da855534017bc649cf4b1d0c1c035cdf10542b39646989139783b51d43fc98",
+    "templates/catalog/catalog_support.html": "5b0e87f91883eb6bee539a4df0f1775b74454eb5e0460fedce6681914f457720",
+    "templates/catalog/catalog_cart.html": "0479713dedbed30a0c0c21671aa94e7a47bf604a7c1ab790a565d19aded55634",
+    "templates/catalog/catalog_checkout.html": "dfe6986f9773f0cec5152f0fd859e9df22af775c17d26fb9cf32b4d6f6467103",
+    "templates/search_filter/search_filter_finder.html": "20e2316d196c328d190d5446d5f962f82250eea9eb80fab2fde46472ba487e14",
+    "assets/css/search_filter/search_filter.css": "c414a9c51d10f2ab1bd0265285698d45856c8b40184ca4063a860e78931707bd",
+    "assets/css/chatbot/chatbot.css": "0cb2df6721ba8ada88a7f0534e4c9da4fc3e2bdefbf9b2fd2e68bc0a5610ba1d",
+    "assets/js/search_filter/search_filter.js": "a9b8a9f0ba1d790856a717a5219691a7f7845e55f9c57df68fd83cec59068826"
+  },
+  "removed_empty_folders": [
+    "modules/ai"
+  ],
+  "preserved_editor_formatting": [
+    "assets/css/lessons/lessons.css"
+  ]
+}

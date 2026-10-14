@@ -1,0 +1,89 @@
+/* Search/filter and budget/skill Finder component. */
+
+.finder-banner {
+  border: 1px solid #56416e;
+  border-radius: 12px;
+  background:
+    radial-gradient(ellipse at 95% 0%, #7444a640, transparent 65%), #18121f;
+}
+
+.dark .finder-banner {
+  background:
+    radial-gradient(ellipse at 95% 0%, #7444a640, transparent 65%), #18121f;
+}
+
+.finder-banner::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  opacity: 0.5;
+  background-image:
+    linear-gradient(#d5b5ff0c 1px, transparent 1px),
+    linear-gradient(90deg, #d5b5ff0c 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.finder-banner h2 {
+  font-size: clamp(2.1rem, 4.2vw, 3.6rem);
+  letter-spacing: -0.055em;
+}
+
+.finder-banner .text-zinc-500,
+.finder-banner .text-zinc-400 {
+  color: #b9aec5;
+}
+
+.finder-banner .primary-btn {
+  background: #b8f5d0;
+  color: #132b20;
+}
+
+.finder-banner .primary-btn:hover {
+  background: #d5ffe5;
+}
+
+.finder-profile {
+  position: relative;
+  border-radius: 10px;
+  border-color: #b696de33;
+  box-shadow: 0 24px 45px #00000030;
+  transform: rotate(2deg);
+}
+
+.finder-profile::before {
+  content: "";
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  top: 26px;
+  right: 26px;
+  border-radius: 50%;
+  background: #b8f5d0;
+  box-shadow:
+    -13px 0 #b696de77,
+    -26px 0 #b696de33;
+}
+
+/* Finder */
+.finder-modal {
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+
+@media (max-width: 639px) {
+  .finder-banner {
+    padding: 36px 24px;
+  }
+  .finder-banner > .relative {
+    gap: 32px;
+  }
+  .finder-profile {
+    transform: none;
+  }
+  .storefront main > section:has(.finder-banner) {
+    padding-block: 64px;
+  }
+}

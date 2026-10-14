@@ -1,0 +1,19 @@
+/* Chat */
+.chat-panel {
+  max-height: calc(100dvh - 120px);
+  border-radius: 14px;
+  border-color: var(--line);
+}
+
+/* Keep long replies readable and controls visibly busy without changing the layout. */
+.chat-panel [data-field="messages"] {
+  min-height: 0;
+}
+.chat-panel [data-field="message"] {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.chat-panel :disabled {
+  cursor: wait;
+  opacity: 0.6;
+}

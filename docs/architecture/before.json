@@ -1,0 +1,892 @@
+{
+  "files": {
+    "modules/__init__.py": {
+      "sha256": "2fe3a29dbbda0cd7aa6cbe3929239a704a2ec11abcd8cb9ef6a494a1b58795af",
+      "bytes": 33,
+      "logic_sha256": "4299300987d6fa0dffff449fe772040c521698b5def8493f6758c76ffea57623"
+    },
+    "modules/admin.py": {
+      "sha256": "4ab08fa5bc1dbaa982d1bcf79b90e1ed10f8e9f8015599fdd8201747ec96399a",
+      "bytes": 8707,
+      "logic_sha256": "22f1794da80825aec1bd4f3f5aadc2866661af4a3a6f9979bdb4fbad8ac9b7b2"
+    },
+    "modules/ai.py": {
+      "sha256": "4717eb17acfc686bff31a737a920e4a7dafd3c4b02c1bc50d4d63ec0c46c5e0d",
+      "bytes": 28159,
+      "logic_sha256": "a06ff45bf8b174b0581df57c0b7625ddda99e78320330836bd32b150bf90cada"
+    },
+    "modules/auth.py": {
+      "sha256": "2acb024723664ed84f3d5c7fd8b11f7ba31917b0119717eddd264def7623bced",
+      "bytes": 19962,
+      "logic_sha256": "5df715bd9c67067c6a478832b1e58b1611b26c5a7f774947cfeff3caeb43317c"
+    },
+    "modules/catalog.py": {
+      "sha256": "ca93f894537d563c7350e21033b7e65cb80f525f81989423d3c8d95fdc422800",
+      "bytes": 4156,
+      "logic_sha256": "98414fd75f6b494c69fb23dce666fa662bb047a52184a71a4e4c742e5d27706b"
+    },
+    "modules/chatbot.py": {
+      "sha256": "e86f85d9c7b3bb3c176c25423f79d172f3ab941cfa3c12f1eb22c70ddef045cf",
+      "bytes": 1161,
+      "logic_sha256": "d052b29ae60a7dc8eb9f4d03e4fd5adaf53fc98dd8fd49adb4cf076aa75f94bd"
+    },
+    "modules/database.py": {
+      "sha256": "155b8cdf14db677488c2e70e52483deb21913aae2748543378d945b48a914d1e",
+      "bytes": 2125,
+      "logic_sha256": "0216fd3607b4645bb5ddb711d9c007d64cefbe722fd117d9fb42a453317c4e1e"
+    },
+    "modules/lessons.py": {
+      "sha256": "24b800e555ab8b9c356f99d755fd782f5a1ab2813ec03226d4d21eee3e31421b",
+      "bytes": 1268,
+      "logic_sha256": "ddfa3aeb0e82b449ed729c4f0e8ec14f1eba79767921da402682e7be20c6c4e9"
+    },
+    "modules/lessons_content.py": {
+      "sha256": "9fcc6445fa70025f3507b7686d02263389b092025096ef0480d48f03ab8ea314",
+      "bytes": 5024,
+      "logic_sha256": "540525b526da18ad11759f8f87a84d4672b071639d274588d33c1ff076f3765b"
+    },
+    "modules/mail.py": {
+      "sha256": "ac623c8c92fa332d76d57bdca8b6d4f21f5fe5a9f487676745cf2aa6171762bf",
+      "bytes": 1772,
+      "logic_sha256": "9390148cf3d39e7ced40fc0577d1a7617664ec645ff2f6dd8e26a9ac63130e34"
+    },
+    "modules/models.py": {
+      "sha256": "6657bcbd14b152577d18854908e1ac47426805c8d5acb2734b90693fc3199982",
+      "bytes": 5779,
+      "logic_sha256": "3935f7ddd6c308f61219914f3e5ecbc117d82fc2d6d2544c9bb6ceed4cf97663"
+    },
+    "modules/orders.py": {
+      "sha256": "1c88ee0c0f896ed0f17c8a7a79da60791657dfec3d5ab372ef4bd06e2ae822b3",
+      "bytes": 3115,
+      "logic_sha256": "f28bc72eea2bfc385a9ef07648b6ec8efd9a316e94f8f085a0249b777e059a99"
+    },
+    "modules/rag_sync.py": {
+      "sha256": "cf4aedd5bf07b4acea6ad86a8a60252143b736190853059dd26fba5aba11736f",
+      "bytes": 4316,
+      "logic_sha256": "962fe82fb8d729fc991fafc707cef5b8e500133055211112d946c4d118fd560a"
+    },
+    "modules/tuner.py": {
+      "sha256": "d1fc7b469cb03ecd7181278c1cd92e1fe90b688258144a9512b95b2ccbcc92df",
+      "bytes": 510,
+      "logic_sha256": "047abb8f5fb02d8e5c1e0d890547a2a94d96fc698d8034c26a3bf155bc090f32"
+    },
+    "templates/account.html": {
+      "sha256": "7ba3e1faad9374aa1695e6de316cfb9b730da1583e3c26563694b010752bc83b",
+      "bytes": 5382
+    },
+    "templates/admin.html": {
+      "sha256": "4eb813b82bce47d28181980b8a63f2881b35ad295d4d9eee73a9a49b053673e6",
+      "bytes": 32901
+    },
+    "templates/auth.html": {
+      "sha256": "5e45b25e9f86bf7046831b6a8849dd6bc94021a2f9a95888a0212f483f622dde",
+      "bytes": 14442
+    },
+    "templates/base.html": {
+      "sha256": "124d21d38a6d182e48e5d2d5ff95581eb3cc983fd87e4275a2128e4826705d0b",
+      "bytes": 1219
+    },
+    "templates/chatbot.html": {
+      "sha256": "81708a30947a9c647124a249fdd016a6283aed03201cda0e301f6c96a221366c",
+      "bytes": 4915
+    },
+    "templates/landing.html": {
+      "sha256": "491c890da602fc961ff163c8247158841fc5a0521d1063ae1b332d47c666edb2",
+      "bytes": 8229
+    },
+    "templates/lessons/_chord_diagram.html": {
+      "sha256": "d3ff41cf4a84b7091619f451b1b2b968ffd33de4a5af5917c6d9ad559cad6546",
+      "bytes": 1552
+    },
+    "templates/lessons/chord_detail.html": {
+      "sha256": "48a4413f7c9dbe9fd830f66857561042825cc77051473919541e7d0a6ae037b1",
+      "bytes": 1408
+    },
+    "templates/lessons/chords.html": {
+      "sha256": "4422af33c7686ec8ffca1f09e9f7dd9b776b30d3accd9d0c1a0cacfc0f56390f",
+      "bytes": 997
+    },
+    "templates/lessons/getting_started.html": {
+      "sha256": "40ef00b59ee2a56ed8eb5ee543439780ccdc3b21c1865e9e0bc94322fee03ca5",
+      "bytes": 3852
+    },
+    "templates/lessons/index.html": {
+      "sha256": "1ad620cb792af2809f2082bddfcc6d4d4ec65e15e45717eae9d0a3f5f15bbd47",
+      "bytes": 1954
+    },
+    "templates/lessons/strumming.html": {
+      "sha256": "e354af6b39d8bd538f2e0d32c9d513633439772b12157d66adcfb635fd6bd2b4",
+      "bytes": 2238
+    },
+    "templates/practice/base.html": {
+      "sha256": "6ec5f8f1b905b7f643000f7eec1774ed83f7d0f928ff43937674adfd182a7b00",
+      "bytes": 996
+    },
+    "templates/practice/feature_links.html": {
+      "sha256": "3f227ac38b2240a8037c13a0fcd17f83684ef35694ce38a9eb022f8c72f4e591",
+      "bytes": 784
+    },
+    "templates/shared.html": {
+      "sha256": "ccb2093302bc3d4b31730404cc86d3ee96049e14a4f19ee48483830b58a4b2eb",
+      "bytes": 6497
+    },
+    "templates/storefront.html": {
+      "sha256": "fbe9846cbfa1b5232075e34dd4002bf7727093dcc5d80037e79fe94c0562fd1e",
+      "bytes": 80623
+    },
+    "templates/tuner/tuner.html": {
+      "sha256": "40221f594630d1bbe5ea82ce21a6dcd10587d7885d3bed91fe63cc469baf1949",
+      "bytes": 3038
+    },
+    "assets/css/account.css": {
+      "sha256": "32626add35acf96d76a6ba73199d12a315d378e4de36d2053a730980d9750040",
+      "bytes": 1802
+    },
+    "assets/css/admin.css": {
+      "sha256": "2885f03e7ee6f3c1cf96ecf56c0cccefdfe4fa3a8adf5810d2345e582c6df2b6",
+      "bytes": 4745
+    },
+    "assets/css/auth.css": {
+      "sha256": "b465aca85a3195ac9bdd63ac17eef717b3fcf6e2b2b611b91d42ae38cc3f234c",
+      "bytes": 1037
+    },
+    "assets/css/landing.css": {
+      "sha256": "71fc0e1d795a619034263c93cc3826a98f91d14730181ef96e500ee13c926326",
+      "bytes": 8606
+    },
+    "assets/css/lessons.css": {
+      "sha256": "a920071b1082b6eb8eae2ed6522cbf3666f6f386ab0db814078c5e2a65ea0457",
+      "bytes": 4071
+    },
+    "assets/css/practice.css": {
+      "sha256": "3dcec32f97bbb9cf1a75450d620d135b266568932b0b96698645adea0c429720",
+      "bytes": 1763
+    },
+    "assets/css/shared.css": {
+      "sha256": "28fbb2b080ab08a99cdc768c33ca7152ca0898332104d9d3f299d25472010a38",
+      "bytes": 69085
+    },
+    "assets/css/storefront.css": {
+      "sha256": "51a4b1c619f64d08cfcf05c7bd3d87503b976a3f902bae9c64103dae922ca657",
+      "bytes": 12708
+    },
+    "assets/css/tuner.css": {
+      "sha256": "f21510ee04b0b86d567c15d97af4bfa3e10076bb8a4b965f67a1d82f16b96b44",
+      "bytes": 3205
+    },
+    "assets/icons-LICENSE.txt": {
+      "sha256": "b495047bd93a9b06913511076f504daba17d5bbeb3e0650f3bb53a4220329c57",
+      "bytes": 3208
+    },
+    "assets/images/acoustic/Black_Cutaway.png": {
+      "sha256": "37166bce95b9ddf16921c203cc4e94ac26db8641bb53119a8399c1c1ea241c58",
+      "bytes": 1520429
+    },
+    "assets/images/acoustic/Figured_Wood.png": {
+      "sha256": "7ef4cc954f2848a1f4ceb7a822e8f4248c153bd8d70e7268ae21957969a15251",
+      "bytes": 1626611
+    },
+    "assets/images/acoustic/Mahogany_Orchestra.png": {
+      "sha256": "5f17cc916fd7cc8d3bdaa822e6227438367ce5b4e639b75ee573532b041ca41c",
+      "bytes": 1671055
+    },
+    "assets/images/acoustic/Mahogany_Parlor.png": {
+      "sha256": "2eb4fdbd240f28146c8107588948a637c2c98cf0844dac71dbe3654d63876ab7",
+      "bytes": 1633525
+    },
+    "assets/images/acoustic/Natural_Cutaway.png": {
+      "sha256": "1f4e6ff653237f344b2ea51f2de9bea85ed31873899a85e2a0b71923ecd2394e",
+      "bytes": 1623167
+    },
+    "assets/images/acoustic/Natural_Dreadnought.png": {
+      "sha256": "618f0aec98fb5dc4e9a5fa2f0cf9588ad4814fb2a00bca378786da13d59f15b3",
+      "bytes": 1605136
+    },
+    "assets/images/acoustic/Natural_Orchestra.png": {
+      "sha256": "f76c15606ac754a59041cf13a081ee06263838a3745f32974b35876e0e4c315a",
+      "bytes": 1595511
+    },
+    "assets/images/acoustic/Sunburst_Dreadnought.png": {
+      "sha256": "c9bc4fb7310d198d837704a1db1bdb02092b7bc87c45951d727f76735c335028",
+      "bytes": 1754723
+    },
+    "assets/images/acoustic/Traditional_Natural.png": {
+      "sha256": "08d672067910862eb1a1e5095f3f79108c561fa74bb68069bd54a646dba533d2",
+      "bytes": 1627108
+    },
+    "assets/images/acoustic/Vintage_Sunburst.png": {
+      "sha256": "49c8d172e592e0cc8626b9fbeba3a6d1bc0d6c94bf6a259c723ecfeff75cd776",
+      "bytes": 1666965
+    },
+    "assets/images/acoustic_studio.jpg": {
+      "sha256": "69a5c0d97ecc27683f75ba24ea1e40acbbccb161296c71d88c0042bb7de2f158",
+      "bytes": 13740
+    },
+    "assets/images/bass/Burlwood.png": {
+      "sha256": "ff17b233d5bb0d21315fd3cbc5ab322ea1482de470583531d70d54623388e9f8",
+      "bytes": 1907569
+    },
+    "assets/images/bass/Crimson_Red.png": {
+      "sha256": "ccf83fbf211f878bbde0b31fd523230a60ad54d018fc3b4ecefe041e03cd9e4d",
+      "bytes": 1805283
+    },
+    "assets/images/bass/Ivory_Semi-Hollow.png": {
+      "sha256": "c976265ce2d636e2d2e6afdc0bb7da71e008df52dd0aba58455be142fc79cc98",
+      "bytes": 1748374
+    },
+    "assets/images/bass/Midnight_Black_Modern.png": {
+      "sha256": "99b9631374ff3ba964d619029ab5be6e76647b127a72aaf32d57b257cf2bd26a",
+      "bytes": 1769411
+    },
+    "assets/images/bass/Natural_Jazz-Style.png": {
+      "sha256": "fd4c463679ed0bdd5b584e70bb0fbff3b019ba5a5b86e5c27a9bb19ff4d88c82",
+      "bytes": 1952251
+    },
+    "assets/images/bass/Natural_Spalted.png": {
+      "sha256": "3b14da9508763f4c0f300c59fd3aa65cc281113e30a958e65899645e0777e8b6",
+      "bytes": 1879494
+    },
+    "assets/images/bass/Ocean_Blue_5-String.png": {
+      "sha256": "2fe1ff01df7c8f0096a26ef938f36455b55b0ac11ccddd539bf705e79fea6059",
+      "bytes": 1887181
+    },
+    "assets/images/bass/Royal_Purple_5-String.png": {
+      "sha256": "28b7533d2445a4cf1677a02014676376181e536b6421e1378b496dfb79cddc3d",
+      "bytes": 1969017
+    },
+    "assets/images/bass/Seafoam_Green.png": {
+      "sha256": "5650379b9d954a172b112ee5c2d5765d9edb8e25118b9fcff7cab22bd297bac2",
+      "bytes": 1725430
+    },
+    "assets/images/bass/Sunburst_Vintage.png": {
+      "sha256": "931417624d750494c1983da6cb104e6566afc66fec7fbdcb61d8811f37087470",
+      "bytes": 1862935
+    },
+    "assets/images/bass_studio.jpg": {
+      "sha256": "c1f9b2b845277e306ddb58ff34503092a9fe30038fb93a2f5eabb16823a6e4eb",
+      "bytes": 109169
+    },
+    "assets/images/classical/Amber_Cedar.png": {
+      "sha256": "d044c4dd45eb5186ba071a3677643a6712c53d663c14fdbff131fa6c6184dd34",
+      "bytes": 1887921
+    },
+    "assets/images/classical/Cream_Spruce.png": {
+      "sha256": "a514f1429bc1c8592328af55856e1f063a9de635c8e151c8aed8b8a05c339957",
+      "bytes": 1822884
+    },
+    "assets/images/classical/Dark_Rosewood.png": {
+      "sha256": "4158e57db852608e736383e8a20d23d24f548d24965360833065f8608e065f80",
+      "bytes": 1930327
+    },
+    "assets/images/classical/Golden_Amber.png": {
+      "sha256": "8675a3e6955c78333fb2e7f5bd7c93b403812bcc086a198f1e2e1601f117b1c6",
+      "bytes": 1888978
+    },
+    "assets/images/classical/Light_Spruce.png": {
+      "sha256": "2efd44c99c53b45959bef7f500e301539f12a9b391d6cc1793f6c286364ef2eb",
+      "bytes": 1788551
+    },
+    "assets/images/classical/Natural_Spruce.png": {
+      "sha256": "87543f7d3813c062f936f1dc69b73feee8a857c352fd33b86a30e15f1125786d",
+      "bytes": 1898921
+    },
+    "assets/images/classical/Orange_Cedar.png": {
+      "sha256": "8bb47aef66680da3aadd8bfc84f2f575e85ae14f72caf3883cbfed6393c32175",
+      "bytes": 1885219
+    },
+    "assets/images/classical/Pale_Spruce.png": {
+      "sha256": "0fffe4e96ba9e30f2ddb13aff324b0ff694419c9b2921f40fe51c2281b2f8a92",
+      "bytes": 1906166
+    },
+    "assets/images/classical/Walnut_Heritage.png": {
+      "sha256": "b9d8e7aa177239caeac5a57554c55b1ec38e082304f2da4a957450bb78a27e33",
+      "bytes": 1902635
+    },
+    "assets/images/classical/Warm_Cedar.png": {
+      "sha256": "77f2ddff277c3d73beda5e135a6ef39790014163b3fa0dfa6343d9c860a2900e",
+      "bytes": 1927935
+    },
+    "assets/images/classical_studio.jpg": {
+      "sha256": "5f97291407feedd118ab506b3bb265396a5c15cf1b31e5f12b62bd6b574f7e4d",
+      "bytes": 20511
+    },
+    "assets/images/electric/Amber_Flame.png": {
+      "sha256": "191f87eb8697965ff7fed2847540750a0615af8dac8dec1a8d6d28d55191926b",
+      "bytes": 1697233
+    },
+    "assets/images/electric/Arctic_White.png": {
+      "sha256": "33cf08af2eb3ff33af5c6009919b49192f7b5d29f4e4e1037c04d4ddbe32fd77",
+      "bytes": 1579710
+    },
+    "assets/images/electric/Butterscotch.png": {
+      "sha256": "5f9532ad896afcc48477e51269bef07d22fa917a0f5f5e051db4ecf752b6ba42",
+      "bytes": 1547493
+    },
+    "assets/images/electric/Cherry_Red.png": {
+      "sha256": "4f730e7cbaeb5b184cbf297d854126f4cd0c4c867315787480d6216777b93d6e",
+      "bytes": 1739528
+    },
+    "assets/images/electric/Cherry_Red_Double-Cut.png": {
+      "sha256": "b4fc5baf90c9d6264db165116fa290db240eee13dcd1d280c2fb7fff4fa28ccf",
+      "bytes": 1570259
+    },
+    "assets/images/electric/Midnight_Black.png": {
+      "sha256": "601d4f6580db030090d393129121495e96452d9d2ee2ee28997b9e937cc0dda4",
+      "bytes": 1498712
+    },
+    "assets/images/electric/Ocean_Blue.png": {
+      "sha256": "1a949faf505ebc91a1d2833b75252fd1278fe2d4ffb3151b6190c5b0b9476cd0",
+      "bytes": 1808038
+    },
+    "assets/images/electric/Royal_Purple.png": {
+      "sha256": "21676cf632b139bbc1b5b596d090d5bbd2986f13ffa3e37b2769d7013ce8fbfc",
+      "bytes": 1773117
+    },
+    "assets/images/electric/Seafoam.png": {
+      "sha256": "1eb8802eceaa100bde57bbff021b8035b1acf8e659e50a3d744630992f32382f",
+      "bytes": 1426827
+    },
+    "assets/images/electric/Sunburst_Classic.png": {
+      "sha256": "d4cc5e68914225df7535bb8b723b2cbf45421033716d6c955a1f2b534d94baea",
+      "bytes": 1674477
+    },
+    "assets/images/electric_studio.jpg": {
+      "sha256": "e2837d0ad664eb9f0174f1e6a01f0cdd78e47d85525abbaf93003f8400179242",
+      "bytes": 252627
+    },
+    "assets/images/essentials.jpeg": {
+      "sha256": "5a941cc5dc93b6dced703c06817fd811d2d857dc392f7649a12b2af7137d22ad",
+      "bytes": 529072
+    },
+    "assets/images/guitar_front.jpg": {
+      "sha256": "1de7adbd011a7dfa2b8c09da5298cbfee0b759d3ac63b022897582fb61875d24",
+      "bytes": 47883
+    },
+    "assets/images/guitar_performance.jpg": {
+      "sha256": "126b0f8232f241f6262cd8de6f5a48b26963763ca2550419c8f386603a34b8e6",
+      "bytes": 237503
+    },
+    "assets/images/SOURCES.md": {
+      "sha256": "a37d4f1f6120ab5790d45b974f3565c110d3e1f08bdbf46e75a7ebd1f52772e5",
+      "bytes": 4682
+    },
+    "assets/js/account.js": {
+      "sha256": "fe8d7935c2dbc37e655ef963e1e3f6670e08b9a0e9544ab1c14769b0675102e9",
+      "bytes": 4655
+    },
+    "assets/js/admin.js": {
+      "sha256": "ddc9b18ac7ce365029b71ee5cb4d7fa4626b40c150d6d17ac964bef7997cff2a",
+      "bytes": 17480
+    },
+    "assets/js/app.js": {
+      "sha256": "d378e20086dd1e100748119b6597c4b36a339dde547716bd87d9370ff02da113",
+      "bytes": 4951
+    },
+    "assets/js/auth.js": {
+      "sha256": "3a4b69f58aace8a8c13761df9df05a3542f0252f8474aa626f95f2549946f0e4",
+      "bytes": 6431
+    },
+    "assets/js/chatbot/chatbot-api.js": {
+      "sha256": "19a83b6dce32444b0904066ce82a79fdf902ac4e569333c8086da050b0214cfd",
+      "bytes": 2624
+    },
+    "assets/js/chatbot/chatbot-ui.js": {
+      "sha256": "94960c6912cba4e103d437e77daf07a10031f506c2d2d51da7ed1f6548d116e4",
+      "bytes": 2802
+    },
+    "assets/js/chatbot/chatbot.js": {
+      "sha256": "d35de20c26633e54066dc490319087380ceadf3783432c8c6d49ae9aa92875c7",
+      "bytes": 1905
+    },
+    "assets/js/shared.js": {
+      "sha256": "9219749e1ee21cdb3005d4dbb0e8db9fd9cf61c3e2b1a0a580a0315e859925a1",
+      "bytes": 8360
+    },
+    "assets/js/storefront.js": {
+      "sha256": "4463305c53676cc30ce6578380703855448f5009623b1f8b71b2491f10f0b6b3",
+      "bytes": 21091
+    },
+    "assets/js/theme.js": {
+      "sha256": "a92b5528f65110b376110ec2d32533219064e1e36e4663391acc6f4d9060f865",
+      "bytes": 198
+    },
+    "assets/js/tuner-pitch.js": {
+      "sha256": "64db3d759d078e968cf1066a29a85e4001c5e518e462d9e83ef769c8aae3c681",
+      "bytes": 3728
+    },
+    "assets/js/tuner.js": {
+      "sha256": "f9727191f5d808bbb7e4177b53727147325157ee09f417e8dc6e92b352510cb6",
+      "bytes": 7396
+    },
+    "tests/browser.cjs": {
+      "sha256": "3f5cf5edbbc1850748edf61da64157e984b1fc28b5a54957fe48d7ecedef53ad",
+      "bytes": 14924
+    },
+    "tests/chatbot.cjs": {
+      "sha256": "389f6890e0131b38348107b3599979dd665e70484c7d50d50bbb1c44b5006fbd",
+      "bytes": 10814
+    },
+    "tests/practice.cjs": {
+      "sha256": "88e2e66afe58b1a1239812714e9a371d6e800874b90f8b2dba2b47dad8e7338a",
+      "bytes": 14020
+    },
+    "tests/serve.py": {
+      "sha256": "115baceb19cfe82b03c17619f47d40954f9b5a0ac026e565f2799c1c65e1993c",
+      "bytes": 1133,
+      "logic_sha256": "4254fd18b12dc241d142307c6cba9de7c9afb29e5360c368033618404a5f0f89"
+    },
+    "tests/support.py": {
+      "sha256": "751bab4db59aff61e3e1dcce01b3f066fa1dbe653024b1ceb3a2abfcaf0e8c7e",
+      "bytes": 1415,
+      "logic_sha256": "644c2e5ae2c38fa0c59aee6e973b83483758d27e25006551f197713d2c643def"
+    },
+    "tests/test_app.py": {
+      "sha256": "6036ead2728fa3b50023adfa7ce12266c4019deed5c6afbe0ebdb619279cb9d3",
+      "bytes": 19219,
+      "logic_sha256": "0b4ed8d53dced4940439f83cb74750e62281a50f34aed1e552cee3eb9b1248c2"
+    },
+    "tests/test_practice.py": {
+      "sha256": "2652bc5e0baf64b51e43daea79fee97d4ad4abba5101e4fb004259bfec85d2fa",
+      "bytes": 5032,
+      "logic_sha256": "e0bdb481479c5fe46193133d53a5f2586ac92a38087fb1ff1d32c77b03153463"
+    },
+    "tests/tuner-pitch.cjs": {
+      "sha256": "c68872ba61ccafc60d2158a9ca23d05b49fb83620454d9279148d090d965d02b",
+      "bytes": 2818
+    },
+    ".vscode/settings.json": {
+      "sha256": "2718064407cc104a7727a2118a488348fb3308c0734c56bd8dd91734b6d921be",
+      "bytes": 68
+    },
+    "docs/guitar-practice-source.md": {
+      "sha256": "bd2b99ad79f32ee49959b4076df20e82600f612ecf9081463b19958d24b98dfe",
+      "bytes": 196359
+    },
+    "docs/guitar-practice.md": {
+      "sha256": "3fec5cb97f59eba20748bac325ba4fc440cf47c439eb10ca843e0749038fd092",
+      "bytes": 13953
+    },
+    "database/catalog.json": {
+      "sha256": "640f9e8978ddca8218a2cdd329c3ac8a2bee94a4006c17695dd64176d577fbcf",
+      "bytes": 27566
+    },
+    "app.py": {
+      "sha256": "911fc42f1aa1c3892feb2e3f01dd652cbaed14374ca721c229a8bf18c614abbb",
+      "bytes": 12095,
+      "logic_sha256": "cacd30d2b5b3e7ede0d01bd5afab45fb1a05e4a973a02c40ae4cc4a9b872024a"
+    },
+    "README.md": {
+      "sha256": "f4c725240ce9a00ebb72ccdffb2aaa554589d84be3d84ed2fbdb702fb7810a1f",
+      "bytes": 15033
+    },
+    "requirements.txt": {
+      "sha256": "9ec6d970d8cc7b43819dd6517066dd7fca2b2b23138d0e012c841960e06fd388",
+      "bytes": 75
+    },
+    ".gitignore": {
+      "sha256": "67d58c4193eb86f664d972fc5fc7c2d89e63fae205fa8cd932a30d3d8ea44d18",
+      "bytes": 90
+    }
+  },
+  "routes": [
+    {
+      "endpoint": "account_page",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/account"
+    },
+    {
+      "endpoint": "admin.add_product",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "rule": "/api/admin/products"
+    },
+    {
+      "endpoint": "admin.archive_product",
+      "methods": [
+        "DELETE",
+        "OPTIONS"
+      ],
+      "rule": "/api/admin/products/<int:product_id>"
+    },
+    {
+      "endpoint": "admin.customers",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/admin/customers"
+    },
+    {
+      "endpoint": "admin.edit_product",
+      "methods": [
+        "OPTIONS",
+        "PUT"
+      ],
+      "rule": "/api/admin/products/<int:product_id>"
+    },
+    {
+      "endpoint": "admin.export_sales",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/admin/sales/export"
+    },
+    {
+      "endpoint": "admin.products",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/admin/products"
+    },
+    {
+      "endpoint": "admin.sales",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/admin/sales"
+    },
+    {
+      "endpoint": "admin.settings",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS",
+        "PUT"
+      ],
+      "rule": "/api/admin/settings"
+    },
+    {
+      "endpoint": "admin.summary",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/admin/summary"
+    },
+    {
+      "endpoint": "admin.update_order",
+      "methods": [
+        "OPTIONS",
+        "PATCH"
+      ],
+      "rule": "/api/admin/sales/<order_id>"
+    },
+    {
+      "endpoint": "auth.change_password",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "rule": "/api/auth/password"
+    },
+    {
+      "endpoint": "auth.current_session",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/auth/session"
+    },
+    {
+      "endpoint": "auth.forgot_password",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "rule": "/api/auth/forgot-password"
+    },
+    {
+      "endpoint": "auth.login",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "rule": "/api/auth/login"
+    },
+    {
+      "endpoint": "auth.logout",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "rule": "/api/auth/logout"
+    },
+    {
+      "endpoint": "auth.profile",
+      "methods": [
+        "OPTIONS",
+        "PATCH"
+      ],
+      "rule": "/api/auth/profile"
+    },
+    {
+      "endpoint": "auth.register",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "rule": "/api/auth/register"
+    },
+    {
+      "endpoint": "auth.reset_password",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "rule": "/api/auth/reset-password"
+    },
+    {
+      "endpoint": "catalog.finder",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "rule": "/api/finder"
+    },
+    {
+      "endpoint": "catalog.product",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/products/<int:product_id>"
+    },
+    {
+      "endpoint": "catalog.products",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/products"
+    },
+    {
+      "endpoint": "catalog.save",
+      "methods": [
+        "OPTIONS",
+        "PUT"
+      ],
+      "rule": "/api/account/saved/<int:product_id>"
+    },
+    {
+      "endpoint": "catalog.saved",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/account/saved"
+    },
+    {
+      "endpoint": "catalog.store_info",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/store"
+    },
+    {
+      "endpoint": "catalog.unsave",
+      "methods": [
+        "DELETE",
+        "OPTIONS"
+      ],
+      "rule": "/api/account/saved/<int:product_id>"
+    },
+    {
+      "endpoint": "chatbot.chat",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "rule": "/api/chat"
+    },
+    {
+      "endpoint": "chatbot.chat_status",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/chat"
+    },
+    {
+      "endpoint": "dashboard",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/admin"
+    },
+    {
+      "endpoint": "health",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/health"
+    },
+    {
+      "endpoint": "index",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/"
+    },
+    {
+      "endpoint": "lessons.chord_detail",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/lessons/chords/<slug>"
+    },
+    {
+      "endpoint": "lessons.chords",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/lessons/chords"
+    },
+    {
+      "endpoint": "lessons.getting_started",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/lessons/getting-started"
+    },
+    {
+      "endpoint": "lessons.index",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/lessons"
+    },
+    {
+      "endpoint": "lessons.strumming",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/lessons/strumming"
+    },
+    {
+      "endpoint": "login_page",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/login"
+    },
+    {
+      "endpoint": "orders.checkout",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "rule": "/api/orders"
+    },
+    {
+      "endpoint": "orders.detail",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/orders/<order_id>"
+    },
+    {
+      "endpoint": "orders.history",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/orders"
+    },
+    {
+      "endpoint": "register_page",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/register"
+    },
+    {
+      "endpoint": "reset_password_page",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/reset-password"
+    },
+    {
+      "endpoint": "shop",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/shop"
+    },
+    {
+      "endpoint": "static",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/static/<path:filename>"
+    },
+    {
+      "endpoint": "tuner.index",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/tuner"
+    }
+  ],
+  "blueprints": [
+    "auth",
+    "catalog",
+    "orders",
+    "admin",
+    "chatbot",
+    "tuner",
+    "lessons"
+  ]
+}

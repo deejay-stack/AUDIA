@@ -5,9 +5,9 @@ import unittest
 from pathlib import Path
 from sqlalchemy import URL, select
 from werkzeug.security import generate_password_hash
-from app import create_app
+from support import create_app
 from modules.database import db, initialize
-from modules.models import User, Product, LoginSession
+from modules.database.models import User, Product, LoginSession
 
 
 class AudiaTests(unittest.TestCase):
@@ -31,8 +31,10 @@ class AudiaTests(unittest.TestCase):
 
     def register(self,email='player@example.com',name='Test Player'):
         result=self.send('/auth/register',dict(name=name,email=email,password='correct-horse-123'))
-        self.assertEqual(result.status_code,200,result.json)
-        return result.json['user']
+        self.assertEqual(result.status_code,201,result.json)
+        login=self.send('/auth/login',dict(email=email,password='correct-horse-123'))
+        self.assertEqual(login.status_code,200,login.json)
+        return login.json['user']
 
     def admin(self):
         with self.app.app_context():
@@ -49,8 +51,19 @@ class AudiaTests(unittest.TestCase):
     def test_assets_and_template_registry(self):
         response=self.client.get('/')
         self.assertEqual(response.status_code,200)
-        for name in ('landing','account','auth','checkout','product-form','settings','notifications'):
-            self.assertIn(f'id="{name}-template"'.encode(),response.data)
+        self.assertIn(b'class="landing-page"',response.data)
+        self.assertNotIn(b'product-card-template',response.data)
+        for route in ('/login','/register','/reset-password'):
+            self.assertEqual(self.client.get(route).status_code,200)
+        self.register()
+        for route,name in (('/shop','checkout'),('/account','saved-item')):
+            page=self.client.get(route)
+            self.assertEqual(page.status_code,200)
+            self.assertIn(f'id="{name}-template"'.encode(),page.data)
+        self.admin()
+        admin_page=self.client.get('/admin')
+        for name in ('product-form','settings','notifications'):
+            self.assertIn(f'id="{name}-template"'.encode(),admin_page.data)
         self.assertNotRegex(response.get_data(as_text=True),r'<style\b|\sstyle=')
         for asset in Path(self.app.static_folder).rglob('*'):
             if asset.is_file():
@@ -69,11 +82,15 @@ class AudiaTests(unittest.TestCase):
 
     def test_registration_password_hash_role_and_duplicate(self):
         response=self.send('/auth/register',dict(name='New Player',email='PLAYER@EXAMPLE.COM',password='correct-horse-123',role='admin'))
-        self.assertEqual(response.status_code,200)
-        self.assertEqual(response.json['user']['role'],'customer')
-        self.assertEqual(response.json['user']['email'],'player@example.com')
+        self.assertEqual(response.status_code,201)
+        self.assertNotIn('user',response.json)
+        self.assertIsNone(self.client.get('/api/auth/session').json['user'])
+        self.assertEqual(self.client.get('/api/products').status_code,401)
+        self.assertEqual(self.client.get('/shop').status_code,302)
         with self.app.app_context():
-            user=db().get(User,response.json['user']['id'])
+            user=db().scalar(select(User).where(User.email=='player@example.com'))
+            self.assertEqual(user.role,'customer')
+            self.assertEqual(db().query(LoginSession).count(),0)
             self.assertNotEqual(user.password_hash,'correct-horse-123')
             self.assertTrue(user.password_hash.startswith('scrypt:'))
         self.assertEqual(self.send('/auth/register',dict(name='Other',email='player@example.com',password='correct-horse-123')).status_code,409)
@@ -110,7 +127,7 @@ class AudiaTests(unittest.TestCase):
         response=self.send('/auth/forgot-password',dict(email='player@example.com'))
         self.assertEqual(response.status_code,200)
         message=self.app.extensions['outbox'][-1].get_content()
-        token=re.search(r'/#reset/([^\s]+)',message)[1]
+        token=re.search(r'/reset-password\?token=([^\s]+)',message)[1]
         self.assertNotIn(token,str(response.json))
         self.assertEqual(self.send('/auth/reset-password',dict(token=token,password='new-password-123')).status_code,200)
         self.assertEqual(self.send('/auth/reset-password',dict(token=token,password='other-password-123')).status_code,400)
@@ -216,7 +233,7 @@ class AudiaTests(unittest.TestCase):
                 self.assertTrue(product['description'])
                 self.assertTrue(product['specs'])
                 self.assertEqual(product['reviews'],0)
-        self.assertIn('images/guitar_performance.jpg',self.client.get('/').get_data(as_text=True))
+        self.assertIn('images/guitar_performance.jpg',self.app.test_client().get('/login').get_data(as_text=True))
 
     def test_initialization_preserves_inventory_and_does_not_duplicate_catalog(self):
         self.register()
@@ -271,7 +288,7 @@ class AudiaTests(unittest.TestCase):
 
     def test_expired_session_cannot_read_products(self):
         from datetime import timedelta
-        from modules.models import now
+        from modules.database.models import now
         self.register()
         with self.app.app_context():
             for login in db().scalars(select(LoginSession)):
@@ -279,6 +296,20 @@ class AudiaTests(unittest.TestCase):
             db().commit()
         self.assertEqual(self.client.get('/api/products').status_code,401)
 
+
+    def test_page_routes_require_login_and_admin_role(self):
+        for route in ('/shop','/account','/admin'):
+            response=self.client.get(route)
+            self.assertEqual(response.status_code,302)
+            self.assertTrue(response.headers['Location'].startswith('/login'))
+        self.register()
+        self.assertEqual(self.client.get('/shop').status_code,200)
+        self.assertEqual(self.client.get('/account').status_code,200)
+        self.assertEqual(self.client.get('/admin').headers['Location'],'/shop')
+        self.admin()
+        self.assertEqual(self.client.get('/admin').status_code,200)
+        self.send('/auth/logout')
+        self.assertEqual(self.client.get('/shop').headers['Location'],'/login')
 
 if __name__=='__main__':
     unittest.main()

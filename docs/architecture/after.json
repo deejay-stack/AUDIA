@@ -1,0 +1,748 @@
+{
+  "routes": [
+    {
+      "endpoint": "account_page",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/account"
+    },
+    {
+      "endpoint": "admin.add_product",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "rule": "/api/admin/products"
+    },
+    {
+      "endpoint": "admin.archive_product",
+      "methods": [
+        "DELETE",
+        "OPTIONS"
+      ],
+      "rule": "/api/admin/products/<int:product_id>"
+    },
+    {
+      "endpoint": "admin.customers",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/admin/customers"
+    },
+    {
+      "endpoint": "admin.edit_product",
+      "methods": [
+        "OPTIONS",
+        "PUT"
+      ],
+      "rule": "/api/admin/products/<int:product_id>"
+    },
+    {
+      "endpoint": "admin.export_sales",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/admin/sales/export"
+    },
+    {
+      "endpoint": "admin.products",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/admin/products"
+    },
+    {
+      "endpoint": "admin.sales",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/admin/sales"
+    },
+    {
+      "endpoint": "admin.settings",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS",
+        "PUT"
+      ],
+      "rule": "/api/admin/settings"
+    },
+    {
+      "endpoint": "admin.summary",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/admin/summary"
+    },
+    {
+      "endpoint": "admin.update_order",
+      "methods": [
+        "OPTIONS",
+        "PATCH"
+      ],
+      "rule": "/api/admin/sales/<order_id>"
+    },
+    {
+      "endpoint": "auth.change_password",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "rule": "/api/auth/password"
+    },
+    {
+      "endpoint": "auth.current_session",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/auth/session"
+    },
+    {
+      "endpoint": "auth.forgot_password",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "rule": "/api/auth/forgot-password"
+    },
+    {
+      "endpoint": "auth.login",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "rule": "/api/auth/login"
+    },
+    {
+      "endpoint": "auth.logout",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "rule": "/api/auth/logout"
+    },
+    {
+      "endpoint": "auth.profile",
+      "methods": [
+        "OPTIONS",
+        "PATCH"
+      ],
+      "rule": "/api/auth/profile"
+    },
+    {
+      "endpoint": "auth.register",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "rule": "/api/auth/register"
+    },
+    {
+      "endpoint": "auth.reset_password",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "rule": "/api/auth/reset-password"
+    },
+    {
+      "endpoint": "catalog.finder",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "rule": "/api/finder"
+    },
+    {
+      "endpoint": "catalog.product",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/products/<int:product_id>"
+    },
+    {
+      "endpoint": "catalog.products",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/products"
+    },
+    {
+      "endpoint": "catalog.save",
+      "methods": [
+        "OPTIONS",
+        "PUT"
+      ],
+      "rule": "/api/account/saved/<int:product_id>"
+    },
+    {
+      "endpoint": "catalog.saved",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/account/saved"
+    },
+    {
+      "endpoint": "catalog.store_info",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/store"
+    },
+    {
+      "endpoint": "catalog.unsave",
+      "methods": [
+        "DELETE",
+        "OPTIONS"
+      ],
+      "rule": "/api/account/saved/<int:product_id>"
+    },
+    {
+      "endpoint": "chatbot.chat",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "rule": "/api/chat"
+    },
+    {
+      "endpoint": "chatbot.chat_status",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/chat"
+    },
+    {
+      "endpoint": "dashboard",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/admin"
+    },
+    {
+      "endpoint": "health",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/health"
+    },
+    {
+      "endpoint": "index",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/"
+    },
+    {
+      "endpoint": "lessons.chord_detail",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/lessons/chords/<slug>"
+    },
+    {
+      "endpoint": "lessons.chords",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/lessons/chords"
+    },
+    {
+      "endpoint": "lessons.getting_started",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/lessons/getting-started"
+    },
+    {
+      "endpoint": "lessons.index",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/lessons"
+    },
+    {
+      "endpoint": "lessons.strumming",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/lessons/strumming"
+    },
+    {
+      "endpoint": "login_page",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/login"
+    },
+    {
+      "endpoint": "orders.checkout",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "rule": "/api/orders"
+    },
+    {
+      "endpoint": "orders.detail",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/orders/<order_id>"
+    },
+    {
+      "endpoint": "orders.history",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/orders"
+    },
+    {
+      "endpoint": "register_page",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/register"
+    },
+    {
+      "endpoint": "reset_password_page",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/reset-password"
+    },
+    {
+      "endpoint": "shop",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/shop"
+    },
+    {
+      "endpoint": "static",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/static/<path:filename>"
+    },
+    {
+      "endpoint": "tuner.index",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/tuner"
+    }
+  ],
+  "blueprints": [
+    "auth",
+    "catalog",
+    "orders",
+    "admin",
+    "chatbot",
+    "tuner",
+    "lessons"
+  ],
+  "migration": {
+    "modules/auth.py": "modules/auth/routes.py",
+    "modules/mail.py": "modules/auth/mail.py",
+    "modules/catalog.py": "modules/catalog/routes.py",
+    "modules/orders.py": "modules/orders/routes.py",
+    "modules/admin.py": "modules/admin/routes.py",
+    "modules/chatbot.py": "modules/chatbot/routes.py",
+    "modules/ai.py": "modules/ai/services.py",
+    "modules/rag_sync.py": "modules/ai/rag_sync.py",
+    "modules/tuner.py": "modules/tuner/routes.py",
+    "modules/lessons.py": "modules/lessons/routes.py",
+    "modules/lessons_content.py": "modules/lessons/data.py",
+    "modules/database.py": "modules/database/connection.py",
+    "modules/models.py": "modules/database/models.py",
+    "templates/base.html": "templates/shared/base.html",
+    "templates/shared.html": "templates/shared/components.html",
+    "templates/practice/base.html": "templates/shared/practice_base.html",
+    "templates/practice/feature_links.html": "templates/shared/practice_links.html",
+    "templates/auth.html": "templates/auth/auth.html",
+    "templates/storefront.html": "templates/catalog/storefront.html",
+    "templates/account.html": "templates/account/account.html",
+    "templates/admin.html": "templates/admin/admin.html",
+    "templates/chatbot.html": "templates/chatbot/chatbot.html",
+    "templates/landing.html": "templates/landing/landing.html",
+    "assets/css/auth.css": "assets/css/auth/auth.css",
+    "assets/css/storefront.css": "assets/css/catalog/storefront.css",
+    "assets/css/account.css": "assets/css/account/account.css",
+    "assets/css/admin.css": "assets/css/admin/admin.css",
+    "assets/css/landing.css": "assets/css/landing/landing.css",
+    "assets/css/tuner.css": "assets/css/tuner/tuner.css",
+    "assets/css/lessons.css": "assets/css/lessons/lessons.css",
+    "assets/css/shared.css": "assets/css/shared/shared.css",
+    "assets/css/practice.css": "assets/css/shared/practice.css",
+    "assets/js/auth.js": "assets/js/auth/auth.js",
+    "assets/js/storefront.js": "assets/js/catalog/storefront.js",
+    "assets/js/account.js": "assets/js/account/account.js",
+    "assets/js/admin.js": "assets/js/admin/admin.js",
+    "assets/js/tuner.js": "assets/js/tuner/tuner.js",
+    "assets/js/tuner-pitch.js": "assets/js/tuner/pitch.js",
+    "assets/js/app.js": "assets/js/shared/app.js",
+    "assets/js/shared.js": "assets/js/shared/shared.js",
+    "assets/js/theme.js": "assets/js/shared/theme.js",
+    "docs/guitar-practice-source.md": "docs/archive/guitar-practice-source.md"
+  },
+  "modified_existing_files": [
+    {
+      "original": "modules/admin.py",
+      "current": "modules/admin/routes.py",
+      "sha256": "104c8331cee6cbec533280ab3a55d3c691abbcbc85b81439e71284b1f140ab7e",
+      "bytes": 8719
+    },
+    {
+      "original": "modules/ai.py",
+      "current": "modules/ai/services.py",
+      "sha256": "62296f9b9d6e1fcdadef87e4051f4731a8bb8da39ae9b3bce395410b5272e581",
+      "bytes": 28170
+    },
+    {
+      "original": "modules/auth.py",
+      "current": "modules/auth/routes.py",
+      "sha256": "75e7e4811eb4723ef0fd970f4702b379666a57732790c46fb7f718ca1ac0c579",
+      "bytes": 19974
+    },
+    {
+      "original": "modules/catalog.py",
+      "current": "modules/catalog/routes.py",
+      "sha256": "4b6f35e2ca918fa65344346c8400c4dcd5699646f4ed646bbe1eb019a817a073",
+      "bytes": 4168
+    },
+    {
+      "original": "modules/lessons.py",
+      "current": "modules/lessons/routes.py",
+      "sha256": "7f293bf9d0745efa47c39d0593f7bc67a6f18239e0abb6a0735f01bf7eca06f9",
+      "bytes": 1265
+    },
+    {
+      "original": "modules/orders.py",
+      "current": "modules/orders/routes.py",
+      "sha256": "4c53393f276d257c98ef5ebe95f77d939324490d34edf1cbe3ce93036728414d",
+      "bytes": 3127
+    },
+    {
+      "original": "modules/rag_sync.py",
+      "current": "modules/ai/rag_sync.py",
+      "sha256": "7a949b2febf89fb84bbd805736f621575708aefde98931c3ce80f0b892880cb7",
+      "bytes": 4326
+    },
+    {
+      "original": "modules/tuner.py",
+      "current": "modules/tuner/routes.py",
+      "sha256": "ae7e0e6c201c0b41ec0852c49eaefb116d48c802263a4d973716ff1e0225fde6",
+      "bytes": 516
+    },
+    {
+      "original": "templates/account.html",
+      "current": "templates/account/account.html",
+      "sha256": "8bbda1f61eddac4fb48ce9a6e25fa27f35c49f25fb74ff9daefb0557bdd1ec90",
+      "bytes": 5388
+    },
+    {
+      "original": "templates/admin.html",
+      "current": "templates/admin/admin.html",
+      "sha256": "aaece62785853e0ffed63697a4ede53234fded743d0344761dba97a1d3cf39b6",
+      "bytes": 32908
+    },
+    {
+      "original": "templates/auth.html",
+      "current": "templates/auth/auth.html",
+      "sha256": "4cc790e4aeefa9782d4fc22a4b4d3f07ccb80fe2e5eb4c68092d90578b7442df",
+      "bytes": 14449
+    },
+    {
+      "original": "templates/base.html",
+      "current": "templates/shared/base.html",
+      "sha256": "1d31d02385d0f0510bf4c73342af40985bf555951195e4af5cdacb9996468555",
+      "bytes": 1251
+    },
+    {
+      "original": "templates/landing.html",
+      "current": "templates/landing/landing.html",
+      "sha256": "5af937a0d5a2bf09efd0dc0346df86fd50c712af85746513f4b387f8daeed889",
+      "bytes": 8243
+    },
+    {
+      "original": "templates/lessons/chord_detail.html",
+      "current": "templates/lessons/chord_detail.html",
+      "sha256": "3cbe8053c73b43960fc34e98e9d0eacb92852cd6ffa8d8dce2fa05fc1c739397",
+      "bytes": 1415
+    },
+    {
+      "original": "templates/lessons/chords.html",
+      "current": "templates/lessons/chords.html",
+      "sha256": "fac422659f8884470976435d4e8894613cc52ab7ded9a0d3b282a1f770d0d5a0",
+      "bytes": 1004
+    },
+    {
+      "original": "templates/lessons/getting_started.html",
+      "current": "templates/lessons/getting_started.html",
+      "sha256": "0ac3188e9ecbd8914c53cb115ac399e5eb0bc54b78c23af28b711d0f8d1ba15f",
+      "bytes": 3859
+    },
+    {
+      "original": "templates/lessons/index.html",
+      "current": "templates/lessons/index.html",
+      "sha256": "29e47f74c12a7e3fc84be9b12c4e2e017d682b25984d165e72ae1d6c4bc094be",
+      "bytes": 1961
+    },
+    {
+      "original": "templates/lessons/strumming.html",
+      "current": "templates/lessons/strumming.html",
+      "sha256": "1b5512f006c62feca4df36365bdfbe7d230d5412f8d9cffac76704938a040314",
+      "bytes": 2245
+    },
+    {
+      "original": "templates/practice/base.html",
+      "current": "templates/shared/practice_base.html",
+      "sha256": "ba6bb27303d5b50171cfefa2e8e743f101e4295ffc29ade5e3a40799bfff59b9",
+      "bytes": 1011
+    },
+    {
+      "original": "templates/storefront.html",
+      "current": "templates/catalog/storefront.html",
+      "sha256": "7fa0c7b6e649a6d1c654ca716b1c40da750dd8378b7fc2f04883fe36bfcccea6",
+      "bytes": 80637
+    },
+    {
+      "original": "templates/tuner/tuner.html",
+      "current": "templates/tuner/tuner.html",
+      "sha256": "3375fcd47e6b4c3daa10ab6be9046dfce992aabc916a326a5f683902ef83c57c",
+      "bytes": 3045
+    },
+    {
+      "original": "assets/css/account.css",
+      "current": "assets/css/account/account.css",
+      "sha256": "29f8ea30cc1cbd47b05547662b60e49496c61db873487874f76ee0ae3ec438c6",
+      "bytes": 1810
+    },
+    {
+      "original": "assets/css/admin.css",
+      "current": "assets/css/admin/admin.css",
+      "sha256": "19812559cb0a19b00059561261a37efb37750ae0148ea0024c8be1b1c52c02f7",
+      "bytes": 4751
+    },
+    {
+      "original": "assets/css/auth.css",
+      "current": "assets/css/auth/auth.css",
+      "sha256": "ba2d70059b7356c0c2908df6150f74de772dfbfd577a7ce2c2ee02b51cc34c6c",
+      "bytes": 1042
+    },
+    {
+      "original": "assets/css/landing.css",
+      "current": "assets/css/landing/landing.css",
+      "sha256": "0d40ad73bd29727de84c24486bccc2e303455d3f1ee50873e1b4fd33a8a9c4d9",
+      "bytes": 8614
+    },
+    {
+      "original": "assets/css/lessons.css",
+      "current": "assets/css/lessons/lessons.css",
+      "sha256": "edc0fd5f7c5eb009a70734ac4f9f52778cee83ba9b272b32b1e2d23d3519f1bf",
+      "bytes": 4079
+    },
+    {
+      "original": "assets/css/storefront.css",
+      "current": "assets/css/catalog/storefront.css",
+      "sha256": "0d271ff75427a2dd711d6bbecc6b3df393834b24187fafe0824685103a7ac392",
+      "bytes": 12716
+    },
+    {
+      "original": "assets/css/tuner.css",
+      "current": "assets/css/tuner/tuner.css",
+      "sha256": "2fab6cd8ae71c63d58afb571d9dbee8dbc1478066f29ab8c66f612c83b5257d1",
+      "bytes": 3213
+    },
+    {
+      "original": "assets/js/account.js",
+      "current": "assets/js/account/account.js",
+      "sha256": "598ba9b993039a12eff0c9769cda30df4547461d8f1b8bd0ae365b5fac9dc29e",
+      "bytes": 4663
+    },
+    {
+      "original": "assets/js/admin.js",
+      "current": "assets/js/admin/admin.js",
+      "sha256": "d517dedb01509c83b855eae02e4952d8a6e78f166e58f62729879558933c8f3d",
+      "bytes": 17488
+    },
+    {
+      "original": "assets/js/app.js",
+      "current": "assets/js/shared/app.js",
+      "sha256": "d9696510227fc007a6bd8b4004479ac86eb735ebae4d540d86cfd3defa3f85f7",
+      "bytes": 4990
+    },
+    {
+      "original": "assets/js/auth.js",
+      "current": "assets/js/auth/auth.js",
+      "sha256": "e0a5d37f5f018ebda76c4e52aacb4b421a47da261a64f12bdc5844a4e7d85c70",
+      "bytes": 6439
+    },
+    {
+      "original": "assets/js/chatbot/chatbot-ui.js",
+      "current": "assets/js/chatbot/chatbot-ui.js",
+      "sha256": "02163771f5623d89d4b9136a3cc9b6722c41a3187039d43abe548709887ba352",
+      "bytes": 2809
+    },
+    {
+      "original": "assets/js/storefront.js",
+      "current": "assets/js/catalog/storefront.js",
+      "sha256": "9a38559a4ce2bf1476de4c8e0e25dd490cdeeb75c87324c22a36cceb6bad94d5",
+      "bytes": 21099
+    },
+    {
+      "original": "assets/js/tuner.js",
+      "current": "assets/js/tuner/tuner.js",
+      "sha256": "0e525e2646d9cea5f3709e54ee06e1a8d5745ba87618892e643bb904ff3cf114",
+      "bytes": 7390
+    },
+    {
+      "original": "tests/practice.cjs",
+      "current": "tests/practice.cjs",
+      "sha256": "fb5cf1a7864ddcb26b799355d8951f7f84ef360cc764e2445a5124bb5a73175c",
+      "bytes": 14285
+    },
+    {
+      "original": "tests/serve.py",
+      "current": "tests/serve.py",
+      "sha256": "72adbfc1ea4df265b9ecfc30b109e0295fd36601cc6025df1e68467435a7f267",
+      "bytes": 1142
+    },
+    {
+      "original": "tests/test_app.py",
+      "current": "tests/test_app.py",
+      "sha256": "af64198d0e9de7f615d69aabc85d94ff0de2cda547bbbef563c1d6fcdc63d240",
+      "bytes": 19237
+    },
+    {
+      "original": "tests/test_practice.py",
+      "current": "tests/test_practice.py",
+      "sha256": "583d2429af70f6ebd252578fd85fc7ae02ed45cec6ff0ad0aace48dc4883a615",
+      "bytes": 5068
+    },
+    {
+      "original": "tests/tuner-pitch.cjs",
+      "current": "tests/tuner-pitch.cjs",
+      "sha256": "f79eb6267a78c3e5c9c8927168a4effe57c3cab56029ec8ee777745c269c0536",
+      "bytes": 2818
+    },
+    {
+      "original": "docs/guitar-practice.md",
+      "current": "docs/guitar-practice.md",
+      "sha256": "30b45ef65188735e5c4427eef75e150c8c8bc618e3c3e04d95db993fd9cf4de6",
+      "bytes": 14394
+    },
+    {
+      "original": "app.py",
+      "current": "app.py",
+      "sha256": "cb0b25e8b25de690d0cf36644f2e5521a514d011cc7d848e51983f020899c418",
+      "bytes": 12197
+    },
+    {
+      "original": "README.md",
+      "current": "README.md",
+      "sha256": "744efec4f18e818059a48a7d54ac1a280a9b07469dc78c7172b03ad3f2a90a87",
+      "bytes": 16111
+    }
+  ],
+  "created_files": [
+    "modules/admin/__init__.py",
+    "modules/ai/__init__.py",
+    "modules/auth/__init__.py",
+    "modules/catalog/__init__.py",
+    "modules/chatbot/__init__.py",
+    "modules/database/__init__.py",
+    "modules/lessons/__init__.py",
+    "modules/orders/__init__.py",
+    "modules/tuner/__init__.py",
+    "PROJECT_STRUCTURE.md",
+    "docs/architecture/before.json",
+    "docs/architecture/after.json",
+    "docs/architecture/migration.json",
+    "docs/architecture/tree-before.txt",
+    "docs/architecture/tree-after.txt",
+    "docs/architecture/routes-before.txt",
+    "docs/architecture/routes-after.txt",
+    "docs/architecture/removed-empty-folders.json",
+    "docs/architecture/updated-files.md",
+    "tests/test_structure.py",
+    "tests/test_ai.py",
+    "tests/structure-browser.cjs"
+  ],
+  "original_files_preserved": 117,
+  "removed_source_files": [],
+  "removed_empty_folders": [
+    "templates/practice"
+  ],
+  "verification": {
+    "server_tests": 29,
+    "visual_comparisons": 56,
+    "harmonic_pitch_cases": 90,
+    "practice_layout_theme_cases": 130,
+    "browser_suites": [
+      "browser.cjs",
+      "chatbot.cjs",
+      "practice.cjs"
+    ],
+    "gemini_provider": "mocked; actual SQL, RAG, enrichment, and prompts exercised"
+  }
+}

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#09090b" />
+    <meta
+      name="description"
+      content="AUDIA - find the guitar that fits your music."
+    />
+    <title>{{ title }} | AUDIA</title>
+    <script src="{{ url_for('static', filename='js/shared/theme.js') }}"></script>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/shared/shared.css') }}"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chatbot/chatbot.css') }}" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/' ~ stylesheet ~ '.css') }}"
+    />
+    {% if page_name == 'storefront' %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/search_filter/search_filter.css') }}" />
+    {% endif %}
+  </head>
+  <body
+    data-page="{{ page_name }}"
+    data-auth-mode="{{ auth_mode|default('login') }}"
+    data-reset-token="{{ reset_token|default('') }}"
+  >
+    <div
+      id="root"
+      inert
+      aria-busy="true"
+      class="min-h-screen bg-stone-50 text-zinc-950 transition-colors duration-300 dark:bg-ink dark:text-white"
+    >
+      {% block content %}{% endblock %}
+    </div>
+    {% block components %}{% endblock %} {% include 'shared/components.html' %}
+    <script
+      type="module"
+      src="{{ url_for('static', filename='js/shared/app.js') }}"
+    ></script>
+  </body>
+</html>

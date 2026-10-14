@@ -1,0 +1,29 @@
+{% extends "shared/practice_base.html" %} {% from
+"lessons/lessons_chord_diagram.html" import chord_diagram %} {% block
+practice_content %}
+<a class="practice-link" href="{{ url_for('lessons.index') }}">← All lessons</a>
+<div class="practice-heading">
+  <p class="section-label">02 · Basic Chords</p>
+  <h1 class="section-title">Your first eight chords</h1>
+  <p>
+    Choose a chord to see finger placements and playing tips. Try E minor first
+    if you are just starting.
+  </p>
+</div>
+<p class="chord-legend">
+  O = open string · X = muted string · numbered circle = finger. 1 index, 2
+  middle, 3 ring, 4 little. Read from low E on the left to high E on the right.
+</p>
+<div class="chord-grid">
+  {% for slug, chord in chords.items() %}
+  <a
+    class="surface-card practice-card chord-card"
+    href="{{ url_for('lessons.chord_detail', slug=slug) }}"
+    ><h2>{{ chord.name }} <span>{{ chord.symbol }}</span></h2>
+    {{ chord_diagram(chord, slug) }}<span class="practice-link"
+      >Learn this chord →</span
+    ></a
+  >
+  {% endfor %}
+</div>
+{% endblock %}

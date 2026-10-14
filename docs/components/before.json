@@ -1,0 +1,774 @@
+{
+  "files": {
+    "app.py": {
+      "sha256": "cb0b25e8b25de690d0cf36644f2e5521a514d011cc7d848e51983f020899c418"
+    },
+    "assets/css/account/account.css": {
+      "sha256": "29f8ea30cc1cbd47b05547662b60e49496c61db873487874f76ee0ae3ec438c6"
+    },
+    "assets/css/admin/admin.css": {
+      "sha256": "19812559cb0a19b00059561261a37efb37750ae0148ea0024c8be1b1c52c02f7"
+    },
+    "assets/css/auth/auth.css": {
+      "sha256": "ba2d70059b7356c0c2908df6150f74de772dfbfd577a7ce2c2ee02b51cc34c6c"
+    },
+    "assets/css/catalog/storefront.css": {
+      "sha256": "0d271ff75427a2dd711d6bbecc6b3df393834b24187fafe0824685103a7ac392"
+    },
+    "assets/css/landing/landing.css": {
+      "sha256": "0d40ad73bd29727de84c24486bccc2e303455d3f1ee50873e1b4fd33a8a9c4d9"
+    },
+    "assets/css/lessons/lessons.css": {
+      "sha256": "edc0fd5f7c5eb009a70734ac4f9f52778cee83ba9b272b32b1e2d23d3519f1bf"
+    },
+    "assets/css/shared/practice.css": {
+      "sha256": "3dcec32f97bbb9cf1a75450d620d135b266568932b0b96698645adea0c429720"
+    },
+    "assets/css/shared/shared.css": {
+      "sha256": "28fbb2b080ab08a99cdc768c33ca7152ca0898332104d9d3f299d25472010a38"
+    },
+    "assets/css/tuner/tuner.css": {
+      "sha256": "2fab6cd8ae71c63d58afb571d9dbee8dbc1478066f29ab8c66f612c83b5257d1"
+    },
+    "assets/icons-LICENSE.txt": {
+      "sha256": "b495047bd93a9b06913511076f504daba17d5bbeb3e0650f3bb53a4220329c57"
+    },
+    "assets/images/SOURCES.md": {
+      "sha256": "a37d4f1f6120ab5790d45b974f3565c110d3e1f08bdbf46e75a7ebd1f52772e5"
+    },
+    "assets/images/acoustic/Black_Cutaway.png": {
+      "sha256": "37166bce95b9ddf16921c203cc4e94ac26db8641bb53119a8399c1c1ea241c58"
+    },
+    "assets/images/acoustic/Figured_Wood.png": {
+      "sha256": "7ef4cc954f2848a1f4ceb7a822e8f4248c153bd8d70e7268ae21957969a15251"
+    },
+    "assets/images/acoustic/Mahogany_Orchestra.png": {
+      "sha256": "5f17cc916fd7cc8d3bdaa822e6227438367ce5b4e639b75ee573532b041ca41c"
+    },
+    "assets/images/acoustic/Mahogany_Parlor.png": {
+      "sha256": "2eb4fdbd240f28146c8107588948a637c2c98cf0844dac71dbe3654d63876ab7"
+    },
+    "assets/images/acoustic/Natural_Cutaway.png": {
+      "sha256": "1f4e6ff653237f344b2ea51f2de9bea85ed31873899a85e2a0b71923ecd2394e"
+    },
+    "assets/images/acoustic/Natural_Dreadnought.png": {
+      "sha256": "618f0aec98fb5dc4e9a5fa2f0cf9588ad4814fb2a00bca378786da13d59f15b3"
+    },
+    "assets/images/acoustic/Natural_Orchestra.png": {
+      "sha256": "f76c15606ac754a59041cf13a081ee06263838a3745f32974b35876e0e4c315a"
+    },
+    "assets/images/acoustic/Sunburst_Dreadnought.png": {
+      "sha256": "c9bc4fb7310d198d837704a1db1bdb02092b7bc87c45951d727f76735c335028"
+    },
+    "assets/images/acoustic/Traditional_Natural.png": {
+      "sha256": "08d672067910862eb1a1e5095f3f79108c561fa74bb68069bd54a646dba533d2"
+    },
+    "assets/images/acoustic/Vintage_Sunburst.png": {
+      "sha256": "49c8d172e592e0cc8626b9fbeba3a6d1bc0d6c94bf6a259c723ecfeff75cd776"
+    },
+    "assets/images/acoustic_studio.jpg": {
+      "sha256": "69a5c0d97ecc27683f75ba24ea1e40acbbccb161296c71d88c0042bb7de2f158"
+    },
+    "assets/images/bass/Burlwood.png": {
+      "sha256": "ff17b233d5bb0d21315fd3cbc5ab322ea1482de470583531d70d54623388e9f8"
+    },
+    "assets/images/bass/Crimson_Red.png": {
+      "sha256": "ccf83fbf211f878bbde0b31fd523230a60ad54d018fc3b4ecefe041e03cd9e4d"
+    },
+    "assets/images/bass/Ivory_Semi-Hollow.png": {
+      "sha256": "c976265ce2d636e2d2e6afdc0bb7da71e008df52dd0aba58455be142fc79cc98"
+    },
+    "assets/images/bass/Midnight_Black_Modern.png": {
+      "sha256": "99b9631374ff3ba964d619029ab5be6e76647b127a72aaf32d57b257cf2bd26a"
+    },
+    "assets/images/bass/Natural_Jazz-Style.png": {
+      "sha256": "fd4c463679ed0bdd5b584e70bb0fbff3b019ba5a5b86e5c27a9bb19ff4d88c82"
+    },
+    "assets/images/bass/Natural_Spalted.png": {
+      "sha256": "3b14da9508763f4c0f300c59fd3aa65cc281113e30a958e65899645e0777e8b6"
+    },
+    "assets/images/bass/Ocean_Blue_5-String.png": {
+      "sha256": "2fe1ff01df7c8f0096a26ef938f36455b55b0ac11ccddd539bf705e79fea6059"
+    },
+    "assets/images/bass/Royal_Purple_5-String.png": {
+      "sha256": "28b7533d2445a4cf1677a02014676376181e536b6421e1378b496dfb79cddc3d"
+    },
+    "assets/images/bass/Seafoam_Green.png": {
+      "sha256": "5650379b9d954a172b112ee5c2d5765d9edb8e25118b9fcff7cab22bd297bac2"
+    },
+    "assets/images/bass/Sunburst_Vintage.png": {
+      "sha256": "931417624d750494c1983da6cb104e6566afc66fec7fbdcb61d8811f37087470"
+    },
+    "assets/images/bass_studio.jpg": {
+      "sha256": "c1f9b2b845277e306ddb58ff34503092a9fe30038fb93a2f5eabb16823a6e4eb"
+    },
+    "assets/images/classical/Amber_Cedar.png": {
+      "sha256": "d044c4dd45eb5186ba071a3677643a6712c53d663c14fdbff131fa6c6184dd34"
+    },
+    "assets/images/classical/Cream_Spruce.png": {
+      "sha256": "a514f1429bc1c8592328af55856e1f063a9de635c8e151c8aed8b8a05c339957"
+    },
+    "assets/images/classical/Dark_Rosewood.png": {
+      "sha256": "4158e57db852608e736383e8a20d23d24f548d24965360833065f8608e065f80"
+    },
+    "assets/images/classical/Golden_Amber.png": {
+      "sha256": "8675a3e6955c78333fb2e7f5bd7c93b403812bcc086a198f1e2e1601f117b1c6"
+    },
+    "assets/images/classical/Light_Spruce.png": {
+      "sha256": "2efd44c99c53b45959bef7f500e301539f12a9b391d6cc1793f6c286364ef2eb"
+    },
+    "assets/images/classical/Natural_Spruce.png": {
+      "sha256": "87543f7d3813c062f936f1dc69b73feee8a857c352fd33b86a30e15f1125786d"
+    },
+    "assets/images/classical/Orange_Cedar.png": {
+      "sha256": "8bb47aef66680da3aadd8bfc84f2f575e85ae14f72caf3883cbfed6393c32175"
+    },
+    "assets/images/classical/Pale_Spruce.png": {
+      "sha256": "0fffe4e96ba9e30f2ddb13aff324b0ff694419c9b2921f40fe51c2281b2f8a92"
+    },
+    "assets/images/classical/Walnut_Heritage.png": {
+      "sha256": "b9d8e7aa177239caeac5a57554c55b1ec38e082304f2da4a957450bb78a27e33"
+    },
+    "assets/images/classical/Warm_Cedar.png": {
+      "sha256": "77f2ddff277c3d73beda5e135a6ef39790014163b3fa0dfa6343d9c860a2900e"
+    },
+    "assets/images/classical_studio.jpg": {
+      "sha256": "5f97291407feedd118ab506b3bb265396a5c15cf1b31e5f12b62bd6b574f7e4d"
+    },
+    "assets/images/electric/Amber_Flame.png": {
+      "sha256": "191f87eb8697965ff7fed2847540750a0615af8dac8dec1a8d6d28d55191926b"
+    },
+    "assets/images/electric/Arctic_White.png": {
+      "sha256": "33cf08af2eb3ff33af5c6009919b49192f7b5d29f4e4e1037c04d4ddbe32fd77"
+    },
+    "assets/images/electric/Butterscotch.png": {
+      "sha256": "5f9532ad896afcc48477e51269bef07d22fa917a0f5f5e051db4ecf752b6ba42"
+    },
+    "assets/images/electric/Cherry_Red.png": {
+      "sha256": "4f730e7cbaeb5b184cbf297d854126f4cd0c4c867315787480d6216777b93d6e"
+    },
+    "assets/images/electric/Cherry_Red_Double-Cut.png": {
+      "sha256": "b4fc5baf90c9d6264db165116fa290db240eee13dcd1d280c2fb7fff4fa28ccf"
+    },
+    "assets/images/electric/Midnight_Black.png": {
+      "sha256": "601d4f6580db030090d393129121495e96452d9d2ee2ee28997b9e937cc0dda4"
+    },
+    "assets/images/electric/Ocean_Blue.png": {
+      "sha256": "1a949faf505ebc91a1d2833b75252fd1278fe2d4ffb3151b6190c5b0b9476cd0"
+    },
+    "assets/images/electric/Royal_Purple.png": {
+      "sha256": "21676cf632b139bbc1b5b596d090d5bbd2986f13ffa3e37b2769d7013ce8fbfc"
+    },
+    "assets/images/electric/Seafoam.png": {
+      "sha256": "1eb8802eceaa100bde57bbff021b8035b1acf8e659e50a3d744630992f32382f"
+    },
+    "assets/images/electric/Sunburst_Classic.png": {
+      "sha256": "d4cc5e68914225df7535bb8b723b2cbf45421033716d6c955a1f2b534d94baea"
+    },
+    "assets/images/electric_studio.jpg": {
+      "sha256": "e2837d0ad664eb9f0174f1e6a01f0cdd78e47d85525abbaf93003f8400179242"
+    },
+    "assets/images/essentials.jpeg": {
+      "sha256": "5a941cc5dc93b6dced703c06817fd811d2d857dc392f7649a12b2af7137d22ad"
+    },
+    "assets/images/guitar_front.jpg": {
+      "sha256": "1de7adbd011a7dfa2b8c09da5298cbfee0b759d3ac63b022897582fb61875d24"
+    },
+    "assets/images/guitar_performance.jpg": {
+      "sha256": "126b0f8232f241f6262cd8de6f5a48b26963763ca2550419c8f386603a34b8e6"
+    },
+    "assets/js/account/account.js": {
+      "sha256": "598ba9b993039a12eff0c9769cda30df4547461d8f1b8bd0ae365b5fac9dc29e"
+    },
+    "assets/js/admin/admin.js": {
+      "sha256": "d517dedb01509c83b855eae02e4952d8a6e78f166e58f62729879558933c8f3d"
+    },
+    "assets/js/auth/auth.js": {
+      "sha256": "e0a5d37f5f018ebda76c4e52aacb4b421a47da261a64f12bdc5844a4e7d85c70"
+    },
+    "assets/js/catalog/storefront.js": {
+      "sha256": "9a38559a4ce2bf1476de4c8e0e25dd490cdeeb75c87324c22a36cceb6bad94d5"
+    },
+    "assets/js/chatbot/chatbot-api.js": {
+      "sha256": "19a83b6dce32444b0904066ce82a79fdf902ac4e569333c8086da050b0214cfd"
+    },
+    "assets/js/chatbot/chatbot-ui.js": {
+      "sha256": "02163771f5623d89d4b9136a3cc9b6722c41a3187039d43abe548709887ba352"
+    },
+    "assets/js/chatbot/chatbot.js": {
+      "sha256": "d35de20c26633e54066dc490319087380ceadf3783432c8c6d49ae9aa92875c7"
+    },
+    "assets/js/shared/app.js": {
+      "sha256": "d9696510227fc007a6bd8b4004479ac86eb735ebae4d540d86cfd3defa3f85f7"
+    },
+    "assets/js/shared/shared.js": {
+      "sha256": "9219749e1ee21cdb3005d4dbb0e8db9fd9cf61c3e2b1a0a580a0315e859925a1"
+    },
+    "assets/js/shared/theme.js": {
+      "sha256": "a92b5528f65110b376110ec2d32533219064e1e36e4663391acc6f4d9060f865"
+    },
+    "assets/js/tuner/pitch.js": {
+      "sha256": "64db3d759d078e968cf1066a29a85e4001c5e518e462d9e83ef769c8aae3c681"
+    },
+    "assets/js/tuner/tuner.js": {
+      "sha256": "0e525e2646d9cea5f3709e54ee06e1a8d5745ba87618892e643bb904ff3cf114"
+    },
+    "database/catalog.json": {
+      "sha256": "640f9e8978ddca8218a2cdd329c3ac8a2bee94a4006c17695dd64176d577fbcf"
+    },
+    "modules/__init__.py": {
+      "sha256": "2fe3a29dbbda0cd7aa6cbe3929239a704a2ec11abcd8cb9ef6a494a1b58795af"
+    },
+    "modules/admin/__init__.py": {
+      "sha256": "821d8eae20a088ef7daa8e77607f98c792ff1cf319de45cc1828c15375a4e7d8"
+    },
+    "modules/admin/routes.py": {
+      "sha256": "104c8331cee6cbec533280ab3a55d3c691abbcbc85b81439e71284b1f140ab7e"
+    },
+    "modules/ai/__init__.py": {
+      "sha256": "93b89827a36c81f3e01d987bc06611ac1607dda8fd62939772a8c13267cb8f67"
+    },
+    "modules/ai/rag_sync.py": {
+      "sha256": "7a949b2febf89fb84bbd805736f621575708aefde98931c3ce80f0b892880cb7"
+    },
+    "modules/ai/services.py": {
+      "sha256": "62296f9b9d6e1fcdadef87e4051f4731a8bb8da39ae9b3bce395410b5272e581"
+    },
+    "modules/auth/__init__.py": {
+      "sha256": "b194f8502c5d03fc11a403f82bab2e4c7a1ee838770ebefe413d6c43abe0e7ba"
+    },
+    "modules/auth/mail.py": {
+      "sha256": "ac623c8c92fa332d76d57bdca8b6d4f21f5fe5a9f487676745cf2aa6171762bf"
+    },
+    "modules/auth/routes.py": {
+      "sha256": "75e7e4811eb4723ef0fd970f4702b379666a57732790c46fb7f718ca1ac0c579"
+    },
+    "modules/catalog/__init__.py": {
+      "sha256": "3ba67dffc3e412a354da0149af6776f9e32faa44f783a4367e55ff8a9bc76212"
+    },
+    "modules/catalog/routes.py": {
+      "sha256": "4b6f35e2ca918fa65344346c8400c4dcd5699646f4ed646bbe1eb019a817a073"
+    },
+    "modules/chatbot/__init__.py": {
+      "sha256": "d398b02534fe9096fe9318fc7db1b7864a96c2141acd43cc934f26f51d976f31"
+    },
+    "modules/chatbot/routes.py": {
+      "sha256": "e86f85d9c7b3bb3c176c25423f79d172f3ab941cfa3c12f1eb22c70ddef045cf"
+    },
+    "modules/database/__init__.py": {
+      "sha256": "d995a82e3b98c8e3527280c4d8bdf1358675e26c415f4c8e268d12fe0a24d305"
+    },
+    "modules/database/connection.py": {
+      "sha256": "155b8cdf14db677488c2e70e52483deb21913aae2748543378d945b48a914d1e"
+    },
+    "modules/database/models.py": {
+      "sha256": "6657bcbd14b152577d18854908e1ac47426805c8d5acb2734b90693fc3199982"
+    },
+    "modules/lessons/__init__.py": {
+      "sha256": "dd0db5bf1d1dab77189a5802daea4f1a5d65acae511d628422206c13212f0bcc"
+    },
+    "modules/lessons/data.py": {
+      "sha256": "9fcc6445fa70025f3507b7686d02263389b092025096ef0480d48f03ab8ea314"
+    },
+    "modules/lessons/routes.py": {
+      "sha256": "7f293bf9d0745efa47c39d0593f7bc67a6f18239e0abb6a0735f01bf7eca06f9"
+    },
+    "modules/orders/__init__.py": {
+      "sha256": "5e81b7b82d69b866a0891965bffa6c7e350d6f02a9e77a8ead3e431f52b016a6"
+    },
+    "modules/orders/routes.py": {
+      "sha256": "4c53393f276d257c98ef5ebe95f77d939324490d34edf1cbe3ce93036728414d"
+    },
+    "modules/tuner/__init__.py": {
+      "sha256": "784e105a84ce42055eaba0cd937279782b85428727c7d2a76f2b9b74a809a262"
+    },
+    "modules/tuner/routes.py": {
+      "sha256": "ae7e0e6c201c0b41ec0852c49eaefb116d48c802263a4d973716ff1e0225fde6"
+    },
+    "requirements.txt": {
+      "sha256": "bc3ad2b4925c3fbd503c6aa43990bec7fd20081c44753b6a43a21779ef9ab6a6"
+    },
+    "templates/account/account.html": {
+      "sha256": "8bbda1f61eddac4fb48ce9a6e25fa27f35c49f25fb74ff9daefb0557bdd1ec90"
+    },
+    "templates/admin/admin.html": {
+      "sha256": "aaece62785853e0ffed63697a4ede53234fded743d0344761dba97a1d3cf39b6"
+    },
+    "templates/auth/auth.html": {
+      "sha256": "4cc790e4aeefa9782d4fc22a4b4d3f07ccb80fe2e5eb4c68092d90578b7442df"
+    },
+    "templates/catalog/storefront.html": {
+      "sha256": "7fa0c7b6e649a6d1c654ca716b1c40da750dd8378b7fc2f04883fe36bfcccea6"
+    },
+    "templates/chatbot/chatbot.html": {
+      "sha256": "81708a30947a9c647124a249fdd016a6283aed03201cda0e301f6c96a221366c"
+    },
+    "templates/landing/landing.html": {
+      "sha256": "5af937a0d5a2bf09efd0dc0346df86fd50c712af85746513f4b387f8daeed889"
+    },
+    "templates/lessons/_chord_diagram.html": {
+      "sha256": "d3ff41cf4a84b7091619f451b1b2b968ffd33de4a5af5917c6d9ad559cad6546"
+    },
+    "templates/lessons/chord_detail.html": {
+      "sha256": "3cbe8053c73b43960fc34e98e9d0eacb92852cd6ffa8d8dce2fa05fc1c739397"
+    },
+    "templates/lessons/chords.html": {
+      "sha256": "fac422659f8884470976435d4e8894613cc52ab7ded9a0d3b282a1f770d0d5a0"
+    },
+    "templates/lessons/getting_started.html": {
+      "sha256": "0ac3188e9ecbd8914c53cb115ac399e5eb0bc54b78c23af28b711d0f8d1ba15f"
+    },
+    "templates/lessons/index.html": {
+      "sha256": "29e47f74c12a7e3fc84be9b12c4e2e017d682b25984d165e72ae1d6c4bc094be"
+    },
+    "templates/lessons/strumming.html": {
+      "sha256": "1b5512f006c62feca4df36365bdfbe7d230d5412f8d9cffac76704938a040314"
+    },
+    "templates/shared/base.html": {
+      "sha256": "1d31d02385d0f0510bf4c73342af40985bf555951195e4af5cdacb9996468555"
+    },
+    "templates/shared/components.html": {
+      "sha256": "ccb2093302bc3d4b31730404cc86d3ee96049e14a4f19ee48483830b58a4b2eb"
+    },
+    "templates/shared/practice_base.html": {
+      "sha256": "ba6bb27303d5b50171cfefa2e8e743f101e4295ffc29ade5e3a40799bfff59b9"
+    },
+    "templates/shared/practice_links.html": {
+      "sha256": "3f227ac38b2240a8037c13a0fcd17f83684ef35694ce38a9eb022f8c72f4e591"
+    },
+    "templates/tuner/tuner.html": {
+      "sha256": "9e6a89e2515b18da08669ebe15906bed8c6daf43abfb609f527690d39090d688"
+    },
+    "tests/browser.cjs": {
+      "sha256": "3f5cf5edbbc1850748edf61da64157e984b1fc28b5a54957fe48d7ecedef53ad"
+    },
+    "tests/chatbot.cjs": {
+      "sha256": "389f6890e0131b38348107b3599979dd665e70484c7d50d50bbb1c44b5006fbd"
+    },
+    "tests/practice.cjs": {
+      "sha256": "fb5cf1a7864ddcb26b799355d8951f7f84ef360cc764e2445a5124bb5a73175c"
+    },
+    "tests/serve.py": {
+      "sha256": "72adbfc1ea4df265b9ecfc30b109e0295fd36601cc6025df1e68467435a7f267"
+    },
+    "tests/structure-browser.cjs": {
+      "sha256": "41aa971b8e38e9d9bfbc5878f2bc26fd8a2616b8aa0b2acf53789524dc8ad847"
+    },
+    "tests/support.py": {
+      "sha256": "751bab4db59aff61e3e1dcce01b3f066fa1dbe653024b1ceb3a2abfcaf0e8c7e"
+    },
+    "tests/test_ai.py": {
+      "sha256": "6d0267fae6213fc43215e46e0619dec9798ca7a2ad1dc89dada98e9b50da1020"
+    },
+    "tests/test_app.py": {
+      "sha256": "af64198d0e9de7f615d69aabc85d94ff0de2cda547bbbef563c1d6fcdc63d240"
+    },
+    "tests/test_practice.py": {
+      "sha256": "583d2429af70f6ebd252578fd85fc7ae02ed45cec6ff0ad0aace48dc4883a615"
+    },
+    "tests/tuner-pitch.cjs": {
+      "sha256": "f79eb6267a78c3e5c9c8927168a4effe57c3cab56029ec8ee777745c269c0536"
+    }
+  },
+  "blueprints": [
+    "auth",
+    "catalog",
+    "orders",
+    "admin",
+    "chatbot",
+    "tuner",
+    "lessons"
+  ],
+  "routes": [
+    {
+      "endpoint": "account_page",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/account"
+    },
+    {
+      "endpoint": "admin.add_product",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "rule": "/api/admin/products"
+    },
+    {
+      "endpoint": "admin.archive_product",
+      "methods": [
+        "DELETE",
+        "OPTIONS"
+      ],
+      "rule": "/api/admin/products/<int:product_id>"
+    },
+    {
+      "endpoint": "admin.customers",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/admin/customers"
+    },
+    {
+      "endpoint": "admin.edit_product",
+      "methods": [
+        "OPTIONS",
+        "PUT"
+      ],
+      "rule": "/api/admin/products/<int:product_id>"
+    },
+    {
+      "endpoint": "admin.export_sales",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/admin/sales/export"
+    },
+    {
+      "endpoint": "admin.products",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/admin/products"
+    },
+    {
+      "endpoint": "admin.sales",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/admin/sales"
+    },
+    {
+      "endpoint": "admin.settings",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS",
+        "PUT"
+      ],
+      "rule": "/api/admin/settings"
+    },
+    {
+      "endpoint": "admin.summary",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/admin/summary"
+    },
+    {
+      "endpoint": "admin.update_order",
+      "methods": [
+        "OPTIONS",
+        "PATCH"
+      ],
+      "rule": "/api/admin/sales/<order_id>"
+    },
+    {
+      "endpoint": "auth.change_password",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "rule": "/api/auth/password"
+    },
+    {
+      "endpoint": "auth.current_session",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/auth/session"
+    },
+    {
+      "endpoint": "auth.forgot_password",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "rule": "/api/auth/forgot-password"
+    },
+    {
+      "endpoint": "auth.login",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "rule": "/api/auth/login"
+    },
+    {
+      "endpoint": "auth.logout",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "rule": "/api/auth/logout"
+    },
+    {
+      "endpoint": "auth.profile",
+      "methods": [
+        "OPTIONS",
+        "PATCH"
+      ],
+      "rule": "/api/auth/profile"
+    },
+    {
+      "endpoint": "auth.register",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "rule": "/api/auth/register"
+    },
+    {
+      "endpoint": "auth.reset_password",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "rule": "/api/auth/reset-password"
+    },
+    {
+      "endpoint": "catalog.finder",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "rule": "/api/finder"
+    },
+    {
+      "endpoint": "catalog.product",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/products/<int:product_id>"
+    },
+    {
+      "endpoint": "catalog.products",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/products"
+    },
+    {
+      "endpoint": "catalog.save",
+      "methods": [
+        "OPTIONS",
+        "PUT"
+      ],
+      "rule": "/api/account/saved/<int:product_id>"
+    },
+    {
+      "endpoint": "catalog.saved",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/account/saved"
+    },
+    {
+      "endpoint": "catalog.store_info",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/store"
+    },
+    {
+      "endpoint": "catalog.unsave",
+      "methods": [
+        "DELETE",
+        "OPTIONS"
+      ],
+      "rule": "/api/account/saved/<int:product_id>"
+    },
+    {
+      "endpoint": "chatbot.chat",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "rule": "/api/chat"
+    },
+    {
+      "endpoint": "chatbot.chat_status",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/chat"
+    },
+    {
+      "endpoint": "dashboard",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/admin"
+    },
+    {
+      "endpoint": "health",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/health"
+    },
+    {
+      "endpoint": "index",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/"
+    },
+    {
+      "endpoint": "lessons.chord_detail",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/lessons/chords/<slug>"
+    },
+    {
+      "endpoint": "lessons.chords",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/lessons/chords"
+    },
+    {
+      "endpoint": "lessons.getting_started",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/lessons/getting-started"
+    },
+    {
+      "endpoint": "lessons.index",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/lessons"
+    },
+    {
+      "endpoint": "lessons.strumming",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/lessons/strumming"
+    },
+    {
+      "endpoint": "login_page",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/login"
+    },
+    {
+      "endpoint": "orders.checkout",
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "rule": "/api/orders"
+    },
+    {
+      "endpoint": "orders.detail",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/orders/<order_id>"
+    },
+    {
+      "endpoint": "orders.history",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/api/orders"
+    },
+    {
+      "endpoint": "register_page",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/register"
+    },
+    {
+      "endpoint": "reset_password_page",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/reset-password"
+    },
+    {
+      "endpoint": "shop",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/shop"
+    },
+    {
+      "endpoint": "static",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/static/<path:filename>"
+    },
+    {
+      "endpoint": "tuner.index",
+      "methods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "rule": "/tuner"
+    }
+  ]
+}

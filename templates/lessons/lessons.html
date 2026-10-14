@@ -1,0 +1,22 @@
+{% extends "shared/practice_base.html" %}
+{% block practice_content %}
+<div class="practice-heading">
+  <p class="section-label">AUDIA practice studio</p>
+  <h1 class="section-title">Learn Guitar</h1>
+  <p>Start small, build good habits, and make your first chords ring.</p>
+</div>
+<div class="lesson-hero surface-card">
+  <div class="practice-card">
+    <p class="section-label">Your first practice</p>
+    <h2>Pick up your guitar.<br>Find your rhythm.</h2>
+    <p>A few focused minutes each day can help you get comfortable. Learn the strings, tune up, try a chord, then add a steady strum.</p>
+    <div class="practice-actions"><a class="primary-btn" href="{{ url_for('lessons.getting_started') }}">Start learning</a><a class="secondary-btn" href="{{ url_for('tuner.index') }}">Tune your guitar</a></div>
+  </div>
+  <img src="{{ url_for('static', filename='images/acoustic_studio.jpg') }}" alt="Acoustic guitar ready for practice" width="640" height="480">
+</div>
+<div class="lesson-grid">
+  <a class="surface-card practice-card lesson-card" href="{{ url_for('lessons.getting_started') }}"><span class="section-label">01 · Getting Started</span><h2>Get to know your guitar</h2><p>Parts, posture, pick grip, string names, and standard tuning.</p><span class="practice-link">Explore the basics →</span></a>
+  <a class="surface-card practice-card lesson-card" href="{{ url_for('lessons.chords') }}"><span class="section-label">02 · Basic Chords</span><h2>Your first eight chords</h2><p>Clear diagrams and finger placements for C, G, D, A, E, Am, Em, and Dm.</p><span class="practice-link">Open the chord library →</span></a>
+  <a class="surface-card practice-card lesson-card" href="{{ url_for('lessons.strumming') }}"><span class="section-label">03 · Strumming</span><h2>Bring chords to life</h2><p>Downstrokes, upstrokes, counting beats, and three beginner patterns.</p><span class="practice-link">Find your rhythm →</span></a>
+</div>
+{% endblock %}

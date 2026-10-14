@@ -1,0 +1,139 @@
+AUDIA_V2/
+|-- .vscode/
+|   `-- settings.json
+|-- assets/
+|   |-- css/
+|   |   |-- account.css
+|   |   |-- admin.css
+|   |   |-- auth.css
+|   |   |-- landing.css
+|   |   |-- lessons.css
+|   |   |-- practice.css
+|   |   |-- shared.css
+|   |   |-- storefront.css
+|   |   `-- tuner.css
+|   |-- images/
+|   |   |-- acoustic/
+|   |   |   |-- Black_Cutaway.png
+|   |   |   |-- Figured_Wood.png
+|   |   |   |-- Mahogany_Orchestra.png
+|   |   |   |-- Mahogany_Parlor.png
+|   |   |   |-- Natural_Cutaway.png
+|   |   |   |-- Natural_Dreadnought.png
+|   |   |   |-- Natural_Orchestra.png
+|   |   |   |-- Sunburst_Dreadnought.png
+|   |   |   |-- Traditional_Natural.png
+|   |   |   `-- Vintage_Sunburst.png
+|   |   |-- bass/
+|   |   |   |-- Burlwood.png
+|   |   |   |-- Crimson_Red.png
+|   |   |   |-- Ivory_Semi-Hollow.png
+|   |   |   |-- Midnight_Black_Modern.png
+|   |   |   |-- Natural_Jazz-Style.png
+|   |   |   |-- Natural_Spalted.png
+|   |   |   |-- Ocean_Blue_5-String.png
+|   |   |   |-- Royal_Purple_5-String.png
+|   |   |   |-- Seafoam_Green.png
+|   |   |   `-- Sunburst_Vintage.png
+|   |   |-- classical/
+|   |   |   |-- Amber_Cedar.png
+|   |   |   |-- Cream_Spruce.png
+|   |   |   |-- Dark_Rosewood.png
+|   |   |   |-- Golden_Amber.png
+|   |   |   |-- Light_Spruce.png
+|   |   |   |-- Natural_Spruce.png
+|   |   |   |-- Orange_Cedar.png
+|   |   |   |-- Pale_Spruce.png
+|   |   |   |-- Walnut_Heritage.png
+|   |   |   `-- Warm_Cedar.png
+|   |   |-- electric/
+|   |   |   |-- Amber_Flame.png
+|   |   |   |-- Arctic_White.png
+|   |   |   |-- Butterscotch.png
+|   |   |   |-- Cherry_Red.png
+|   |   |   |-- Cherry_Red_Double-Cut.png
+|   |   |   |-- Midnight_Black.png
+|   |   |   |-- Ocean_Blue.png
+|   |   |   |-- Royal_Purple.png
+|   |   |   |-- Seafoam.png
+|   |   |   `-- Sunburst_Classic.png
+|   |   |-- acoustic_studio.jpg
+|   |   |-- bass_studio.jpg
+|   |   |-- classical_studio.jpg
+|   |   |-- electric_studio.jpg
+|   |   |-- essentials.jpeg
+|   |   |-- guitar_front.jpg
+|   |   |-- guitar_performance.jpg
+|   |   `-- SOURCES.md
+|   |-- js/
+|   |   |-- chatbot/
+|   |   |   |-- chatbot-api.js
+|   |   |   |-- chatbot-ui.js
+|   |   |   `-- chatbot.js
+|   |   |-- account.js
+|   |   |-- admin.js
+|   |   |-- app.js
+|   |   |-- auth.js
+|   |   |-- shared.js
+|   |   |-- storefront.js
+|   |   |-- theme.js
+|   |   |-- tuner-pitch.js
+|   |   `-- tuner.js
+|   `-- icons-LICENSE.txt
+|-- database/
+|   `-- catalog.json
+|-- docs/
+|   |-- guitar-practice-source.md
+|   `-- guitar-practice.md
+|-- modules/
+|   |-- __init__.py
+|   |-- admin.py
+|   |-- ai.py
+|   |-- auth.py
+|   |-- catalog.py
+|   |-- chatbot.py
+|   |-- database.py
+|   |-- lessons.py
+|   |-- lessons_content.py
+|   |-- mail.py
+|   |-- models.py
+|   |-- orders.py
+|   |-- rag_sync.py
+|   `-- tuner.py
+|-- templates/
+|   |-- lessons/
+|   |   |-- _chord_diagram.html
+|   |   |-- chord_detail.html
+|   |   |-- chords.html
+|   |   |-- getting_started.html
+|   |   |-- index.html
+|   |   `-- strumming.html
+|   |-- practice/
+|   |   |-- base.html
+|   |   `-- feature_links.html
+|   |-- tuner/
+|   |   `-- tuner.html
+|   |-- account.html
+|   |-- admin.html
+|   |-- auth.html
+|   |-- base.html
+|   |-- chatbot.html
+|   |-- landing.html
+|   |-- shared.html
+|   `-- storefront.html
+|-- tests/
+|   |-- browser.cjs
+|   |-- chatbot.cjs
+|   |-- practice.cjs
+|   |-- serve.py
+|   |-- support.py
+|   |-- test_app.py
+|   |-- test_practice.py
+|   `-- tuner-pitch.cjs
+|-- .env
+|-- .env.example
+|-- .gitignore
+|-- app.py
+|-- debug.log
+|-- README.md
+`-- requirements.txt

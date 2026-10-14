@@ -1,0 +1,971 @@
+{% extends "shared/base.html" %} {% block content %}
+<div class="admin-page min-h-screen bg-stone-50 dark:bg-ink">
+  <aside
+    class="fixed inset-y-0 left-0 z-50 flex w-[270px] flex-col border-r border-zinc-200 bg-white p-5 transition-transform dark:border-white/10 dark:bg-[#0d0d10] lg:translate-x-0 -translate-x-full"
+  >
+    <div class="flex h-12 items-center justify-between px-2">
+      <button
+        class="audia-mark flex items-center text-left text-lg"
+        aria-label="Go to AUDIA home"
+        data-action="overview"
+      >
+        <span class="mark-a">A</span>UDI<span class="mark-a">A</span>
+      </button>
+      <button
+        class="icon-btn lg:hidden"
+        data-action="close-sidebar"
+        aria-label="Close admin menu"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-x"
+          aria-hidden="true"
+        >
+          <path d="M18 6 6 18"></path>
+          <path d="m6 6 12 12"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="mt-7 rounded-2xl bg-zinc-100 p-3 dark:bg-white/[.055]">
+      <div class="flex items-center gap-3">
+        <div
+          class="grid h-10 w-10 place-items-center rounded-xl bg-zinc-950 text-white dark:bg-acid dark:text-ink"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="17"
+            height="17"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-store"
+            aria-hidden="true"
+          >
+            <path d="M15 21v-5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5"></path>
+            <path
+              d="M17.774 10.31a1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.451 0 1.12 1.12 0 0 0-1.548 0 2.5 2.5 0 0 1-3.452 0 1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.77-3.248l2.889-4.184A2 2 0 0 1 7 2h10a2 2 0 0 1 1.653.873l2.895 4.192a2.5 2.5 0 0 1-3.774 3.244"
+            ></path>
+            <path d="M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05"></path>
+          </svg>
+        </div>
+        <div class="min-w-0">
+          <p class="truncate text-sm font-semibold" data-field="store-name">
+            AUDIA Flagship
+          </p>
+          <p class="text-[10px] text-zinc-500">Main storefront</p>
+        </div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-chevron-down ml-auto text-zinc-500"
+          aria-hidden="true"
+        >
+          <path d="m6 9 6 6 6-6"></path>
+        </svg>
+      </div>
+    </div>
+    <nav class="mt-7 space-y-1">
+      <p
+        class="mb-3 px-3 text-[9px] font-bold uppercase tracking-[.18em] text-zinc-400"
+      >
+        Workspace
+      </p>
+      <button
+        class="flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition bg-zinc-950 text-white dark:bg-acid dark:text-ink"
+        data-action="overview"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="17"
+          height="17"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-layout-dashboard"
+          aria-hidden="true"
+        >
+          <rect width="7" height="9" x="3" y="3" rx="1"></rect>
+          <rect width="7" height="5" x="14" y="3" rx="1"></rect>
+          <rect width="7" height="9" x="14" y="12" rx="1"></rect>
+          <rect width="7" height="5" x="3" y="16" rx="1"></rect>
+        </svg>
+        Overview
+      </button>
+      <button
+        class="flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition text-zinc-500 hover:bg-zinc-100 hover:text-zinc-950 dark:hover:bg-white/5 dark:hover:text-white"
+        data-action="sales"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="17"
+          height="17"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-circle-dollar-sign"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path>
+          <path d="M12 18V6"></path>
+        </svg>
+        Sales directory<span
+          class="ml-auto rounded-full px-2 py-0.5 text-[9px] bg-zinc-100 dark:bg-white/5"
+          data-field="order-count"
+          >0</span
+        >
+      </button>
+      <button
+        class="flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition text-zinc-500 hover:bg-zinc-100 hover:text-zinc-950 dark:hover:bg-white/5 dark:hover:text-white"
+        data-action="products"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="17"
+          height="17"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-package"
+          aria-hidden="true"
+        >
+          <path
+            d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"
+          ></path>
+          <path d="M12 22V12"></path>
+          <polyline points="3.29 7 12 12 20.71 7"></polyline>
+          <path d="m7.5 4.27 9 5.15"></path>
+        </svg>
+        Products
+      </button>
+      <button
+        class="flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition text-zinc-500 hover:bg-zinc-100 hover:text-zinc-950 dark:hover:bg-white/5 dark:hover:text-white"
+        data-action="customers"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="17"
+          height="17"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-users"
+          aria-hidden="true"
+        >
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+          <path d="M16 3.128a4 4 0 0 1 0 7.744"></path>
+          <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+        </svg>
+        Customers
+      </button>
+    </nav>
+    <div
+      class="mt-auto space-y-1 border-t border-zinc-200 pt-4 dark:border-white/10"
+    >
+      <button
+        class="flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm text-zinc-500 hover:bg-zinc-100 dark:hover:bg-white/5"
+        data-action="settings"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="17"
+          height="17"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-settings"
+          aria-hidden="true"
+        >
+          <path
+            d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"
+          ></path>
+          <circle cx="12" cy="12" r="3"></circle>
+        </svg>
+        Settings
+      </button>
+      <button
+        class="flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm text-zinc-500 hover:bg-zinc-100 dark:hover:bg-white/5"
+        data-action="store"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="17"
+          height="17"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-arrow-left"
+          aria-hidden="true"
+        >
+          <path d="m12 19-7-7 7-7"></path>
+          <path d="M19 12H5"></path>
+        </svg>
+        View storefront
+      </button>
+      <button
+        class="w-full px-3 pt-3 text-left text-[11px] text-zinc-400 hover:text-rose-500"
+        data-action="logout"
+      >
+        Sign out of admin
+      </button>
+    </div>
+  </aside>
+  <div class="lg:pl-[270px]">
+    <header
+      class="sticky top-0 z-30 flex h-[78px] items-center justify-between border-b border-zinc-200 bg-stone-50/90 px-5 backdrop-blur-xl dark:border-white/10 dark:bg-ink/90 sm:px-8"
+    >
+      <div class="flex items-center gap-3">
+        <button
+          class="icon-btn lg:hidden"
+          data-action="sidebar"
+          aria-label="Open admin menu"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="19"
+            height="19"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-menu"
+            aria-hidden="true"
+          >
+            <path d="M4 5h16"></path>
+            <path d="M4 12h16"></path>
+            <path d="M4 19h16"></path>
+          </svg>
+        </button>
+        <div>
+          <p class="text-[10px] uppercase tracking-[.15em] text-zinc-400">
+            Administration
+          </p>
+          <h1
+            class="font-display text-xl font-semibold"
+            data-field="admin-title"
+          >
+            Overview
+          </h1>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <button
+          class="icon-btn relative"
+          aria-label="Notifications"
+          data-action="notifications"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-bell"
+            aria-hidden="true"
+          >
+            <path d="M10.268 21a2 2 0 0 0 3.464 0"></path>
+            <path
+              d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"
+            ></path>
+          </svg>
+          <span
+            class="absolute right-2 top-2 h-1.5 w-1.5 rounded-full bg-rose-500"
+          ></span>
+        </button>
+        <button
+          class="theme-toggle relative flex items-center rounded-full border border-zinc-200 bg-white text-zinc-700 shadow-sm transition hover:border-zinc-300 dark:border-white/10 dark:bg-white/[.05] dark:text-zinc-200 h-10 w-10 justify-center"
+          aria-label="Switch to light mode"
+          title="Switch to light mode"
+          data-action="theme"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="17"
+            height="17"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-sun"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2"></path>
+            <path d="M12 20v2"></path>
+            <path d="m4.93 4.93 1.41 1.41"></path>
+            <path d="m17.66 17.66 1.41 1.41"></path>
+            <path d="M2 12h2"></path>
+            <path d="M20 12h2"></path>
+            <path d="m6.34 17.66-1.41 1.41"></path>
+            <path d="m19.07 4.93-1.41 1.41"></path>
+          </svg>
+        </button>
+        <div
+          class="ml-1 hidden items-center gap-3 border-l border-zinc-200 pl-4 dark:border-white/10 sm:flex"
+        >
+          <div
+            class="grid h-9 w-9 place-items-center rounded-full bg-violet-100 text-xs font-bold text-violet-700 dark:bg-violet-400/15 dark:text-violet-300"
+          >
+            AJ
+          </div>
+          <div>
+            <p class="text-xs font-semibold" data-field="admin-name">
+              AUDIA Admin
+            </p>
+            <p class="text-[10px] text-zinc-500">Store manager</p>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="p-5 sm:p-8 xl:p-10" data-field="admin-view"></main>
+  </div>
+</div>
+{% endblock %} {% block components %}
+<!-- Related cards and dialogs live here with the page that uses them. -->
+
+<!-- Overview -->
+<template id="overview-template">
+  <div>
+    <div class="admin-section-heading">
+      <div>
+        <p class="text-sm text-zinc-500" data-field="today"></p>
+        <h2
+          class="mt-1 font-display text-3xl font-semibold"
+          data-field="admin-greeting"
+        >
+          Welcome back.
+        </h2>
+      </div>
+      <button class="primary-btn" data-action="add-product">
+        <span aria-hidden="true">+</span> Add product
+      </button>
+    </div>
+    <div class="stats-grid mt-7 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <div class="stat-card surface-card p-6">
+        <div class="stat-glyph" aria-hidden="true">₱</div>
+        <p class="mt-4 text-xs text-zinc-500">Delivered revenue</p>
+        <p
+          class="mt-2 font-display text-3xl font-semibold"
+          data-field="gross_revenue"
+        >
+          —
+        </p>
+      </div>
+      <div class="stat-card surface-card p-6">
+        <div class="stat-glyph" aria-hidden="true">↗</div>
+        <p class="mt-4 text-xs text-zinc-500">Total orders</p>
+        <p
+          class="mt-2 font-display text-3xl font-semibold"
+          data-field="total_orders"
+        >
+          —
+        </p>
+      </div>
+      <div class="stat-card surface-card p-6">
+        <div class="stat-glyph" aria-hidden="true">◎</div>
+        <p class="mt-4 text-xs text-zinc-500">New customers</p>
+        <p
+          class="mt-2 font-display text-3xl font-semibold"
+          data-field="new_customers"
+        >
+          —
+        </p>
+      </div>
+      <div class="stat-card surface-card p-6">
+        <div class="stat-glyph" aria-hidden="true">◇</div>
+        <p class="mt-4 text-xs text-zinc-500">Low stock items</p>
+        <p
+          class="mt-2 font-display text-3xl font-semibold"
+          data-field="low_stock_items"
+        >
+          —
+        </p>
+      </div>
+    </div>
+    <div class="report-grid mt-6">
+      <section class="surface-card p-6 revenue-chart">
+        <div class="admin-section-heading">
+          <div>
+            <h3 class="font-display text-lg font-semibold">
+              Revenue performance
+            </h3>
+            <p class="mt-1 text-xs text-zinc-500">
+              Delivered orders in the selected period
+            </p>
+          </div>
+          <label class="input-shell"
+            ><select data-field="report-period" aria-label="Reporting period">
+              <option value="week">Last 7 days</option>
+              <option value="month">Last 30 days</option>
+            </select></label
+          >
+        </div>
+        <div class="revenue-plot" data-field="revenue-chart"></div>
+      </section>
+      <section class="surface-card p-6">
+        <h3 class="font-display text-lg font-semibold">Sales by category</h3>
+        <p class="mt-1 text-xs text-zinc-500">Delivered revenue</p>
+        <div class="category-report" data-field="category-report"></div>
+      </section>
+    </div>
+    <div class="surface-card mt-7 overflow-hidden">
+      <div
+        class="flex items-center justify-between border-b border-zinc-200 p-6 dark:border-white/10"
+      >
+        <div>
+          <h3 class="font-display text-lg font-semibold">Recent sales</h3>
+          <p class="mt-1 text-xs text-zinc-500">
+            Latest completed and active orders
+          </p>
+        </div>
+        <button class="text-xs font-semibold" data-action="sales">
+          View all
+        </button>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full min-w-[680px] text-left">
+          <thead>
+            <tr class="text-[9px] uppercase tracking-widest text-zinc-500">
+              <th class="px-6 py-4">Order</th>
+              <th class="px-6 py-4">Customer</th>
+              <th class="px-6 py-4">Product</th>
+              <th class="px-6 py-4">Status</th>
+              <th class="px-6 py-4 text-right">Total</th>
+            </tr>
+          </thead>
+          <tbody
+            data-field="sales-rows"
+            class="divide-y divide-zinc-100 dark:divide-white/5"
+          ></tbody>
+        </table>
+        <p class="empty-state" data-field="sales-empty" hidden>
+          No orders yet. New orders will appear here.
+        </p>
+      </div>
+    </div>
+  </div>
+</template>
+
+<!-- Recent Sale -->
+<template id="recent-sale-template">
+  <tr class="text-xs transition hover:bg-zinc-50 dark:hover:bg-white/[.025]">
+    <td class="px-5 py-4 font-semibold" data-field="id"></td>
+    <td class="px-5 py-4">
+      <p class="font-medium" data-field="customer"></p>
+      <p class="mt-1 text-[10px] text-zinc-500" data-field="email"></p>
+    </td>
+    <td
+      class="max-w-[180px] truncate px-5 py-4 text-zinc-500"
+      data-field="product"
+    ></td>
+    <td class="px-5 py-4">
+      <span
+        class="inline-flex rounded-full px-2.5 py-1 text-[11px] font-semibold bg-emerald-100 text-emerald-700 dark:bg-emerald-400/10 dark:text-emerald-300"
+        data-field="status"
+      ></span>
+    </td>
+    <td class="px-5 py-4 text-right font-semibold" data-field="amount"></td>
+  </tr>
+</template>
+
+<!-- Sales -->
+<template id="sales-template">
+  <div
+    data-motion='{"initial":{"opacity":0,"y":10},"animate":{"opacity":1,"y":0},"viewport":false}'
+  >
+    <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+      <div>
+        <p class="text-sm text-zinc-500">All storefront transactions</p>
+        <h2 class="mt-1 font-display text-3xl font-semibold tracking-tight">
+          Sales directory
+        </h2>
+      </div>
+      <button class="secondary-btn self-start" data-action="export-sales">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="15"
+          height="15"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-download"
+          aria-hidden="true"
+        >
+          <path d="M12 15V3"></path>
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <path d="m7 10 5 5 5-5"></path>
+        </svg>
+        Export CSV
+      </button>
+    </div>
+    <div class="surface-card mt-7 overflow-hidden">
+      <div
+        class="flex flex-col gap-3 border-b border-zinc-200 p-5 dark:border-white/10 sm:flex-row"
+      >
+        <label class="input-shell flex-1">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-search"
+            aria-hidden="true"
+          >
+            <path d="m21 21-4.34-4.34"></path>
+            <circle cx="11" cy="11" r="8"></circle>
+          </svg>
+          <input
+            class="w-full bg-transparent py-3 text-sm outline-none"
+            placeholder="Search order, customer, email, or product"
+            value=""
+            data-field="sales-query"
+            aria-label="Search sales"
+          />
+        </label>
+        <label class="input-shell">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-sliders-horizontal"
+            aria-hidden="true"
+          >
+            <path d="M10 5H3"></path>
+            <path d="M12 19H3"></path>
+            <path d="M14 3v4"></path>
+            <path d="M16 17v4"></path>
+            <path d="M21 12h-9"></path>
+            <path d="M21 19h-5"></path>
+            <path d="M21 5h-7"></path>
+            <path d="M8 10v4"></path>
+            <path d="M8 12H3"></path>
+          </svg>
+          <select
+            class="appearance-none bg-transparent py-3 pr-6 text-sm outline-none"
+            data-field="sales-status"
+            aria-label="Order status"
+          >
+            <option selected="">All</option>
+            <option>Shipped</option>
+            <option>Delivered</option>
+            <option>Cancelled</option>
+            <option>Processing</option>
+            <option>Pending</option>
+            <option>Refunded</option>
+          </select>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="13"
+            height="13"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-chevron-down"
+            aria-hidden="true"
+          >
+            <path d="m6 9 6 6 6-6"></path>
+          </svg>
+        </label>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full min-w-[900px] text-left">
+          <thead>
+            <tr
+              class="bg-zinc-50 text-[9px] uppercase tracking-[.15em] text-zinc-400 dark:bg-white/[.025]"
+            >
+              <th class="px-5 py-4">Order ID</th>
+              <th class="px-5 py-4">Customer</th>
+              <th class="px-5 py-4">Product</th>
+              <th class="px-5 py-4">Date</th>
+              <th class="px-5 py-4">Payment</th>
+              <th class="px-5 py-4">Status</th>
+              <th class="px-5 py-4 text-right">Total</th>
+              <th class="w-12"></th>
+            </tr>
+          </thead>
+          <tbody
+            class="divide-y divide-zinc-100 dark:divide-white/5"
+            data-field="sales-rows"
+          ></tbody>
+        </table>
+        <p class="empty-state" data-field="sales-empty" hidden>
+          No orders match your search.
+        </p>
+      </div>
+      <div
+        class="flex items-center justify-between border-t border-zinc-200 px-5 py-4 text-xs text-zinc-500 dark:border-white/10"
+      >
+        <span data-field="sales-count">Showing 6 of 6 sales</span>
+        <div class="flex gap-2">
+          <button
+            class="rounded-lg border border-zinc-200 px-3 py-2 dark:border-white/10"
+            data-action="sales-previous"
+          >
+            Previous
+          </button>
+          <button
+            class="rounded-lg border border-zinc-200 px-3 py-2 dark:border-white/10"
+            data-action="sales-next"
+          >
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<!-- Sale Row -->
+<template id="sale-row-template">
+  <tr class="text-xs hover:bg-zinc-50 dark:hover:bg-white/[.025]">
+    <td class="px-5 py-4 font-semibold" data-field="id"></td>
+    <td class="px-5 py-4">
+      <p class="font-medium" data-field="customer"></p>
+      <p class="mt-1 text-[10px] text-zinc-500" data-field="email"></p>
+    </td>
+    <td
+      class="max-w-[210px] truncate px-5 py-4 text-zinc-500"
+      data-field="product"
+    ></td>
+    <td class="px-5 py-4 text-zinc-500" data-field="date"></td>
+    <td class="px-5 py-4 text-zinc-500" data-field="payment"></td>
+    <td class="px-5 py-4">
+      <span
+        class="inline-flex rounded-full px-2.5 py-1 text-[11px] font-semibold bg-emerald-100 text-emerald-700 dark:bg-emerald-400/10 dark:text-emerald-300"
+        data-field="status"
+      ></span>
+    </td>
+    <td class="px-5 py-4 text-right font-semibold" data-field="amount"></td>
+    <td class="pr-4">
+      <button
+        class="icon-btn h-8 w-8"
+        data-action="edit-order"
+        aria-label="Manage order"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="15"
+          height="15"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-ellipsis"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="1"></circle>
+          <circle cx="19" cy="12" r="1"></circle>
+          <circle cx="5" cy="12" r="1"></circle>
+        </svg>
+      </button>
+    </td>
+  </tr>
+</template>
+
+<!-- Admin Products -->
+<template id="admin-products-template">
+  <div>
+    <div class="admin-section-heading">
+      <div>
+        <p class="text-sm text-zinc-500">Catalog management</p>
+        <h2 class="mt-1 font-display text-3xl font-semibold">Products</h2>
+      </div>
+      <button class="primary-btn" data-action="add-product">
+        <span aria-hidden="true">+</span> Add product
+      </button>
+    </div>
+    <label class="input-shell mt-7"
+      ><input
+        class="w-full bg-transparent py-3 text-sm outline-none"
+        data-field="product-query"
+        placeholder="Search inventory"
+        aria-label="Search inventory"
+    /></label>
+    <div
+      class="mt-7 grid gap-4 sm:grid-cols-2 xl:grid-cols-3"
+      data-field="admin-products"
+    ></div>
+  </div>
+</template>
+
+<!-- Admin Product -->
+<template id="admin-product-template">
+  <article class="surface-card flex gap-4 p-4">
+    <img data-field="image" alt="" class="h-24 w-20 rounded-xl object-cover" />
+    <div class="min-w-0 flex-1">
+      <p
+        class="text-[10px] uppercase tracking-widest text-zinc-500"
+        data-field="category"
+      ></p>
+      <h3 class="mt-2 text-sm font-semibold" data-field="name"></h3>
+      <div class="mt-4 flex items-end justify-between gap-2">
+        <div>
+          <p class="text-sm font-semibold" data-field="price"></p>
+          <p class="mt-1 text-[10px] text-zinc-500" data-field="stock"></p>
+        </div>
+        <button class="secondary-btn" data-action="edit-product">Edit</button>
+      </div>
+    </div>
+  </article>
+</template>
+
+<!-- Product Form -->
+<template id="product-form-template">
+  <form method="post" class="form-grid" data-form="product">
+    <label class="form-wide"
+      >Product name<input name="name" required minlength="2" maxlength="150"
+    /></label>
+    <label>Brand<input name="brand" required maxlength="80" /></label>
+    <label
+      >Category<select name="category">
+        <option>Electric</option>
+        <option>Acoustic</option>
+        <option>Bass</option>
+        <option>Classical</option>
+        <option>Accessories</option>
+        <option>Bundles</option>
+      </select></label
+    >
+    <label
+      >Price (PHP)<input
+        name="price"
+        type="number"
+        min="0.01"
+        max="10000000"
+        step="0.01"
+        required
+    /></label>
+    <label
+      >Stock quantity<input
+        name="stock"
+        type="number"
+        min="0"
+        max="100000"
+        step="1"
+        required
+    /></label>
+    <label
+      >Experience level<select name="level">
+        <option>Beginner</option>
+        <option>Intermediate</option>
+        <option>Advanced</option>
+      </select></label
+    >
+    <label>Color<input name="color" maxlength="60" /></label>
+    <label
+      >Badge<input name="badge" maxlength="40" placeholder="Optional"
+    /></label>
+    <label class="checkbox-label"
+      ><input type="checkbox" name="active" checked /> Visible in store</label
+    >
+    <label class="form-wide"
+      >Image URL or local path<input
+        name="image"
+        type="text"
+        required
+        maxlength="2000"
+        placeholder="/static/images/electric/Amber_Flame.png"
+    /></label>
+    <label class="form-wide"
+      >Description<textarea
+        name="description"
+        required
+        maxlength="3000"
+      ></textarea>
+    </label>
+    <label class="form-wide"
+      >Specifications, one per line<textarea
+        name="specs"
+        maxlength="4000"
+      ></textarea>
+    </label>
+    <p
+      class="form-error form-wide"
+      data-field="form-error"
+      role="alert"
+      hidden
+    ></p>
+    <div class="form-actions form-wide">
+      <button
+        type="button"
+        class="danger-btn"
+        data-action="archive-product"
+        hidden
+      >
+        Archive product</button
+      ><button type="submit" class="primary-btn">Save product</button>
+    </div>
+  </form>
+</template>
+
+<!-- Customers -->
+<template id="customers-template">
+  <div
+    data-motion='{"initial":{"opacity":0,"y":10},"animate":{"opacity":1,"y":0},"viewport":false}'
+  >
+    <p class="text-sm text-zinc-500">Customer records</p>
+    <h2 class="mt-1 font-display text-3xl font-semibold">Customers</h2>
+    <label class="input-shell mt-7"
+      ><input
+        class="w-full bg-transparent py-3 text-sm outline-none"
+        placeholder="Search customers"
+        aria-label="Search customers"
+        data-field="customer-query"
+    /></label>
+    <div class="surface-card mt-7 overflow-hidden">
+      <div
+        class="grid gap-px bg-zinc-200 dark:bg-white/10 sm:grid-cols-2 xl:grid-cols-3"
+        data-field="customers"
+      ></div>
+    </div>
+  </div>
+</template>
+
+<!-- Customer -->
+<template id="customer-template">
+  <div class="bg-white p-5 dark:bg-panel">
+    <div class="flex items-center gap-3">
+      <div
+        class="grid h-11 w-11 place-items-center rounded-full bg-zinc-100 text-sm font-bold dark:bg-white/5"
+        data-field="initials"
+      ></div>
+      <div>
+        <p class="text-sm font-semibold" data-field="customer"></p>
+        <p class="text-[10px] text-zinc-500" data-field="email"></p>
+      </div>
+    </div>
+    <div
+      class="mt-5 flex justify-between border-t border-zinc-100 pt-4 text-xs dark:border-white/5"
+    >
+      <span class="text-zinc-500" data-field="order"></span>
+      <span class="font-semibold" data-field="amount"></span>
+    </div>
+  </div>
+</template>
+
+<!-- Settings -->
+<template id="settings-template">
+  <section class="surface-card settings-panel">
+    <p class="section-label">Store preferences</p>
+    <h2 class="mt-3 font-display text-3xl font-semibold">Settings</h2>
+    <form method="post" class="stack-form mt-7" data-form="settings">
+      <label
+        >Store name<input
+          name="store_name"
+          minlength="2"
+          maxlength="100"
+          required /></label
+      ><label
+        >Support email<input
+          name="support_email"
+          type="email"
+          maxlength="254"
+          required
+      /></label>
+      <p class="form-error" data-field="form-error" role="alert" hidden></p>
+      <button class="primary-btn" type="submit">Save settings</button>
+    </form>
+    <div class="settings-security">
+      <h3 class="font-semibold">Your administrator account</h3>
+      <p class="form-hint mt-2">Update your profile or change your password.</p>
+      <button class="secondary-btn mt-4" data-action="admin-account">
+        Manage account
+      </button>
+    </div>
+  </section>
+</template>
+
+<!-- Notifications -->
+<template id="notifications-template">
+  <div>
+    <p class="form-hint">Inventory and order alerts for your store.</p>
+    <ul class="notification-list" data-field="alerts"></ul>
+  </div>
+</template>
+
+<!-- Order Status -->
+<template id="order-status-template">
+  <form method="post" class="stack-form mt-6">
+    <label>Update order status<select name="status" required></select></label>
+    <p class="form-hint">
+      Cancelled and refunded orders return their items to inventory. Refund
+      status records an offline refund; it does not transfer money.
+    </p>
+    <p class="form-error" data-field="form-error" role="alert" hidden></p>
+    <button type="submit" class="primary-btn">Update order</button>
+  </form>
+</template>
+
+<!-- Sidebar Backdrop -->
+<template id="sidebar-backdrop-template">
+  <button
+    data-action="close-sidebar"
+    class="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm lg:hidden"
+    data-motion='{"initial":{"opacity":0},"animate":{"opacity":1}}'
+  ></button>
+</template>
+{% endblock %}

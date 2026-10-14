@@ -1,0 +1,20 @@
+{% extends "shared/base.html" %}
+{% block content %}
+<div class="practice-page">
+  <header class="practice-header shell">
+    <a class="audia-mark" href="{{ url_for('index') }}" aria-label="AUDIA home"><span class="mark-a">A</span>UDI<span class="mark-a">A</span></a>
+    <nav class="practice-nav" aria-label="Main navigation">
+      <a href="{{ url_for('shop') }}">Store</a>
+      <a href="{{ url_for('shop') }}#shop">Products</a>
+      <a href="{{ url_for('tuner.index') }}" {% if practice_area == 'tuner' %}aria-current="page"{% endif %}>Guitar Tuner</a>
+      <a href="{{ url_for('lessons.index') }}" {% if practice_area == 'lessons' %}aria-current="page"{% endif %}>Guitar Lessons</a>
+      <a href="{{ url_for('account_page') }}">Account</a>
+    </nav>
+    <button class="icon-btn" data-action="theme" aria-label="Change theme"></button>
+  </header>
+  <main class="shell practice-main">
+    {% block practice_content %}{% endblock %}
+  </main>
+  {% include 'chatbot/chatbot.html' %}
+</div>
+{% endblock %}

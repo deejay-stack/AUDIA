@@ -1,0 +1,59 @@
+{% macro chord_diagram(chord, diagram_id) %}
+<svg
+  class="chord-diagram"
+  viewBox="0 0 220 245"
+  role="img"
+  aria-labelledby="{{ diagram_id }}-title {{ diagram_id }}-description"
+>
+  <title id="{{ diagram_id }}-title">{{ chord.name }} chord diagram</title>
+  <desc id="{{ diagram_id }}-description">
+    Strings run from low E on the left to high E on the right. O means open, X
+    means muted. {{ chord.placement|join(' ') }} {{ chord.played }} {{
+    chord.muted }}
+  </desc>
+  {% for fret in range(5) %}
+  <line
+    class="chord-fret{% if fret == 0 %} chord-nut{% endif %}"
+    x1="35"
+    y1="{{ 55 + fret * 36 }}"
+    x2="185"
+    y2="{{ 55 + fret * 36 }}"
+  />
+  {% endfor %} {% for label in ['E', 'A', 'D', 'G', 'B', 'e'] %} {% set position
+  = loop.index0 %}{% set x = 35 + position * 30 %}{% set fret =
+  chord.frets[position] %}
+  <line class="chord-string" x1="{{ x }}" y1="55" x2="{{ x }}" y2="199" />
+  <text class="chord-string-label" x="{{ x }}" y="226" text-anchor="middle">
+    {{ label }}
+  </text>
+  {% if fret is none or fret == 0 %}
+  <text class="chord-open-muted" x="{{ x }}" y="35" text-anchor="middle">
+    {{ 'X' if fret is none else 'O' }}
+  </text>
+  {% else %}
+  <circle
+    class="chord-finger"
+    cx="{{ x }}"
+    cy="{{ 55 + (fret - 0.5) * 36 }}"
+    r="11"
+  />
+  <text
+    class="chord-finger-number"
+    x="{{ x }}"
+    y="{{ 59 + (fret - 0.5) * 36 }}"
+    text-anchor="middle"
+  >
+    {{ chord.fingers[position] }}
+  </text>
+  {% endif %} {% endfor %} {% for fret in range(1, 5) %}
+  <text
+    class="chord-fret-label"
+    x="14"
+    y="{{ 59 + (fret - 0.5) * 36 }}"
+    text-anchor="middle"
+  >
+    {{ fret }}
+  </text>
+  {% endfor %}
+</svg>
+{% endmacro %}

@@ -1,0 +1,169 @@
+AUDIA_V2/
+|-- assets/
+|   |-- css/
+|   |   |-- account/
+|   |   |   `-- account.css
+|   |   |-- admin/
+|   |   |   `-- admin.css
+|   |   |-- auth/
+|   |   |   `-- auth.css
+|   |   |-- catalog/
+|   |   |   `-- storefront.css
+|   |   |-- landing/
+|   |   |   `-- landing.css
+|   |   |-- lessons/
+|   |   |   `-- lessons.css
+|   |   |-- shared/
+|   |   |   |-- practice.css
+|   |   |   `-- shared.css
+|   |   `-- tuner/
+|   |       `-- tuner.css
+|   |-- images/
+|   |   |-- acoustic/
+|   |   |   |-- Black_Cutaway.png
+|   |   |   |-- Figured_Wood.png
+|   |   |   |-- Mahogany_Orchestra.png
+|   |   |   |-- Mahogany_Parlor.png
+|   |   |   |-- Natural_Cutaway.png
+|   |   |   |-- Natural_Dreadnought.png
+|   |   |   |-- Natural_Orchestra.png
+|   |   |   |-- Sunburst_Dreadnought.png
+|   |   |   |-- Traditional_Natural.png
+|   |   |   `-- Vintage_Sunburst.png
+|   |   |-- bass/
+|   |   |   |-- Burlwood.png
+|   |   |   |-- Crimson_Red.png
+|   |   |   |-- Ivory_Semi-Hollow.png
+|   |   |   |-- Midnight_Black_Modern.png
+|   |   |   |-- Natural_Jazz-Style.png
+|   |   |   |-- Natural_Spalted.png
+|   |   |   |-- Ocean_Blue_5-String.png
+|   |   |   |-- Royal_Purple_5-String.png
+|   |   |   |-- Seafoam_Green.png
+|   |   |   `-- Sunburst_Vintage.png
+|   |   |-- classical/
+|   |   |   |-- Amber_Cedar.png
+|   |   |   |-- Cream_Spruce.png
+|   |   |   |-- Dark_Rosewood.png
+|   |   |   |-- Golden_Amber.png
+|   |   |   |-- Light_Spruce.png
+|   |   |   |-- Natural_Spruce.png
+|   |   |   |-- Orange_Cedar.png
+|   |   |   |-- Pale_Spruce.png
+|   |   |   |-- Walnut_Heritage.png
+|   |   |   `-- Warm_Cedar.png
+|   |   |-- electric/
+|   |   |   |-- Amber_Flame.png
+|   |   |   |-- Arctic_White.png
+|   |   |   |-- Butterscotch.png
+|   |   |   |-- Cherry_Red.png
+|   |   |   |-- Cherry_Red_Double-Cut.png
+|   |   |   |-- Midnight_Black.png
+|   |   |   |-- Ocean_Blue.png
+|   |   |   |-- Royal_Purple.png
+|   |   |   |-- Seafoam.png
+|   |   |   `-- Sunburst_Classic.png
+|   |   |-- acoustic_studio.jpg
+|   |   |-- bass_studio.jpg
+|   |   |-- classical_studio.jpg
+|   |   |-- electric_studio.jpg
+|   |   |-- essentials.jpeg
+|   |   |-- guitar_front.jpg
+|   |   |-- guitar_performance.jpg
+|   |   `-- SOURCES.md
+|   |-- js/
+|   |   |-- account/
+|   |   |   `-- account.js
+|   |   |-- admin/
+|   |   |   `-- admin.js
+|   |   |-- auth/
+|   |   |   `-- auth.js
+|   |   |-- catalog/
+|   |   |   `-- storefront.js
+|   |   |-- chatbot/
+|   |   |   |-- chatbot-api.js
+|   |   |   |-- chatbot-ui.js
+|   |   |   `-- chatbot.js
+|   |   |-- shared/
+|   |   |   |-- app.js
+|   |   |   |-- shared.js
+|   |   |   `-- theme.js
+|   |   `-- tuner/
+|   |       |-- pitch.js
+|   |       `-- tuner.js
+|   `-- icons-LICENSE.txt
+|-- database/
+|   `-- catalog.json
+|-- modules/
+|   |-- admin/
+|   |   |-- __init__.py
+|   |   `-- routes.py
+|   |-- ai/
+|   |   |-- __init__.py
+|   |   |-- rag_sync.py
+|   |   `-- services.py
+|   |-- auth/
+|   |   |-- __init__.py
+|   |   |-- mail.py
+|   |   `-- routes.py
+|   |-- catalog/
+|   |   |-- __init__.py
+|   |   `-- routes.py
+|   |-- chatbot/
+|   |   |-- __init__.py
+|   |   `-- routes.py
+|   |-- database/
+|   |   |-- __init__.py
+|   |   |-- connection.py
+|   |   `-- models.py
+|   |-- lessons/
+|   |   |-- __init__.py
+|   |   |-- data.py
+|   |   `-- routes.py
+|   |-- orders/
+|   |   |-- __init__.py
+|   |   `-- routes.py
+|   |-- tuner/
+|   |   |-- __init__.py
+|   |   `-- routes.py
+|   `-- __init__.py
+|-- templates/
+|   |-- account/
+|   |   `-- account.html
+|   |-- admin/
+|   |   `-- admin.html
+|   |-- auth/
+|   |   `-- auth.html
+|   |-- catalog/
+|   |   `-- storefront.html
+|   |-- chatbot/
+|   |   `-- chatbot.html
+|   |-- landing/
+|   |   `-- landing.html
+|   |-- lessons/
+|   |   |-- _chord_diagram.html
+|   |   |-- chord_detail.html
+|   |   |-- chords.html
+|   |   |-- getting_started.html
+|   |   |-- index.html
+|   |   `-- strumming.html
+|   |-- shared/
+|   |   |-- base.html
+|   |   |-- components.html
+|   |   |-- practice_base.html
+|   |   `-- practice_links.html
+|   `-- tuner/
+|       `-- tuner.html
+|-- tests/
+|   |-- browser.cjs
+|   |-- chatbot.cjs
+|   |-- practice.cjs
+|   |-- serve.py
+|   |-- structure-browser.cjs
+|   |-- support.py
+|   |-- test_ai.py
+|   |-- test_app.py
+|   |-- test_practice.py
+|   `-- tuner-pitch.cjs
+|-- app.py
+`-- requirements.txt

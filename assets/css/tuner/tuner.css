@@ -1,0 +1,165 @@
+@import url("../shared/practice.css");
+
+.tuner-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 24px;
+}
+.tuner-container {
+  padding: 32px;
+  text-align: center;
+  min-width: 0;
+  align-self: start;
+}
+.tuner-microphone {
+  color: var(--muted);
+  font-size: 13px;
+  min-height: 24px;
+}
+.tuner-note {
+  font-family: "Space Grotesk", Inter, system-ui;
+  font-size: clamp(72px, 12vw, 116px);
+  font-weight: 600;
+  line-height: 1.2;
+  margin-top: 24px;
+}
+.tuner-octave {
+  font-size: 0.45em;
+  color: var(--muted);
+  margin-left: 4px;
+}
+.tuner-frequency {
+  color: var(--muted);
+  font-size: 18px;
+  font-variant-numeric: tabular-nums;
+}
+.tuner-cents {
+  margin-top: 8px;
+  color: var(--accent);
+  font-size: 16px;
+  font-variant-numeric: tabular-nums;
+}
+.tuner-status {
+  font-weight: 600;
+  margin-top: 24px;
+  color: var(--muted);
+}
+.tuner-container[data-tuning="in-tune"] .tuner-status {
+  color: var(--mint);
+}
+.tuner-container[data-tuning="flat"] .tuner-status,
+.tuner-container[data-tuning="sharp"] .tuner-status {
+  color: var(--accent);
+}
+.tuner-meter {
+  margin-top: 24px;
+}
+.tuner-meter-track {
+  position: relative;
+  height: 36px;
+  margin-inline: 8px;
+  border-bottom: 2px solid var(--line);
+  background: repeating-linear-gradient(
+    90deg,
+    var(--line) 0 1px,
+    transparent 1px 10%
+  );
+}
+.tuner-meter-center {
+  position: absolute;
+  left: 45%;
+  width: 10%;
+  height: 100%;
+  background: var(--mint);
+  opacity: 0.18;
+  border-radius: 4px;
+}
+.tuner-meter-center::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  height: 100%;
+  width: 2px;
+  background: var(--text);
+}
+.tuner-indicator {
+  position: absolute;
+  left: 50%;
+  top: -5px;
+  width: 4px;
+  height: 45px;
+  background: var(--accent);
+  border-radius: 4px;
+  transform: translateX(-50%);
+  transition: left 100ms linear;
+}
+.tuner-container[data-tuning="in-tune"] .tuner-indicator {
+  background: var(--mint);
+}
+.tuner-meter-labels {
+  display: flex;
+  justify-content: space-between;
+  gap: 4px;
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 11px;
+}
+.tuner-controls {
+  justify-content: center;
+  margin-top: 32px;
+}
+.tuner-privacy {
+  margin-top: 24px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+.tuner-container .form-error {
+  margin-top: 20px;
+}
+.tuner-strings {
+  list-style: none;
+  margin-top: 24px;
+}
+.tuner-strings li {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid var(--line);
+  padding: 12px 8px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.tuner-strings li > :last-child {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.tuner-strings strong {
+  color: var(--text);
+  font-size: 20px;
+}
+.tuner-strings li[data-active] {
+  background: var(--soft);
+  border-radius: 8px;
+}
+.tuner-strings li[data-active] strong {
+  color: var(--accent);
+}
+.tuner-tips .practice-link {
+  display: inline-block;
+  margin-top: 16px;
+}
+@media (max-width: 767px) {
+  .tuner-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .tuner-container {
+    padding: 24px 20px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tuner-indicator {
+    transition: none;
+  }
+}

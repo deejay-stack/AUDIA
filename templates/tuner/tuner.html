@@ -1,0 +1,92 @@
+{% extends "shared/practice_base.html" %} {% block practice_content %}
+<div class="practice-heading">
+  <p class="section-label">AUDIA practice studio</p>
+  <h1 class="section-title">Guitar Tuner</h1>
+  <p>
+    Six strings. One clear sound. Pluck a single open string and let it ring.
+  </p>
+</div>
+<div class="tuner-layout">
+  <section class="surface-card tuner-container" aria-label="Live guitar tuner">
+    <p id="tuner-microphone" class="tuner-microphone" role="status">
+      Microphone inactive
+    </p>
+    <div class="tuner-readout" aria-label="Detected pitch">
+      <p class="tuner-note">
+        <span id="tuner-note">—</span
+        ><span id="tuner-octave" class="tuner-octave"></span>
+      </p>
+      <p id="tuner-frequency" class="tuner-frequency">— Hz</p>
+      <p id="tuner-cents" class="tuner-cents">— cents</p>
+    </div>
+    <p id="tuner-status" class="tuner-status" role="status">Play a string</p>
+    <div
+      id="tuner-meter"
+      class="tuner-meter"
+      role="meter"
+      aria-label="Tuning deviation in cents"
+      aria-valuemin="-50"
+      aria-valuemax="50"
+      aria-valuenow="0"
+      aria-valuetext="No reliable pitch"
+    >
+      <div class="tuner-meter-track">
+        <span class="tuner-meter-center" aria-hidden="true"></span
+        ><span id="tuner-indicator" class="tuner-indicator" hidden></span>
+      </div>
+      <div class="tuner-meter-labels" aria-hidden="true">
+        <span>Flat −50</span><span>In tune</span><span>+50 Sharp</span>
+      </div>
+    </div>
+    <div class="practice-actions tuner-controls">
+      <button id="tuner-start" type="button" class="primary-btn">
+        Start Tuner
+      </button>
+      <button id="tuner-stop" type="button" class="secondary-btn" disabled>
+        Stop Tuner
+      </button>
+    </div>
+    <p id="tuner-error" class="form-error" role="alert" hidden></p>
+    <p class="tuner-privacy">
+      Audio is processed locally in your browser and is not recorded.
+    </p>
+  </section>
+  <aside class="tuner-guide">
+    <section class="surface-card practice-card">
+      <p class="section-label">Standard tuning · A4 = 440 Hz</p>
+      <h2>Meet your six strings</h2>
+      <p>
+        From the thickest string to the thinnest. The matching string lights up
+        automatically.
+      </p>
+      <ol class="tuner-strings" reversed>
+        {% for note, frequency in [('E2', '82.41'), ('A2', '110.00'), ('D3',
+        '146.83'), ('G3', '196.00'), ('B3', '246.94'), ('E4', '329.63')] %}
+        <li data-tuning-note="{{ note }}">
+          <span>String {{ 7 - loop.index }}</span><strong>{{ note }}</strong
+          ><span>{{ frequency }} Hz</span>
+        </li>
+        {% endfor %}
+      </ol>
+    </section>
+    <section class="practice-card tuner-tips">
+      <h2>A little preparation</h2>
+      <p>
+        Use a quiet room and keep your microphone near the guitar. Mute the
+        other strings and pluck gently. Adjust the tuning peg a little at a
+        time, then pluck again.
+      </p>
+      <p>
+        Within ±5 cents is in tune. The note follows the nearest musical pitch;
+        check the string reference to make sure you reach the intended open
+        string.
+      </p>
+      <a
+        class="practice-link"
+        href="{{ url_for('lessons.getting_started') }}#tuning"
+        >Learn standard tuning →</a
+      >
+    </section>
+  </aside>
+</div>
+{% endblock %}

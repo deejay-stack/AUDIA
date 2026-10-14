@@ -1,0 +1,193 @@
+AUDIA_V2/
+|-- assets/
+|   |-- css/
+|   |   |-- account/
+|   |   |   `-- account.css
+|   |   |-- admin/
+|   |   |   `-- admin.css
+|   |   |-- auth/
+|   |   |   `-- auth.css
+|   |   |-- catalog/
+|   |   |   `-- catalog.css
+|   |   |-- chatbot/
+|   |   |   `-- chatbot.css
+|   |   |-- landing/
+|   |   |   `-- landing.css
+|   |   |-- lessons/
+|   |   |   `-- lessons.css
+|   |   |-- search_filter/
+|   |   |   `-- search_filter.css
+|   |   |-- shared/
+|   |   |   |-- practice.css
+|   |   |   `-- shared.css
+|   |   `-- tuner/
+|   |       `-- tuner.css
+|   |-- images/
+|   |   |-- acoustic/
+|   |   |   |-- Black_Cutaway.png
+|   |   |   |-- Figured_Wood.png
+|   |   |   |-- Mahogany_Orchestra.png
+|   |   |   |-- Mahogany_Parlor.png
+|   |   |   |-- Natural_Cutaway.png
+|   |   |   |-- Natural_Dreadnought.png
+|   |   |   |-- Natural_Orchestra.png
+|   |   |   |-- Sunburst_Dreadnought.png
+|   |   |   |-- Traditional_Natural.png
+|   |   |   `-- Vintage_Sunburst.png
+|   |   |-- bass/
+|   |   |   |-- Burlwood.png
+|   |   |   |-- Crimson_Red.png
+|   |   |   |-- Ivory_Semi-Hollow.png
+|   |   |   |-- Midnight_Black_Modern.png
+|   |   |   |-- Natural_Jazz-Style.png
+|   |   |   |-- Natural_Spalted.png
+|   |   |   |-- Ocean_Blue_5-String.png
+|   |   |   |-- Royal_Purple_5-String.png
+|   |   |   |-- Seafoam_Green.png
+|   |   |   `-- Sunburst_Vintage.png
+|   |   |-- classical/
+|   |   |   |-- Amber_Cedar.png
+|   |   |   |-- Cream_Spruce.png
+|   |   |   |-- Dark_Rosewood.png
+|   |   |   |-- Golden_Amber.png
+|   |   |   |-- Light_Spruce.png
+|   |   |   |-- Natural_Spruce.png
+|   |   |   |-- Orange_Cedar.png
+|   |   |   |-- Pale_Spruce.png
+|   |   |   |-- Walnut_Heritage.png
+|   |   |   `-- Warm_Cedar.png
+|   |   |-- electric/
+|   |   |   |-- Amber_Flame.png
+|   |   |   |-- Arctic_White.png
+|   |   |   |-- Butterscotch.png
+|   |   |   |-- Cherry_Red.png
+|   |   |   |-- Cherry_Red_Double-Cut.png
+|   |   |   |-- Midnight_Black.png
+|   |   |   |-- Ocean_Blue.png
+|   |   |   |-- Royal_Purple.png
+|   |   |   |-- Seafoam.png
+|   |   |   `-- Sunburst_Classic.png
+|   |   |-- acoustic_studio.jpg
+|   |   |-- bass_studio.jpg
+|   |   |-- classical_studio.jpg
+|   |   |-- electric_studio.jpg
+|   |   |-- essentials.jpeg
+|   |   |-- guitar_front.jpg
+|   |   |-- guitar_performance.jpg
+|   |   `-- SOURCES.md
+|   |-- js/
+|   |   |-- account/
+|   |   |   `-- account.js
+|   |   |-- admin/
+|   |   |   `-- admin.js
+|   |   |-- auth/
+|   |   |   `-- auth.js
+|   |   |-- catalog/
+|   |   |   `-- catalog.js
+|   |   |-- chatbot/
+|   |   |   |-- chatbot.js
+|   |   |   |-- chatbot_api.js
+|   |   |   `-- chatbot_ui.js
+|   |   |-- search_filter/
+|   |   |   `-- search_filter.js
+|   |   |-- shared/
+|   |   |   |-- app.js
+|   |   |   |-- shared.js
+|   |   |   `-- theme.js
+|   |   `-- tuner/
+|   |       |-- tuner.js
+|   |       `-- tuner_pitch.js
+|   `-- icons-LICENSE.txt
+|-- database/
+|   `-- catalog.json
+|-- modules/
+|   |-- admin/
+|   |   |-- __init__.py
+|   |   `-- admin.py
+|   |-- auth/
+|   |   |-- __init__.py
+|   |   |-- auth.py
+|   |   `-- auth_mail.py
+|   |-- catalog/
+|   |   |-- __init__.py
+|   |   `-- catalog.py
+|   |-- chatbot/
+|   |   |-- ai/
+|   |   |   |-- __init__.py
+|   |   |   |-- ai.py
+|   |   |   `-- ai_rag_sync.py
+|   |   |-- __init__.py
+|   |   `-- chatbot.py
+|   |-- database/
+|   |   |-- __init__.py
+|   |   |-- connection.py
+|   |   `-- models.py
+|   |-- lessons/
+|   |   |-- __init__.py
+|   |   |-- lessons.py
+|   |   `-- lessons_data.py
+|   |-- orders/
+|   |   |-- __init__.py
+|   |   `-- orders.py
+|   |-- search_filter/
+|   |   |-- __init__.py
+|   |   `-- search_filter.py
+|   |-- tuner/
+|   |   |-- __init__.py
+|   |   `-- tuner.py
+|   `-- __init__.py
+|-- templates/
+|   |-- account/
+|   |   `-- account.html
+|   |-- admin/
+|   |   `-- admin.html
+|   |-- auth/
+|   |   `-- auth.html
+|   |-- catalog/
+|   |   |-- catalog.html
+|   |   |-- catalog_bundle.html
+|   |   |-- catalog_cart.html
+|   |   |-- catalog_checkout.html
+|   |   |-- catalog_navigation.html
+|   |   |-- catalog_product_card.html
+|   |   `-- catalog_support.html
+|   |-- chatbot/
+|   |   `-- chatbot.html
+|   |-- landing/
+|   |   `-- landing.html
+|   |-- lessons/
+|   |   |-- lessons.html
+|   |   |-- lessons_chord_detail.html
+|   |   |-- lessons_chord_diagram.html
+|   |   |-- lessons_chords.html
+|   |   |-- lessons_getting_started.html
+|   |   `-- lessons_strumming.html
+|   |-- search_filter/
+|   |   |-- search_filter.html
+|   |   |-- search_filter_finder.html
+|   |   |-- search_filter_finder_banner.html
+|   |   `-- search_filter_types.html
+|   |-- shared/
+|   |   |-- base.html
+|   |   |-- components.html
+|   |   |-- practice_base.html
+|   |   `-- practice_links.html
+|   `-- tuner/
+|       `-- tuner.html
+|-- tests/
+|   |-- browser.cjs
+|   |-- chatbot.cjs
+|   |-- practice.cjs
+|   |-- serve.py
+|   |-- structure-browser.cjs
+|   |-- support.py
+|   |-- test_ai.py
+|   |-- test_app.py
+|   |-- test_practice.py
+|   |-- test_structure.py
+|   `-- tuner-pitch.cjs
+|-- app.py
+|-- DEBUGGING_GUIDE.md
+|-- PROJECT_STRUCTURE.md
+|-- README.md
+`-- requirements.txt

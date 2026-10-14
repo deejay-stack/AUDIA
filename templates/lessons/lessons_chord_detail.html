@@ -1,0 +1,49 @@
+{% extends "shared/practice_base.html" %} {% from
+"lessons/lessons_chord_diagram.html" import chord_diagram %} {% block
+practice_content %}
+<a class="practice-link" href="{{ url_for('lessons.chords') }}"
+  >← Chord library</a
+>
+<div class="practice-heading">
+  <p class="section-label">02 · Basic Chords</p>
+  <h1 class="section-title">{{ chord.name }}</h1>
+  <p>Make each string ring clearly before trying a full strum.</p>
+</div>
+<div class="chord-detail-layout">
+  <section
+    class="surface-card practice-card chord-detail-diagram"
+    aria-label="Chord shape"
+  >
+    <h2>{{ chord.symbol }}</h2>
+    {{ chord_diagram(chord, slug) }}
+    <p class="chord-legend">
+      O = open · X = muted<br />1 index · 2 middle · 3 ring · 4 little
+    </p>
+  </section>
+  <section class="surface-card practice-card">
+    <h2>Finger placement</h2>
+    <ul class="lesson-steps">
+      {% for placement in chord.placement %}
+      <li>{{ placement }}</li>
+      {% endfor %}
+    </ul>
+    <h3>Strings to play</h3>
+    <p>{{ chord.played }}</p>
+    <h3>Strings to leave out</h3>
+    <p>{{ chord.muted }}</p>
+    <h3>Make it sound clear</h3>
+    <p>{{ chord.tip }}</p>
+    <p>
+      Place your fingers just behind the frets. Pick each played string
+      separately, adjust any buzzing notes, and then strum slowly.
+    </p>
+  </section>
+</div>
+<div class="practice-actions">
+  <a class="secondary-btn" href="{{ url_for('lessons.chords') }}"
+    >Try another chord</a
+  ><a class="primary-btn" href="{{ url_for('lessons.strumming') }}"
+    >Add a strumming pattern →</a
+  >
+</div>
+{% endblock %}

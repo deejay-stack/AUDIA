@@ -1,0 +1,129 @@
+{% extends "shared/practice_base.html" %} {% block practice_content %}
+<a class="practice-link" href="{{ url_for('lessons.index') }}">← All lessons</a>
+<div class="practice-heading">
+  <p class="section-label">01 · Getting Started</p>
+  <h1 class="section-title">Get to know your guitar</h1>
+  <p>
+    Get comfortable before you start playing. These instructions describe
+    right-handed playing; mirror the hands for left-handed playing.
+  </p>
+</div>
+<nav class="lesson-topics" aria-label="Getting started topics">
+  <a href="#parts">Guitar parts</a><a href="#holding">Holding your guitar</a
+  ><a href="#pick">Holding a pick</a><a href="#strings">String names</a
+  ><a href="#tuning">Standard tuning</a>
+</nav>
+<div class="lesson-basics-grid">
+  <section id="parts" class="surface-card practice-card">
+    <h2>Parts of a guitar</h2>
+    <dl class="lesson-definitions">
+      <dt>Headstock &amp; tuning pegs</dt>
+      <dd>
+        The headstock holds the pegs. Turn them to change string tension and
+        pitch.
+      </dd>
+      <dt>Nut, neck &amp; frets</dt>
+      <dd>
+        The nut guides strings into the neck. Press just behind a metal fret to
+        shorten a string and change its note.
+      </dd>
+      <dt>Body &amp; sound</dt>
+      <dd>
+        An acoustic guitar uses a sound hole and hollow body. An electric guitar
+        uses pickups to send sound to an amplifier.
+      </dd>
+      <dt>Bridge &amp; saddle</dt>
+      <dd>
+        These support the strings at the body end and help transfer their
+        vibrations.
+      </dd>
+    </dl>
+  </section>
+  <section id="holding" class="surface-card practice-card">
+    <h2>How to hold a guitar</h2>
+    <ol class="lesson-steps">
+      <li>Sit upright with both feet supported and your shoulders relaxed.</li>
+      <li>
+        Rest the guitar body on your right thigh. Classical players may prefer
+        the left thigh with a foot support.
+      </li>
+      <li>
+        Keep the neck angled slightly upward. Rest your right forearm lightly
+        over the body.
+      </li>
+      <li>
+        Place your left thumb behind the neck and curve your fingers. Avoid
+        squeezing or bending your wrist sharply.
+      </li>
+    </ol>
+    <p>
+      A strap can support the guitar while standing. Adjust it so both hands can
+      move comfortably.
+    </p>
+  </section>
+  <section id="pick" class="surface-card practice-card">
+    <h2>How to hold a guitar pick</h2>
+    <ol class="lesson-steps">
+      <li>Curl your index finger gently.</li>
+      <li>
+        Lay the pick on the side of the index finger, with the point facing the
+        strings.
+      </li>
+      <li>
+        Place your thumb over it, leaving a small part of the point exposed.
+      </li>
+      <li>
+        Hold it securely, relax your wrist, and let the pick glide over the
+        strings.
+      </li>
+    </ol>
+    <p>
+      A light or medium pick is a comfortable starting point. Use small motions
+      instead of gripping tightly.
+    </p>
+  </section>
+  <section id="strings" class="surface-card practice-card">
+    <h2>Guitar string names</h2>
+    <p>
+      String 6 is the thickest and lowest. String 1 is the thinnest and highest.
+    </p>
+    <ol class="lesson-string-list" reversed>
+      <li>6 · E — low E</li>
+      <li>5 · A</li>
+      <li>4 · D</li>
+      <li>3 · G</li>
+      <li>2 · B</li>
+      <li>1 · E — high E</li>
+    </ol>
+    <p>Remember: <strong>E A D G B E</strong>, from thick to thin.</p>
+  </section>
+  <section id="tuning" class="surface-card practice-card lesson-wide">
+    <h2>Standard guitar tuning</h2>
+    <p>
+      The open-string pitches are E2 (82.41 Hz), A2 (110.00 Hz), D3 (146.83 Hz),
+      G3 (196.00 Hz), B3 (246.94 Hz), and E4 (329.63 Hz). The octave number
+      distinguishes low E from high E.
+    </p>
+    <ol class="lesson-steps">
+      <li>Open the tuner and press Start Tuner. Allow microphone access.</li>
+      <li>
+        Mute the other strings and pluck one open string. Match its note and
+        octave to the reference.
+      </li>
+      <li>
+        If the reading is flat, carefully increase tension. If sharp, reduce
+        tension. Make small adjustments; avoid overtightening.
+      </li>
+      <li>Repeat for all six strings and check them once more.</li>
+    </ol>
+    <a class="primary-btn" href="{{ url_for('tuner.index') }}"
+      >Open Guitar Tuner</a
+    >
+  </section>
+</div>
+<div class="practice-actions">
+  <a class="secondary-btn" href="{{ url_for('lessons.chords') }}"
+    >Next: basic chords →</a
+  >
+</div>
+{% endblock %}
