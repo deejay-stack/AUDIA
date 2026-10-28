@@ -111,3 +111,18 @@ ul.lesson-steps {
     max-height: 260px;
   }
 }
+
+/* Expanded curriculum and original song practice. */
+.practice-curriculum { margin-top: 3rem; }
+.curriculum-level { font-size: 1.35rem; margin: 2rem 0 1rem; scroll-margin-top: 2rem; }
+.song-bars { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: .5rem; margin: 1rem 0; list-style: none; }
+.song-bars li { background: var(--soft); padding: .7rem .3rem; text-align: center; border-radius: 8px; }
+.song-bars small, .song-bars strong { display: block; }
+.song-bars small { color: var(--muted); font-size: .7rem; }
+.song-lyric { font-style: italic; }
+.chord-filters { margin: 1.5rem 0; align-items: end; }
+.chord-filters label { display: grid; gap: .4rem; }
+.chord-filters select { background: var(--surface); color: var(--text); border: 1px solid var(--line); padding: .7rem; border-radius: 8px; }
+.chord-barre { stroke: var(--accent); stroke-width: 15px; stroke-linecap: round; opacity: .7; }
+.practice-card > [data-action="complete-lesson"] { margin-top: 1.5rem; }
+.practice-card > [aria-pressed="true"] { background: var(--mint); color: var(--page); }

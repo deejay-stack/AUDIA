@@ -5,7 +5,7 @@ Shared colors are in `assets/css/shared/theme.css`; browser defaults are in
 `assets/css/shared/reset.css`. Component adjustments live in their matching
 CSS files, including theme and responsive rules.
 
-Current frontend map after the October 15 HTML/CSS refactor. Existing folders, filenames, Flask routes and backend logic are preserved. Catalog and search/filter each contain a single HTML/CSS pair with section comments. Other module entry stylesheets import their matching component sheets; `shared.css` loads shared primitives. No frontend build is required.
+Current frontend map, updated October 29, 2026 for commerce and learning additions. Catalog and search/filter each contain a single HTML/CSS pair with section comments. Other module entry stylesheets import their matching component sheets; `shared.css` loads shared primitives. No frontend build is required.
 
 | Module | UI Component | HTML File | CSS File | JS File | Rendered In |
 |---|---|---|---|---|---|
@@ -51,18 +51,18 @@ Current frontend map after the October 15 HTML/CSS refactor. Existing folders, f
 | landing | Landing join | [landing_join.html](../templates/landing/landing_join.html) | [landing_join.css](../assets/css/landing/landing_join.css) | assets/js/shared/app.js (navigation/theme); assets/js/shared/shared.js (reveals) | / |
 | landing | Landing overview | [landing_overview.html](../templates/landing/landing_overview.html) | [landing_overview.css](../assets/css/landing/landing_overview.css) | assets/js/shared/app.js (navigation/theme); assets/js/shared/shared.js (reveals) | / |
 | landing | Landing steps | [landing_steps.html](../templates/landing/landing_steps.html) | [landing_steps.css](../assets/css/landing/landing_steps.css) | assets/js/shared/app.js (navigation/theme); assets/js/shared/shared.js (reveals) | / |
-| lessons | Lessons | [lessons.html](../templates/lessons/lessons.html) | [lessons.css](../assets/css/lessons/lessons.css) | No lesson controller: Jinja renders the content; assets/js/shared/app.js handles navigation/theme | /lessons and lesson subpages |
-| lessons | Lessons chord detail | [lessons_chord_detail.html](../templates/lessons/lessons_chord_detail.html) | [lessons_chord_detail.css](../assets/css/lessons/lessons_chord_detail.css) | No lesson controller: Jinja renders the content; assets/js/shared/app.js handles navigation/theme | /lessons and lesson subpages |
-| lessons | Chord diagram macro | [lessons_chord_diagram.html](../templates/lessons/lessons_chord_diagram.html) | [lessons_chord_diagram.css](../assets/css/lessons/lessons_chord_diagram.css) | No lesson controller: Jinja renders the content; assets/js/shared/app.js handles navigation/theme | /lessons and lesson subpages |
-| lessons | Lessons chords | [lessons_chords.html](../templates/lessons/lessons_chords.html) | [lessons_chords.css](../assets/css/lessons/lessons_chords.css) | No lesson controller: Jinja renders the content; assets/js/shared/app.js handles navigation/theme | /lessons and lesson subpages |
-| lessons | Lessons getting started | [lessons_getting_started.html](../templates/lessons/lessons_getting_started.html) | [lessons_getting_started.css](../assets/css/lessons/lessons_getting_started.css) | No lesson controller: Jinja renders the content; assets/js/shared/app.js handles navigation/theme | /lessons and lesson subpages |
-| lessons | Lessons strumming | [lessons_strumming.html](../templates/lessons/lessons_strumming.html) | [lessons_strumming.css](../assets/css/lessons/lessons_strumming.css) | No lesson controller: Jinja renders the content; assets/js/shared/app.js handles navigation/theme | /lessons and lesson subpages |
-| lessons | Strumming pattern diagram | [lessons_strumming_pattern.html](../templates/lessons/lessons_strumming_pattern.html) | [lessons_strumming_pattern.css](../assets/css/lessons/lessons_strumming_pattern.css) | No lesson controller: Jinja renders the content; assets/js/shared/app.js handles navigation/theme | /lessons and lesson subpages |
+| lessons | Lessons | [lessons.html](../templates/lessons/lessons.html) | [lessons.css](../assets/css/lessons/lessons.css) | assets/js/lessons/lessons.js (progress); Jinja renders learning content | /lessons and lesson subpages |
+| lessons | Lessons chord detail | [lessons_chord_detail.html](../templates/lessons/lessons_chord_detail.html) | [lessons_chord_detail.css](../assets/css/lessons/lessons_chord_detail.css) | assets/js/lessons/lessons.js (progress); Jinja renders learning content | /lessons and lesson subpages |
+| lessons | Chord diagram macro | [lessons_chord_diagram.html](../templates/lessons/lessons_chord_diagram.html) | [lessons_chord_diagram.css](../assets/css/lessons/lessons_chord_diagram.css) | assets/js/lessons/lessons.js (progress); Jinja renders learning content | /lessons and lesson subpages |
+| lessons | Lessons chords | [lessons_chords.html](../templates/lessons/lessons_chords.html) | [lessons_chords.css](../assets/css/lessons/lessons_chords.css) | assets/js/lessons/lessons.js (progress); Jinja renders learning content | /lessons and lesson subpages |
+| lessons | Lessons getting started | [lessons_getting_started.html](../templates/lessons/lessons_getting_started.html) | [lessons_getting_started.css](../assets/css/lessons/lessons_getting_started.css) | assets/js/lessons/lessons.js (progress); Jinja renders learning content | /lessons and lesson subpages |
+| lessons | Lessons strumming | [lessons_strumming.html](../templates/lessons/lessons_strumming.html) | [lessons_strumming.css](../assets/css/lessons/lessons_strumming.css) | assets/js/lessons/lessons.js (progress); Jinja renders learning content | /lessons and lesson subpages |
+| lessons | Strumming pattern diagram | [lessons_strumming_pattern.html](../templates/lessons/lessons_strumming_pattern.html) | [lessons_strumming_pattern.css](../assets/css/lessons/lessons_strumming_pattern.css) | assets/js/lessons/lessons.js (progress); Jinja renders learning content | /lessons and lesson subpages |
 | search_filter | Search, sorting, type filters, and Guitar Finder | [search_filter.html](../templates/search_filter/search_filter.html) | [search_filter.css](../assets/css/search_filter/search_filter.css) | assets/js/search_filter/search_filter.js | /shop |
 | shared | Global HTML shell | [base.html](../templates/shared/base.html) | [base.css](../assets/css/shared/base.css) | assets/js/shared/app.js; assets/js/shared/shared.js; assets/js/shared/theme.js | Shared layout; dialogs in catalog/account/admin; practice layout in tuner/lessons |
-| shared | Shared template composition | [components.html](../templates/shared/components.html) | [components.css](../assets/css/shared/components.css) | assets/js/shared/app.js; assets/js/shared/shared.js; assets/js/shared/theme.js | Shared layout; dialogs in catalog/account/admin; practice layout in tuner/lessons |
+| shared | Shared template composition | [components.html](../templates/shared/components.html) | [shared.css](../assets/css/shared/shared.css) | assets/js/shared/app.js; assets/js/shared/shared.js; assets/js/shared/theme.js | Shared layout; dialogs in catalog/account/admin; practice layout in tuner/lessons |
 | shared | Dialog shell | [dialog.html](../templates/shared/dialog.html) | [dialog.css](../assets/css/shared/dialog.css) | assets/js/shared/app.js; assets/js/shared/shared.js; assets/js/shared/theme.js | Shared layout; dialogs in catalog/account/admin; practice layout in tuner/lessons |
-| shared | Reusable native SVG icon templates | [icons.html](../templates/shared/icons.html) | [icons.css](../assets/css/shared/icons.css) | assets/js/shared/app.js; assets/js/shared/shared.js; assets/js/shared/theme.js | Shared layout; dialogs in catalog/account/admin; practice layout in tuner/lessons |
+| shared | Reusable native SVG icon templates | [icons.html](../templates/shared/icons.html) | [shared.css](../assets/css/shared/shared.css) | assets/js/shared/app.js; assets/js/shared/shared.js; assets/js/shared/theme.js | Shared layout; dialogs in catalog/account/admin; practice layout in tuner/lessons |
 | shared | Order detail dialog | [order_detail.html](../templates/shared/order_detail.html) | [order_detail.css](../assets/css/shared/order_detail.css) | assets/js/shared/app.js; assets/js/shared/shared.js; assets/js/shared/theme.js | Shared layout; dialogs in catalog/account/admin; practice layout in tuner/lessons |
 | shared | Practice page shell | [practice_base.html](../templates/shared/practice_base.html) | [practice_base.css](../assets/css/shared/practice_base.css) | assets/js/shared/app.js; assets/js/shared/shared.js; assets/js/shared/theme.js | Shared layout; dialogs in catalog/account/admin; practice layout in tuner/lessons |
 | shared | Practice navigation strip | [practice_links.html](../templates/shared/practice_links.html) | [practice_links.css](../assets/css/shared/practice_links.css) | assets/js/shared/app.js; assets/js/shared/shared.js; assets/js/shared/theme.js | Shared layout; dialogs in catalog/account/admin; practice layout in tuner/lessons |
@@ -80,7 +80,7 @@ Current frontend map after the October 15 HTML/CSS refactor. Existing folders, f
 
 - Notices and empty results are small DOM constructors in `assets/js/shared/shared.js` (`notice()` and `empty()`), rather than HTML templates. Their exact CSS files are `assets/css/shared/notice.css` and `assets/css/shared/empty_state.css`. Order item text is generated by `orderDetails()`; its containing markup and presentation are in `shared/order_detail.html` and `shared/order_detail.css`.
 
-- The admin revenue chart is native SVG generated by `assets/js/admin/admin.js` (`renderSummary()`); its SVG geometry and accessibility attributes remain data-driven. Chart layout/color rules are owned by `admin_overview.css`. Shared icon templates have native SVG geometry in `shared/icons.html` and inherit `currentColor`; `icons.css` is the matching edit point. Some composition-only CSS sheets document shared primitive ownership and intentionally add no redundant declarations. They are still imported by their module entry.
+- The admin revenue chart is native SVG generated by `assets/js/admin/admin.js` (`renderSummary()`); its SVG geometry and accessibility attributes remain data-driven. Chart layout/color rules are owned by `admin_overview.css`. Shared icon templates have native SVG geometry in `shared/icons.html` and inherit `currentColor`; shared styles are the edit point. Empty composition/icon CSS placeholders were removed; the SVG templates and license remain.
 
 - Existing reveal/dismiss timing and initial keyframes remain in the Web Animations flow in `shared/shared.js`. Settled poses belong to `assets/css/shared/animations.css` through `data-motion-state` attributes. No inline style attributes are written. The tuner marker position is the one continuously numeric presentation value: `positionIndicator()` in `tuner.js` uses the native animation API, with timing read from `tuner_meter.css`; pitch detection is unchanged.
 
@@ -91,9 +91,8 @@ Current frontend map after the October 15 HTML/CSS refactor. Existing folders, f
 3. For an appearance problem, open the matching CSS. Check base rules, hover/focus states, `.dark` context and media queries. Use DevTools Computed to see the winning declaration, including shared primitives. Catalog and search/filter each use one stylesheet; for other features, verify the module entry stylesheet imports the component file.
 4. For missing dynamically rendered content, locate the matching `<template id="...-template">`, then search its controller for `clone("...")`, the relevant data hook or render function. Check Console and Network before changing any selectors.
 5. For failed requests, trace the existing controller to its `/api/...` endpoint and module. Preserve template IDs, field names, CSRF/session handling and API contracts. The existing [backend debugging guide](../DEBUGGING_GUIDE.md) covers this trace.
-6. Run the relevant browser test, then the Python suite. `tests/test_frontend.py` checks the original DOM attributes, backend hashes, matching sheets, imports and utility removal. Visual captures use disposable data and mocked chat responses.
+6. Check the affected screen, keyboard controls, and both responsive themes. Recorded verification and limitations are in [UPGRADE_NOTES.md](UPGRADE_NOTES.md).
 
-See [FRONTEND_REFACTOR_REPORT.md](FRONTEND_REFACTOR_REPORT.md) for the complete inspected/changed file inventory and validation results. Earlier architecture/component reports are historical snapshots; this document is the current frontend map.
 
 ## Catalog and search/filter sections
 
@@ -109,3 +108,26 @@ The nearby `{% with search_filter_section='toolbar' %}` (or `types`, `banner`,
 `finder`) chooses its labeled section. This keeps the controls in their existing
 positions while all search/filter markup stays in one file. Shared layout and
 chatbot templates remain in their own feature folders.
+
+## Commerce and learning additions
+
+- `templates/account/orders.html` reuses account header/order cards and `assets/js/account/account.js`; it has no duplicated profile forms.
+- `templates/shared/order_detail.html` and `assets/js/shared/shared.js` own the shared tracking timeline and history. Checkout/payment/timeline additions use `assets/css/shared/commerce.css`.
+- Existing `templates/catalog/catalog.html` owns payment selection and the checkout summary. Existing admin order-status markup owns cash collection/refund confirmations.
+- `templates/lessons/lessons_practice.html` and `lessons_songs.html` use `assets/css/lessons/lessons.css`. `assets/js/lessons/lessons.js` persists course completion through the authenticated API.
+- Shared icons/composition have no unique CSS rules; their placeholder stylesheet files were removed. Existing inline SVG/license content stays intact.
+
+See [UPGRADE_NOTES.md](UPGRADE_NOTES.md) for the current verification record.
+
+
+## Role-security presentation
+
+`templates/auth/auth_roles.html` links `/login` and `/admin/login`; it no longer
+switches a role inside one form. `assets/js/auth/auth.js` sends each portal to its
+own server endpoint. `templates/auth/access_denied.html` reuses shared cards and
+buttons with the auth stylesheet. Admin profiles omit customer orders/saved cards;
+shared navigation links remain consistent with server permissions.
+
+`assets/css/shared/theme.css` owns semantic colors, spacing/type/radius tokens.
+Shared form controls, errors and status badges use those pairs in both themes.
+See [SECURITY_REVIEW.md](SECURITY_REVIEW.md) for changes and verification limits.

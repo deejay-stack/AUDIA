@@ -1,5 +1,5 @@
 // Microphone lifecycle and UI for the tuner only. No recordings or audio uploads.
-import { detectPitch, describePitch, PitchStabilizer } from "./tuner_pitch.js";
+import { detectPitch, describeStringPitch, STANDARD_STRINGS, PitchStabilizer } from "./tuner_pitch.js";
 
 // Only the visual marker position is dynamic. Its timing is owned by tuner_meter.css.
 const indicatorPositions = new WeakMap();
@@ -27,6 +27,7 @@ export function mountTuner(page) {
   let context = null;
   let source = null;
   let analyser = null;
+  let highpass = null, lowpass = null;
   let frame = null;
   let generation = 0;
   let active = false;
@@ -62,11 +63,14 @@ export function mountTuner(page) {
     if (stream) stream.getTracks().forEach((track) => track.stop());
     if (source) source.disconnect();
     if (analyser) analyser.disconnect();
+    highpass?.disconnect();
+    lowpass?.disconnect();
     if (context) {
       context.onstatechange = null;
       if (context.state !== "closed") void context.close().catch(() => {});
     }
     stream = context = source = analyser = null;
+    highpass = lowpass = null;
     stabilizer.reset();
     clearPitch();
     find("microphone").textContent = "Microphone inactive";
@@ -75,7 +79,8 @@ export function mountTuner(page) {
   }
 
   function renderPitch(frequency) {
-    const pitch = describePitch(frequency);
+    const pitch = describeStringPitch(frequency, find("target-string").value);
+    find("target").textContent = `Target ${pitch.target.key} · ${pitch.target.frequency.toFixed(2)} Hz`;
     find("note").textContent = pitch.note;
     find("octave").textContent = pitch.octave;
     find("frequency").textContent = `${pitch.frequency.toFixed(1)} Hz`;
@@ -89,7 +94,7 @@ export function mountTuner(page) {
     find("meter").setAttribute("aria-valuenow", cents.toFixed(1));
     find("meter").setAttribute("aria-valuetext", `${pitch.note}${pitch.octave}, ${rounded} cents, ${pitch.status}`);
     page.querySelectorAll("[data-tuning-note]").forEach((node) => {
-      node.toggleAttribute("data-active", node.dataset.tuningNote === `${pitch.note}${pitch.octave}`);
+      node.toggleAttribute("data-active", node.dataset.tuningNote === pitch.target.key);
     });
   }
 
@@ -126,9 +131,14 @@ export function mountTuner(page) {
       }
       stream = microphone;
       analyser = audioContext.createAnalyser();
-      analyser.fftSize = 4096;
+      // Keep enough waveform cycles even on high-sample-rate audio devices.
+      analyser.fftSize = Math.min(32768, 2 ** Math.ceil(Math.log2(audioContext.sampleRate * 0.09)));
       source = audioContext.createMediaStreamSource(microphone);
-      source.connect(analyser);
+      highpass = audioContext.createBiquadFilter();
+      highpass.type = "highpass"; highpass.frequency.value = 55; highpass.Q.value = 0.7;
+      lowpass = audioContext.createBiquadFilter();
+      lowpass.type = "lowpass"; lowpass.frequency.value = find("instrument").value === "electric" ? 1000 : 1400; lowpass.Q.value = 0.7;
+      source.connect(highpass).connect(lowpass).connect(analyser);
       // No connection to destination: the microphone never plays through speakers.
       const samples = new Float32Array(analyser.fftSize);
       active = true;
@@ -154,7 +164,8 @@ export function mountTuner(page) {
           lastRead = now;
           try {
             analyser.getFloatTimeDomainData(samples);
-            const pitch = detectPitch(samples, audioContext.sampleRate);
+            const electric = find("instrument").value === "electric";
+            const pitch = detectPitch(samples, audioContext.sampleRate, { noiseFloor: electric ? 0.004 : 0.008 });
             const frequency = pitch ? stabilizer.push(pitch.frequency) : null;
             if (frequency) { renderPitch(frequency); lastReliable = now; }
             if (now - lastReliable > 650) {
@@ -185,7 +196,23 @@ export function mountTuner(page) {
   }
 
   startButton.addEventListener("click", startTuner);
+  function selectTarget() {
+    stabilizer.reset(); clearPitch();
+    const selected = STANDARD_STRINGS.find((string) => string.key === find("target-string").value);
+    find("target").textContent = selected ? `Target ${selected.key} · ${selected.frequency.toFixed(2)} Hz` : "Automatic standard-string detection";
+    page.querySelectorAll("[data-tuning-note]").forEach((node) => node.toggleAttribute("data-selected", node.dataset.tuningNote === selected?.key));
+  }
+  find("target-string").addEventListener("change", selectTarget);
+  find("instrument").addEventListener("change", () => {
+    stabilizer.reset(); clearPitch();
+    if (lowpass) lowpass.frequency.value = find("instrument").value === "electric" ? 1000 : 1400;
+  });
+  page.querySelectorAll("[data-string-target]").forEach((button) => button.addEventListener("click", () => {
+    find("target-string").value = button.dataset.stringTarget; selectTarget();
+  }));
   stopButton.addEventListener("click", () => { stopTuner(); find("error").hidden = true; });
   window.addEventListener("pagehide", stopTuner);
-  document.addEventListener("visibilitychange", () => { if (document.hidden) stopTuner(); });
+  const onVisibility = () => { if (document.hidden) stopTuner(); };
+  document.addEventListener("visibilitychange", onVisibility);
+  return { destroy() { stopTuner(); window.removeEventListener("pagehide", stopTuner); document.removeEventListener("visibilitychange", onVisibility); } };
 }

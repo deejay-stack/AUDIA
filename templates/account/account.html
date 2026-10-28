@@ -14,7 +14,7 @@
       data-field="greeting"
     ></h1>
     <p class="account__your-instruments-orders-and-account">
-      Your instruments, orders, and account details, together.
+      {{ 'Manage your administrator profile and password.' if g.user.role == 'admin' else 'Your instruments, orders, and account details, together.' }}
     </p>
     <div class="account-grid">
       <!-- Component: account profile | CSS: assets/css/account/account_profile.css -->
@@ -22,10 +22,12 @@
       <!-- Component: account password | CSS: assets/css/account/account_password.css -->
       {% include 'account/account_password.html' %}
     </div>
+    {% if g.user.role == 'customer' %}
     <!-- Component: account orders | CSS: assets/css/account/account_orders.css -->
     {% include 'account/account_orders.html' %}
     <!-- Component: account saved | CSS: assets/css/account/account_saved.css -->
     {% include 'account/account_saved.html' %}
+    {% endif %}
   </main>
 </div>
 {% endblock %} {% block components %}

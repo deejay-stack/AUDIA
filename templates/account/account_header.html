@@ -4,7 +4,7 @@
 <header class="account-header shell">
     <button class="audia-mark" data-action="store">AUDIA</button>
     <div class="account-header__account-header-div">
-      <button class="secondary-btn" data-action="store">Back to store</button
+      <button class="secondary-btn" data-action="store">{{ 'Back to dashboard' if g.user.role == 'admin' else 'Back to store' }}</button
       ><button
         class="icon-btn"
         data-action="theme"

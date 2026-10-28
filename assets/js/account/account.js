@@ -9,21 +9,30 @@ import {
   formError,
   notice,
   orderDetails,
+  poll,
 } from "../shared/shared.js";
 
 export function mountAccount(page, app) {
   let alive = true,
     orders = [],
     saved = [];
-  field(page, "greeting").textContent =
+  if (field(page, "greeting")) field(page, "greeting").textContent =
     `Welcome back, ${app.user.name.split(" ")[0]}.`;
   const profile = page.querySelector('[data-form="profile"]');
-  for (const name of ["name", "email", "phone", "address"])
+  if (profile) for (const name of ["name", "email", "phone", "address"])
     profile.elements[name].value = app.user[name] || "";
+  let loadingOrders = false, loadedOrders = false, snapshot = "";
   async function loadOrders() {
+    if (loadingOrders) return;
+    loadingOrders = true;
     try {
       const data = await api("/orders");
       if (!alive) return;
+      textUpdate("Tracking up to date. Automatically refreshes every 15 seconds.");
+      const next = JSON.stringify(data.orders);
+      if (snapshot === next) return;
+      snapshot = next;
+      loadedOrders = true;
       orders = data.orders;
       if (!orders.length)
         return empty(
@@ -37,13 +46,22 @@ export function mountAccount(page, app) {
           for (const key of ["id", "date", "product", "status"])
             field(card, key).textContent = order[key];
           field(card, "amount").textContent = peso(order.amount);
+          field(card, "status").dataset.status = order.status;
+          field(card, "payment").textContent = `${order.payment} · ${order.payment_status}`;
+          field(card, "tracking").textContent = order.status === "Pending" ? "Awaiting store confirmation" : `Tracking: ${order.status}`;
           return card;
         }),
       );
     } catch (error) {
-      if (alive) empty(field(page, "orders"), error.message);
+      if (alive) {
+        textUpdate(`Unable to refresh tracking: ${error.message}`);
+        if (!loadedOrders) empty(field(page, "orders"), error.message);
+      }
+    } finally {
+      loadingOrders = false;
     }
   }
+  function textUpdate(message) { field(page, "orders-update").textContent = message; }
   async function loadSaved() {
     try {
       const data = await api("/account/saved");
@@ -102,7 +120,7 @@ export function mountAccount(page, app) {
     const button = event.target.closest("[data-action]");
     if (!button) return;
     const action = button.dataset.action;
-    if (action === "store") app.navigate("storefront");
+    if (action === "store") app.navigate(app.user.role === "admin" ? "dashboard" : "storefront");
     if (action === "logout") app.logout();
     if (action === "refresh-orders") loadOrders();
     if (action === "view-order")
@@ -138,11 +156,14 @@ export function mountAccount(page, app) {
       }
     }
   });
-  loadOrders();
-  loadSaved();
+  const customer = app.user.role === "customer";
+  if (customer) loadOrders();
+  const stopPolling = customer ? poll(loadOrders) : () => {};
+  if (profile && customer) loadSaved();
   return {
     destroy() {
       alive = false;
+      stopPolling();
     },
   };
 }

@@ -1,3 +1,10 @@
+"""Module: app.
+
+Purpose: Compose Flask configuration, blueprints, entry pages, error handlers, and CLI commands.
+Main components: role-specific login/workspace pages, configuration, security registration, health/errors and database/admin/AI CLI commands.
+Related: audia.config, audia.routes, audia.database; root templates/assets and .env.
+Debugging: Check startup order here, then the route or service named in the traceback.
+"""
 import os
 import secrets
 from datetime import timedelta
@@ -15,8 +22,8 @@ from flask import (
     request,
     url_for,
 )
-from sqlalchemy import URL, text
-from sqlalchemy.exc import OperationalError
+from sqlalchemy import select, text
+from sqlalchemy.exc import IntegrityError, OperationalError
 from werkzeug.security import generate_password_hash
 
 
@@ -33,20 +40,21 @@ load_dotenv(ROOT / ".env")
 # 2. Import AUDIA modules AFTER .env has been loaded
 # ---------------------------------------------------------
 
-from modules.admin import admin
-from modules.auth import (
+from audia.routes.admin import admin
+from audia.routes.auth import (
     auth,
     install_security,
+    require_page,
     validate_email,
     validate_password,
 )
-from modules.catalog import catalog
-from modules.chatbot import chatbot
-from modules.database import db, init_database, initialize
-from modules.database.models import User
-from modules.orders import orders
-from modules.tuner import tuner
-from modules.lessons import lessons
+from audia.routes.catalog import catalog
+from audia.routes.chatbot import chatbot
+from audia.database import db, init_database, initialize
+from audia.database.models import User
+from audia.routes.orders import orders
+from audia.routes.tuner import tuner
+from audia.routes.lessons import lessons, lessons_api
 
 
 # ---------------------------------------------------------
@@ -66,46 +74,7 @@ app = Flask(
 # 4. Build PostgreSQL database URL
 # ---------------------------------------------------------
 
-def build_database_url():
-    """
-    Build the PostgreSQL URL from the separate
-    credentials stored in .env.
-
-    Falls back to DATABASE_URL if the separate
-    credentials are not available.
-    """
-
-    required_variables = (
-        "DB_USER",
-        "DB_PASSWORD",
-        "DB_NAME",
-    )
-
-    if not all(
-        os.getenv(name)
-        for name in required_variables
-    ):
-        return os.getenv(
-            "DATABASE_URL",
-            "",
-        )
-
-    return URL.create(
-        drivername="postgresql+psycopg",
-        username=os.getenv("DB_USER"),
-        password=os.getenv("DB_PASSWORD"),
-        host=os.getenv(
-            "DB_HOST",
-            "localhost",
-        ),
-        port=int(
-            os.getenv(
-                "DB_PORT",
-                "5432",
-            )
-        ),
-        database=os.getenv("DB_NAME"),
-    )
+from audia.config.database import build_database_url
 
 
 # ---------------------------------------------------------
@@ -121,6 +90,8 @@ app.config.update(
 
     SESSION_COOKIE_HTTPONLY=True,
     SESSION_COOKIE_SAMESITE="Lax",
+    # Database LoginSession expiry is fixed; avoid stale concurrent cookie refreshes.
+    SESSION_REFRESH_EACH_REQUEST=False,
 
     SESSION_COOKIE_SECURE=(
         os.getenv(
@@ -233,6 +204,7 @@ app.register_blueprint(admin)
 app.register_blueprint(chatbot)
 app.register_blueprint(tuner)
 app.register_blueprint(lessons)
+app.register_blueprint(lessons_api)
 
 
 # Install authentication/security hooks
@@ -255,6 +227,9 @@ def index():
 
 @app.route("/login")
 def login_page():
+    # Preserve old administrator bookmarks while keeping a distinct login page.
+    if request.args.get('role') == 'admin':
+        return redirect(url_for('admin_login_page'))
 
     if g.user:
         return redirect(
@@ -265,19 +240,22 @@ def login_page():
             )
         )
 
-    mode = (
-        "admin"
-        if request.args.get("role") == "admin"
-        else "login"
-    )
-
     return render_template(
         "auth/auth.html",
         title="Sign in",
         page_name="auth",
         stylesheet="auth/auth",
-        auth_mode=mode,
+        auth_mode='login',
     )
+
+
+@app.route('/admin/login')
+def admin_login_page():
+    """Show the administrator portal; session identity still comes from the database."""
+    if g.user:
+        return redirect(url_for('dashboard' if g.user.role == 'admin' else 'shop'))
+    return render_template('auth/auth.html', title='Administrator sign in', page_name='auth',
+                           stylesheet='auth/auth', auth_mode='admin')
 
 
 @app.route("/register")
@@ -285,7 +263,7 @@ def register_page():
 
     if g.user:
         return redirect(
-            url_for("shop")
+            url_for('dashboard' if g.user.role == 'admin' else 'shop')
         )
 
     return render_template(
@@ -314,13 +292,9 @@ def reset_password_page():
 
 
 @app.route("/shop")
+@require_page(role='customer')
 def shop():
-
-    if not g.user:
-        return redirect(
-            url_for("login_page")
-        )
-
+    """Customer storefront; the reusable page guard rejects other roles."""
     return render_template(
         "catalog/catalog.html",
         title="Guitar shop",
@@ -330,13 +304,9 @@ def shop():
 
 
 @app.route("/account")
+@require_page()
 def account_page():
-
-    if not g.user:
-        return redirect(
-            url_for("login_page")
-        )
-
+    """Shared profile/password page with role-specific navigation and sections."""
     return render_template(
         "account/account.html",
         title="My account",
@@ -345,22 +315,17 @@ def account_page():
     )
 
 
+@app.route("/orders")
+@require_page(role='customer')
+def orders_page():
+    """Render the authenticated order/tracking workspace with existing account styles."""
+    return render_template("account/orders.html", title="My Orders", page_name="orders", stylesheet="account/account")
+
+
 @app.route("/admin")
+@require_page(role='admin')
 def dashboard():
-
-    if not g.user:
-        return redirect(
-            url_for(
-                "login_page",
-                role="admin",
-            )
-        )
-
-    if g.user.role != "admin":
-        return redirect(
-            url_for("shop")
-        )
-
+    """Administrator workspace; customers receive a 403 before rendering."""
     return render_template(
         "admin/admin.html",
         title="Administration",
@@ -376,6 +341,11 @@ def dashboard():
 @app.route("/api/health")
 def health():
 
+    """Return database readiness JSON for the configured application.
+
+    Executes SELECT 1 when configured; SQL connectivity errors reach
+    database_unavailable(), while missing configuration returns 503.
+    """
     if "engine" not in current_app.extensions:
 
         return jsonify(
@@ -456,6 +426,18 @@ def init_db():
     )
 
 
+@app.cli.command("upgrade-db")
+def upgrade_db():
+    """Back up records, add missing feature tables and enforce the single-admin index."""
+    from audia.database.migrations import upgrade_database
+    try:
+        backup = upgrade_database(current_app)
+        click.echo(f"Database upgraded. Private backup: {backup}" if backup else "Database is already up to date.")
+    except Exception as error:
+        current_app.logger.exception("Additive database upgrade failed.")
+        raise click.ClickException("Database upgrade failed. Check the server log; existing tables are unchanged.") from error
+
+
 # ---------------------------------------------------------
 # 13. CLI: create administrator
 # ---------------------------------------------------------
@@ -479,6 +461,11 @@ def create_admin(
     password,
 ):
 
+    """Create an administrator from prompted email, name, and password.
+
+    Uses auth validators and database.User; invalid or existing email input
+    raises ClickException. Database errors propagate without changing logic.
+    """
     try:
 
         email = validate_email(
@@ -511,6 +498,9 @@ def create_admin(
             "no account was changed."
         )
 
+    if db().scalar(select(User.id).where(User.role == 'admin').limit(1)) is not None:
+        raise click.ClickException('An administrator already exists. No account was changed.')
+
     admin_user = User(
         name=name.strip(),
         email=email,
@@ -524,7 +514,11 @@ def create_admin(
         admin_user
     )
 
-    db().commit()
+    try:
+        db().commit()
+    except IntegrityError as error:
+        db().rollback()
+        raise click.ClickException('Administrator creation was blocked. Check the existing administrator and email.') from error
 
     click.echo(
         "Administrator created."
@@ -537,7 +531,7 @@ def sync_rag():
     with the RAG database.
     """
 
-    from modules.chatbot.ai.ai_rag_sync import (
+    from audia.services.ai.ai_rag_sync import (
         sync_products_to_rag,
     )
 

@@ -1712,7 +1712,7 @@
             >1 items</span
           >
         </div>
-        <button class="icon-btn" data-action="close-cart">
+        <button class="icon-btn" data-action="close-cart" aria-label="Close cart">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="18"
@@ -1887,6 +1887,10 @@
 <!-- SECTION: CHECKOUT -->
 <template id="checkout-template">
   <form method="post" class="stack-form" data-form="checkout">
+    <h3>Review your order</h3>
+    <ul class="checkout-items" data-field="checkout-items"></ul>
+    <div class="order-total"><span>Subtotal</span><strong data-field="checkout-subtotal"></strong></div>
+    <div class="order-total"><span>Shipping · free standard delivery</span><strong data-field="checkout-shipping"></strong></div>
     <p class="form-hint">
       Your instruments are reserved when you place your order. Pay with cash on
       delivery.
@@ -1912,9 +1916,16 @@
     <div class="order-total catalog-checkout__stack-form-div">
       <span>Order total</span><strong data-field="checkout-total"></strong>
     </div>
-    <p class="form-hint">
-      Payment: cash on delivery. No online payment is collected.
-    </p>
+    <fieldset class="payment-options">
+      <legend>Payment method</legend>
+      <label class="payment-option"><input type="radio" name="payment_method" value="cod" checked required>
+        <span class="payment-icon" aria-hidden="true">₱</span><span><strong>Cash on Delivery</strong><small>Pay when your order arrives. No advance payment.</small></span></label>
+      <label class="payment-option"><input type="radio" name="payment_method" value="card_demo">
+        <span class="payment-icon" aria-hidden="true">▰</span><span><strong>Credit / debit card <em>Preview</em></strong><small>Card payments are not connected. No card details collected.</small></span></label>
+      <label class="payment-option"><input type="radio" name="payment_method" value="wallet_demo">
+        <span class="payment-icon" aria-hidden="true">▣</span><span><strong>E-wallet <em>Preview</em></strong><small>A preview of a future payment option. No money is transferred.</small></span></label>
+    </fieldset>
+    <p class="payment-preview" data-field="payment-preview" role="status" hidden>This method is a preview only. Choose Cash on Delivery to place your order.</p>
     <p class="form-error" role="alert" data-field="form-error" hidden></p>
     <button type="submit" class="primary-btn">Place order</button>
   </form>

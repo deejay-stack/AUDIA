@@ -1,0 +1,28 @@
+/* Shared checkout, payment and order tracking additions; uses existing AUDIA tokens. */
+.checkout-items, .order-history { display: grid; gap: .6rem; padding: 1rem 0; overflow-wrap: anywhere; }
+.payment-options { border: 0; padding: 0; display: grid; gap: .65rem; min-width: 0; }
+.payment-options legend { font-weight: 600; margin-bottom: .75rem; }
+.payment-option { display: flex; align-items: center; gap: .8rem; padding: 1rem; border: 1px solid var(--line); border-radius: 12px; cursor: pointer; background: var(--surface); }
+.payment-option:has(input:checked) { border-color: var(--accent); outline: 1px solid var(--accent); background: var(--soft); }
+.payment-option input { width: 18px; height: 18px; flex: 0 0 18px; accent-color: var(--accent); }
+.payment-option strong, .payment-option small { display: block; }
+.payment-option small { color: var(--muted); font-weight: 400; margin-top: .3rem; line-height: 1.5; }
+.payment-option em { font-size: .7rem; font-style: normal; border: 1px solid var(--line); border-radius: 20px; padding: .2rem .4rem; }
+.payment-icon { font-size: 1.6rem; color: var(--accent); }
+.payment-preview { padding: .8rem; border-radius: 10px; background: var(--soft); color: var(--text); font-size: .85rem; }
+.confirmation-option { display: flex !important; align-items: flex-start; gap: .65rem; }
+.confirmation-option input { width: 18px; height: 18px; flex: 0 0 18px; }
+.stack-form label.payment-option { display: flex; align-items: center; gap: var(--space-3); font-size: var(--text-sm); }
+.stack-form .payment-option input { width: 18px; padding: 0; }
+.order-timeline { list-style: none; padding: .5rem 0; display: grid; gap: 0; }
+.order-timeline li { position: relative; padding: .65rem .5rem .65rem 1.8rem; margin-left: .5rem; border-left: 2px solid var(--line); color: var(--muted); font-size: .85rem; }
+.order-timeline li::before { content: ''; position: absolute; left: -6px; top: 1rem; width: 10px; height: 10px; border-radius: 50%; background: var(--line); }
+.order-timeline li[data-state='done'], .order-timeline li[data-state='current'] { color: var(--text); border-color: var(--accent); }
+.order-timeline li[data-state='done']::before, .order-timeline li[data-state='current']::before { background: var(--accent); }
+.order-timeline li[data-state='current'] { font-weight: 600; }
+.order-timeline small { display: block; font-weight: 400; color: var(--muted); margin-top: .25rem; }
+.order-status { white-space: nowrap; }
+[data-cart-count] { display: inline-grid; place-items: center; min-width: 1.4rem; min-height: 1.4rem; padding: 0 .3rem; background: var(--soft); border: 1px solid var(--line); border-radius: 999px; font-size: .75rem; }
+:where(a,button,input,select,textarea,summary):focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.order-detail h3 { margin-top: 1rem; font-weight: 600; }
+@media (max-width: 480px) { .payment-option { padding: .8rem; gap: .6rem; } .payment-icon { display: none; } .detail-list { grid-template-columns: 95px minmax(0,1fr); } }

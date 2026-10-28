@@ -2,14 +2,14 @@
 // YIN: de Cheveigné & Kawahara (2002), doi:10.1121/1.1458024.
 const NOTE_NAMES = ["C", "C♯", "D", "D♯", "E", "F", "F♯", "G", "G♯", "A", "A♯", "B"];
 
-export function detectPitch(input, sampleRate) {
+export function detectPitch(input, sampleRate, { noiseFloor = 0.008 } = {}) {
   if (!input.length || !Number.isFinite(sampleRate) || sampleRate <= 0) return null;
   let mean = 0;
   for (const value of input) mean += value;
   mean /= input.length;
   let energy = 0;
   for (const value of input) energy += (value - mean) ** 2;
-  if (Math.sqrt(energy / input.length) < 0.008) return null;
+  if (Math.sqrt(energy / input.length) < noiseFloor) return null;
 
   // Average groups of samples to reduce work while preserving guitar pitches.
   const step = Math.max(1, Math.floor(sampleRate / 12000));
@@ -64,6 +64,23 @@ export function describePitch(frequency) {
     : magnitude <= 15 ? "Slightly Sharp" : "Too Sharp";
   return { note, octave, frequency, cents, status,
     tuning: magnitude <= 5 ? "in-tune" : cents < 0 ? "flat" : "sharp" };
+}
+
+// Both instrument modes use these same A4=440 standard targets.
+export const STANDARD_STRINGS = [40, 45, 50, 55, 59, 64].map((midi) => ({
+  key: `${NOTE_NAMES[midi % 12]}${Math.floor(midi / 12) - 1}`,
+  frequency: 440 * 2 ** ((midi - 69) / 12),
+}));
+
+export function describeStringPitch(frequency, selected = "auto") {
+  const target = STANDARD_STRINGS.find((string) => string.key === selected) ||
+    STANDARD_STRINGS.reduce((best, string) =>
+      Math.abs(Math.log2(frequency / string.frequency)) < Math.abs(Math.log2(frequency / best.frequency)) ? string : best);
+  const cents = 1200 * Math.log2(frequency / target.frequency);
+  const inTune = Math.abs(cents) <= 5;
+  return { ...describePitch(frequency), target, cents,
+    tuning: inTune ? "in-tune" : cents < 0 ? "flat" : "sharp",
+    status: inTune ? "In Tune" : cents < 0 ? "Too Low / Flat" : "Too High / Sharp" };
 }
 
 export class PitchStabilizer {

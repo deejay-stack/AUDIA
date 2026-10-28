@@ -1,0 +1,14 @@
+{% extends 'shared/base.html' %}
+{% block content %}
+<main class="shell access-denied">
+  <section class="surface-card">
+    <p class="section-label">Protected workspace</p>
+    <h1 class="section-title">Access denied</h1>
+    <p>This account does not have permission to open this page.</p>
+    <div class="practice-actions">
+      {% if g.user %}<a class="primary-btn" href="{{ url_for('dashboard' if g.user.role == 'admin' else 'shop') }}">Return to your workspace</a>{% else %}<a class="primary-btn" href="{{ url_for('login_page') }}">Customer sign in</a><a class="secondary-btn" href="{{ url_for('admin_login_page') }}">Administrator sign in</a>{% endif %}
+      <a class="secondary-btn" href="{{ url_for('index') }}">AUDIA home</a>
+    </div>
+  </section>
+</main>
+{% endblock %}

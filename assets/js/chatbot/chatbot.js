@@ -50,4 +50,8 @@ export function initChatbot(page) {
     event.preventDefault();
     sendMessage();
   });
+  host.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" && event.isComposing) event.preventDefault();
+    if (event.key === "Escape") { ui.closeChat(); event.stopPropagation(); }
+  });
 }

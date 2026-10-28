@@ -1,6 +1,6 @@
 <!-- MODULE: LESSONS | COMPONENT: Lessons
      PURPOSE: Lessons structure. CSS: assets/css/lessons/lessons.css
-     JS: No lesson controller: Jinja renders the content; assets/js/shared/app.js handles navigation/theme. Preserve IDs and data-action/data-field hooks. -->
+     JS: assets/js/lessons/lessons.js handles progress; Jinja renders learning content. Preserve IDs and data-action/data-field hooks. -->
 {% extends "shared/practice_base.html" %}
 {% block practice_content %}
 <div class="practice-heading">
@@ -19,7 +19,16 @@
 </div>
 <div class="lesson-grid">
   <a class="surface-card practice-card lesson-card" href="{{ url_for('lessons.getting_started') }}"><span class="section-label">01 · Getting Started</span><h2>Get to know your guitar</h2><p>Parts, posture, pick grip, string names, and standard tuning.</p><span class="practice-link">Explore the basics →</span></a>
-  <a class="surface-card practice-card lesson-card" href="{{ url_for('lessons.chords') }}"><span class="section-label">02 · Basic Chords</span><h2>Your first eight chords</h2><p>Clear diagrams and finger placements for C, G, D, A, E, Am, Em, and Dm.</p><span class="practice-link">Open the chord library →</span></a>
-  <a class="surface-card practice-card lesson-card" href="{{ url_for('lessons.strumming') }}"><span class="section-label">03 · Strumming</span><h2>Bring chords to life</h2><p>Downstrokes, upstrokes, counting beats, and three beginner patterns.</p><span class="practice-link">Find your rhythm →</span></a>
+  <a class="surface-card practice-card lesson-card" href="{{ url_for('lessons.chords') }}"><span class="section-label">02 · Chord Library</span><h2>Twenty useful chord shapes</h2><p>Major, minor, seventh and suspended chords, including your original eight shapes.</p><span class="practice-link">Open the chord library →</span></a>
+  <a class="surface-card practice-card lesson-card" href="{{ url_for('lessons.strumming') }}"><span class="section-label">03 · Strumming</span><h2>Bring chords to life</h2><p>Six patterns, from steady downstrokes to muted backbeats and syncopation.</p><span class="practice-link">Find your rhythm →</span></a>
 </div>
+<section id="courses" class="practice-curriculum">
+  <h2 class="section-title">Build your practice</h2>
+  <p>Choose your level. Complete each exercise at your own pace; lesson completion is saved to your account.</p>
+  <nav class="practice-actions" aria-label="Difficulty levels">{% for level in ['Beginner','Intermediate','Advanced'] %}<a class="secondary-btn" href="#{{ level|lower }}">{{ level }}</a>{% endfor %}<a class="primary-btn" href="{{ url_for('lessons.songs') }}">Original song practice</a></nav>
+  {% for level in ['Beginner','Intermediate','Advanced'] %}
+  <h3 id="{{ level|lower }}" class="curriculum-level">{{ level }}</h3>
+  <div class="lesson-grid">{% for slug, course in courses.items() if course.difficulty == level %}<article class="surface-card practice-card"><p class="section-label">{{ course.category }} · {{ course.minutes }} minutes</p><h3>{{ course.title }}</h3><p>{{ course.exercise }}</p><a class="practice-link" href="{{ url_for('lessons.practice', slug=slug) }}">Open lesson →</a></article>{% endfor %}</div>
+  {% endfor %}
+</section>
 {% endblock %}

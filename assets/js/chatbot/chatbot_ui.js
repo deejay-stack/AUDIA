@@ -1,10 +1,11 @@
 // DOM behavior only: reuse the existing chat, message and suggestion templates.
-import { clone, field, icon, animate } from "../shared/shared.js";
+import { clone, field, icon } from "../shared/shared.js";
 
 export function createChatUI(host) {
   const toggle = host.querySelector('[data-action="chat"]');
   let panel;
   let typing;
+  let opened = false, motion;
 
   function scrollToLatestMessage() {
     const messages = field(panel, "messages");
@@ -32,21 +33,27 @@ export function createChatUI(host) {
         clone("message"),
         clone("chat-suggestions"),
       );
-      animate(panel);
-    } else {
-      panel.hidden = !panel.hidden;
     }
-    const open = !panel.hidden;
+    const open = opened = !opened;
+    motion?.cancel();
+    panel.hidden = false;
+    panel.inert = !open;
+    const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    motion = panel.animate(open ? [
+      { opacity: 0, transform: "translateY(14px) scale(.98)" }, { opacity: 1, transform: "none" },
+    ] : [{ opacity: 1, transform: "none" }, { opacity: 0, transform: "translateY(14px) scale(.98)" }],
+    { duration: reduced ? 0 : 180, easing: "ease-out" });
+    motion.finished.then(() => { if (!opened) panel.hidden = true; }).catch(() => {});
     toggle.setAttribute("aria-expanded", String(open));
     toggle.setAttribute(
       "aria-label",
-      open ? "Close customer support" : "Open customer support",
+      open ? "Close AUDI, Our AI Assistant" : "Ask AUDI, Our AI Assistant",
     );
     toggle.replaceChildren(icon(open ? "x" : "message-circle", open ? 20 : 21));
     if (open) {
       scrollToLatestMessage();
       field(panel, "chat-input").focus();
-    }
+    } else toggle.focus();
   }
 
   function setChatLoading(loading) {
@@ -77,15 +84,17 @@ export function createChatUI(host) {
       addMessage(message, "user");
     },
     addAssistantMessage: (message) => addMessage(message, "assistant"),
-    showError: (message) => addMessage(message, "assistant"),
+    showError: (message) => { const bubble = addMessage(message, "assistant"); bubble.classList.add("chatbot-message--error"); bubble.setAttribute("role", "alert"); },
     showTypingIndicator() {
       typing = addMessage("AUDI is typing…", "assistant");
       typing.setAttribute("role", "status");
+      typing.classList.add("chatbot-typing");
     },
     hideTypingIndicator() {
       typing?.remove();
       typing = null;
     },
     setChatLoading,
+    closeChat() { if (opened) toggleChat(); },
   };
 }

@@ -15,22 +15,15 @@ import {
   busy,
   formError,
   orderDetails,
+  poll,
 } from "../shared/shared.js";
 
 const labels = {
   overview: "Overview",
-  sales: "Sales directory",
+  sales: "Orders & payments",
   products: "Products",
   customers: "Customers",
   settings: "Settings",
-};
-const transitions = {
-  Pending: ["Processing", "Cancelled"],
-  Processing: ["Shipped", "Cancelled"],
-  Shipped: ["Delivered"],
-  Delivered: ["Refunded"],
-  Cancelled: [],
-  Refunded: [],
 };
 
 export function mountAdmin(page, app) {
@@ -60,9 +53,10 @@ export function mountAdmin(page, app) {
     ])
       text(row, key, sale[key]);
     text(row, "amount", peso(sale.amount));
+    if (!recent) text(row, "payment", `${sale.payment} · ${sale.payment_status}`);
     text(row, "status", sale.status);
     field(row, "status").className =
-      `order-status status-${sale.status.toLowerCase()}`;
+      `order-status status-${sale.status.toLowerCase().replaceAll(" ", "-")}`;
     return row;
   }
   function renderSales() {
@@ -371,15 +365,29 @@ export function mountAdmin(page, app) {
       }
     });
   }
-  function editOrder(order) {
-    const panel = orderDetails(order),
-      choices = transitions[order.status] || [];
-    if (!choices.length) return;
+  async function editOrder(order) {
+    try { order = (await api(`/orders/${order.id}`)).order; }
+    catch (error) { notice(error.message); return; }
+    if (!alive) return;
+    const panel = orderDetails(order, { live: false }),
+      choices = order.next_statuses || [];
+    const canCollect = order.payment === "Cash on delivery" && order.payment_status === "Pending";
+    if (!choices.length && !canCollect) return;
     const form = clone("order-status");
     field(panel, "dialog-body").append(form);
     form.elements.status.replaceChildren(
-      ...choices.map((status) => new Option(status, status)),
+      new Option(`Keep ${order.status}`, order.status),
+      ...choices.map((status) => new Option(status === "Confirmed" ? "Accept order (Confirmed)" : status === "Rejected" ? "Reject order" : status, status)),
     );
+    function paymentControls() {
+      const collecting = canCollect && form.elements.status.value === "Delivered";
+      field(form, "collection").hidden = !collecting;
+      form.elements.collection_confirmed.disabled = !collecting;
+      form.elements.payment_reference.disabled = !collecting;
+      field(form, "refund").hidden = !(order.payment_status === "Paid" && form.elements.status.value === "Refunded");
+    }
+    form.addEventListener("change", paymentControls);
+    paymentControls();
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
       if (form.querySelector("[type=submit]").disabled) return;
@@ -388,7 +396,14 @@ export function mountAdmin(page, app) {
       try {
         await api(`/admin/sales/${order.id}`, {
           method: "PATCH",
-          body: { status: form.elements.status.value },
+          body: {
+            status: form.elements.status.value, expected_status: order.status,
+            ...(form.elements.collection_confirmed.checked && !form.elements.collection_confirmed.disabled ? {
+              payment_status: "Paid", collection_confirmed: true,
+              payment_reference: form.elements.payment_reference.value,
+            } : {}),
+            refund_confirmed: form.elements.refund_confirmed.checked,
+          },
         });
         panel.close();
         notice("Order updated.");
@@ -405,7 +420,7 @@ export function mountAdmin(page, app) {
     if (!button) return;
     const action = button.dataset.action;
     if (labels[action]) navigate(action);
-    if (action === "store") app.navigate("storefront");
+    if (action === "store") app.navigate("landing");
     if (action === "admin-account") app.navigate("account");
     if (action === "logout") app.logout();
     if (action === "close-sidebar") closeSidebar();
@@ -538,10 +553,22 @@ export function mountAdmin(page, app) {
     })
     .catch(() => {});
   navigate("overview");
+  const stopPolling = poll(async () => {
+    if (!alive || !["overview", "sales"].includes(active)) return;
+    const view = active;
+    try {
+      const data = await api("/admin/sales");
+      if (!alive || view !== active) return;
+      if (JSON.stringify(data.sales) !== JSON.stringify(sales)) {
+        sales = data.sales; renderSales(); text(page, "order-count", sales.length);
+      }
+    } catch { /* Keep displayed records; manual navigation exposes request errors. */ }
+  });
   return {
     destroy() {
       alive = false;
       generation++;
+      stopPolling();
     },
   };
 }

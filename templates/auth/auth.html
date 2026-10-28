@@ -30,14 +30,13 @@
           class="auth__auth-title"
           data-field="auth-title"
         >
-          Welcome to AUDIA.
+          {{ 'Administrator sign in' if auth_mode == 'admin' else 'Customer sign in' }}
         </h1>
         <p
           class="auth__auth-subtitle"
           data-field="auth-subtitle"
         >
-          Sign in to continue as a customer or open the store administration
-          workspace.
+          {{ 'Use the authorized administrator account to manage the store.' if auth_mode == 'admin' else 'Use your customer account to shop and track your orders.' }}
         </p>
       </div>
       <!-- Component: auth roles | CSS: assets/css/auth/auth_roles.css -->

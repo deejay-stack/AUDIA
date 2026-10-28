@@ -16,26 +16,26 @@ use the same component name in each language.
 | Broken behavior | Start here | Then trace |
 | --- | --- | --- |
 | Catalog page missing or wrong template | `app.py`: `shop()` → `templates/catalog/catalog.html` | Matching catalog CSS/JS and labeled sections in `catalog.html` |
-| Products do not load | `assets/js/catalog/catalog.js`: `/products` request, `renderProducts()` | Network `/api/products` → `modules/search_filter/search_filter.py`: `products()` → `modules/catalog/catalog.py`: `products_data()` |
-| Name, description, price, stock or image missing | `templates/catalog/catalog.html` | `catalog.js`: `renderProducts()`; `Product.public()` in `modules/database/models.py` |
+| Products do not load | `assets/js/catalog/catalog.js`: `/products` request, `renderProducts()` | Network `/api/products` → `audia/routes/search_filter/search_filter.py`: `products()` → `audia/routes/catalog/catalog.py`: `products_data()` |
+| Name, description, price, stock or image missing | `templates/catalog/catalog.html` | `catalog.js`: `renderProducts()`; `Product.public()` in `audia/database/models.py` |
 | Add to Cart or quantity buttons fail | `assets/js/catalog/catalog.js`: `addToCart()`, `renderCart()`, `changeQuantity()` | `templates/catalog/catalog.html`; stock limits; shared cart storage |
-| Purchase/checkout fails | `templates/catalog/catalog.html`, `catalog.js`: `openCheckout()` | POST `/api/orders` → `modules/orders/orders.py`; inspect CSRF, request key, stock and order data |
+| Purchase/checkout fails | `templates/catalog/catalog.html`, `catalog.js`: `openCheckout()` | POST `/api/orders` → `audia/routes/orders/orders.py`; inspect CSRF, request key, stock and order data |
 | Search, type filtering or sorting fails | `assets/js/search_filter/search_filter.js`: `filterProducts()`, `handleAction()`, input/change listeners | `search_filter.html`, `search_filter.html`; server `products()` handles API query/type filtering |
 | Budget/skill Finder stops advancing or returns no results | `search_filter.js`: `renderFinder()`, `finishFinder()` | `search_filter.html`; POST `/api/finder` → `search_filter.py`: `finder()`; profile restoration |
 | Search/Finder layout broken | `assets/css/search_filter/search_filter.css` | Its matching component sheets plus shared input/button primitives; catalog includes these fragments |
 | Chat window does not open/send | `assets/js/chatbot/chatbot.js`: `initChatbot()` | `chatbot.html`, `chatbot_ui.js`, `chatbot_api.js`; shared startup calls the initializer |
-| Chat returns an error or wrong recommendation | POST `/api/chat` → `modules/chatbot/chatbot.py` | `modules/chatbot/ai/ai.py`: `ask_audia()`, `extract_product_filters()`, `retrieve_products_with_filters()`, `retrieve_documents()`, `enrich_documents_with_live_data()` |
+| Chat returns an error or wrong recommendation | POST `/api/chat` → `audia/routes/chatbot/chatbot.py` | `audia/services/ai/ai.py`: `ask_audia()`, `extract_product_filters()`, `retrieve_products_with_filters()`, `retrieve_documents()`, `enrich_documents_with_live_data()` |
 | Chat wrapping/size/busy controls broken | `assets/css/chatbot/chatbot.css` | Imports `chatbot_panel.css`, `chatbot_message.css` and `chatbot_suggestions.css`; shared base loads the entry |
-| Product knowledge not indexed | `modules/chatbot/ai/ai_rag_sync.py` | `build_product_document()`, `sync_products_to_rag()`, embeddings in `ai.py`; existing `sync-rag` CLI |
-| Tuner page or controls missing | `modules/tuner/tuner.py`, `templates/tuner/tuner.html` | `assets/js/tuner/tuner.js`: `mountTuner()`, `startTuner()`, `stopTuner()`, `renderPitch()` |
-| Wrong guitar note/flat/sharp indication | `assets/js/tuner/tuner_pitch.js` | `detectPitch()`, `describePitch()`, `PitchStabilizer`; run `node tests/tuner-pitch.cjs` |
+| Product knowledge not indexed | `audia/services/ai/ai_rag_sync.py` | `build_product_document()`, `sync_products_to_rag()`, embeddings in `ai.py`; existing `sync-rag` CLI |
+| Tuner page or controls missing | `audia/routes/tuner/tuner.py`, `templates/tuner/tuner.html` | `assets/js/tuner/tuner.js`: `mountTuner()`, `startTuner()`, `stopTuner()`, `renderPitch()` |
+| Wrong guitar note/flat/sharp indication | `assets/js/tuner/tuner_pitch.js` | `detectPitch()`, `describePitch()`, `PitchStabilizer`; compare the detected frequency against a known standard string |
 | Tuner microphone does not start/stop | `assets/js/tuner/tuner.js` | Secure context, permission, stream tracks/AudioContext and lifecycle handlers; no server audio upload |
-| Lesson page/link fails | `modules/lessons/lessons.py`: `lesson_page()` and page handlers | `templates/lessons/lessons.html` and named `lessons_*.html` subpages |
-| Missing/wrong chord fingers or diagram | `modules/lessons/lessons_data.py`: `CHORDS` | `lessons_chords.html`, `lessons_chord_detail.html`, `lessons_chord_diagram.html`: `chord_diagram()` |
-| Strumming beats/content wrong | `modules/lessons/lessons_data.py`: `STRUMMING_PATTERNS` | `templates/lessons/lessons_strumming.html` and `assets/css/lessons/lessons.css` |
+| Lesson page/link fails | `audia/routes/lessons/lessons.py`: `lesson_page()` and page handlers | `templates/lessons/lessons.html` and named `lessons_*.html` subpages |
+| Missing/wrong chord fingers or diagram | `audia/routes/lessons/lessons_data.py`: `CHORDS` | `lessons_chords.html`, `lessons_chord_detail.html`, `lessons_chord_diagram.html`: `chord_diagram()` |
+| Strumming beats/content wrong | `audia/routes/lessons/lessons_data.py`: `STRUMMING_PATTERNS` | `templates/lessons/lessons_strumming.html` and `assets/css/lessons/lessons.css` |
 | Multiple components lose theme/layout/navigation | `assets/js/shared/theme.js`, `shared/app.js`, `shared/shared.js` | `templates/shared/base.html`, `practice_base.html`, `practice_links.html`; shared CSS |
-| Login, profile, passwords or CSRF fail | `modules/auth/auth.py` | Auth/account templates/controllers; reset mail in `auth_mail.py`; shared session/API helpers |
-| Admin inventory, sales or order status fail | `modules/admin/admin.py` | `templates/admin/admin.html`, `assets/js/admin/admin.js`, `assets/css/admin/admin.css` |
+| Login, profile, passwords or CSRF fail | `audia/routes/auth/auth.py` | Auth/account templates/controllers; reset mail in `audia/services/mail.py`; shared session/API helpers |
+| Admin inventory, sales or order status fail | `audia/routes/admin/admin.py` | `templates/admin/admin.html`, `assets/js/admin/admin.js`, `assets/css/admin/admin.css` |
 
 The search field currently matches product names/brands. Type chips filter
 guitar category, sorting supports price/rating, and Finder handles budget and
@@ -51,15 +51,34 @@ This grouping preserves those existing controls and behaviors.
 4. For appearance problems, check the matching CSS and its load in shared base.
 5. For all components failing at startup, check `app.py`, package imports,
    the `.venv` interpreter and installed requirements.
-6. Run the relevant existing tests, then the full suite after repairing code.
+6. Verify the repaired workflow in the configured app, including invalid input and signed-out access. Use the recorded checks in [UPGRADE_NOTES.md](docs/UPGRADE_NOTES.md) as a guide. Tests were removed after verification as requested.
 
-```powershell
-.\.venv\Scripts\python.exe app.py
-.\.venv\Scripts\python.exe -m unittest discover -s tests -p 'test_*.py'
-node tests/tuner-pitch.cjs
-```
+## Commerce, session and practice updates
 
-Browser checks use `.venv/Scripts/python.exe tests/serve.py` with disposable
-data, followed by `node tests/browser.cjs`, `node tests/chatbot.cjs`, or
-`node tests/practice.cjs`. See [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md)
-for the full file map and unchanged routes.
+| Symptom | Inspect |
+| --- | --- |
+| COD order or payment selection fails | `assets/js/catalog/catalog.js` checkout payload/request key; `audia/routes/orders/orders.py` validates COD and locks stock. Preview methods cannot submit. |
+| Tracking is stale | `assets/js/shared/shared.js` `poll()`/`orderDetails()`; `assets/js/account/account.js`; `/api/orders`. Polling pauses while the document is hidden. |
+| Admin acceptance, collection or refund fails | `audia/services/orders.py`; expected status, allowed transitions, actual collection confirmation and receipt note. Collection requires Delivered. |
+| Login/logout redirects unexpectedly | Auth `current_session()`/`security()`/`logout()`; shared app revalidation, cross-tab event, BFCache reload and session-fetch error path. Do not store tokens in browser storage. |
+| Lesson completion fails | `/api/lessons/progress`, CSRF header, user-owned `LessonProgress`; `assets/js/lessons/lessons.js`. |
+| New tables are missing | Run `python -m flask --app app upgrade-db` with the project interpreter. It saves a private backup and creates only missing additive tables. |
+| Tuner targets the wrong string | Use manual target selection; `describeStringPitch()` compares to E2/A2/D3/G3/B3/E4. Both guitar types share these targets; electric mode changes sensitivity. |
+
+Current implementation/testing/cleanup details and remaining verification limits:
+[UPGRADE_NOTES.md](docs/UPGRADE_NOTES.md). Test suites and obsolete reports were
+removed after verification as requested. Do not use the removed historical hash
+contracts to evaluate intentional new feature code.
+
+
+## Strict customer/admin authentication
+
+- Customer portal: `/login` -> POST `/api/auth/login`; admin portal: `/admin/login` -> POST `/api/auth/admin/login`. Both call `login_for_role()` with a server-defined expected role.
+- Inspect `api_access_error()`, `require_user()` and `require_page()` for 401/403/redirect behavior. The security hook restores the database identity, compares the signed role binding, checks access, then enforces CSRF.
+- An admin cannot use customer login, shopping state or customer workspace pages. Admin order-detail inspection and shared profile/password/practice features remain intentional exceptions.
+- Inspect `reject_role_assignment()` for public/profile escalation rejection. Registration can only create customers.
+- Inspect `uq_users_single_admin` in `models.py` and `upgrade_database()` for the one-admin guard. Duplicate-admin legacy databases are refused without deactivation; identify the authorized account before making any manual changes.
+- Old session cookies intentionally require one new sign-in after deployment. Existing passwords are unchanged. No cookie/browser-storage edit can replace the stored account role.
+- Run `.venv\Scripts\python.exe -B -m unittest discover -s tests -v` for the retained security regressions. These use disposable SQLite and never modify the configured administrator.
+
+[SECURITY_REVIEW.md](docs/SECURITY_REVIEW.md) records all modified files and verified scenarios.

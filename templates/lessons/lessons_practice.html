@@ -1,0 +1,10 @@
+{% extends 'shared/practice_base.html' %}
+{% block practice_content %}
+<a class="practice-link" href="{{ url_for('lessons.index') }}#courses">← All lessons</a>
+<div class="practice-heading"><p class="section-label">{{ course.difficulty }} · {{ course.category }} · {{ course.minutes }} minutes</p><h1 class="section-title">{{ course.title }}</h1></div>
+<div class="lesson-grid">
+  <section class="surface-card practice-card"><h2>Work through it</h2><ol class="lesson-steps">{% for step in course.steps %}<li>{{ step }}</li>{% endfor %}</ol></section>
+  <section class="surface-card practice-card"><h2>Your practice exercise</h2><p>{{ course.exercise }}</p><h3>Chords in this lesson</h3><div class="practice-actions">{% for chord_slug in course.chords %}<a class="secondary-btn" href="{{ url_for('lessons.chord_detail', slug=chord_slug) }}">{{ chords[chord_slug].symbol }}</a>{% endfor %}</div><button class="primary-btn" data-action="complete-lesson" data-lesson-slug="{{ slug }}" aria-pressed="false" disabled>Loading progress…</button></section>
+</div>
+<nav class="practice-actions" aria-label="Lesson navigation">{% if previous %}<a class="secondary-btn" href="{{ url_for('lessons.practice', slug=previous) }}">← Previous lesson</a>{% endif %}{% if following %}<a class="primary-btn" href="{{ url_for('lessons.practice', slug=following) }}">Next lesson →</a>{% else %}<a class="primary-btn" href="{{ url_for('lessons.songs') }}">Try an original song →</a>{% endif %}</nav>
+{% endblock %}

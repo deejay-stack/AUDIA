@@ -15,6 +15,40 @@
   --mint: #22734d;
   --grid: rgba(112, 85, 155, 0.07);
   --shadow: 0 12px 40px -24px rgba(57, 33, 96, 0.3);
+  /* Shared semantic palette; keep the established violet/mint brand. */
+  --primary: #7143d6;
+  --primary-hover: #6333c5;
+  --on-primary: #ffffff;
+  --secondary: var(--surface);
+  --on-secondary: var(--text);
+  --background: var(--page);
+  --border: var(--line);
+  --success: #17603c;
+  --success-bg: #e8f5ee;
+  --warning: #805000;
+  --warning-bg: #fff3cf;
+  --error: #ad1c40;
+  --error-bg: #fdeaf0;
+  --info: #6240a6;
+  --info-bg: #f0eafa;
+  --space-1: .25rem;
+  --space-2: .5rem;
+  --space-3: .75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", Inter, ui-sans-serif, system-ui;
+  --text-xs: .75rem;
+  --text-sm: .875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --leading-body: 1.6;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
 }
 
 html.dark {
@@ -28,4 +62,15 @@ html.dark {
   --mint: #b8f5d0;
   --grid: rgba(197, 173, 235, 0.065);
   --shadow: 0 12px 40px -24px rgba(0, 0, 0, 0.65);
+  --primary: #b8f5d0;
+  --primary-hover: #d5ffe5;
+  --on-primary: #132b20;
+  --success: #b8f5d0;
+  --success-bg: #173529;
+  --warning: #ffd37c;
+  --warning-bg: #342912;
+  --error: #ffa6b6;
+  --error-bg: #391e2a;
+  --info: #d4baff;
+  --info-bg: #2b213e;
 }

@@ -2,6 +2,10 @@
      PURPOSE: Practice navigation strip structure. CSS: assets/css/shared/practice_links.css
      JS: assets/js/shared/app.js; assets/js/shared/shared.js; assets/js/shared/theme.js. Preserve IDs and data-action/data-field hooks. -->
 <nav class="shell practice-links__guitar-practice" aria-label="Guitar practice">
+  {% if g.user and g.user.role == 'customer' %}
+  <a href="{{ url_for('orders_page') }}">My Orders</a>
+  <a href="{{ url_for('shop') }}?cart=1">Cart <span data-cart-count aria-label="Items in cart">0</span></a>
+  {% endif %}
   <a class="practice-links__guitar-tuner" href="{{ url_for('tuner.index') }}">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 10v4m4-8v12m4-15v18m4-15v12m4-8v4"/></svg>
     Guitar Tuner

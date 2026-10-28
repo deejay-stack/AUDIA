@@ -11,6 +11,7 @@ async function requestJson(url, options = {}) {
     const response = await fetch(url, {
       ...options,
       credentials: "same-origin",
+      cache: "no-store",
       signal: controller.signal,
     });
     const value = await response.json().catch(() => null);

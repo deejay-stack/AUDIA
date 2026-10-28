@@ -90,7 +90,7 @@ Some HTML is a template that JavaScript fills with real data:
   [tuner.js](../assets/js/tuner/tuner.js). Ordinary headings and preparation
   instructions are written in `tuner.html`.
 - Lesson names, chord fingers, and strumming patterns come from
-  [lessons_data.py](../modules/lessons/lessons_data.py).
+  [lessons_data.py](../audia/routes/lessons/lessons_data.py).
 
 Keep IDs and `data-action` / `data-field` attributes when editing HTML; the
 existing JavaScript uses them to find controls and fill content.
@@ -102,13 +102,28 @@ beside the rule. Also check the selected theme, screen width, and component stat
 
 ## Check a change
 
-Run the Python checks from the project folder:
+Save and hard-refresh the configured app. Check both themes and narrow/wide windows,
+then use the browser's Styles panel to confirm the expected rule is applied.
+Keep API-related data hooks and keyboard focus visible. Automated test artifacts
+were removed after verification at the user's request; see
+[UPGRADE_NOTES.md](UPGRADE_NOTES.md) for the recorded results and limitations.
 
-```powershell
-.\.venv\Scripts\python.exe -m unittest discover -s tests -p 'test_*.py'
-```
+Checkout/payment cards and order timelines use `assets/css/shared/commerce.css`.
+The lesson controller now saves completion flags; curriculum content remains in
+`audia/routes/lessons/lessons_data.py`. Shared SVG/composition templates use shared
+styles directly; empty `components.css` and `icons.css` files were removed.
 
-The browser check `node tests/css-editing.cjs` verifies that editing the component
-rules above changes the actual screen in both themes at mobile and desktop
-widths. It uses Playwright and the disposable server from `tests/serve.py`; its
-sample CSS edits stay in memory and do not modify your files or real database.
+
+## Shared semantic tokens
+
+Use `assets/css/shared/theme.css` for `--primary`/`--on-primary`, secondary/background,
+surface/text/border, success/warning/error/info colors, `--space-*`, `--font-*`,
+`--text-*` and radius tokens. Light and dark themes keep separate readable color
+pairs. `--accent` remains the violet focus/link color; primary buttons use
+`--primary` (violet in light mode and mint in dark mode). Edit the pair together.
+
+`auth_roles.html` now contains real links between separate sign-in pages. Styling
+cannot grant a role. `access_denied.html` reuses the same shared card/button system.
+The security suite checks semantic text pairs at 4.5:1; actual rendered layouts
+and all device-specific focus behavior still need browser inspection. See
+[SECURITY_REVIEW.md](SECURITY_REVIEW.md).

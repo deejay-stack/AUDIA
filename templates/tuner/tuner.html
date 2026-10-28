@@ -11,6 +11,11 @@
 </div>
 <div class="tuner-layout">
   <section class="surface-card tuner-container" aria-label="Live guitar tuner">
+    <div class="tuner-settings">
+      <label>Guitar type<select id="tuner-instrument"><option value="acoustic">Acoustic guitar</option><option value="electric">Electric guitar · higher sensitivity</option></select></label>
+      <label>Target string<select id="tuner-target-string"><option value="auto">Automatic detection</option>{% for note in ['E2','A2','D3','G3','B3','E4'] %}<option>{{ note }}</option>{% endfor %}</select></label>
+    </div>
+    <p id="tuner-target" class="form-hint">Automatic standard-string detection</p>
     <p id="tuner-microphone" class="tuner-microphone" role="status">
       Microphone inactive
     </p>
@@ -59,9 +64,10 @@
         time, then pluck again.
       </p>
       <p>
-        Within ±5 cents is in tune. The note follows the nearest musical pitch;
-        check the string reference to make sure you reach the intended open
-        string.
+        Within ±5 cents of the target string is in tune. Choose a string manually
+        if the guitar is far out of tune. Both guitar types use E–A–D–G–B–E;
+        electric mode is more sensitive to quiet signals. Use a clean amplifier
+        near the microphone for a quiet electric guitar.
       </p>
       <a
         class="practice-link"

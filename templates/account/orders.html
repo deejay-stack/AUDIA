@@ -1,0 +1,17 @@
+<!-- Customer orders share the existing account header, cards and detail dialog. -->
+{% extends "shared/base.html" %}
+{% block content %}
+<div class="account-page account__account-page">
+  {% include 'account/account_header.html' %}
+  {% include 'shared/practice_links.html' %}
+  <main class="shell account-main">
+    <p class="section-label">Your AUDIA</p>
+    <h1 class="section-title">My Orders</h1>
+    <p class="form-hint">Review your purchases, payment status and delivery updates. Tracking refreshes automatically every 15 seconds while you are here.</p>
+    {% include 'account/account_orders.html' %}
+    <a class="primary-btn" href="{{ url_for('shop') }}">Continue shopping</a>
+  </main>
+  {% include 'chatbot/chatbot.html' %}
+</div>
+{% endblock %}
+{% block components %}{% include 'account/account_order_card.html' %}{% endblock %}

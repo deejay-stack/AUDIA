@@ -10,35 +10,36 @@
 }
 
 .status-delivered {
-  color: var(--mint);
+  color: var(--success);
+  background: var(--success-bg);
 }
 
 .status-cancelled {
-  color: rgb(190, 18, 60);
-  background: rgba(251, 113, 133, 0.1);
+  color: var(--error);
+  background: var(--error-bg);
 }
 
 .status-refunded {
-  color: rgb(190, 18, 60);
-  background: rgba(251, 113, 133, 0.1);
+  color: var(--error);
+  background: var(--error-bg);
 }
 
 /* Dark theme. */
 .dark .status-cancelled {
-  color: rgb(253, 164, 175);
+  color: var(--error);
 }
 
 /* Dark theme. */
 .dark .status-refunded {
-  color: rgb(253, 164, 175);
+  color: var(--error);
 }
 
 .status-pending {
-  color: rgb(161, 98, 7);
-  background: rgba(251, 191, 36, 0.1);
+  color: var(--warning);
+  background: var(--warning-bg);
 }
 
 /* Dark theme. */
 .dark .status-pending {
-  color: rgb(253, 230, 138);
+  color: var(--warning);
 }

@@ -5,8 +5,9 @@
         {% for note, frequency in [('E2', '82.41'), ('A2', '110.00'), ('D3',
         '146.83'), ('G3', '196.00'), ('B3', '246.94'), ('E4', '329.63')] %}
         <li data-tuning-note="{{ note }}">
+          <button type="button" class="tuner-string-button" data-string-target="{{ note }}" aria-label="Tune string {{ 7 - loop.index }} to {{ note }}">
           <span>String {{ 7 - loop.index }}</span><strong>{{ note }}</strong
-          ><span>{{ frequency }} Hz</span>
+          ><span>{{ frequency }} Hz</span></button>
         </li>
         {% endfor %}
       </ol>

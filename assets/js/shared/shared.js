@@ -24,7 +24,8 @@ export const peso = (value) =>
   new Intl.NumberFormat("en-PH", {
     style: "currency",
     currency: "PHP",
-    maximumFractionDigits: 0,
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
   }).format(value);
 
 // Web Animations and IntersectionObserver replace the former motion dependency.
@@ -142,6 +143,7 @@ export async function api(path, options = {}) {
       ...options,
       headers,
       credentials: "same-origin",
+      cache: "no-store",
       body:
         options.body === undefined ? undefined : JSON.stringify(options.body),
     });
@@ -151,6 +153,10 @@ export async function api(path, options = {}) {
     );
   }
   const data = await response.json().catch(() => ({}));
+  if (response.status === 403 && data.error?.startsWith("Your session has changed.") && !options._retried) {
+    await api("/auth/session");
+    return api(path, { ...options, _retried: true });
+  }
   if (!response.ok) {
     if (response.status === 401 && !path.startsWith("/auth/")) {
       window.dispatchEvent(new Event("audia:unauthorized"));
@@ -210,6 +216,34 @@ export function writeCart(items) {
     key,
     JSON.stringify(items.map(({ id, qty }) => ({ id, qty }))),
   );
+  window.dispatchEvent(new Event("audia:cart-changed"));
+}
+
+// Poll visible pages without overlapping requests; stop on navigation or disposal.
+export function poll(task, interval = 15000) {
+  let timer, stopped = false, running = false;
+  async function tick() {
+    clearTimeout(timer);
+    if (stopped || running) return;
+    if (!document.hidden) {
+      running = true;
+      try { await task(); } catch { /* The view owns its error feedback. */ }
+      finally { running = false; }
+    }
+    if (!stopped) timer = setTimeout(tick, interval);
+  }
+  const refresh = () => { if (!document.hidden) void tick(); };
+  document.addEventListener("visibilitychange", refresh);
+  window.addEventListener("focus", refresh);
+  function stop() {
+    stopped = true; clearTimeout(timer);
+    document.removeEventListener("visibilitychange", refresh);
+    window.removeEventListener("focus", refresh);
+    window.removeEventListener("pagehide", stop);
+  }
+  window.addEventListener("pagehide", stop);
+  timer = setTimeout(tick, interval);
+  return stop;
 }
 
 // UI
@@ -274,26 +308,79 @@ export function empty(node, message) {
   node.replaceChildren(text);
 }
 
-export function orderDetails(order) {
+export function orderDetails(order, { live = true } = {}) {
   const panel = dialog(`Order ${order.id}`, "order-detail");
-  for (const key of [
-    "status",
-    "customer",
-    "address",
-    "phone",
-    "payment",
-    "date",
-  ]) {
-    field(panel, key).textContent = order[key];
+  function render(order) {
+    field(panel, "status").dataset.status = order.status;
+    for (const key of [
+      "status",
+      "customer",
+      "address",
+      "phone",
+      "payment",
+      "date",
+      "payment_status",
+    ]) {
+      field(panel, key).textContent = order[key];
+    }
+    field(panel, "total").textContent = new Intl.NumberFormat("en-PH", {
+      style: "currency",
+      currency: "PHP",
+    }).format(order.amount);
+    field(panel, "items").replaceChildren();
+    for (const item of order.items) {
+      const row = document.createElement("li");
+      row.textContent = `${item.name} × ${item.quantity} · ${peso(item.price)} each · ${peso(item.price * item.quantity)}`;
+      field(panel, "items").append(row);
+    }
+    text(panel, "subtotal", peso(order.subtotal ?? order.amount));
+    text(panel, "shipping", peso(order.shipping_fee ?? 0));
+    renderTracking(field(panel, "tracking"), order);
+    field(panel, "history").replaceChildren(...(order.history || []).map((event) => {
+      const row = document.createElement("li");
+      row.textContent = `${new Date(event.at).toLocaleString()} · ${event.kind === "payment" ? event.note : event.status}`;
+      return row;
+    }));
+    text(panel, "tracking-update", !order.history?.length ? "Earlier status timestamps were not recorded for this order." : live ? "Updates automatically while this window is open." : "Status shown when opened. Reopen to review later changes.");
   }
-  field(panel, "total").textContent = new Intl.NumberFormat("en-PH", {
-    style: "currency",
-    currency: "PHP",
-  }).format(order.amount);
-  for (const item of order.items) {
-    const row = document.createElement("li");
-    row.textContent = `${item.name} × ${item.quantity}`;
-    field(panel, "items").append(row);
+  render(order);
+  if (live) {
+    const stop = poll(async () => {
+      if (!panel.isConnected) return stop();
+      try {
+        const data = await api(`/orders/${encodeURIComponent(order.id)}`);
+        if (panel.isConnected) render(data.order);
+      } catch (error) { if (panel.isConnected) text(panel, "tracking-update", `Unable to refresh: ${error.message}`); }
+    });
+    panel.addEventListener("close", stop, { once: true });
   }
   return panel;
+}
+
+export function renderTracking(node, order) {
+  const stages = ["Pending", "Confirmed", "Processing", "Shipped", "Out for Delivery", "Delivered"];
+  const current = stages.indexOf(order.status);
+  node.replaceChildren(...stages.map((status, index) => {
+    const item = document.createElement("li");
+    item.textContent = status === "Pending" ? "Pending confirmation" : status;
+    item.dataset.state = current === index ? "current" : current > index ? "done" : "waiting";
+    if (current === index) item.setAttribute("aria-current", "step");
+    const recorded = (order.history || []).find((event) => event.kind === "status" && event.status === status);
+    if (recorded) {
+      const time = document.createElement("small");
+      time.textContent = new Date(recorded.at).toLocaleString();
+      item.append(time);
+    }
+    return item;
+  }));
+  const placed = document.createElement("li");
+  placed.textContent = `Order placed · ${new Date(order.created_at).toLocaleString()}`;
+  placed.dataset.state = "done";
+  node.prepend(placed);
+  if (current < 0) {
+    const terminal = document.createElement("li");
+    terminal.textContent = `Order ${order.status.toLowerCase()}`;
+    terminal.dataset.state = "current";
+    node.append(terminal);
+  }
 }

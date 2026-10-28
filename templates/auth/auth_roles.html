@@ -1,13 +1,14 @@
-<!-- MODULE: AUTH | COMPONENT: Customer/admin role switcher
-     PURPOSE: Customer/admin role switcher structure. CSS: assets/css/auth/auth_roles.css
+<!-- MODULE: AUTH | COMPONENT: Separate customer/admin sign-in navigation
+     PURPOSE: Link to distinct server-defined login pages. CSS: assets/css/auth/auth_roles.css
      JS: assets/js/auth/auth.js. Preserve IDs and data-action/data-field hooks. -->
-<div
+<nav aria-label="Sign-in portal"
         data-field="roles"
         class="auth-roles__roles"
       >
-        <button
-          class="auth-roles__role-customer"
+        <a href="{{ url_for('login_page') }}"
+          class="{{ 'auth-roles__option--selected' if auth_mode != 'admin' else 'auth-roles__option' }}"
           data-action="role-customer"
+          {% if auth_mode != 'admin' %}aria-current="page"{% endif %}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -26,10 +27,11 @@
             <path d="M20 21a8 8 0 0 0-16 0"></path>
           </svg>
           Customer
-        </button>
-        <button
-          class="auth-roles__role-admin"
+        </a>
+        <a href="{{ url_for('admin_login_page') }}"
+          class="{{ 'auth-roles__option--selected' if auth_mode == 'admin' else 'auth-roles__option' }}"
           data-action="role-admin"
+          {% if auth_mode == 'admin' %}aria-current="page"{% endif %}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -50,5 +52,5 @@
             <path d="m9 12 2 2 4-4"></path>
           </svg>
           Administrator
-        </button>
-      </div>
+        </a>
+      </nav>

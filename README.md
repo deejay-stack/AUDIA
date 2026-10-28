@@ -24,14 +24,14 @@ PostgreSQL is the application database. Configuration is loaded from the root `.
 
 1. Create a dedicated PostgreSQL database and application user.
 2. Copy `.env.example` to `.env` and set `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER` and `DB_PASSWORD`. Alternatively, leave those credentials unset and use `DATABASE_URL`. The separate fields safely handle special characters in passwords. Set `SECRET_KEY` to a long random secret, or leave it empty to use the persistent local key in `instance/`. Keep `.env` private.
-3. Initialize the schema and catalog, then create an administrator:
+3. Initialize the schema and catalog, then provision the first administrator only if none exists:
 
 ```powershell
 python -m flask --app app init-db
 python -m flask --app app create-admin
 ```
 
-The administrator command prompts for an email, name, and password. Public registration always creates a customer and redirects to `/login` with a success message. Creating an account does not sign the customer in; they must enter their password on the login page. `init-db` creates missing tables and seeds an empty catalog; it does not delete existing records or overwrite products. Future changes to an existing schema should use explicit database migrations rather than dropping tables.
+The administrator command prompts for an email, name, and password and refuses a second administrator. The existing administrator is preserved by the single-admin database constraint. Public registration always creates a customer and redirects to `/login` with a success message. Creating an account does not sign the customer in; they must enter their password on the login page. `init-db` creates missing tables and seeds an empty catalog; it does not delete existing records or overwrite products. Future changes to an existing schema should use explicit database migrations rather than dropping tables.
 
 For an HTTPS deployment, set `COOKIE_SECURE=true` and set `APP_URL` to the public origin. `FLASK_DEBUG` defaults to off. Use a production WSGI server for deployment.
 
@@ -81,25 +81,20 @@ to find a component, change its appearance, and understand dynamic text.
 Use [FRONTEND_COMPONENT_MAP.md](docs/FRONTEND_COMPONENT_MAP.md) for the current
 HTML/CSS/JavaScript file pairs and student debugging steps. The frontend now uses
 traditional component CSS, with no Tailwind utilities or build dependency.
-See [FRONTEND_REFACTOR_REPORT.md](docs/FRONTEND_REFACTOR_REPORT.md) for the full
-file inventory and verification results.
+See [UPGRADE_NOTES.md](docs/UPGRADE_NOTES.md) for the current features and verification results.
 
-See [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) for the full before/after trees,
-every file move, the route comparison, and a guide to editing each feature.
+See [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) for the current folder tree,
+backend responsibilities and a guide to editing each feature.
 Use [DEBUGGING_GUIDE.md](DEBUGGING_GUIDE.md) to find the files/functions for a broken component.
 
 ```text
 app.py                       Flask app, settings, @app.route pages, CLI, entry point
-modules/
-  auth/                      Authentication, request security, password reset mail
-  catalog/                   Products, availability, saved instruments, support
-  search_filter/             Product search, type filters and budget/skill Finder
-  orders/                    Customer checkout and order access
-  admin/                     Protected store operations and reporting
-  chatbot/                   AUDIA Assistant API; Gemini/RAG in chatbot/ai/
-  tuner/                     Existing guitar tuner page
-  lessons/                   Existing lesson routes and static chord/pattern data
+audia/
+  routes/                    Feature blueprints; auth keeps existing security hooks
+    auth/ catalog/ search_filter/ orders/ admin/ chatbot/ tuner/ lessons/
+  services/                  AI/RAG in ai/, reset mail in mail.py, order transitions in orders.py
   database/                  Shared connection lifecycle, initialization, and models
+  config/                    Existing database URL builder
 database/catalog.json        School-project catalog seed
 templates/
   shared/                    Shared document, icons, dialogs, and practice layout
@@ -116,10 +111,7 @@ assets/
   css/                       Shared styles and feature-specific folders
   js/                        Shared startup/helpers/theme and feature controllers
   images/                    Uploaded guitar and studio photos, plus source notes
-tests/                       API/security and browser integration checks
-docs/components/             Current component moves, route snapshots and complete source
-docs/architecture/           Historical first-refactor snapshots
-docs/archive/                Original guitar-practice implementation snapshot
+docs/                        Current editing guides, component map and upgrade notes
 instance/                    Ignored local secret key and development mail outbox
 .env.example                 PostgreSQL, session, and mail configuration example
 requirements.txt             Python runtime dependencies
@@ -143,7 +135,7 @@ For a product card, edit the PRODUCT CARD section in `templates/catalog/catalog.
 
 `templates/shared/components.html`, `assets/css/shared/shared.css`, and `assets/js/shared/shared.js` contain elements used by several pages. `assets/js/shared/app.js` starts the current page and handles navigation, sign-out, and theme controls. `assets/js/shared/theme.js` applies the saved theme before the page appears. Flask still serves assets at `/static/`. Templates do not contain inline CSS; shared animation helpers apply movement styles at runtime.
 
-Each backend feature has a folder under `modules/`, with a small `__init__.py` exposing its existing blueprint or services. Forms and interactive controls call the unchanged `/api/...` endpoints. To change account creation, edit `modules/auth/auth.py`; to change an existing entry page's template, edit `app.py`. Database credentials stay in `.env`. Test-only app construction is in `tests/support.py`.
+Each backend feature has a folder under `audia/routes/`, with a small `__init__.py` exposing its existing blueprint or services. Forms and interactive controls call the unchanged `/api/...` endpoints. To change account creation, edit `audia/routes/auth/auth.py`; to change an existing entry page's template, edit `app.py`. Database credentials stay in `.env`. Shared order transitions and payment auditing are in `audia/services/orders.py`.
 
 ## Chatbot: where to edit
 
@@ -157,40 +149,66 @@ All chatbot JavaScript is grouped under `assets/js/chatbot/` (Flask serves the `
 | `chatbot_ui.js` | DOM only. `addUserMessage()` and `addAssistantMessage()` display safe text; `showTypingIndicator()`, `hideTypingIndicator()` and `setChatLoading()` control the waiting state; `showError()` displays a friendly error. |
 | `chatbot.js` | `initChatbot()` connects existing buttons and the form. Its `sendMessage()` validates input, prevents duplicate submissions, calls the API and restores the form in `finally`. |
 
-`assets/js/shared/app.js` calls `initChatbot()` after the page starts. The controller obtains `/api/auth/session`, then sends `{ "message": "..." }` to the existing `/api/chat` route with same-origin cookies, a CSRF header and UTF-8 JSON. Flask's existing `modules/chatbot/chatbot.py` calls `modules/chatbot/ai/ai.py`; only the returned `answer` appears in the chat. Sources, SQL filters and internal errors are not rendered. Gemini credentials stay on the server. CSRF tokens stay in JavaScript memory.
+`assets/js/shared/app.js` calls `initChatbot()` after the page starts. The controller obtains `/api/auth/session`, then sends `{ "message": "..." }` to the existing `/api/chat` route with same-origin cookies, a CSRF header and UTF-8 JSON. Flask's existing `audia/routes/chatbot/chatbot.py` calls `audia/services/ai/ai.py`; only the returned `answer` appears in the chat. Sources, SQL filters and internal errors are not rendered. Gemini credentials stay on the server. CSRF tokens stay in JavaScript memory.
 
-To test manually, run the configured Flask app, open `/`, and click **Open customer support**. Try **Hello**, **I am a beginner and I want a black acoustic guitar with a cutaway.**, **I am a beginner looking for an acoustic guitar under ₱10,000. What do you recommend?**, and **How much is ACOUSTIC_001 and is it still available?** Send with the button or Enter. Check the immediate message, typing indicator, answer and enabled input afterward. Blank messages should do nothing. Repeat in `/shop` after signing in. Close and reopen chat while waiting to check that the conversation is preserved. Use the browser's offline mode after opening chat to check the friendly error, then restore connectivity and send again.
+To test manually, run the configured Flask app, open `/`, and click **Ask AUDI, Our AI Assistant**. Try **Hello**, **I am a beginner and I want a black acoustic guitar with a cutaway.**, **I am a beginner looking for an acoustic guitar under ₱10,000. What do you recommend?**, and **How much is ACOUSTIC_001 and is it still available?** Send with the button or Enter. Check the immediate message, typing indicator, answer and enabled input afterward. Blank messages should do nothing. Repeat in `/shop` after signing in. Close and reopen chat while waiting to check that the conversation is preserved. Use the browser's offline mode after opening chat to check the friendly error, then restore connectivity and send again.
 
-For deterministic browser integration checks, run `python tests/serve.py` and then `node tests/chatbot.cjs`. These checks mock AI responses and cover guests, signed-in users, Unicode, safe rendering, failures and the single CSRF retry. To run the four real prompts against your configured backend in PowerShell (this calls the AI service):
+## Orders, payments and learning updates
 
-```powershell
-$env:AUDIA_BASE_URL = 'http://127.0.0.1:5000'
-$env:AUDIA_CHAT_LIVE = '1'
-node tests/chatbot.cjs
-Remove-Item Env:AUDIA_CHAT_LIVE
-Remove-Item Env:AUDIA_BASE_URL
-```
+Authenticated customers can open **My Orders** at `/orders` from the shared navigation.
+Order lists and open tracking details refresh every 15 seconds while visible.
+Admin **Orders & payments** supports acceptance, rejection, processing, dispatch,
+delivery and recorded offline collection/refunds. COD stays pending until cash
+collection is explicitly confirmed after delivery. Card/e-wallet cards are previews
+only: they collect no payment details and cannot place a paid order.
 
-## Verification
+The tuner uses real microphone input, with acoustic/electric sensitivity and
+manual/automatic standard-string targets. Learning now includes 20 chord shapes,
+nine courses, six strumming patterns, three original song studies and account-backed
+lesson completion.
 
-Server tests create and delete their own database; they never use `DATABASE_URL` from `.env`:
-
-```powershell
-python -m unittest discover -s tests -v
-```
-
-For browser tests, run the disposable fixture server in one terminal:
+For an existing database, apply the additive migration before starting this version:
 
 ```powershell
-python tests/serve.py
+.venv\Scripts\python.exe -m flask --app app upgrade-db
 ```
 
-In a second terminal, with Playwright and Chromium available:
+The configured database in this workspace has already been upgraded. The command
+is repeatable and saves a private pre-upgrade row snapshot under `instance/backups/`.
+It creates three tables without altering existing records. Fresh databases continue
+to use `init-db`. Restart an already-running server to load Python changes.
+
+See [UPGRADE_NOTES.md](docs/UPGRADE_NOTES.md) for features, bug fixes, database changes,
+verification results and remaining limits. Tests and generated test artifacts were
+removed after verification as requested. Desktop/mobile browser inspection was
+blocked by the computer-use URL check; physical microphone and live external-service
+checks remain manual. Existing startup commands and dependencies are unchanged.
+
+## Separate login portals and security regressions
+
+Customers sign in at `/login` using `/api/auth/login`. The administrator signs in
+at `/admin/login` using `/api/auth/admin/login`. Cross-role credentials are rejected
+with the same generic error. The legacy `/login?role=admin` link redirects to the
+administrator page. The server checks database identity and role on every protected
+request; changing the URL, form fields or browser storage cannot change privileges.
+
+Exactly one existing administrator is retained. Public registration is customer-only,
+role assignment through public/profile forms is rejected, and a partial unique
+index blocks a second administrator. `upgrade-db` applies this guard on other existing
+checkouts after a private backup and refuses duplicate-admin databases without
+changing accounts. It has already been applied to this workspace.
+
+Restart the server after updating. Existing cookies must sign in once through the
+correct portal; existing passwords and account records were not changed. Shared
+profile/password and practice features remain available, while customer-only shopping
+state and admin management are separated.
+
+This request adds a retained, self-contained security regression suite (the earlier
+commerce test artifacts remain removed):
 
 ```powershell
-node tests/browser.cjs
+.venv\Scripts\python.exe -B -m unittest discover -s tests -v
 ```
 
-`PLAYWRIGHT_MODULE` can point to an existing Playwright installation. `AUDIA_BASE_URL` defaults to the fixture at `http://127.0.0.1:5056`. Start a fresh fixture server for each full run. Set `SCREENSHOT_DIR=test-results` to save UI captures. Fixture credentials exist only in the disposable test database.
-
-The tests cover authentication, authorization, CSRF, reset links, session revocation, inventory, idempotent checkout, order ownership, reporting, exports, and the customer/admin browser flows. Core API integration cases have also been checked against PostgreSQL using disposable schemas, with no test users or orders retained in the application tables. Production deployment and load testing are separate from these local checks.
+See [SECURITY_REVIEW.md](docs/SECURITY_REVIEW.md) for every modified file, the test
+matrix, shared color/spacing tokens, recovery checkpoints and verification limits.

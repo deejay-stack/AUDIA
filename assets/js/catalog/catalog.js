@@ -102,9 +102,11 @@ export function mountStore(page, app) {
     writeCart(cart);
     const count = cart.reduce((sum, item) => sum + item.qty, 0);
     const button = $(page, '[data-action="cart"]');
+    button.setAttribute("aria-label", `Open cart, ${count} items`);
     let badge = $(button, "span");
     if (count && !badge) {
       badge = clone("cart-badge");
+      badge.setAttribute("aria-live", "polite");
       button.append(badge);
     }
     if (badge) {
@@ -141,16 +143,28 @@ export function mountStore(page, app) {
   function openCart() {
     if (!cartPanel) {
       cartPanel = clone("cart");
+      cartPanel.setAttribute("role", "dialog");
+      cartPanel.setAttribute("aria-modal", "true");
+      cartPanel.setAttribute("aria-label", "Your shopping cart");
       page.append(cartPanel);
       animate(cartPanel);
+      cartPanel.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") { event.preventDefault(); closeCart(); return; }
+        if (event.key !== "Tab") return;
+        const focusable = [...cartPanel.querySelectorAll('button:not(:disabled),a[href],input:not(:disabled)')].filter((node) => node.getClientRects().length);
+        const first = focusable[0], last = focusable.at(-1);
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+      });
     }
     renderCart();
+    cartPanel.querySelector('[data-action="close-cart"]').focus();
   }
   function addToCart(product) {
     if (!product || product.stock < 1)
       return notice("This item is currently out of stock.");
     if (
-      (cart.find((item) => item.id === product.id)?.qty || 0) >= product.stock
+      (cart.find((item) => item.id === product.id)?.qty || 0) >= Math.min(product.stock, 99)
     )
       return notice("You have reached the available stock for this item.");
     cart = cart.some((item) => item.id === product.id)
@@ -159,10 +173,11 @@ export function mountStore(page, app) {
         )
       : [...cart, { ...product, qty: 1 }];
     openCart();
+    notice(`${product.name} added to your cart.`);
   }
   function changeQuantity(id, delta) {
     const item = cart.find((item) => item.id === id);
-    if (delta > 0 && item && item.qty >= item.stock)
+    if (delta > 0 && item && item.qty >= Math.min(item.stock, 99))
       return notice("You have reached the available stock for this item.");
     cart = cart
       .map((item) =>
@@ -175,6 +190,7 @@ export function mountStore(page, app) {
     const closing = cartPanel;
     cartPanel = null;
     dismiss(closing, "cart");
+    $(page, '[data-action="cart"]').focus();
   }
 
   function openCheckout() {
@@ -186,45 +202,68 @@ export function mountStore(page, app) {
     if (!cart.length) return;
     const panel = dialog("Your next chapter starts here.", "checkout");
     const form = panel.querySelector("form");
+    let submitting = false;
     form.elements.address.value = app.user.address || "";
     form.elements.phone.value = app.user.phone || "";
+    const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+    text(form, "checkout-subtotal", peso(subtotal));
+    text(form, "checkout-shipping", peso(0));
+    field(form, "checkout-items").replaceChildren(...cart.map((item) => {
+      const row = document.createElement("li");
+      row.textContent = `${item.name} × ${item.qty} · ${peso(item.price * item.qty)}`;
+      return row;
+    }));
+    form.addEventListener("change", () => {
+      const preview = form.elements.payment_method.value !== "cod";
+      field(form, "payment-preview").hidden = !preview;
+      form.querySelector('[type="submit"]').disabled = preview || submitting;
+    });
     field(form, "checkout-total").textContent = peso(
       cart.reduce((sum, item) => sum + item.price * item.qty, 0),
     );
-    const requestKey = crypto.randomUUID();
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
       if (form.querySelector("[type=submit]").disabled) return;
+      if (submitting) return;
+      if (!form.reportValidity()) return;
+      if (form.elements.payment_method.value !== "cod") return;
+      submitting = true;
       busy(form, true);
       formError(form, "");
+      const body = {
+        address: form.elements.address.value.trim(), phone: form.elements.phone.value.trim(),
+        payment_method: form.elements.payment_method.value,
+        items: cart.map((item) => ({ product_id: item.id, quantity: item.qty })),
+      };
+      // Keep the same key after a lost response or reopening the same checkout.
+      const signature = JSON.stringify(body);
+      let attempt;
+      try { attempt = JSON.parse(sessionStorage.getItem("audia-checkout")); } catch { /* New attempt below. */ }
+      if (attempt?.signature !== signature) attempt = { signature, key: crypto.randomUUID() };
+      sessionStorage.setItem("audia-checkout", JSON.stringify(attempt));
       try {
         const data = await api("/orders", {
           method: "POST",
-          body: {
-            request_key: requestKey,
-            address: form.elements.address.value,
-            phone: form.elements.phone.value,
-            items: cart.map((item) => ({
-              product_id: item.id,
-              quantity: item.qty,
-            })),
-          },
+          body: { ...body, request_key: attempt.key },
         });
         for (const item of cart) {
           const product = products.find((p) => p.id === item.id);
           if (product) product.stock -= item.qty;
         }
         cart = [];
+        sessionStorage.removeItem("audia-checkout");
         renderCart();
         renderProducts();
         panel.close();
         closeCart();
         orderDetails(data.order);
-        notice("Your order has been placed.");
+        notice("Order placed. Pay on delivery. Follow updates in My Orders.");
       } catch (error) {
         formError(form, error.message);
       } finally {
+        submitting = false;
         busy(form, false, "Place order");
+        form.querySelector('[type="submit"]').disabled = form.elements.payment_method.value !== "cod";
       }
     });
   }
@@ -450,12 +489,13 @@ export function mountStore(page, app) {
       cart = storedCart
         .map((item) => {
           const product = products.find((p) => p.id === item.id);
-          return product ? { ...product, qty: item.qty } : null;
+          return product && product.stock > 0 ? { ...product, qty: Math.min(item.qty, product.stock, 99) } : null;
         })
         .filter(Boolean);
       field(page, "no-products").textContent = "No guitar matches that search.";
       renderProducts();
       renderCart();
+      if (new URLSearchParams(location.search).get("cart") === "1") openCart();
       if (app.openFinder) {
         app.openFinder = false;
         searchFilter.openFinder();

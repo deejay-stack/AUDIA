@@ -1,28 +1,9 @@
 /* ==================================================
-   COMPONENT: CUSTOMER/ADMIN ROLE SWITCHER
+   COMPONENT: SEPARATE CUSTOMER/ADMIN SIGN-IN NAVIGATION
    HTML FILE: templates/auth/auth_roles.html
-   PURPOSE: Customer/admin role switcher presentation; preserve existing colors, states and breakpoints.
+   PURPOSE: Consistent accessible links between the two server-defined portals.
    JS: assets/js/auth/auth.js.
    ================================================== */
-
-.auth-roles__role-admin {
-  color: var(--muted);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  border-radius: 0.75rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  font-size: 0.75rem;
-  line-height: 1rem;
-  font-weight: 600;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
 
 .auth-roles__option {
   color: var(--muted);
@@ -48,7 +29,7 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0px, 1fr));
   border-radius: 1rem;
-  background-color: rgb(244, 244, 245);
+  background-color: var(--soft);
   padding: 0.375rem;
 }
 
@@ -58,7 +39,7 @@
   justify-content: center;
   gap: 0.5rem;
   border-radius: 0.75rem;
-  background-color: rgb(255, 255, 255);
+  background-color: var(--surface);
   padding-left: 1rem;
   padding-right: 1rem;
   padding-top: 0.75rem;
@@ -66,28 +47,7 @@
   font-size: 0.75rem;
   line-height: 1rem;
   font-weight: 600;
-  color: rgb(9, 9, 11);
-  box-shadow: 0 0 #0000, 0 0 #0000, 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-.auth-roles__role-customer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  border-radius: 0.75rem;
-  background-color: rgb(255, 255, 255);
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  font-size: 0.75rem;
-  line-height: 1rem;
-  font-weight: 600;
-  color: rgb(9, 9, 11);
+  color: var(--text);
   box-shadow: 0 0 #0000, 0 0 #0000, 0 1px 2px 0 rgb(0 0 0 / 0.05);
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -96,17 +56,14 @@
 
 /* Dark theme. */
 .dark .auth-roles__roles {
-  background-color: rgba(255, 255, 255, 0.055);
+  background-color: var(--soft);
 }
 
 /* Dark theme. */
 .dark .auth-roles__option--selected {
-  background-color: rgb(39, 39, 42);
-  color: rgb(255, 255, 255);
+  background-color: var(--surface);
+  color: var(--text);
 }
 
-/* Dark theme. */
-.dark .auth-roles__role-customer {
-  background-color: rgb(39, 39, 42);
-  color: rgb(255, 255, 255);
-}
+.auth-roles__roles a { min-width: 0; min-height: 44px; text-align: center; text-decoration: none; }
+@media (max-width: 359px) { .auth-roles__roles a { padding-inline: var(--space-2); gap: var(--space-1); } .auth-roles__roles svg { flex-shrink: 0; width: 14px; } }

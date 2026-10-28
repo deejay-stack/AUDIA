@@ -1,0 +1,7 @@
+{% extends 'shared/practice_base.html' %}
+{% block practice_content %}
+<a class="practice-link" href="{{ url_for('lessons.index') }}">← All lessons</a>
+<div class="practice-heading"><p class="section-label">Original AUDIA exercises</p><h1 class="section-title">Song practice</h1><p>Three original eight-bar studies. These lyrics and chord exercises were written for AUDIA. Repeat slowly, then add your own melody.</p></div>
+<div class="lesson-grid">{% for song in songs %}<article class="surface-card practice-card"><p class="section-label">{{ song.difficulty }} · {{ song.meter }} · {{ song.bpm }} BPM</p><h2>{{ song.title }}</h2><ol class="song-bars" aria-label="One chord per bar">{% for chord in song.progression %}<li><small>Bar {{ loop.index }}</small><strong>{{ chord }}</strong></li>{% endfor %}</ol><p>{{ song.practice }}</p>{% for line in song.lyrics %}<p class="song-lyric">{{ line }}</p>{% endfor %}</article>{% endfor %}</div>
+<div class="practice-actions"><a class="secondary-btn" href="{{ url_for('lessons.strumming') }}">Strumming patterns</a><a class="primary-btn" href="{{ url_for('lessons.chords') }}">Chord library</a></div>
+{% endblock %}

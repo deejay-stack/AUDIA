@@ -7,11 +7,16 @@
   <header class="practice-header shell">
     <a class="audia-mark" href="{{ url_for('index') }}" aria-label="AUDIA home"><span class="mark-a">A</span>UDI<span class="mark-a">A</span></a>
     <nav class="practice-nav" aria-label="Main navigation">
+      {% if g.user.role == 'customer' %}
       <a href="{{ url_for('shop') }}">Store</a>
       <a href="{{ url_for('shop') }}#shop">Products</a>
+      {% else %}<a href="{{ url_for('dashboard') }}">Admin Dashboard</a>{% endif %}
       <a href="{{ url_for('tuner.index') }}" {% if practice_area == 'tuner' %}aria-current="page"{% endif %}>Guitar Tuner</a>
       <a href="{{ url_for('lessons.index') }}" {% if practice_area == 'lessons' %}aria-current="page"{% endif %}>Guitar Lessons</a>
       <a href="{{ url_for('account_page') }}">Account</a>
+      {% if g.user.role == 'customer' %}<a href="{{ url_for('orders_page') }}">My Orders</a>
+      <a href="{{ url_for('shop') }}?cart=1">Cart <span data-cart-count>0</span></a>
+      {% endif %}
     </nav>
     <button class="icon-btn" data-action="theme" aria-label="Change theme"></button>
   </header>

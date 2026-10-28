@@ -1,12 +1,7 @@
 import { $, field, icon, api } from "../shared/shared.js";
 
-const selectedRole =
-  "auth-roles__option--selected";
-const plainRole =
-  "auth-roles__option";
-
 export function mountAuth(page, app, initialRole) {
-  let role = initialRole === "admin" ? "admin" : "customer";
+  const role = initialRole === "admin" ? "admin" : "customer";
   let mode =
     initialRole === "reset"
       ? "reset"
@@ -16,14 +11,14 @@ export function mountAuth(page, app, initialRole) {
   let loading = false,
     alive = true;
   const titles = {
-    login: "Welcome to AUDIA.",
+    login: role === "admin" ? "Administrator sign in" : "Customer sign in",
     register: "Find your people. Find your sound.",
     forgot: "Let’s get you back in.",
     reset: "A fresh start.",
   };
   const subtitles = {
     login:
-      "Sign in to your account or open the store administration workspace.",
+      role === "admin" ? "Use the authorized administrator account to manage the store." : "Use your customer account to shop and track your orders.",
     register:
       "Create your account to save instruments, place orders, and keep track of your gear.",
     forgot:
@@ -65,11 +60,6 @@ export function mountAuth(page, app, initialRole) {
     field(page, "password").autocomplete =
       mode === "login" ? "current-password" : "new-password";
     field(page, "password-hint").hidden = !["register", "reset"].includes(mode);
-    for (const option of ["customer", "admin"]) {
-      const button = $(page, `[data-action="role-${option}"]`);
-      button.className = role === option ? selectedRole : plainRole;
-      button.setAttribute("aria-pressed", String(role === option));
-    }
     labels.login = role === "admin" ? "Open dashboard" : "Sign in";
     const submit = field(page, "login-submit");
     submit.disabled = loading;
@@ -91,18 +81,12 @@ export function mountAuth(page, app, initialRole) {
       app.navigate(app.user ? "storefront" : "landing");
     }
     if (loading) return;
-    if (action === "role-customer" || action === "role-admin") {
-      role = action.slice(5);
-      error("");
-      render();
-    }
     if (action === "register") {
-      role = "customer";
       app.navigate("auth", "register");
     }
     if (action === "forgot") change("forgot");
     if (action === "back-login") {
-      if (mode === "register") app.navigate("auth");
+      if (["register", "reset"].includes(mode)) app.navigate("auth", role);
       else change("login");
     }
     if (action === "password") {
@@ -133,7 +117,7 @@ export function mountAuth(page, app, initialRole) {
     const submitted = mode;
     try {
       const paths = {
-        login: "login",
+        login: role === "admin" ? "admin/login" : "login",
         register: "register",
         forgot: "forgot-password",
         reset: "reset-password",
@@ -159,11 +143,15 @@ export function mountAuth(page, app, initialRole) {
         field(page, "password").value = "";
         field(page, "confirm").value = "";
         app.navigate("auth");
-      } else if (data.user) app.login(data.user);
-      else {
+      } else if (data.user) {
+        if (data.user.role !== role) throw new Error("Incorrect email or password.");
+        app.login(data.user);
+      } else {
         if (submitted === "reset") {
           app.resetToken = "";
-          change("login");
+          sessionStorage.setItem("audia-auth-message", data.message);
+          app.navigate("auth", data.login_role === "admin" ? "admin" : "customer");
+          return;
         }
         success(data.message);
       }
