@@ -244,8 +244,8 @@ export function mountAdmin(page, app) {
   }
   function closeSidebar() {
     const sidebar = $(page, "aside");
-    sidebar.classList.add("-translate-x-full");
-    sidebar.classList.remove("translate-x-0");
+    sidebar.classList.add("is-sidebar-closed");
+    sidebar.classList.remove("is-sidebar-open");
     if (backdrop) {
       dismiss(backdrop);
       backdrop = null;
@@ -263,7 +263,7 @@ export function mountAdmin(page, app) {
     $$(page, "aside nav button").forEach((button) => {
       const selected = button.dataset.action === next;
       button.setAttribute("aria-current", selected ? "page" : "false");
-      button.className = `flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition ${selected ? "bg-zinc-950 text-white dark:bg-acid dark:text-ink" : "text-zinc-500 hover:bg-zinc-100 dark:hover:bg-white/5"}`;
+      button.className = selected ? "admin-sidebar__link--selected" : "admin-sidebar__link";
     });
     closeSidebar();
     animate(main.firstElementChild);
@@ -411,8 +411,8 @@ export function mountAdmin(page, app) {
     if (action === "close-sidebar") closeSidebar();
     if (action === "sidebar") {
       const sidebar = $(page, "aside");
-      sidebar.classList.remove("-translate-x-full");
-      sidebar.classList.add("translate-x-0");
+      sidebar.classList.remove("is-sidebar-closed");
+      sidebar.classList.add("is-sidebar-open");
       if (!backdrop) {
         backdrop = clone("sidebar-backdrop");
         page.prepend(backdrop);

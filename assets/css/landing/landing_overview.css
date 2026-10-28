@@ -1,0 +1,55 @@
+/* ==================================================
+   COMPONENT: LANDING OVERVIEW
+   HTML FILE: templates/landing/landing_overview.html
+   PURPOSE: Landing overview presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/shared/app.js (navigation/theme); assets/js/shared/shared.js (reveals).
+   ================================================== */
+
+.landing-about {
+  border-block: 1px solid var(--line);
+  padding-block: 80px;
+  background: var(--surface);
+}
+
+.landing-features {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0px, 1fr));
+  gap: 30px;
+}
+
+.landing-features article {
+  border-top: 1px solid var(--line);
+  padding-top: 26px;
+}
+
+.landing-step {
+  color: var(--accent);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+}
+
+.landing-features h3 {
+  margin-top: 20px;
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.landing-features p {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.85;
+}
+
+/* Screen size or accessibility preference: (max-width: 767px). */
+@media (max-width: 767px) {
+  .landing-about {
+    padding-block: 54px;
+  }
+
+  .landing-features {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}

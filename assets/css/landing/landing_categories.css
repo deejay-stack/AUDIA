@@ -1,0 +1,138 @@
+/* ==================================================
+   COMPONENT: LANDING CATEGORIES
+   HTML FILE: templates/landing/landing_categories.html
+   PURPOSE: Landing categories presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/shared/app.js (navigation/theme); assets/js/shared/shared.js (reveals).
+   ================================================== */
+
+.landing-collections {
+  padding-block: 90px;
+}
+
+.landing-collection-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0px, 1fr));
+  gap: 20px;
+}
+
+.landing-collection {
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  text-align: left;
+  background: var(--surface);
+  transition: border-color 0.2s;
+}
+
+.landing-collection:hover {
+  border-color: var(--accent);
+}
+
+.landing-collection-photo {
+  position: relative;
+  display: block;
+  height: 280px;
+  overflow: hidden;
+  background: rgb(23, 20, 27);
+}
+
+.landing-collection-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0px;
+  background: linear-gradient(transparent 45%, rgba(0, 0, 0, 0.867));
+  pointer-events: none;
+}
+
+.landing-collection-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.landing-collection[data-category="Electric"] img {
+  object-position: 66% center;
+}
+
+.landing-collection[data-category="Classical"] img {
+  object-position: 35% center;
+}
+
+.landing-collection[data-category="Bass"] img {
+  object-position: left center;
+}
+
+.landing-collection-label {
+  position: absolute;
+  z-index: 1;
+  bottom: 22px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: rgb(255, 255, 255);
+}
+
+.landing-collection-label strong {
+  font-size: 23px;
+  letter-spacing: -0.035em;
+}
+
+.landing-collection-label > span {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.376);
+  border-radius: 7px;
+}
+
+.landing-collection-copy {
+  display: block;
+  padding: 22px 20px;
+}
+
+.landing-collection-copy strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.landing-collection-copy > span {
+  display: block;
+  margin-top: 10px;
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+
+/* Screen size or accessibility preference: (max-width: 1023px). */
+@media (max-width: 1023px) {
+  .landing-collection-grid {
+    grid-template-columns: repeat(2, minmax(0px, 1fr));
+  }
+
+  .landing-collection-photo {
+    height: 290px;
+  }
+}
+
+/* Screen size or accessibility preference: (max-width: 767px). */
+@media (max-width: 767px) {
+  .landing-collections {
+    padding-block: 54px;
+  }
+}
+
+/* Screen size or accessibility preference: (max-width: 479px). */
+@media (max-width: 479px) {
+  .landing-collection-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .landing-collection-photo {
+    height: 270px;
+  }
+}

@@ -1,0 +1,124 @@
+<!-- MODULE: ADMIN | COMPONENT: Overview dashboard
+     PURPOSE: Overview dashboard structure. CSS: assets/css/admin/admin_overview.css
+     JS: assets/js/admin/admin.js. Preserve IDs and data-action/data-field hooks. -->
+<template id="overview-template">
+  <div>
+    <div class="admin-section-heading">
+      <div>
+        <p class="admin-overview__today" data-field="today"></p>
+        <h2
+          class="admin-overview__admin-greeting"
+          data-field="admin-greeting"
+        >
+          Welcome back.
+        </h2>
+      </div>
+      <button class="primary-btn" data-action="add-product">
+        <span aria-hidden="true">+</span> Add product
+      </button>
+    </div>
+    <div class="stats-grid admin-overview__stats-grid">
+      <div class="stat-card surface-card admin-overview__stat-card">
+        <div class="stat-glyph" aria-hidden="true">₱</div>
+        <p class="admin-overview__delivered-revenue">Delivered revenue</p>
+        <p
+          class="admin-overview__gross-revenue"
+          data-field="gross_revenue"
+        >
+          —
+        </p>
+      </div>
+      <div class="stat-card surface-card admin-overview__stat-card">
+        <div class="stat-glyph" aria-hidden="true">↗</div>
+        <p class="admin-overview__total-orders">Total orders</p>
+        <p
+          class="admin-overview__total-orders-total-orders"
+          data-field="total_orders"
+        >
+          —
+        </p>
+      </div>
+      <div class="stat-card surface-card admin-overview__stat-card">
+        <div class="stat-glyph" aria-hidden="true">◎</div>
+        <p class="admin-overview__new-customers">New customers</p>
+        <p
+          class="admin-overview__new-customers-new-customers"
+          data-field="new_customers"
+        >
+          —
+        </p>
+      </div>
+      <div class="stat-card surface-card admin-overview__stat-card">
+        <div class="stat-glyph" aria-hidden="true">◇</div>
+        <p class="admin-overview__low-stock-items">Low stock items</p>
+        <p
+          class="admin-overview__low-stock-items-low-stock-items"
+          data-field="low_stock_items"
+        >
+          —
+        </p>
+      </div>
+    </div>
+    <div class="report-grid admin-overview__report-grid">
+      <section class="surface-card revenue-chart admin-overview__surface-card">
+        <div class="admin-section-heading">
+          <div>
+            <h3 class="admin-overview__revenue-performance">
+              Revenue performance
+            </h3>
+            <p class="admin-overview__delivered-orders-in-the-selected">
+              Delivered orders in the selected period
+            </p>
+          </div>
+          <label class="input-shell"
+            ><select data-field="report-period" aria-label="Reporting period">
+              <option value="week">Last 7 days</option>
+              <option value="month">Last 30 days</option>
+            </select></label
+          >
+        </div>
+        <div class="revenue-plot" data-field="revenue-chart"></div>
+      </section>
+      <section class="surface-card admin-overview__surface-card-revenue-performance-delivered-orders-in">
+        <h3 class="admin-overview__sales-by-category">Sales by category</h3>
+        <p class="admin-overview__delivered-revenue-sales-by-category-delivered-revenue">Delivered revenue</p>
+        <div class="category-report" data-field="category-report"></div>
+      </section>
+    </div>
+    <div class="surface-card admin-overview__surface-card-welcome-back-add-product-delivered">
+      <div
+        class="admin-overview__surface-card-div"
+      >
+        <div>
+          <h3 class="admin-overview__recent-sales">Recent sales</h3>
+          <p class="admin-overview__latest-completed-and-active-orders">
+            Latest completed and active orders
+          </p>
+        </div>
+        <button class="admin-overview__sales" data-action="sales">
+          View all
+        </button>
+      </div>
+      <div class="admin-overview__surface-card-div-recent-sales-latest-completed-and">
+        <table class="admin-overview__surface-card-table">
+          <thead>
+            <tr class="admin-overview__surface-card-tr">
+              <th class="admin-overview__surface-card-th">Order</th>
+              <th class="admin-overview__surface-card-th">Customer</th>
+              <th class="admin-overview__surface-card-th">Product</th>
+              <th class="admin-overview__surface-card-th">Status</th>
+              <th class="admin-overview__surface-card-th-order-customer-product-status-total">Total</th>
+            </tr>
+          </thead>
+          <tbody
+            data-field="sales-rows"
+            class="admin-overview__sales-rows"
+          ></tbody>
+        </table>
+        <p class="empty-state" data-field="sales-empty" hidden>
+          No orders yet. New orders will appear here.
+        </p>
+      </div>
+    </div>
+  </div>
+</template>

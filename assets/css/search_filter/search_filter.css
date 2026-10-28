@@ -1,57 +1,448 @@
-/* Search/filter and budget/skill Finder component. */
+/* ==================================================
+   COMPONENT: SEARCH FILTER
+   HTML FILE: templates/search_filter/search_filter.html
+   PURPOSE: Search filter presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/search_filter/search_filter.js.
+   ================================================== */
 
-.finder-banner {
-  border: 1px solid #56416e;
+/* SECTION: CHECK */
+
+/* ==================================================
+   COMPONENT: SEARCH FILTER CHECK
+   HTML FILE: templates/search_filter/search_filter.html
+   PURPOSE: Search filter check presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/search_filter/search_filter.js.
+   ================================================== */
+
+.float-right {
+  float: right;
+}
+
+/* SECTION: FINDER */
+
+/* ==================================================
+   COMPONENT: BUDGET AND SKILL FINDER DIALOG
+   HTML FILE: templates/search_filter/search_filter.html
+   PURPOSE: Budget and skill Finder dialog presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/search_filter/search_filter.js.
+   ================================================== */
+
+.search-filter-finder__four-quick-questions {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.search-filter-finder__budget-div {
+  color: var(--muted);
+  margin-top: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.search-filter-finder__finder-template-div {
+  position: fixed;
+  inset: 0px;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}
+
+.search-filter-finder__close-finder {
+  position: absolute;
+  inset: 0px;
+  background-color: rgba(0, 0, 0, 0.65);
+  backdrop-filter: none;
+}
+
+.search-filter-finder__finder-modal {
+  position: relative;
+  width: 100%;
+  max-width: 42rem;
+  overflow: hidden;
+  box-shadow:
+    0 0 #0000,
+    0 0 #0000,
+    0 25px 50px -12px rgb(0 0 0 / 0.25);
+  background: var(--surface);
+  color: var(--text);
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+
+.search-filter-finder__budget-value {
+  margin-bottom: 1.75rem;
+  text-align: center;
+  font-family: "Space Grotesk", Inter, ui-sans-serif, system-ui;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  font-weight: 600;
+}
+
+.search-filter-finder__progress {
+  margin-bottom: 2rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.search-filter-finder__budget {
+  margin-top: 2.5rem;
+}
+
+.search-filter-finder__finder-next {
+  margin-top: 2.5rem;
+  width: 100%;
+}
+
+.search-filter-finder__question-title {
+  margin-top: 0.75rem;
+  font-family: "Space Grotesk", Inter, ui-sans-serif, system-ui;
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 600;
+}
+
+.search-filter-finder__options {
+  margin-top: 2.25rem;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.search-filter-finder__finder-modal-div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom-width: 1px;
+  border-color: rgb(228, 228, 231);
+  padding: 1.5rem;
+}
+
+.search-filter-finder__finder-modal-div-audia-guitar-finder-four-quick {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.search-filter-finder__progress-span {
+  height: 0.25rem;
+  flex: 1 1 0%;
+  border-radius: 9999px;
+  background-color: rgb(9, 9, 11);
+}
+
+.search-filter-finder__progress-span-span {
+  height: 0.25rem;
+  flex: 1 1 0%;
+  border-radius: 9999px;
+  background-color: rgb(228, 228, 231);
+}
+
+.search-filter-progress {
+  height: 0.25rem;
+  flex: 1 1 0%;
+  border-radius: 9999px;
+  background-color: rgb(228, 228, 231);
+}
+
+.search-filter-progress--complete {
+  height: 0.25rem;
+  flex: 1 1 0%;
+  border-radius: 9999px;
+  background-color: rgb(9, 9, 11);
+}
+
+.search-filter-finder__budget-input {
+  width: 100%;
+}
+
+.search-filter-finder__finder-body {
+  padding: 1.75rem;
+}
+
+.search-filter-finder__audia-guitar-finder {
+  font-family: "Space Grotesk", Inter, ui-sans-serif, system-ui;
+  font-weight: 600;
+}
+
+/* Dark theme. */
+.dark .search-filter-finder__finder-modal {
+  background: var(--surface);
+  border-color: var(--line);
+  background-color: rgb(23, 21, 30);
+}
+
+/* Dark theme. */
+.dark .search-filter-finder__finder-modal-div {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Dark theme. */
+.dark .search-filter-finder__progress-span {
+  background-color: rgb(184, 245, 208);
+}
+
+/* Dark theme. */
+.dark .search-filter-progress--complete {
+  background-color: rgb(184, 245, 208);
+}
+
+/* Dark theme. */
+.dark .search-filter-finder__progress-span-span {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Dark theme. */
+.dark .search-filter-progress {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Screen size or accessibility preference: (min-width: 640px). */
+@media (min-width: 640px) {
+  .search-filter-finder__options {
+    grid-template-columns: repeat(2, minmax(0px, 1fr));
+  }
+
+  .search-filter-finder__finder-body {
+    padding: 2.5rem;
+  }
+}
+
+/* Screen size or accessibility preference: (prefers-reduced-motion: reduce). */
+@media (prefers-reduced-motion: reduce) {
+  .search-filter-finder__finder-modal[data-motion-state] {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
+.search-filter-finder-banner__finder-banner .search-filter-finder__budget-div {
+  color: rgb(185, 174, 197);
+}
+
+.search-filter-finder-banner__finder-banner
+  .search-filter-finder__four-quick-questions {
+  color: rgb(185, 174, 197);
+}
+
+/* Screen size or accessibility preference: (max-width: 639px). */
+@media (max-width: 639px) {
+  .search-filter-finder-banner__finder-banner
+    > .search-filter-finder__finder-modal {
+    gap: 32px;
+  }
+}
+
+/* SECTION: FINDER BANNER */
+
+/* ==================================================
+   COMPONENT: SEARCH FILTER FINDER BANNER
+   HTML FILE: templates/search_filter/search_filter.html
+   PURPOSE: Search filter finder banner presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/search_filter/search_filter.js.
+   ================================================== */
+
+.search-filter-finder-banner__type {
+  color: rgb(185, 174, 197);
+}
+
+.search-filter-finder-banner__genre {
+  color: rgb(185, 174, 197);
+}
+
+.search-filter-finder-banner__experience {
+  color: rgb(185, 174, 197);
+}
+
+.search-filter-finder-banner__example-profile {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: rgb(185, 174, 197);
+}
+
+.search-filter-finder-banner__budget {
+  color: rgb(185, 174, 197);
+}
+
+.search-filter-finder-banner__finder-banner-div {
+  position: absolute;
+  right: -7rem;
+  top: -7rem;
+  height: 20rem;
+  width: 20rem;
+  border-radius: 9999px;
+  background-color: rgba(139, 92, 246, 0.25);
+  filter: none;
+}
+
+.search-filter-finder-banner__finder-banner {
+  position: relative;
+  overflow: hidden;
+  padding-left: 1.75rem;
+  padding-right: 1.75rem;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  color: rgb(255, 255, 255);
+  border: 1px solid rgb(86, 65, 110);
   border-radius: 12px;
   background:
-    radial-gradient(ellipse at 95% 0%, #7444a640, transparent 65%), #18121f;
+    radial-gradient(at 95% 0%, rgba(116, 68, 166, 0.25), transparent 65%),
+    rgb(24, 18, 31);
 }
 
-.dark .finder-banner {
-  background:
-    radial-gradient(ellipse at 95% 0%, #7444a640, transparent 65%), #18121f;
+.search-filter-finder-banner__finder-banner-div-guitar-finder-four-questions-a {
+  position: relative;
+  display: grid;
+  align-items: center;
+  gap: 3rem;
 }
 
-.finder-banner::before {
-  content: "";
-  pointer-events: none;
-  position: absolute;
-  inset: 0;
-  opacity: 0.5;
-  background-image:
-    linear-gradient(#d5b5ff0c 1px, transparent 1px),
-    linear-gradient(90deg, #d5b5ff0c 1px, transparent 1px);
-  background-size: 48px 48px;
-}
-
-.finder-banner h2 {
+.search-filter-finder-banner__four-questions-a-much-better {
+  margin-top: 1rem;
+  font-family: "Space Grotesk", Inter, ui-sans-serif, system-ui;
+  line-height: 1.25;
+  font-weight: 600;
   font-size: clamp(2.1rem, 4.2vw, 3.6rem);
   letter-spacing: -0.055em;
 }
 
-.finder-banner .text-zinc-500,
-.finder-banner .text-zinc-400 {
-  color: #b9aec5;
+.search-filter-finder-banner__choose-your-budget-experience-preferred {
+  margin-top: 1.25rem;
+  max-width: 36rem;
+  line-height: 1.75rem;
+  color: rgb(185, 174, 197);
 }
 
-.finder-banner .primary-btn {
-  background: #b8f5d0;
-  color: #132b20;
+.search-filter-finder-banner__finder-profile-div {
+  margin-top: 1.5rem;
 }
 
-.finder-banner .primary-btn:hover {
-  background: #d5ffe5;
+.search-filter-finder-banner__finder {
+  margin-top: 2rem;
+  background: rgb(184, 245, 208);
+  color: rgb(19, 43, 32);
 }
 
-.finder-profile {
+.search-filter-finder-banner__finder-profile-div-budget-10k-20k-experience-beginner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.search-filter-finder-banner__finder-profile-div
+  > :not([hidden])
+  ~ :not([hidden]) {
+  border-top-width: 1px;
+  border-bottom-width: 0px;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.search-filter-finder-banner__finder-profile {
+  border-width: 1px;
+  background-color: rgba(255, 255, 255, 0.055);
+  padding: 1.5rem;
+  backdrop-filter: none;
   position: relative;
   border-radius: 10px;
-  border-color: #b696de33;
-  box-shadow: 0 24px 45px #00000030;
+  border-color: rgba(182, 150, 222, 0.2);
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 24px 45px;
   transform: rotate(2deg);
 }
 
-.finder-profile::before {
+.search-filter-finder-banner__shell {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+.search-filter-finder-banner__guitar-finder {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: rgb(184, 245, 208);
+}
+
+.search-filter-finder-banner__10k-20k {
+  font-weight: 500;
+}
+
+.search-filter-finder-banner__beginner {
+  font-weight: 500;
+}
+
+.search-filter-finder-banner__electric {
+  font-weight: 500;
+}
+
+.search-filter-finder-banner__rock {
+  font-weight: 500;
+}
+
+/* Dark theme. */
+.dark .search-filter-finder-banner__finder-banner {
+  background:
+    radial-gradient(at 95% 0%, rgba(116, 68, 166, 0.25), transparent 65%),
+    rgb(24, 18, 31);
+}
+
+/* Screen size or accessibility preference: (min-width: 640px). */
+@media (min-width: 640px) {
+  .search-filter-finder-banner__finder-banner {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  .search-filter-finder-banner__shell {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+  }
+
+  .search-filter-finder-banner__four-questions-a-much-better {
+    line-height: 1;
+  }
+}
+
+/* Screen size or accessibility preference: (min-width: 1024px). */
+@media (min-width: 1024px) {
+  .search-filter-finder-banner__finder-banner-div-guitar-finder-four-questions-a {
+    grid-template-columns: 1fr 0.72fr;
+  }
+
+  .search-filter-finder-banner__finder-banner {
+    padding-left: 5rem;
+    padding-right: 5rem;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+}
+
+.search-filter-finder-banner__finder-banner::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0px;
+  opacity: 0.5;
+  background-image:
+    linear-gradient(rgba(213, 181, 255, 0.047) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(213, 181, 255, 0.047) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.search-filter-finder-banner__finder-banner .primary-btn:hover {
+  background: rgb(213, 255, 229);
+}
+
+.search-filter-finder-banner__finder-profile::before {
   content: "";
   position: absolute;
   width: 7px;
@@ -59,31 +450,407 @@
   top: 26px;
   right: 26px;
   border-radius: 50%;
-  background: #b8f5d0;
+  background: rgb(184, 245, 208);
   box-shadow:
-    -13px 0 #b696de77,
-    -26px 0 #b696de33;
+    rgba(182, 150, 222, 0.467) -13px 0px,
+    rgba(182, 150, 222, 0.2) -26px 0px;
 }
 
-/* Finder */
-.finder-modal {
-  max-height: calc(100dvh - 32px);
-  overflow-y: auto;
-  border: 1px solid var(--line);
-  border-radius: 14px;
-}
-
+/* Screen size or accessibility preference: (max-width: 639px). */
 @media (max-width: 639px) {
-  .finder-banner {
+  .search-filter-finder-banner__finder-banner {
     padding: 36px 24px;
   }
-  .finder-banner > .relative {
+
+  .search-filter-finder-banner__finder-banner
+    > .search-filter-finder-banner__finder-banner {
     gap: 32px;
   }
-  .finder-profile {
+
+  .search-filter-finder-banner__finder-banner-div-guitar-finder-four-questions-a {
+    gap: 32px;
+  }
+
+  .search-filter-finder-banner__finder-profile {
     transform: none;
   }
-  .storefront main > section:has(.finder-banner) {
+}
+
+.search-filter-finder-banner__finder-banner .input-shell {
+  color: rgb(185, 174, 197);
+}
+
+.search-filter-finder-banner__finder-banner .filter-chip {
+  color: rgb(185, 174, 197);
+}
+
+/* SECTION: FINDER MATCH */
+
+/* ==================================================
+   COMPONENT: SEARCH FILTER FINDER MATCH
+   HTML FILE: templates/search_filter/search_filter.html
+   PURPOSE: Search filter finder match presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/search_filter/search_filter.js.
+   ================================================== */
+
+.search-filter-finder-match__category {
+  color: var(--muted);
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.search-filter-finder-match__rank {
+  position: absolute;
+  left: -0.5rem;
+  top: -0.5rem;
+  display: grid;
+  height: 1.5rem;
+  width: 1.5rem;
+  place-items: center;
+  border-radius: 9999px;
+  background-color: rgb(9, 9, 11);
+  font-size: 10px;
+  font-weight: 700;
+  color: rgb(255, 255, 255);
+}
+
+.search-filter-finder-match__finder-match-template-div-1-electric-001-electric-beginner {
+  position: relative;
+}
+
+.search-filter-finder-match__price {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+}
+
+.search-filter-finder-match__finder-match-template-div {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 1rem;
+  border-width: 1px;
+  border-color: rgb(228, 228, 231);
+  padding: 0.75rem;
+}
+
+.search-filter-finder-match__add-match {
+  display: grid;
+  height: 2.5rem;
+  width: 2.5rem;
+  place-items: center;
+  border-radius: 9999px;
+  background-color: rgb(9, 9, 11);
+  color: rgb(255, 255, 255);
+}
+
+.search-filter-finder-match__image {
+  height: 5rem;
+  width: 4rem;
+  border-radius: 0.75rem;
+  object-fit: cover;
+}
+
+.search-filter-finder-match__finder-match-template-div-1-electric-001-electric-beginner-template-div-div {
+  min-width: 0px;
+  flex: 1 1 0%;
+}
+
+.search-filter-finder-match__name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+}
+
+/* Dark theme. */
+.dark .search-filter-finder-match__finder-match-template-div {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Dark theme. */
+.dark .search-filter-finder-match__add-match {
+  background-color: rgb(184, 245, 208);
+  color: rgb(13, 12, 18);
+}
+
+/* Dark theme. */
+.dark .search-filter-finder-match__rank {
+  background-color: rgb(184, 245, 208);
+  color: rgb(13, 12, 18);
+}
+
+.search-filter-finder-banner__finder-banner
+  .search-filter-finder-match__category {
+  color: rgb(185, 174, 197);
+}
+
+/* Screen size or accessibility preference: (max-width: 639px). */
+@media (max-width: 639px) {
+  .search-filter-finder-banner__finder-banner
+    > .search-filter-finder-match__finder-match-template-div-1-electric-001-electric-beginner {
+    gap: 32px;
+  }
+}
+
+/* SECTION: FINDER OPTION */
+
+/* ==================================================
+   COMPONENT: SEARCH FILTER FINDER OPTION
+   HTML FILE: templates/search_filter/search_filter.html
+   PURPOSE: Search filter finder option presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/search_filter/search_filter.js.
+   ================================================== */
+
+.search-filter-finder-option__finder-option {
+  border-radius: 1rem;
+  border-width: 1px;
+  border-color: rgb(9, 9, 11);
+  background-color: rgb(9, 9, 11);
+  padding: 1.25rem;
+  text-align: left;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: rgb(255, 255, 255);
+  transition-property:
+    color, background-color, border-color, text-decoration-color, fill, stroke,
+    opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.search-filter-option {
+  border-radius: 1rem;
+  border-width: 1px;
+  border-color: rgb(228, 228, 231);
+  padding: 1.25rem;
+  text-align: left;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  transition-property:
+    color, background-color, border-color, text-decoration-color, fill, stroke,
+    opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.search-filter-option--selected {
+  border-radius: 1rem;
+  border-width: 1px;
+  border-color: rgb(9, 9, 11);
+  background-color: rgb(9, 9, 11);
+  padding: 1.25rem;
+  text-align: left;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: rgb(255, 255, 255);
+  transition-property:
+    color, background-color, border-color, text-decoration-color, fill, stroke,
+    opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.search-filter-option:hover {
+  border-color: rgb(161, 161, 170);
+}
+
+/* Dark theme. */
+.dark .search-filter-finder-option__finder-option {
+  border-color: rgb(184, 245, 208);
+  background-color: rgba(184, 245, 208, 0.1);
+  color: rgb(184, 245, 208);
+}
+
+/* Dark theme. */
+.dark .search-filter-option--selected {
+  border-color: rgb(184, 245, 208);
+  background-color: rgba(184, 245, 208, 0.1);
+  color: rgb(184, 245, 208);
+}
+
+/* Dark theme. */
+.dark .search-filter-option {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* SECTION: FINDER RESULTS */
+
+/* ==================================================
+   COMPONENT: SEARCH FILTER FINDER RESULTS
+   HTML FILE: templates/search_filter/search_filter.html
+   PURPOSE: Search filter finder results presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/search_filter/search_filter.js.
+   ================================================== */
+
+.search-filter-finder-results__your-closest-matches {
+  margin-top: 0.75rem;
+  font-family: "Space Grotesk", Inter, ui-sans-serif, system-ui;
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 600;
+}
+
+.search-filter-finder-results__finder-restart {
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+.search-filter-finder-results__matches {
+  margin-top: 1.75rem;
+}
+
+.search-filter-finder-results__matches > :not([hidden]) ~ :not([hidden]) {
+  margin-top: 0.75rem;
+  margin-bottom: 0px;
+}
+
+.search-filter-finder-results__finder-results {
+  padding: 1.75rem;
+}
+
+/* Screen size or accessibility preference: (min-width: 640px). */
+@media (min-width: 640px) {
+  .search-filter-finder-results__finder-results {
+    padding: 2.5rem;
+  }
+}
+
+/* SECTION: SEARCH */
+
+/* ==================================================
+   COMPONENT: PRODUCT SEARCH
+   HTML FILE: templates/search_filter/search_filter.html
+   PURPOSE: Product search presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/search_filter/search_filter.js.
+   ================================================== */
+
+.search-filter-search__search {
+  width: 100%;
+  background-color: transparent;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  outline: transparent solid 2px;
+  outline-offset: 2px;
+}
+
+.search-filter-search__input-shell {
+  min-width: 270px;
+}
+
+/* SECTION: SORT */
+
+/* ==================================================
+   COMPONENT: PRODUCT SORTING
+   HTML FILE: templates/search_filter/search_filter.html
+   PURPOSE: Product sorting presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/search_filter/search_filter.js.
+   ================================================== */
+
+.search-filter-sort__sort {
+  appearance: none;
+  background-color: transparent;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  padding-right: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  outline: transparent solid 2px;
+  outline-offset: 2px;
+}
+
+/* SECTION: TYPES */
+
+/* ==================================================
+   COMPONENT: GUITAR TYPE FILTERS
+   HTML FILE: templates/search_filter/search_filter.html
+   PURPOSE: Guitar type filters presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/search_filter/search_filter.js.
+   ================================================== */
+
+.filter-chip {
+  flex-shrink: 0;
+  border-width: 1px;
+  padding: 0.625rem 1.25rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 600;
+  transition-property:
+    color, background-color, border-color, text-decoration-color, fill, stroke,
+    opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  border-radius: 6px;
+  border-color: var(--line);
+  color: var(--muted);
+  background: var(--surface);
+}
+
+.filter-chip:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* Dark theme. */
+.dark .filter-chip {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Dark theme. */
+.dark .filter-chip:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+  color: rgb(255, 255, 255);
+}
+
+.filter-chip-active {
+  background: var(--soft);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.filter-chip-active:hover {
+  color: rgb(255, 255, 255);
+}
+
+/* Dark theme. */
+.dark .filter-chip-active {
+  background: var(--soft);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.search-filter-types__all-electric-acoustic-classical-bass-layout {
+  margin-top: 2rem;
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+/* SECTION: TOOLBAR LAYOUT */
+
+.search-filter__layout {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Screen size or accessibility preference: (min-width: 640px). */
+@media (min-width: 640px) {
+  .search-filter__layout {
+    flex-direction: row;
+  }
+}
+
+/* Screen size or accessibility preference: (max-width: 639px). */
+@media (max-width: 639px) {
+  .storefront main > section:has(.search-filter-finder-banner__finder-banner) {
     padding-block: 64px;
   }
 }

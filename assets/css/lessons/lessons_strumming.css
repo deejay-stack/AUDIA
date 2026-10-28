@@ -1,0 +1,12 @@
+/* ==================================================
+   COMPONENT: LESSONS STRUMMING
+   HTML FILE: templates/lessons/lessons_strumming.html
+   PURPOSE: Lessons strumming presentation; preserve existing colors, states and breakpoints.
+   JS: No lesson controller: Jinja renders the content; assets/js/shared/app.js handles navigation/theme.
+   ================================================== */
+
+.strumming-lessons {
+  display: grid;
+  gap: 24px;
+  margin-top: 24px;
+}

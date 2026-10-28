@@ -1,0 +1,47 @@
+<!-- MODULE: LANDING | COMPONENT: Landing categories
+     PURPOSE: Landing categories structure. CSS: assets/css/landing/landing_categories.css
+     JS: assets/js/shared/app.js (navigation/theme); assets/js/shared/shared.js (reveals). Preserve IDs and data-action/data-field hooks. -->
+<section id="guitar-families" class="shell landing-collections">
+      <div class="landing-section-heading">
+        <div>
+          <p class="section-label">A quick introduction</p>
+          <h2 class="section-title">Choose your voice.</h2>
+        </div>
+        <p>
+          Get to know the four guitar families. Sign in when you are ready to
+          explore individual instruments.
+        </p>
+      </div>
+      <div class="landing-collection-grid">
+        {% for category, caption, description in [ ('Electric', 'Plug into
+        possibility.', 'Explore amplified sounds, effects, and styles from clean
+        pop to rock.'), ('Acoustic', 'Let the song lead.', 'A familiar starting
+        point for unplugged strumming and fingerpicking.'), ('Classical', 'Make
+        room for the details.', 'Discover traditional shapes suited to classical
+        and fingerstyle study.'), ('Bass', 'Give the music its pulse.', 'Build
+        the low-end foundation and connect melody with rhythm.') ] %}
+        <button
+          class="landing-collection"
+          data-action="browse"
+          data-category="{{ category }}"
+          aria-label="Explore {{ category|lower }} guitars"
+        >
+          <span class="landing-collection-photo">
+            <img
+              src="{{ url_for('static', filename='images/' ~ category|lower ~ '_studio.jpg') }}"
+              alt="{{ category }} guitar in a studio"
+              loading="lazy"
+              decoding="async"
+            />
+            <span class="landing-collection-label"
+              ><strong>{{ category }}</strong
+              ><span aria-hidden="true">↗</span></span
+            >
+          </span>
+          <span class="landing-collection-copy"
+            ><strong>{{ caption }}</strong><span>{{ description }}</span></span
+          >
+        </button>
+        {% endfor %}
+      </div>
+    </section>

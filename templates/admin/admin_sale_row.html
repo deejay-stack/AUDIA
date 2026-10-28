@@ -1,0 +1,50 @@
+<!-- MODULE: ADMIN | COMPONENT: Admin sale row
+     PURPOSE: Admin sale row structure. CSS: assets/css/admin/admin_sale_row.css
+     JS: assets/js/admin/admin.js. Preserve IDs and data-action/data-field hooks. -->
+<template id="sale-row-template">
+  <tr class="admin-sale-row__sale-row-template-tr">
+    <td class="admin-sale-row__id" data-field="id"></td>
+    <td class="admin-sale-row__sale-row-template-td">
+      <p class="admin-sale-row__customer" data-field="customer"></p>
+      <p class="admin-sale-row__email" data-field="email"></p>
+    </td>
+    <td
+      class="admin-sale-row__product"
+      data-field="product"
+    ></td>
+    <td class="admin-sale-row__date" data-field="date"></td>
+    <td class="admin-sale-row__payment" data-field="payment"></td>
+    <td class="admin-sale-row__sale-row-template-td">
+      <span
+        class="admin-sale-row__status"
+        data-field="status"
+      ></span>
+    </td>
+    <td class="admin-sale-row__amount" data-field="amount"></td>
+    <td class="admin-sale-row__sale-row-template-td-td">
+      <button
+        class="icon-btn admin-sale-row__edit-order"
+        data-action="edit-order"
+        aria-label="Manage order"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="15"
+          height="15"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-ellipsis"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="1"></circle>
+          <circle cx="19" cy="12" r="1"></circle>
+          <circle cx="5" cy="12" r="1"></circle>
+        </svg>
+      </button>
+    </td>
+  </tr>
+</template>

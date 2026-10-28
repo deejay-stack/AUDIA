@@ -1,0 +1,26 @@
+<!-- MODULE: SHARED | COMPONENT: Dialog shell
+     PURPOSE: Dialog shell structure. CSS: assets/css/shared/dialog.css
+     JS: assets/js/shared/app.js; assets/js/shared/shared.js; assets/js/shared/theme.js. Preserve IDs and data-action/data-field hooks. -->
+<template id="dialog-template">
+  <dialog class="app-dialog" aria-labelledby="dialog-title">
+    <div class="dialog-heading">
+      <div>
+        <p class="section-label">AUDIA</p>
+        <h2
+          id="dialog-title"
+          class="dialog__dialog-title"
+          data-field="dialog-title"
+        ></h2>
+      </div>
+      <button
+        type="button"
+        class="icon-btn"
+        aria-label="Close dialog"
+        data-action="dialog-close"
+      >
+        ✕
+      </button>
+    </div>
+    <div data-field="dialog-body"></div>
+  </dialog>
+</template>

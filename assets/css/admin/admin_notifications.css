@@ -1,0 +1,19 @@
+/* ==================================================
+   COMPONENT: ADMIN NOTIFICATIONS
+   HTML FILE: templates/admin/admin_notifications.html
+   PURPOSE: Admin notifications presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/admin/admin.js.
+   ================================================== */
+
+.notification-list {
+  margin-top: 20px;
+  display: grid;
+  gap: 14px;
+  font-size: 13px;
+}
+
+.notification-list li {
+  padding: 14px;
+  border-radius: 9px;
+  background: var(--soft);
+}

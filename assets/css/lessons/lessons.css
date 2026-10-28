@@ -1,20 +1,37 @@
+/* ==================================================
+   COMPONENT: LESSONS
+   HTML FILE: templates/lessons/lessons.html
+   PURPOSE: Lessons presentation; preserve existing colors, states and breakpoints.
+   JS: No lesson controller: Jinja renders the content; assets/js/shared/app.js handles navigation/theme.
+   ================================================== */
+
 @import url("../shared/practice.css");
+@import url("../shared/practice_base.css");
+@import url("lessons_chord_detail.css");
+@import url("lessons_chord_diagram.css");
+@import url("lessons_chords.css");
+@import url("lessons_getting_started.css");
+@import url("lessons_strumming.css");
+@import url("lessons_strumming_pattern.css");
 
 .lesson-hero {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0px, 1fr));
   overflow: hidden;
   margin-bottom: 24px;
 }
+
 .lesson-hero .practice-card {
   align-self: center;
   padding: 36px;
 }
+
 .lesson-hero h2 {
   margin-top: 16px;
   font-size: clamp(26px, 4vw, 40px);
   letter-spacing: -0.04em;
 }
+
 .lesson-hero img {
   height: 100%;
   min-height: 320px;
@@ -22,43 +39,32 @@
   width: 100%;
   object-fit: cover;
 }
+
 .lesson-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0px, 1fr));
   gap: 24px;
 }
+
 .lesson-card {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
+
 .lesson-card p {
-  margin-top: 0;
+  margin-top: 0px;
 }
+
 .lesson-card .practice-link {
   margin-top: auto;
   padding-top: 12px;
 }
-.lesson-card:hover,
-.chord-card:hover {
+
+.lesson-card:hover {
   border-color: var(--accent);
 }
-.lesson-topics {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px 20px;
-  margin-bottom: 24px;
-  color: var(--accent);
-  font-size: 13px;
-}
-.lesson-basics-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px;
-}
-.lesson-wide {
-  grid-column: 1 / -1;
-}
+
 .lesson-steps {
   margin-block: 16px;
   padding-left: 22px;
@@ -66,189 +72,42 @@
   line-height: 1.8;
   color: var(--muted);
 }
+
 ol.lesson-steps {
   list-style: decimal;
 }
+
 ul.lesson-steps {
   list-style: disc;
 }
+
 .lesson-steps li + li {
   margin-top: 8px;
 }
-.lesson-definitions dt {
-  font-size: 14px;
-  font-weight: 600;
-  margin-top: 16px;
-}
-.lesson-definitions dd {
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.8;
-  margin-top: 4px;
-}
-.lesson-string-list {
-  margin-top: 16px;
-  font-size: 14px;
-  line-height: 2;
-}
+
 .chord-legend {
   color: var(--muted);
   font-size: 12px;
   line-height: 1.8;
   margin-bottom: 24px;
 }
-.chord-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 20px;
-}
-.chord-card h2 {
-  font-size: 17px;
-  display: flex;
-  justify-content: space-between;
-  gap: 8px;
-}
-.chord-card h2 span {
-  color: var(--accent);
-}
-.chord-diagram {
-  display: block;
-  width: 100%;
-  max-width: 240px;
-  height: auto;
-  margin: 20px auto;
-}
-.chord-fret,
-.chord-string {
-  stroke: var(--muted);
-  stroke-width: 1.5;
-}
-.chord-nut {
-  stroke: var(--text);
-  stroke-width: 5;
-}
-.chord-string-label,
-.chord-open-muted {
-  fill: var(--text);
-  font-size: 14px;
-}
-.chord-fret-label {
-  fill: var(--muted);
-  font-size: 12px;
-}
-.chord-finger {
-  fill: var(--text);
-}
-.chord-finger-number {
-  fill: var(--surface);
-  font-size: 12px;
-  font-weight: 700;
-}
-.chord-detail-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-  gap: 24px;
-}
-.chord-detail-diagram {
-  text-align: center;
-  align-self: start;
-}
-.chord-detail-diagram h2 {
-  font-size: 36px;
-  color: var(--accent);
-}
-.chord-detail-diagram .chord-legend {
-  margin-bottom: 0;
-}
-.strumming-lessons {
-  display: grid;
-  gap: 24px;
-  margin-top: 24px;
-}
-.strumming-pattern {
-  display: grid;
-  grid-template-columns: repeat(8, minmax(0, 1fr));
-  gap: 8px;
-  margin-block: 24px;
-  max-width: 640px;
-}
-.strumming-beat {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-}
-.strumming-stroke {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 64px;
-  width: 100%;
-  border-radius: 8px;
-  background: var(--soft);
-  color: var(--accent);
-  font-size: 20px;
-  font-weight: 600;
-}
-.strumming-rest {
-  color: var(--muted);
-}
-.strumming-stroke > span {
-  font-size: 15px;
-}
-.strumming-count {
-  color: var(--muted);
-  font-size: 13px;
-}
-@media (max-width: 1100px) {
-  .chord-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-@media (max-width: 900px) {
-  .chord-detail-layout {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
+
+/* Screen size or accessibility preference: (max-width: 767px). */
 @media (max-width: 767px) {
-  .lesson-hero,
-  .lesson-grid,
-  .lesson-basics-grid {
-    grid-template-columns: minmax(0, 1fr);
+  .lesson-hero {
+    grid-template-columns: minmax(0px, 1fr);
   }
+
+  .lesson-grid {
+    grid-template-columns: minmax(0px, 1fr);
+  }
+
   .lesson-hero .practice-card {
     padding: 24px;
   }
+
   .lesson-hero img {
-    min-height: 0;
+    min-height: 0px;
     max-height: 260px;
-  }
-  .chord-grid {
-    gap: 12px;
-  }
-  .chord-card {
-    padding: 16px 12px;
-  }
-  .chord-card h2 {
-    font-size: 15px;
-    flex-wrap: wrap;
-  }
-  .strumming-pattern {
-    gap: 4px;
-  }
-  .strumming-stroke {
-    font-size: 17px;
-  }
-}
-@media (max-width: 479px) {
-  .chord-grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  .chord-card {
-    padding: 20px;
-  }
-  .chord-card h2 {
-    font-size: 17px;
   }
 }

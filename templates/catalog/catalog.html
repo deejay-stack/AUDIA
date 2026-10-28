@@ -1,28 +1,34 @@
+<!-- MODULE: CATALOG | COMPONENT: Catalog page composition
+     PURPOSE: Catalog page composition structure. CSS: assets/css/catalog/catalog.css
+     JS: assets/js/catalog/catalog.js. Preserve IDs and data-action/data-field hooks. -->
 {% extends "shared/base.html" %} {% block content %}
-<div class="storefront min-h-screen overflow-x-clip">
-  <div
-    class="announcement px-5 py-2.5 text-center font-semibold uppercase tracking-[.18em]"
+<div class="storefront catalog__storefront">
+  <!-- SECTION: ANNOUNCEMENT -->
+<div
+    class="announcement catalog__announcement"
   >
     Free nationwide delivery over ₱15,000
-    <span class="mx-2 opacity-40">•</span> Professional setup included
+    <span class="catalog__announcement-span">•</span> Professional setup included
   </div>
-  <header
-    class="store-header sticky top-0 z-40 border-b border-zinc-200/80 bg-stone-50/90 backdrop-blur-xl dark:border-white/10 dark:bg-ink/90"
+
+  <!-- SECTION: HEADER -->
+<header
+    class="store-header catalog-header__store-header"
   >
-    <div class="shell flex h-[76px] items-center justify-between">
+    <div class="shell catalog-header__shell">
       <button
-        class="audia-mark flex items-center text-left text-lg"
+        class="audia-mark catalog-header__home"
         aria-label="Go to AUDIA home"
         data-action="home"
       >
         <span class="mark-a">A</span>UDI<span class="mark-a">A</span>
       </button>
       <nav
-        class="hidden items-center gap-8 text-sm font-medium text-zinc-600 dark:text-zinc-400 lg:flex"
+        class="catalog-header__shell-nav"
       >
         <a class="nav-link" href="#shop">Shop</a>
         <a class="nav-link" href="#categories">Guitars</a>
-        <button class="nav-link flex items-center gap-2" data-action="finder">
+        <button class="nav-link catalog-header__finder" data-action="finder">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="15"
@@ -46,9 +52,9 @@
         <a class="nav-link" href="#bundles">Bundles</a>
         <a class="nav-link" href="#track">Track order</a>
       </nav>
-      <div class="flex items-center gap-1.5">
+      <div class="catalog-header__shell-div">
         <button
-          class="theme-toggle relative flex items-center rounded-full border border-zinc-200 bg-white text-zinc-700 shadow-sm transition hover:border-zinc-300 dark:border-white/10 dark:bg-white/[.05] dark:text-zinc-200 h-10 w-10 justify-center"
+          class="theme-toggle catalog-header__theme"
           aria-label="Switch to light mode"
           title="Switch to light mode"
           data-action="theme"
@@ -96,7 +102,7 @@
           </svg>
         </button>
         <button
-          class="icon-btn hidden sm:grid"
+          class="icon-btn catalog-header__account"
           aria-label="Sign in"
           data-action="account"
         >
@@ -119,7 +125,7 @@
           </svg>
         </button>
         <button
-          class="icon-btn relative"
+          class="icon-btn catalog-header__cart"
           aria-label="Open cart"
           data-action="cart"
         >
@@ -144,7 +150,7 @@
           </svg>
         </button>
         <button
-          class="icon-btn lg:hidden"
+          class="icon-btn catalog-header__menu"
           aria-label="Open menu"
           data-action="menu"
         >
@@ -169,18 +175,21 @@
       </div>
     </div>
   </header>
+
+  <!-- Component: practice links | CSS: assets/css/shared/practice_links.css -->
   {% include 'shared/practice_links.html' %}
   <main>
-    <section
+    <!-- SECTION: HERO -->
+<section
       id="top"
-      class="hero-section relative overflow-hidden border-b border-zinc-200 dark:border-white/10"
+      class="hero-section catalog-hero__top"
     >
-      <div aria-hidden="true" class="hero-mesh absolute inset-0"></div>
+      <div aria-hidden="true" class="hero-mesh catalog-hero__hero-mesh"></div>
       <div
-        class="shell hero-layout relative grid items-center gap-12 py-16 lg:grid-cols-[1.05fr_1fr] lg:py-10"
+        class="shell hero-layout catalog-hero__shell"
       >
         <div
-          class="hero-copy relative z-10 max-w-xl"
+          class="hero-copy catalog-hero__hero-copy"
           data-motion='{"initial":{"opacity":0,"y":32},"animate":{"opacity":1,"y":0},"transition":{"duration":0.8,"ease":[0.22,1,0.36,1]},"viewport":false}'
         >
           <p class="section-label hero-eyebrow">
@@ -204,18 +213,18 @@
             </svg>
           </p>
           <h1
-            class="mt-5 font-display text-[clamp(3.4rem,7.5vw,7rem)] font-semibold leading-[.88] tracking-[-.065em]"
+            class="catalog-hero__make-some-noise"
           >
             Make some<br /><span class="hero-gradient">noise.</span>
           </h1>
           <p
-            class="mt-7 max-w-lg text-base leading-7 text-zinc-600 dark:text-zinc-400 sm:text-lg"
+            class="catalog-hero__discover-guitars-chosen-for-feel"
           >
             Discover guitars chosen for feel, tone, and lasting value. Compare
             the details, listen to a preview, and find an instrument you’ll keep
             reaching for.
           </p>
-          <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+          <div class="catalog-hero__hero-copy-div">
             <a href="#shop" class="primary-btn"
               >Shop guitars
               <svg
@@ -257,34 +266,34 @@
             </button>
           </div>
           <div
-            class="hero-stats mt-12 grid grid-cols-3 border-t border-zinc-200 pt-6 dark:border-white/10"
+            class="hero-stats catalog-hero__hero-stats"
           >
             <div>
-              <div class="font-display text-xl font-semibold sm:text-2xl">
+              <div class="catalog-hero__hero-stats-div">
                 120+
               </div>
               <div
-                class="mt-1 text-[9px] uppercase tracking-[.16em] text-zinc-500 sm:text-[10px]"
+                class="catalog-hero__hero-stats-div-120-instruments"
               >
                 instruments
               </div>
             </div>
             <div>
-              <div class="font-display text-xl font-semibold sm:text-2xl">
+              <div class="catalog-hero__hero-stats-div">
                 4.9
               </div>
               <div
-                class="mt-1 text-[9px] uppercase tracking-[.16em] text-zinc-500 sm:text-[10px]"
+                class="catalog-hero__hero-stats-div-4-9-buyer-rating"
               >
                 buyer rating
               </div>
             </div>
             <div>
-              <div class="font-display text-xl font-semibold sm:text-2xl">
+              <div class="catalog-hero__hero-stats-div">
                 2-year
               </div>
               <div
-                class="mt-1 text-[9px] uppercase tracking-[.16em] text-zinc-500 sm:text-[10px]"
+                class="catalog-hero__hero-stats-div-2-year-warranty"
               >
                 warranty
               </div>
@@ -292,38 +301,38 @@
           </div>
         </div>
         <div
-          class="hero-visual relative"
+          class="hero-visual catalog-hero__hero-visual"
           data-motion='{"initial":{"opacity":0,"scale":0.96},"animate":{"opacity":1,"scale":1},"transition":{"duration":1,"delay":0.12,"ease":[0.22,1,0.36,1]},"viewport":false}'
         >
           <div class="sound-orbit orbit-one" aria-hidden="true"></div>
           <div class="sound-orbit orbit-two" aria-hidden="true"></div>
-          <div class="hero-photo absolute overflow-hidden bg-zinc-900">
+          <div class="hero-photo catalog-hero__hero-photo">
             <img
-              class="h-full w-full object-cover object-center transition duration-1000 hover:scale-[1.025]"
+              class="catalog-hero__hero-photo-img"
               src="{{ url_for('static', filename='images/guitar_front.jpg') }}"
               alt="Guitars and amplifiers in a studio"
             />
             <div
-              class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/5"
+              class="catalog-hero__hero-photo-div"
             ></div>
             <div
-              class="hero-photo-caption absolute bottom-6 left-6 right-6 flex items-end justify-between gap-3 text-white sm:left-8 sm:right-8"
+              class="hero-photo-caption catalog-hero__hero-photo-caption"
             >
               <div>
                 <p
-                  class="text-[10px] font-semibold uppercase tracking-[.18em] text-white/60"
+                  class="catalog-hero__featured-sound"
                 >
                   Featured sound
                 </p>
-                <h2 class="mt-2 font-display text-2xl font-semibold">
+                <h2 class="catalog-hero__midnight-drive">
                   Midnight Drive
                 </h2>
-                <p class="mt-1 text-xs text-white/60">
+                <p class="catalog-hero__warm-humbuckers-crisp-overdrive">
                   Warm humbuckers · crisp overdrive
                 </p>
               </div>
               <button
-                class="h-11 gap-2 px-4 inline-flex items-center justify-center rounded-full bg-white text-zinc-950 shadow-lg transition hover:scale-105"
+                class="catalog-hero__sound"
                 aria-label="Play guitar tone"
                 data-action="sound"
               >
@@ -344,14 +353,14 @@
                     d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"
                   ></path>
                 </svg>
-                <span class="text-xs font-semibold">Hear the tone</span>
+                <span class="catalog-hero__hear-the-tone">Hear the tone</span>
               </button>
             </div>
           </div>
           <div
-            class="setup-note absolute right-0 top-3 rounded-2xl border border-zinc-200 bg-white p-4 shadow-xl dark:border-white/10 dark:bg-zinc-900 sm:right-1 sm:top-12"
+            class="setup-note catalog-hero__setup-note"
           >
-            <div class="flex items-center gap-3">
+            <div class="catalog-hero__setup-note-div">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="18"
@@ -375,8 +384,8 @@
                 ></path>
               </svg>
               <div>
-                <p class="text-xs font-semibold">Free setup</p>
-                <p class="mt-0.5 text-[10px] text-zinc-500">
+                <p class="catalog-hero__free-setup">Free setup</p>
+                <p class="catalog-hero__ready-to-play-on-arrival">
                   Ready to play on arrival
                 </p>
               </div>
@@ -432,9 +441,9 @@
         </div>
       </div>
       <div class="hero-bottom">
-        <div class="shell flex flex-wrap items-center justify-between gap-4">
+        <div class="shell catalog-hero__shell-good-gear-great-possibilities-your">
           <span>GOOD GEAR. GREAT POSSIBILITIES.</span>
-          <span class="flex items-center gap-2"
+          <span class="catalog-hero__your-sound-starts-here"
             ><span class="status-dot" aria-hidden="true"></span> Your sound
             starts here
             <svg
@@ -456,26 +465,28 @@
         </div>
       </div>
     </section>
-    <section id="categories" class="shell py-24 sm:py-28">
+
+    <!-- SECTION: CATEGORIES -->
+<section id="categories" class="shell catalog-categories__categories">
       <div
-        class="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end"
+        class="catalog-categories__categories-div"
         data-motion='{"initial":{"opacity":0,"y":28},"animate":{"opacity":1,"y":0},"transition":{"duration":0.7,"delay":0,"ease":[0.22,1,0.36,1]},"viewport":true}'
       >
         <div>
           <p class="section-label">Browse the collection</p>
           <h2 class="section-title">Choose your voice.</h2>
         </div>
-        <p class="max-w-sm text-sm leading-6 text-zinc-500">
+        <p class="catalog-categories__start-with-the-instrument-family">
           Start with the instrument family that fits the sound in your head.
         </p>
       </div>
-      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="catalog-categories__categories-div-browse-the-collection-choose-your">
         <div
           class=""
           data-motion='{"initial":{"opacity":0,"y":28},"animate":{"opacity":1,"y":0},"transition":{"duration":0.7,"delay":0,"ease":[0.22,1,0.36,1]},"viewport":true}'
         >
           <button
-            class="category-card group relative h-[390px] w-full overflow-hidden rounded-2xl bg-zinc-900 text-left shadow-sm"
+            class="category-card catalog-categories__category is-hover-group"
             data-hover='{"y":-7}'
             data-action="category"
             data-category="Electric"
@@ -483,24 +494,117 @@
             <img
               src="{{ url_for('static', filename='images/electric_studio.jpg') }}"
               alt="Electric guitar"
-              class="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+              class="catalog-categories__category-img"
             />
             <div
-              class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/15 to-transparent"
+              class="catalog-categories__category-div"
             ></div>
             <div
-              class="absolute inset-x-0 bottom-0 flex items-end justify-between p-6 text-white"
+              class="catalog-categories__category-div-01-models-10-electric"
             >
               <div>
-                <p class="text-[10px] uppercase tracking-[.16em] text-white/55">
+                <p class="catalog-categories__01-models-10">
                   01 · <span data-category-count="Electric">10</span> models
                 </p>
-                <h3 class="mt-2 font-display text-2xl font-semibold">
+                <h3 class="catalog-categories__electric">
                   Electric
                 </h3>
               </div>
               <span
-                class="grid h-10 w-10 place-items-center rounded-full border border-white/30 bg-white/10 backdrop-blur transition group-hover:bg-white group-hover:text-zinc-950"
+                class="catalog-categories__category-span"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="17"
+                  height="17"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-arrow-up-right"
+                  aria-hidden="true"
+                >
+                  <path d="M7 7h10v10"></path>
+                  <path d="M7 17 17 7"></path>
+                </svg>
+              </span>
+            </div>
+          </button>
+        </div>
+         <div class="hero-bottom">
+        <div class="shell catalog-hero__shell-good-gear-great-possibilities-your">
+          <span>GOOD GEAR. GREAT POSSIBILITIES.</span>
+          <span class="catalog-hero__your-sound-starts-here"
+            ><span class="status-dot" aria-hidden="true"></span> Your sound
+            starts here
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="13"
+              height="13"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-arrow-right"
+              aria-hidden="true"
+            >
+              <path d="M5 12h14"></path>
+              <path d="m12 5 7 7-7 7"></path></svg
+          ></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: CATEGORIES -->
+<section id="categories" class="shell catalog-categories__categories">
+      <div
+        class="catalog-categories__categories-div"
+        data-motion='{"initial":{"opacity":0,"y":28},"animate":{"opacity":1,"y":0},"transition":{"duration":0.7,"delay":0,"ease":[0.22,1,0.36,1]},"viewport":true}'
+      >
+        <div>
+          <p class="section-label">Browse the collection</p>
+          <h2 class="section-title">Choose your voice.</h2>
+        </div>
+        <p class="catalog-categories__start-with-the-instrument-family">
+          Start with the instrument family that fits the sound in your head.
+        </p>
+      </div>
+      <div class="catalog-categories__categories-div-browse-the-collection-choose-your">
+        <div
+          class=""
+          data-motion='{"initial":{"opacity":0,"y":28},"animate":{"opacity":1,"y":0},"transition":{"duration":0.7,"delay":0,"ease":[0.22,1,0.36,1]},"viewport":true}'
+        >
+          <button
+            class="category-card catalog-categories__category is-hover-group"
+            data-hover='{"y":-7}'
+            data-action="category"
+            data-category="Electric"
+          >
+            <img
+              src="{{ url_for('static', filename='images/electric_studio.jpg') }}"
+              alt="Electric guitar"
+              class="catalog-categories__category-img"
+            />
+            <div
+              class="catalog-categories__category-div"
+            ></div>
+            <div
+              class="catalog-categories__category-div-01-models-10-electric"
+            >
+              <div>
+                <p class="catalog-categories__01-models-10">
+                  01 · <span data-category-count="Electric">10</span> models
+                </p>
+                <h3 class="catalog-categories__electric">
+                  Electric
+                </h3>
+              </div>
+              <span
+                class="catalog-categories__category-span"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -527,7 +631,7 @@
           data-motion='{"initial":{"opacity":0,"y":28},"animate":{"opacity":1,"y":0},"transition":{"duration":0.7,"delay":0.07,"ease":[0.22,1,0.36,1]},"viewport":true}'
         >
           <button
-            class="category-card group relative h-[390px] w-full overflow-hidden rounded-2xl bg-zinc-900 text-left shadow-sm"
+            class="category-card catalog-categories__category is-hover-group"
             data-hover='{"y":-7}'
             data-action="category"
             data-category="Acoustic"
@@ -535,24 +639,24 @@
             <img
               src="{{ url_for('static', filename='images/acoustic_studio.jpg') }}"
               alt="Acoustic guitar"
-              class="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+              class="catalog-categories__category-img"
             />
             <div
-              class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/15 to-transparent"
+              class="catalog-categories__category-div"
             ></div>
             <div
-              class="absolute inset-x-0 bottom-0 flex items-end justify-between p-6 text-white"
+              class="catalog-categories__category-div-02-models-10-acoustic"
             >
               <div>
-                <p class="text-[10px] uppercase tracking-[.16em] text-white/55">
+                <p class="catalog-categories__02-models-10">
                   02 · <span data-category-count="Acoustic">10</span> models
                 </p>
-                <h3 class="mt-2 font-display text-2xl font-semibold">
+                <h3 class="catalog-categories__acoustic">
                   Acoustic
                 </h3>
               </div>
               <span
-                class="grid h-10 w-10 place-items-center rounded-full border border-white/30 bg-white/10 backdrop-blur transition group-hover:bg-white group-hover:text-zinc-950"
+                class="catalog-categories__category-span"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -579,7 +683,7 @@
           data-motion='{"initial":{"opacity":0,"y":28},"animate":{"opacity":1,"y":0},"transition":{"duration":0.7,"delay":0.14,"ease":[0.22,1,0.36,1]},"viewport":true}'
         >
           <button
-            class="category-card group relative h-[390px] w-full overflow-hidden rounded-2xl bg-zinc-900 text-left shadow-sm"
+            class="category-card catalog-categories__category is-hover-group"
             data-hover='{"y":-7}'
             data-action="category"
             data-category="Classical"
@@ -587,24 +691,24 @@
             <img
               src="{{ url_for('static', filename='images/classical_studio.jpg') }}"
               alt="Classical guitar"
-              class="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+              class="catalog-categories__category-img"
             />
             <div
-              class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/15 to-transparent"
+              class="catalog-categories__category-div"
             ></div>
             <div
-              class="absolute inset-x-0 bottom-0 flex items-end justify-between p-6 text-white"
+              class="catalog-categories__category-div-03-models-10-classical"
             >
               <div>
-                <p class="text-[10px] uppercase tracking-[.16em] text-white/55">
+                <p class="catalog-categories__03-models-10">
                   03 · <span data-category-count="Classical">10</span> models
                 </p>
-                <h3 class="mt-2 font-display text-2xl font-semibold">
+                <h3 class="catalog-categories__classical">
                   Classical
                 </h3>
               </div>
               <span
-                class="grid h-10 w-10 place-items-center rounded-full border border-white/30 bg-white/10 backdrop-blur transition group-hover:bg-white group-hover:text-zinc-950"
+                class="catalog-categories__category-span"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -631,7 +735,7 @@
           data-motion='{"initial":{"opacity":0,"y":28},"animate":{"opacity":1,"y":0},"transition":{"duration":0.7,"delay":0.21000000000000002,"ease":[0.22,1,0.36,1]},"viewport":true}'
         >
           <button
-            class="category-card group relative h-[390px] w-full overflow-hidden rounded-2xl bg-zinc-900 text-left shadow-sm"
+            class="category-card catalog-categories__category is-hover-group"
             data-hover='{"y":-7}'
             data-action="category"
             data-category="Bass"
@@ -639,22 +743,22 @@
             <img
               src="{{ url_for('static', filename='images/bass_studio.jpg') }}"
               alt="Bass guitar"
-              class="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+              class="catalog-categories__category-img"
             />
             <div
-              class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/15 to-transparent"
+              class="catalog-categories__category-div"
             ></div>
             <div
-              class="absolute inset-x-0 bottom-0 flex items-end justify-between p-6 text-white"
+              class="catalog-categories__category-div-04-models-10-bass"
             >
               <div>
-                <p class="text-[10px] uppercase tracking-[.16em] text-white/55">
+                <p class="catalog-categories__04-models-10">
                   04 · <span data-category-count="Bass">10</span> models
                 </p>
-                <h3 class="mt-2 font-display text-2xl font-semibold">Bass</h3>
+                <h3 class="catalog-categories__bass">Bass</h3>
               </div>
               <span
-                class="grid h-10 w-10 place-items-center rounded-full border border-white/30 bg-white/10 backdrop-blur transition group-hover:bg-white group-hover:text-zinc-950"
+                class="catalog-categories__category-span"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -678,31 +782,37 @@
         </div>
       </div>
     </section>
-    <section
+
+    <!-- SECTION: PRODUCTS -->
+<section
       id="shop"
-      class="border-y border-zinc-200 bg-white py-24 dark:border-white/10 dark:bg-[#0c0c0f] sm:py-28"
+      class="catalog-products__shop"
     >
       <div class="shell">
         <div
-          class="flex flex-col justify-between gap-7 lg:flex-row lg:items-end"
+          class="catalog-products__shell-div"
           data-motion='{"initial":{"opacity":0,"y":28},"animate":{"opacity":1,"y":0},"transition":{"duration":0.7,"delay":0,"ease":[0.22,1,0.36,1]},"viewport":true}'
         >
           <div>
             <p class="section-label">Curated instruments</p>
             <h2 class="section-title">Guitars worth playing.</h2>
-            <p class="form-hint mt-3">
+            <p class="form-hint catalog-products__form-hint">
               School project catalog: illustrative brands, prices and stock.
             </p>
           </div>
+{% with search_filter_section='toolbar' %}
 {% include 'search_filter/search_filter.html' %}
+{% endwith %}
         </div>
-{% include 'search_filter/search_filter_types.html' %}
+{% with search_filter_section='types' %}
+{% include 'search_filter/search_filter.html' %}
+{% endwith %}
         <div
-          class="mt-9 grid gap-x-5 gap-y-12 sm:grid-cols-2 lg:grid-cols-3"
+          class="catalog-products__products"
           data-field="products"
         ></div>
         <div
-          class="mt-9 rounded-2xl border border-dashed border-zinc-300 py-20 text-center text-sm text-zinc-500 dark:border-white/15"
+          class="catalog-products__no-products"
           hidden=""
           data-field="no-products"
         >
@@ -710,34 +820,38 @@
         </div>
       </div>
     </section>
-{% include 'search_filter/search_filter_finder_banner.html' %}
-    <section id="bundles" class="shell pb-24 sm:pb-28">
+
+    {% with search_filter_section='banner' %}
+{% include 'search_filter/search_filter.html' %}
+{% endwith %}
+    <!-- SECTION: BUNDLES -->
+<section id="bundles" class="shell catalog-bundles__bundles">
       <div
-        class="grid overflow-hidden rounded-[2rem] border border-zinc-200 bg-white shadow-sm dark:border-white/10 dark:bg-panel lg:grid-cols-2"
+        class="catalog-bundles__bundles-div"
         data-motion='{"initial":{"opacity":0,"y":28},"animate":{"opacity":1,"y":0},"transition":{"duration":0.7,"delay":0,"ease":[0.22,1,0.36,1]},"viewport":true}'
       >
-        <div class="relative min-h-[430px] overflow-hidden">
+        <div class="catalog-bundles__bundles-div-save-3-500-complete-starter">
           <img
             src="{{ url_for('static', filename='images/electric_studio.jpg') }}"
             alt="Electric guitar beside a practice amplifier"
-            class="absolute inset-0 h-full w-full object-cover transition duration-1000 hover:scale-105"
+            class="catalog-bundles__bundles-img"
           />
           <span
-            class="absolute left-6 top-6 rounded-full bg-white px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest text-zinc-950"
+            class="catalog-bundles__save-3-500"
             >Save ₱3,500</span
           >
         </div>
-        <div class="flex flex-col justify-center p-8 sm:p-12 lg:p-16">
+        <div class="catalog-bundles__bundles-div-save-3-500-complete-starter-section-div-div">
           <p class="section-label">Complete starter rig</p>
-          <h2 class="mt-3 font-display text-4xl font-semibold">
+          <h2 class="catalog-bundles__everything-after-the-guitar">
             Everything after the guitar.
           </h2>
-          <p class="mt-4 leading-7 text-zinc-500">
+          <p class="catalog-bundles__a-matched-practice-amp-padded">
             A matched practice amp, padded bag, cable, tuner, strap, picks, and
             a professional setup—ready from day one.
           </p>
-          <div class="mt-7 grid grid-cols-2 gap-3 text-sm">
-            <div class="flex items-center gap-2">
+          <div class="catalog-bundles__bundles-div-complete-starter-rig-everything-after">
+            <div class="catalog-bundles__bundles-div-15w-practice-amp-padded-gig">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="14"
@@ -748,14 +862,14 @@
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                class="lucide lucide-check text-emerald-500"
+                class="lucide lucide-check catalog-bundles__bundles-svg"
                 aria-hidden="true"
               >
                 <path d="M20 6 9 17l-5-5"></path>
               </svg>
               15W practice amp
             </div>
-            <div class="flex items-center gap-2">
+            <div class="catalog-bundles__bundles-div-15w-practice-amp-padded-gig">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="14"
@@ -766,14 +880,14 @@
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                class="lucide lucide-check text-emerald-500"
+                class="lucide lucide-check catalog-bundles__bundles-svg"
                 aria-hidden="true"
               >
                 <path d="M20 6 9 17l-5-5"></path>
               </svg>
               Padded gig bag
             </div>
-            <div class="flex items-center gap-2">
+            <div class="catalog-bundles__bundles-div-15w-practice-amp-padded-gig">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="14"
@@ -784,14 +898,14 @@
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                class="lucide lucide-check text-emerald-500"
+                class="lucide lucide-check catalog-bundles__bundles-svg"
                 aria-hidden="true"
               >
                 <path d="M20 6 9 17l-5-5"></path>
               </svg>
               Clip-on tuner
             </div>
-            <div class="flex items-center gap-2">
+            <div class="catalog-bundles__bundles-div-15w-practice-amp-padded-gig">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="14"
@@ -802,14 +916,14 @@
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                class="lucide lucide-check text-emerald-500"
+                class="lucide lucide-check catalog-bundles__bundles-svg"
                 aria-hidden="true"
               >
                 <path d="M20 6 9 17l-5-5"></path>
               </svg>
               Cable + strap
             </div>
-            <div class="flex items-center gap-2">
+            <div class="catalog-bundles__bundles-div-15w-practice-amp-padded-gig">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="14"
@@ -820,14 +934,14 @@
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                class="lucide lucide-check text-emerald-500"
+                class="lucide lucide-check catalog-bundles__bundles-svg"
                 aria-hidden="true"
               >
                 <path d="M20 6 9 17l-5-5"></path>
               </svg>
               Assorted picks
             </div>
-            <div class="flex items-center gap-2">
+            <div class="catalog-bundles__bundles-div-15w-practice-amp-padded-gig">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="14"
@@ -838,7 +952,7 @@
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                class="lucide lucide-check text-emerald-500"
+                class="lucide lucide-check catalog-bundles__bundles-svg"
                 aria-hidden="true"
               >
                 <path d="M20 6 9 17l-5-5"></path>
@@ -846,11 +960,11 @@
               Free setup
             </div>
           </div>
-          <div class="mt-8 flex items-end gap-3">
-            <span class="font-display text-3xl font-semibold">₱19,990</span>
-            <span class="pb-1 text-sm text-zinc-500 line-through">₱23,490</span>
+          <div class="catalog-bundles__bundles-div-complete-starter-rig-everything-after-section-div-div-div">
+            <span class="catalog-bundles__19-990">₱19,990</span>
+            <span class="line-through catalog-bundles__line-through">₱23,490</span>
           </div>
-          <button class="primary-btn mt-7 self-start" data-action="bundle">
+          <button class="primary-btn catalog-bundles__bundle" data-action="bundle">
             View the bundle
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -872,22 +986,24 @@
         </div>
       </div>
     </section>
-    <section
+
+    <!-- SECTION: TRACKING -->
+<section
       id="track"
-      class="border-y border-zinc-200 bg-zinc-100 py-24 dark:border-white/10 dark:bg-white/[.02]"
+      class="catalog-tracking__track"
     >
       <div
-        class="shell grid gap-12 lg:grid-cols-[.72fr_1.28fr] lg:items-center"
+        class="shell catalog-tracking__shell"
         data-motion='{"initial":{"opacity":0,"y":28},"animate":{"opacity":1,"y":0},"transition":{"duration":0.7,"delay":0,"ease":[0.22,1,0.36,1]},"viewport":true}'
       >
         <div>
           <p class="section-label">Delivery updates</p>
           <h2 class="section-title">Know where it is.</h2>
-          <p class="mt-4 leading-7 text-zinc-500">
+          <p class="catalog-tracking__enter-your-order-number-to">
             Enter your order number to see its current status and estimated
             delivery.
           </p>
-          <div class="input-shell mt-7 max-w-md p-1.5 pl-5">
+          <div class="input-shell catalog-tracking__input-shell">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -907,33 +1023,33 @@
             <input
               placeholder="Enter your order number"
               aria-label="Order number"
-              class="min-w-0 flex-1 bg-transparent py-2 text-sm outline-none"
+              class="catalog-tracking__order"
               value=""
               data-field="order"
             />
             <button
-              class="rounded-full bg-zinc-950 px-5 py-2.5 text-xs font-bold text-white dark:bg-white dark:text-zinc-950"
+              class="catalog-tracking__track-track"
               data-action="track"
             >
               Track
             </button>
           </div>
         </div>
-        <div class="surface-card p-6 sm:p-8">
-          <div class="flex items-center justify-between">
+        <div class="surface-card catalog-tracking__surface-card">
+          <div class="catalog-tracking__surface-card-div">
             <div>
-              <p class="text-xs text-zinc-500">Order</p>
-              <p class="mt-1 font-semibold">Example delivery journey</p>
+              <p class="catalog-tracking__order-order-example-delivery-journey">Order</p>
+              <p class="catalog-tracking__example-delivery-journey">Example delivery journey</p>
             </div>
             <span
-              class="rounded-full bg-blue-100 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-widest text-blue-700 dark:bg-blue-400/10 dark:text-blue-300"
+              class="catalog-tracking__in-transit"
               >In transit</span
             >
           </div>
-          <div class="mt-10 grid grid-cols-4">
-            <div class="relative text-center">
+          <div class="catalog-tracking__surface-card-div-order-example-delivery-journey-in">
+            <div class="catalog-tracking__surface-card-div-processing-shipped-out-for-delivery">
               <div
-                class="relative z-10 mx-auto grid h-10 w-10 place-items-center rounded-full border border-zinc-950 bg-zinc-950 text-white dark:border-acid dark:bg-acid dark:text-ink"
+                class="catalog-tracking__surface-card-div-processing"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -958,15 +1074,15 @@
                 </svg>
               </div>
               <div
-                class="absolute left-1/2 top-5 h-px w-full bg-zinc-950 dark:bg-acid"
+                class="catalog-tracking__surface-card-div-processing-div-div-div-div-div"
               ></div>
-              <p class="mt-3 text-[9px] text-zinc-500 sm:text-[11px]">
+              <p class="catalog-tracking__processing">
                 Processing
               </p>
             </div>
-            <div class="relative text-center">
+            <div class="catalog-tracking__surface-card-div-processing-shipped-out-for-delivery">
               <div
-                class="relative z-10 mx-auto grid h-10 w-10 place-items-center rounded-full border border-zinc-950 bg-zinc-950 text-white dark:border-acid dark:bg-acid dark:text-ink"
+                class="catalog-tracking__surface-card-div-shipped"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -993,15 +1109,15 @@
                 </svg>
               </div>
               <div
-                class="absolute left-1/2 top-5 h-px w-full bg-zinc-950 dark:bg-acid"
+                class="catalog-tracking__surface-card-div-shipped-div-div-div-div-div"
               ></div>
-              <p class="mt-3 text-[9px] text-zinc-500 sm:text-[11px]">
+              <p class="catalog-tracking__shipped">
                 Shipped
               </p>
             </div>
-            <div class="relative text-center">
+            <div class="catalog-tracking__surface-card-div-processing-shipped-out-for-delivery">
               <div
-                class="relative z-10 mx-auto grid h-10 w-10 place-items-center rounded-full border border-zinc-200 bg-white text-zinc-400 dark:border-white/10 dark:bg-panel"
+                class="catalog-tracking__surface-card-div-out-for-delivery"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -1021,15 +1137,15 @@
                 </svg>
               </div>
               <div
-                class="absolute left-1/2 top-5 h-px w-full bg-zinc-200 dark:bg-white/10"
+                class="catalog-tracking__surface-card-div-out-for-delivery-div-div-div-div-div"
               ></div>
-              <p class="mt-3 text-[9px] text-zinc-500 sm:text-[11px]">
+              <p class="catalog-tracking__out-for-delivery">
                 Out for delivery
               </p>
             </div>
-            <div class="relative text-center">
+            <div class="catalog-tracking__surface-card-div-processing-shipped-out-for-delivery">
               <div
-                class="relative z-10 mx-auto grid h-10 w-10 place-items-center rounded-full border border-zinc-200 bg-white text-zinc-400 dark:border-white/10 dark:bg-panel"
+                class="catalog-tracking__surface-card-div-delivered"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -1047,23 +1163,25 @@
                   <path d="M20 6 9 17l-5-5"></path>
                 </svg>
               </div>
-              <p class="mt-3 text-[9px] text-zinc-500 sm:text-[11px]">
+              <p class="catalog-tracking__delivered">
                 Delivered
               </p>
             </div>
           </div>
           <div
-            class="mt-7 flex justify-between border-t border-zinc-200 pt-5 text-xs dark:border-white/10"
+            class="catalog-tracking__surface-card-div-order-example-delivery-journey-in-section-div-div-div"
           >
-            <span class="text-zinc-500">Estimated arrival</span>
-            <span class="font-semibold">Thursday, Sep 10</span>
+            <span class="catalog-tracking__estimated-arrival">Estimated arrival</span>
+            <span class="catalog-tracking__thursday-sep-10">Thursday, Sep 10</span>
           </div>
         </div>
       </div>
     </section>
-    <div class="shell grid gap-4 py-14 sm:grid-cols-3">
+
+    <!-- SECTION: GUARANTEES -->
+<div class="shell catalog__shell">
       <div
-        class="flex items-center gap-4 rounded-2xl border border-zinc-200 p-5 dark:border-white/10"
+        class="catalog__shell-div"
         data-motion='{"initial":{"opacity":0,"y":28},"animate":{"opacity":1,"y":0},"transition":{"duration":0.7,"delay":0,"ease":[0.22,1,0.36,1]},"viewport":true}'
       >
         <svg
@@ -1085,14 +1203,14 @@
           <path d="m9 12 2 2 4-4"></path>
         </svg>
         <div>
-          <p class="text-sm font-semibold">Authentic gear</p>
-          <p class="mt-1 text-xs text-zinc-500">
+          <p class="catalog__authentic-gear">Authentic gear</p>
+          <p class="catalog__official-products-with-warranty">
             Official products with warranty
           </p>
         </div>
       </div>
       <div
-        class="flex items-center gap-4 rounded-2xl border border-zinc-200 p-5 dark:border-white/10"
+        class="catalog__shell-div"
         data-motion='{"initial":{"opacity":0,"y":28},"animate":{"opacity":1,"y":0},"transition":{"duration":0.7,"delay":0,"ease":[0.22,1,0.36,1]},"viewport":true}'
       >
         <svg
@@ -1115,12 +1233,12 @@
           <path d="M19.364 18.364a9 9 0 0 0 0-12.728"></path>
         </svg>
         <div>
-          <p class="text-sm font-semibold">Hear before buying</p>
-          <p class="mt-1 text-xs text-zinc-500">Tone previews on key models</p>
+          <p class="catalog__hear-before-buying">Hear before buying</p>
+          <p class="catalog__tone-previews-on-key-models">Tone previews on key models</p>
         </div>
       </div>
       <div
-        class="flex items-center gap-4 rounded-2xl border border-zinc-200 p-5 dark:border-white/10"
+        class="catalog__shell-div"
         data-motion='{"initial":{"opacity":0,"y":28},"animate":{"opacity":1,"y":0},"transition":{"duration":0.7,"delay":0,"ease":[0.22,1,0.36,1]},"viewport":true}'
       >
         <svg
@@ -1141,58 +1259,60 @@
           ></path>
         </svg>
         <div>
-          <p class="text-sm font-semibold">Player-first support</p>
-          <p class="mt-1 text-xs text-zinc-500">Help choosing and setting up</p>
+          <p class="catalog__player-first-support">Player-first support</p>
+          <p class="catalog__help-choosing-and-setting-up">Help choosing and setting up</p>
         </div>
       </div>
     </div>
+
   </main>
-  <footer
-    class="border-t border-zinc-200 bg-white pt-16 dark:border-white/10 dark:bg-ink"
+  <!-- SECTION: FOOTER -->
+<footer
+    class="catalog-footer__udi-a-a-a-guitar-footer"
   >
     <div
-      class="shell grid gap-12 pb-14 sm:grid-cols-2 lg:grid-cols-[1.4fr_repeat(3,1fr)]"
+      class="shell catalog-footer__shell"
     >
       <div>
         <button
-          class="audia-mark flex items-center text-left text-lg"
+          class="audia-mark catalog-footer__home"
           aria-label="Go to AUDIA home"
           data-action="home"
         >
           <span class="mark-a">A</span>UDI<span class="mark-a">A</span>
         </button>
-        <p class="mt-6 max-w-xs text-sm leading-6 text-zinc-500">
+        <p class="catalog-footer__a-guitar-only-marketplace-helping">
           A guitar-only marketplace helping players find, hear, compare, and
           purchase the right instrument.
         </p>
       </div>
       <div>
-        <h3 class="text-xs font-semibold uppercase tracking-[.18em]">Shop</h3>
-        <div class="mt-5 flex flex-col gap-3">
+        <h3 class="catalog-footer__shop">Shop</h3>
+        <div class="catalog-footer__shell-div">
           <a
             href="#shop"
-            class="text-sm text-zinc-500 transition hover:text-zinc-950 dark:hover:text-white"
+            class="catalog-footer__category"
             data-action="category"
             data-category="Electric"
             >Electric guitars</a
           >
           <a
             href="#shop"
-            class="text-sm text-zinc-500 transition hover:text-zinc-950 dark:hover:text-white"
+            class="catalog-footer__category"
             data-action="category"
             data-category="Acoustic"
             >Acoustic guitars</a
           >
           <a
             href="#shop"
-            class="text-sm text-zinc-500 transition hover:text-zinc-950 dark:hover:text-white"
+            class="catalog-footer__category"
             data-action="category"
             data-category="Bass"
             >Bass guitars</a
           >
           <a
             href="#shop"
-            class="text-sm text-zinc-500 transition hover:text-zinc-950 dark:hover:text-white"
+            class="catalog-footer__category"
             data-action="category"
             data-category="Accessories"
             >Accessories</a
@@ -1200,29 +1320,29 @@
         </div>
       </div>
       <div>
-        <h3 class="text-xs font-semibold uppercase tracking-[.18em]">
+        <h3 class="catalog-footer__services">
           Services
         </h3>
-        <div class="mt-5 flex flex-col gap-3">
+        <div class="catalog-footer__shell-div">
           <a
             href="#shop"
-            class="text-sm text-zinc-500 transition hover:text-zinc-950 dark:hover:text-white"
+            class="catalog-footer__finder"
             data-action="finder"
             >Guitar finder</a
           >
           <a
             href="#shop"
-            class="text-sm text-zinc-500 transition hover:text-zinc-950 dark:hover:text-white"
+            class="catalog-footer__sound-previews"
             >Sound previews</a
           >
           <a
             href="#bundles"
-            class="text-sm text-zinc-500 transition hover:text-zinc-950 dark:hover:text-white"
+            class="catalog-footer__bundles"
             >Bundles</a
           >
           <a
             href="#shop"
-            class="text-sm text-zinc-500 transition hover:text-zinc-950 dark:hover:text-white"
+            class="catalog-footer__support-info"
             data-action="support-info"
             data-topic="setup"
             >Professional setup</a
@@ -1230,32 +1350,32 @@
         </div>
       </div>
       <div>
-        <h3 class="text-xs font-semibold uppercase tracking-[.18em]">
+        <h3 class="catalog-footer__support">
           Support
         </h3>
-        <div class="mt-5 flex flex-col gap-3">
+        <div class="catalog-footer__shell-div">
           <a
             href="#track"
-            class="text-sm text-zinc-500 transition hover:text-zinc-950 dark:hover:text-white"
+            class="catalog-footer__order-tracking"
             >Order tracking</a
           >
           <a
             href="#shop"
-            class="text-sm text-zinc-500 transition hover:text-zinc-950 dark:hover:text-white"
+            class="catalog-footer__support-info"
             data-action="support-info"
             data-topic="delivery"
             >Delivery &amp; returns</a
           >
           <a
             href="#shop"
-            class="text-sm text-zinc-500 transition hover:text-zinc-950 dark:hover:text-white"
+            class="catalog-footer__support-info"
             data-action="support-info"
             data-topic="warranty"
             >Warranty</a
           >
           <a
             href="#shop"
-            class="text-sm text-zinc-500 transition hover:text-zinc-950 dark:hover:text-white"
+            class="catalog-footer__support-info"
             data-action="support-info"
             data-topic="contact"
             >Contact us</a
@@ -1263,13 +1383,13 @@
         </div>
       </div>
     </div>
-    <div class="border-t border-zinc-200 dark:border-white/10">
+    <div class="catalog-footer__2026-audia-guitar-marketplace-admin-layout">
       <div
-        class="shell flex flex-col justify-between gap-3 py-6 text-[11px] text-zinc-500 sm:flex-row"
+        class="shell catalog-footer__shell-2026-audia-guitar-marketplace-admin"
       >
         <span>© 2026 AUDIA Guitar Marketplace</span>
         <button
-          class="hover:text-zinc-950 dark:hover:text-white"
+          class="catalog-footer__admin-login"
           data-action="admin-login"
         >
           Admin portal
@@ -1277,17 +1397,532 @@
       </div>
     </div>
   </footer>
+
+  <!-- Component: chatbot | CSS: assets/css/chatbot/chatbot.css -->
   {% include 'chatbot/chatbot.html' %}
 </div>
 {% endblock %} {% block components %}
 <!-- Related cards and dialogs live here with the page that uses them. -->
 
 <!-- Product Card -->
-{% include 'catalog/catalog_product_card.html' %}
-{% include 'catalog/catalog_navigation.html' %}
-{% include 'catalog/catalog_bundle.html' %}
-{% include 'catalog/catalog_support.html' %}
-{% include 'catalog/catalog_cart.html' %}
-{% include 'catalog/catalog_checkout.html' %}
-{% include 'search_filter/search_filter_finder.html' %}
+<!-- SECTION: PRODUCT CARD -->
+<!-- Product text below is initial template content. catalog.js fills data-field
+     elements from the database. Edit live product text in Administration > Products. -->
+<template id="product-card-template">
+  <div
+    class=""
+    data-motion='{"initial":{"opacity":0,"y":28},"animate":{"opacity":1,"y":0},"transition":{"duration":0.7,"delay":0,"ease":[0.22,1,0.36,1]},"viewport":true}'
+  >
+    <article class="product-card catalog-product-card__product-card is-hover-group">
+      <div
+        class="product-image catalog-product-card__product-image"
+      >
+        <img
+          loading="lazy"
+          decoding="async"
+          src="{{ url_for('static', filename='images/electric/Amber_Flame.png') }}"
+          alt="ELECTRIC_001"
+          class="catalog-product-card__image"
+          data-field="image"
+        />
+        <span
+          class="catalog-product-card__badge"
+          data-field="badge"
+          >Amber Flame</span
+        >
+        <button
+          class="catalog-product-card__like"
+          aria-label="Save guitar"
+          data-action="like"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-heart"
+            aria-hidden="true"
+          >
+            <path
+              d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"
+            ></path>
+          </svg>
+        </button>
+        <div class="catalog-product-card__product-image-div">
+          <button
+            class="catalog-product-card__sound"
+            aria-label="Play guitar tone"
+            data-action="sound"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-play"
+              aria-hidden="true"
+            >
+              <path
+                d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"
+              ></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="product-details catalog-product-card__product-details">
+        <div
+          class="catalog-product-card__product-details-div"
+        >
+          <span data-field="category">AUDIA Demo · Electric</span>
+          <span class="normal-case catalog-product-card__normal-case">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="11"
+              height="11"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-star catalog-product-card__normal-case-svg"
+              aria-hidden="true"
+            >
+              <path
+                d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"
+              ></path>
+            </svg>
+            <span data-field="rating">0 (0)</span>
+          </span>
+        </div>
+        <h3 class="catalog-product-card__name" data-field="name">
+          ELECTRIC_001
+        </h3>
+        <p
+          class="catalog-product-card__description"
+          data-field="description"
+        >
+          Amber Flame single-cut electric with an amber figured finish and two
+          covered pickups.
+        </p>
+        <div class="catalog-product-card__product-details-div-audia-demo-electric-0-0">
+          <div>
+            <p class="catalog-product-card__price" data-field="price">₱12,990</p>
+            <p class="catalog-product-card__stock" data-field="stock">
+              8 available
+            </p>
+          </div>
+          <button
+            class="catalog-product-card__add"
+            aria-label="Add ELECTRIC_001 to cart"
+            data-action="add"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="17"
+              height="17"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-plus"
+              aria-hidden="true"
+            >
+              <path d="M5 12h14"></path>
+              <path d="M12 5v14"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </article>
+  </div>
+</template>
+
+<!-- Mobile Nav -->
+
+<!-- SECTION: NAVIGATION -->
+<template id="mobile-nav-template">
+  <nav
+    class="shell catalog-navigation__shell"
+    data-motion='{"initial":{"height":0,"opacity":0},"animate":{"height":"auto","opacity":1},"viewport":false}'
+  >
+    <div class="catalog-navigation__shell-div">
+      <a
+        href="#shop"
+        class="catalog-navigation__mobile-link"
+        data-action="mobile-link"
+        >Shop</a
+      >
+      <a
+        href="#categories"
+        class="catalog-navigation__mobile-link"
+        data-action="mobile-link"
+        >Guitars</a
+      >
+      <a
+        href="#bundles"
+        class="catalog-navigation__mobile-link"
+        data-action="mobile-link"
+        >Bundles</a
+      >
+      <a
+        href="#track"
+        class="catalog-navigation__mobile-link"
+        data-action="mobile-link"
+        >Track order</a
+      >
+      <button
+        class="catalog-navigation__finder"
+        data-action="finder"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-compass"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="10"></circle>
+          <path
+            d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"
+          ></path>
+        </svg>
+        Guitar finder
+      </button>
+      <button
+        class="catalog-navigation__account"
+        data-action="account"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-circle-user-round"
+          aria-hidden="true"
+        >
+          <path d="M17.925 20.056a6 6 0 0 0-11.851.001"></path>
+          <circle cx="12" cy="11" r="4"></circle>
+          <circle cx="12" cy="12" r="10"></circle>
+        </svg>
+        Sign in
+      </button>
+    </div>
+  </nav>
+</template>
+
+<!-- Bundle Detail -->
+
+<!-- SECTION: BUNDLE -->
+<template id="bundle-detail-template">
+  <div class="bundle-detail">
+    <img class="bundle-image" data-field="image" alt="" />
+    <p class="form-hint catalog-bundle__description" data-field="description"></p>
+    <div class="order-total catalog-bundle__bundle-detail-div">
+      <span>Complete bundle</span><strong data-field="price"></strong>
+    </div>
+    <button class="primary-btn catalog-bundle__bundle-add" data-field="bundle-add">
+      Add bundle to cart
+    </button>
+  </div>
+</template>
+
+<!-- Support Info -->
+
+<!-- SECTION: SUPPORT -->
+<template id="support-info-template">
+  <div>
+    <p class="form-hint" data-field="support-copy"></p>
+    <p class="form-hint catalog-support__form-hint">
+      Keep your order confirmation for reference. The store can help confirm the
+      terms for your instrument.
+    </p>
+    <a
+      class="secondary-btn catalog-support__support-email"
+      data-field="support-email"
+      href="mailto:support@audia.ph"
+      >Contact the store</a
+    >
+  </div>
+</template>
+
+<!-- Cart -->
+
+<!-- SECTION: CART -->
+<template id="cart-template">
+  <div class="catalog-cart__cart-template-div">
+    <button
+      class="catalog-cart__close-cart"
+      aria-label="Close cart"
+      data-motion='{"initial":{"opacity":0},"animate":{"opacity":1},"viewport":false}'
+      data-action="close-cart"
+    ></button>
+    <aside
+      class="cart-panel catalog-cart__cart-panel"
+      data-motion='{"initial":{"x":"100%"},"animate":{"x":0},"transition":{"type":"spring","stiffness":300,"damping":32},"viewport":false}'
+    >
+      <div
+        class="catalog-cart__cart-panel-div"
+      >
+        <div class="catalog-cart__cart-panel-div-your-cart-1-items">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="19"
+            height="19"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-shopping-bag"
+            aria-hidden="true"
+          >
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+            <path d="M3.103 6.034h17.794"></path>
+            <path
+              d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z"
+            ></path>
+          </svg>
+          <h2 class="catalog-cart__your-cart">Your cart</h2>
+          <span class="catalog-cart__cart-count" data-field="cart-count"
+            >1 items</span
+          >
+        </div>
+        <button class="icon-btn" data-action="close-cart">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-x"
+            aria-hidden="true"
+          >
+            <path d="M18 6 6 18"></path>
+            <path d="m6 6 12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="catalog-cart__cart-body" data-field="cart-body"></div>
+      <div
+        class="catalog-cart__cart-footer"
+        data-field="cart-footer"
+      >
+        <div class="catalog-cart__cart-footer-div">
+          <span class="catalog-cart__subtotal">Subtotal</span>
+          <span class="catalog-cart__subtotal-subtotal-12-990" data-field="subtotal"
+            >₱12,990</span
+          >
+        </div>
+        <button class="primary-btn catalog-cart__checkout" data-action="checkout">
+          Proceed to checkout
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-shield-check"
+            aria-hidden="true"
+          >
+            <path
+              d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"
+            ></path>
+            <path d="m9 12 2 2 4-4"></path>
+          </svg>
+        </button>
+      </div>
+    </aside>
+  </div>
+</template>
+
+<!-- Cart Badge -->
+<!-- SECTION: CART BADGE -->
+<template id="cart-badge-template">
+  <span
+    class="catalog-cart-badge__cart-badge-template-span"
+  ></span>
+</template>
+
+
+<!-- Cart Empty -->
+<!-- SECTION: CART EMPTY -->
+<template id="cart-empty-template">
+  <div class="catalog-cart-empty__cart-empty-template-div">
+    <div>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="36"
+        height="36"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="lucide lucide-shopping-bag catalog-cart-empty__cart-empty-template-svg"
+        aria-hidden="true"
+      >
+        <path d="M16 10a4 4 0 0 1-8 0"></path>
+        <path d="M3.103 6.034h17.794"></path>
+        <path
+          d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z"
+        ></path>
+      </svg>
+      <p class="catalog-cart-empty__your-cart-is-empty">Your cart is empty.</p>
+    </div>
+  </div>
+</template>
+
+
+<!-- Cart Item -->
+<!-- SECTION: CART ITEM -->
+<template id="cart-item-template">
+  <div class="catalog-cart-item__cart-item-template-div">
+    <img
+      src="{{ url_for('static', filename='images/electric/Amber_Flame.png') }}"
+      alt=""
+      class="catalog-cart-item__image"
+      data-field="image"
+    />
+    <div class="catalog-cart-item__cart-item-template-div-audia-demo-electric-001-12">
+      <p
+        class="catalog-cart-item__brand"
+        data-field="brand"
+      >
+        AUDIA Demo
+      </p>
+      <p class="catalog-cart-item__name" data-field="name">
+        ELECTRIC_001
+      </p>
+      <div class="catalog-cart-item__cart-item-template-div-audia-demo-electric-001-12-template-div-div-div">
+        <span class="catalog-cart-item__price" data-field="price">₱12,990</span>
+        <div
+          class="catalog-cart-item__cart-item-template-div-12-990-1"
+        >
+          <button data-action="decrease">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="13"
+              height="13"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-minus"
+              aria-hidden="true"
+            >
+              <path d="M5 12h14"></path>
+            </svg>
+          </button>
+          <span class="catalog-cart-item__quantity" data-field="quantity">1</span>
+          <button data-action="increase">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="13"
+              height="13"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-plus"
+              aria-hidden="true"
+            >
+              <path d="M5 12h14"></path>
+              <path d="M12 5v14"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+
+<!-- Cart Items -->
+<!-- SECTION: CART ITEMS -->
+<template id="cart-items-template">
+  <div class="catalog-cart-items__cart-items-template-div"></div>
+</template>
+
+
+<!-- Checkout -->
+
+<!-- SECTION: CHECKOUT -->
+<template id="checkout-template">
+  <form method="post" class="stack-form" data-form="checkout">
+    <p class="form-hint">
+      Your instruments are reserved when you place your order. Pay with cash on
+      delivery.
+    </p>
+    <label
+      >Delivery address<textarea
+        name="address"
+        required
+        minlength="10"
+        maxlength="500"
+        autocomplete="street-address"
+        placeholder="House number, street, barangay, city, province, postal code"
+      ></textarea></label
+    ><label
+      >Phone number<input
+        name="phone"
+        type="tel"
+        required
+        minlength="7"
+        maxlength="30"
+        autocomplete="tel"
+    /></label>
+    <div class="order-total catalog-checkout__stack-form-div">
+      <span>Order total</span><strong data-field="checkout-total"></strong>
+    </div>
+    <p class="form-hint">
+      Payment: cash on delivery. No online payment is collected.
+    </p>
+    <p class="form-error" role="alert" data-field="form-error" hidden></p>
+    <button type="submit" class="primary-btn">Place order</button>
+  </form>
+</template>
+
+<!-- Finder -->
+
+{% with search_filter_section='finder' %}
+{% include 'search_filter/search_filter.html' %}
+{% endwith %}
 {% endblock %}

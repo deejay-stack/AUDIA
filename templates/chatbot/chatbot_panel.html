@@ -1,0 +1,83 @@
+<!-- MODULE: CHATBOT | COMPONENT: Chat panel
+     PURPOSE: Chat panel structure. CSS: assets/css/chatbot/chatbot_panel.css
+     JS: assets/js/chatbot/chatbot.js; assets/js/chatbot/chatbot_ui.js; assets/js/chatbot/chatbot_api.js. Preserve IDs and data-action/data-field hooks. -->
+<template id="chat-template">
+    <div
+      class="chat-panel chatbot-panel"
+      data-motion='{"initial":{"opacity":0,"y":20,"scale":0.97},"animate":{"opacity":1,"y":0,"scale":1},"viewport":false}'
+    >
+      <div
+        class="chatbot-panel__header"
+      >
+        <div
+          class="chatbot-panel__avatar"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="17"
+            height="17"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-headphones"
+            aria-hidden="true"
+          >
+            <path
+              d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"
+            ></path>
+          </svg>
+        </div>
+        <div>
+          <p class="chatbot-panel__title">AUDI customer guide</p>
+          <p class="chatbot-panel__availability">Available now</p>
+        </div>
+      </div>
+      <div
+        class="chatbot-panel__messages"
+        data-field="messages"
+        role="log"
+        aria-live="polite"
+        aria-relevant="additions text"
+        aria-label="Conversation"
+      ></div>
+      <form
+        method="post"
+        class="chatbot-panel__form"
+        data-form="chat"
+      >
+        <input
+          class="chatbot-panel__input"
+          placeholder="Ask about a guitar"
+          value=""
+          data-field="chat-input"
+          aria-label="Your message"
+          maxlength="2000"
+        />
+        <button
+          type="submit"
+          aria-label="Send message"
+          class="chatbot-panel__send"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-arrow-right"
+            aria-hidden="true"
+          >
+            <path d="M5 12h14"></path>
+            <path d="m12 5 7 7-7 7"></path>
+          </svg>
+        </button>
+      </form>
+    </div>
+  </template>

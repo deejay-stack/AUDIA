@@ -1,0 +1,21 @@
+/* ==================================================
+   COMPONENT: ADMIN SIDEBAR BACKDROP
+   HTML FILE: templates/admin/admin_sidebar_backdrop.html
+   PURPOSE: Admin sidebar backdrop presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/admin/admin.js.
+   ================================================== */
+
+.admin-sidebar-backdrop__close-sidebar {
+  position: fixed;
+  inset: 0px;
+  z-index: 40;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: none;
+}
+
+/* Screen size or accessibility preference: (min-width: 1024px). */
+@media (min-width: 1024px) {
+  .admin-sidebar-backdrop__close-sidebar {
+    display: none;
+  }
+}

@@ -1,0 +1,21 @@
+<!-- MODULE: TUNER | COMPONENT: Tuner meter
+     PURPOSE: Tuner meter structure. CSS: assets/css/tuner/tuner_meter.css
+     JS: assets/js/tuner/tuner.js (pitch: assets/js/tuner/tuner_pitch.js). Preserve IDs and data-action/data-field hooks. -->
+<div
+      id="tuner-meter"
+      class="tuner-meter"
+      role="meter"
+      aria-label="Tuning deviation in cents"
+      aria-valuemin="-50"
+      aria-valuemax="50"
+      aria-valuenow="0"
+      aria-valuetext="No reliable pitch"
+    >
+      <div class="tuner-meter-track">
+        <span class="tuner-meter-center" aria-hidden="true"></span
+        ><span id="tuner-indicator" class="tuner-indicator" hidden></span>
+      </div>
+      <div class="tuner-meter-labels" aria-hidden="true">
+        <span>Flat −50</span><span>In tune</span><span>+50 Sharp</span>
+      </div>
+    </div>

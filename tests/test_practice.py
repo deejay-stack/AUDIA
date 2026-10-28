@@ -74,11 +74,11 @@ class PracticeTests(unittest.TestCase):
         }
         for slug, (muted, opened, fretted) in shapes.items():
             html = self.client.get("/lessons/chords/" + slug).get_data(as_text=True)
-            diagram = ElementTree.fromstring(re.search(r'<svg class="chord-diagram".*?</svg>', html, re.S)[0])
+            diagram = ElementTree.fromstring(re.search(r'<svg\s+class="chord-diagram".*?</svg>', html, re.S)[0])
             strings = diagram.findall(".//line[@class='chord-string']")
             self.assertEqual(len(strings), 6, slug)
             self.assertEqual([int(line.attrib["x1"]) for line in strings], [35, 65, 95, 125, 155, 185])
-            markers = [node.text for node in diagram.findall(".//text[@class='chord-open-muted']")]
+            markers = [(node.text or "").strip() for node in diagram.findall(".//text[@class='chord-open-muted']")]
             self.assertEqual(markers.count("X"), muted, slug)
             self.assertEqual(markers.count("O"), opened, slug)
             self.assertEqual(len(diagram.findall(".//circle")), fretted, slug)

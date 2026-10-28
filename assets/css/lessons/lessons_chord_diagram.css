@@ -1,0 +1,54 @@
+/* ==================================================
+   COMPONENT: CHORD DIAGRAM MACRO
+   HTML FILE: templates/lessons/lessons_chord_diagram.html
+   PURPOSE: Chord diagram macro presentation; preserve existing colors, states and breakpoints.
+   JS: No lesson controller: Jinja renders the content; assets/js/shared/app.js handles navigation/theme.
+   ================================================== */
+
+.chord-diagram {
+  display: block;
+  width: 100%;
+  max-width: 240px;
+  height: auto;
+  margin: 20px auto;
+}
+
+.chord-fret {
+  stroke: var(--muted);
+  stroke-width: 1.5;
+}
+
+.chord-string {
+  stroke: var(--muted);
+  stroke-width: 1.5;
+}
+
+.chord-nut {
+  stroke: var(--text);
+  stroke-width: 5;
+}
+
+.chord-string-label {
+  fill: var(--text);
+  font-size: 14px;
+}
+
+.chord-open-muted {
+  fill: var(--text);
+  font-size: 14px;
+}
+
+.chord-fret-label {
+  fill: var(--muted);
+  font-size: 12px;
+}
+
+.chord-finger {
+  fill: var(--text);
+}
+
+.chord-finger-number {
+  fill: var(--surface);
+  font-size: 12px;
+  font-weight: 700;
+}

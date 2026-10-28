@@ -1,0 +1,153 @@
+/* ==================================================
+   COMPONENT: AUTH ARTWORK
+   HTML FILE: templates/auth/auth_artwork.html
+   PURPOSE: Auth artwork presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/auth/auth.js.
+   ================================================== */
+
+.auth-artwork__auth-art-div {
+  position: absolute;
+  inset: 0px;
+  background-image: none;
+}
+
+.auth-artwork__auth-art-img {
+  position: absolute;
+  inset: 0px;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  opacity: 0.7;
+  filter: saturate(0.6);
+}
+
+.auth-artwork__auth-art {
+  position: relative;
+  display: none;
+  overflow: hidden;
+  background-color: rgb(9, 9, 11);
+  margin: 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(185, 157, 221, 0.2);
+}
+
+.auth-artwork__auth-art-div-udi-a-a-audia-member {
+  position: relative;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 3rem;
+  color: rgb(255, 255, 255);
+}
+
+.auth-artwork__your-next-guitar-is-closer {
+  margin-top: 1.25rem;
+  font-family: "Space Grotesk", Inter, ui-sans-serif, system-ui;
+  font-size: 3rem;
+  line-height: 1.03;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+
+.auth-artwork__save-instruments-keep-your-guitar {
+  margin-top: 1.5rem;
+  max-width: 32rem;
+  line-height: 1.75rem;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.auth-artwork__auth-art-div-audia-member-access-your-next {
+  margin-top: 2.25rem;
+  display: flex;
+  gap: 1.75rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.auth-artwork__faster-checkout {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.auth-artwork__home {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.auth-artwork__order-history {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.auth-artwork__saved-gear {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.auth-artwork__auth-art-div-udi-a-a-audia-member-div-div-div {
+  max-width: 36rem;
+}
+
+.auth-artwork__audia-member-access {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.auth-artwork__audia-find-your-sound {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.auth-artwork__auth-art-svg {
+  color: rgb(184, 245, 208);
+}
+
+/* Screen size or accessibility preference: (min-width: 1024px). */
+@media (min-width: 1024px) {
+  .auth-artwork__auth-art {
+    display: block;
+  }
+}
+
+/* Screen size or accessibility preference: (min-width: 1280px). */
+@media (min-width: 1280px) {
+  .auth-artwork__auth-art-div-udi-a-a-audia-member {
+    padding: 4rem;
+  }
+
+  .auth-artwork__your-next-guitar-is-closer {
+    font-size: 3.75rem;
+    line-height: 1;
+  }
+}
+
+/* Screen size or accessibility preference: (prefers-reduced-motion: reduce). */
+@media (prefers-reduced-motion: reduce) {
+  .auth-artwork__auth-art-img {
+    transform: none !important;
+  }
+}
+
+.auth-artwork__auth-art::after {
+  content: "";
+  position: absolute;
+  inset: 0px;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(113, 54, 175, 0.2), transparent 60%);
+}
+
+.auth-artwork__auth-art .mark-a {
+  color: rgb(184, 245, 208);
+}

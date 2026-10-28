@@ -1,0 +1,47 @@
+/* ==================================================
+   COMPONENT: ACCOUNT ORDER CARD
+   HTML FILE: templates/account/account_order_card.html
+   PURPOSE: Account order card presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/account/account.js.
+   ================================================== */
+
+.account-order-card__product {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.account-order-card__id {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+}
+
+.account-order {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding: 22px 0px;
+  border-bottom: 1px solid var(--line);
+}
+
+.account-order:last-child {
+  border: 0px;
+}
+
+.account-order-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 14px;
+}
+
+/* Screen size or accessibility preference: (max-width: 639px). */
+@media (max-width: 639px) {
+  .account-order {
+    align-items: start;
+    flex-direction: column;
+  }
+}

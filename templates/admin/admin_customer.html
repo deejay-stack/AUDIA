@@ -1,0 +1,23 @@
+<!-- MODULE: ADMIN | COMPONENT: Admin customer
+     PURPOSE: Admin customer structure. CSS: assets/css/admin/admin_customer.css
+     JS: assets/js/admin/admin.js. Preserve IDs and data-action/data-field hooks. -->
+<template id="customer-template">
+  <div class="admin-customer__customer-template-div">
+    <div class="admin-customer__customer-template-div-div">
+      <div
+        class="admin-customer__initials"
+        data-field="initials"
+      ></div>
+      <div>
+        <p class="admin-customer__customer" data-field="customer"></p>
+        <p class="admin-customer__email" data-field="email"></p>
+      </div>
+    </div>
+    <div
+      class="admin-customer__customer-template-div-div-template-div-div"
+    >
+      <span class="admin-customer__order" data-field="order"></span>
+      <span class="admin-customer__amount" data-field="amount"></span>
+    </div>
+  </div>
+</template>

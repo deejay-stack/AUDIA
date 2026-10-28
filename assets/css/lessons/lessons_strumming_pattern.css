@@ -1,0 +1,59 @@
+/* ==================================================
+   COMPONENT: STRUMMING PATTERN DIAGRAM
+   HTML FILE: templates/lessons/lessons_strumming_pattern.html
+   PURPOSE: Strumming pattern diagram presentation; preserve existing colors, states and breakpoints.
+   JS: No lesson controller: Jinja renders the content; assets/js/shared/app.js handles navigation/theme.
+   ================================================== */
+
+.strumming-pattern {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0px, 1fr));
+  gap: 8px;
+  margin-block: 24px;
+  max-width: 640px;
+}
+
+.strumming-beat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.strumming-stroke {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 64px;
+  width: 100%;
+  border-radius: 8px;
+  background: var(--soft);
+  color: var(--accent);
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.strumming-rest {
+  color: var(--muted);
+}
+
+.strumming-stroke > span {
+  font-size: 15px;
+}
+
+.strumming-count {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* Screen size or accessibility preference: (max-width: 767px). */
+@media (max-width: 767px) {
+  .strumming-pattern {
+    gap: 4px;
+  }
+
+  .strumming-stroke {
+    font-size: 17px;
+  }
+}

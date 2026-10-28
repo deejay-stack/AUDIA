@@ -1,0 +1,7669 @@
+{
+  "backend": {
+    "modules/__init__.py": "2fe3a29dbbda0cd7aa6cbe3929239a704a2ec11abcd8cb9ef6a494a1b58795af",
+    "modules/admin/admin.py": "104c8331cee6cbec533280ab3a55d3c691abbcbc85b81439e71284b1f140ab7e",
+    "modules/admin/__init__.py": "b661622843af40c94a3f065d0be15b354d915fe4506f7312e9c279bc12a40628",
+    "modules/auth/auth.py": "3f16a0a5ef23308bddce9bd0571f862c8af0cb54bcab3fc30956e723440dc70f",
+    "modules/auth/auth_mail.py": "ac623c8c92fa332d76d57bdca8b6d4f21f5fe5a9f487676745cf2aa6171762bf",
+    "modules/auth/__init__.py": "6af871a308b75e939292c374861189847ebb16b1e6ec5fc42f1c18f760a71cf3",
+    "modules/catalog/catalog.py": "80d6b0f8ab25827e3062bcfb23846cf1e5228beb29d0be7ba91f1de0746ad1d9",
+    "modules/catalog/__init__.py": "43ff52a9cff8f55a5f7a8c3245f33fd6af1598cf48ef88bcb419d3c32ec101fb",
+    "modules/chatbot/chatbot.py": "8371f8503c7deadfbce673260c981b7141533bc028b66543a31a1fa64df68578",
+    "modules/chatbot/__init__.py": "ebe12a11f19c2ea3ec308cc3bd21dad19f21b231f1ebaa1bb804611cd49d5512",
+    "modules/database/connection.py": "155b8cdf14db677488c2e70e52483deb21913aae2748543378d945b48a914d1e",
+    "modules/database/models.py": "6657bcbd14b152577d18854908e1ac47426805c8d5acb2734b90693fc3199982",
+    "modules/database/__init__.py": "d995a82e3b98c8e3527280c4d8bdf1358675e26c415f4c8e268d12fe0a24d305",
+    "modules/lessons/lessons.py": "b72425027e7023acd4f7ac28677d7c3652ea160511e6e04f348ed75edf0de6bb",
+    "modules/lessons/lessons_data.py": "9fcc6445fa70025f3507b7686d02263389b092025096ef0480d48f03ab8ea314",
+    "modules/lessons/__init__.py": "430fc8eebf75de0ce70b38f21ad36c1496e07e508d31b749cfc87c653bf7c9bb",
+    "modules/orders/orders.py": "4c53393f276d257c98ef5ebe95f77d939324490d34edf1cbe3ce93036728414d",
+    "modules/orders/__init__.py": "d51d784b9119e52b15d88c7e662fd2bacb9e23c8919092c2ce6283c13f35eac4",
+    "modules/search_filter/search_filter.py": "fed1807d3469c7cb1af93db92c70814065ac854765196dc24edc7162f7da457b",
+    "modules/search_filter/__init__.py": "bd7ca9cf55de75ee753677ff0de74223d21e171d497cd7aa376e6426f695364d",
+    "modules/tuner/tuner.py": "ae7e0e6c201c0b41ec0852c49eaefb116d48c802263a4d973716ff1e0225fde6",
+    "modules/tuner/__init__.py": "e0a34f525b72039eb9b53684fdfe760909cd29580dc4b2d3d3ee54defd754f11",
+    "modules/chatbot/ai/ai.py": "62296f9b9d6e1fcdadef87e4051f4731a8bb8da39ae9b3bce395410b5272e581",
+    "modules/chatbot/ai/ai_rag_sync.py": "c0d454b3893041982c8ba95279bda97fd09e1464214f62104ee168a21e8abb1e",
+    "modules/chatbot/ai/__init__.py": "94a4160458aaba2c1b41e4c06542484622405b3f4061c3edfbdd41f364f4f715",
+    "app.py": "18977dfadf4154a0eb8b0a89fec0b19d9031c34d8d18c42bbae76d8154441e7a"
+  },
+  "classes": [
+    {
+      "html": "templates/account/account.html",
+      "class": "account__account-page",
+      "tag": "div",
+      "purpose": "account-page",
+      "original_classes": [
+        "account-page",
+        "min-h-screen"
+      ]
+    },
+    {
+      "html": "templates/account/account.html",
+      "class": "account__greeting",
+      "tag": "h1",
+      "purpose": "greeting",
+      "original_classes": [
+        "font-display",
+        "text-4xl",
+        "font-semibold",
+        "mt-3"
+      ]
+    },
+    {
+      "html": "templates/account/account.html",
+      "class": "account__your-instruments-orders-and-account",
+      "tag": "p",
+      "purpose": "your-instruments-orders-and-account",
+      "original_classes": [
+        "mt-3",
+        "text-sm",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/account/account_header.html",
+      "class": "account-header__account-header-div",
+      "tag": "div",
+      "purpose": "account-header-div",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "gap-3"
+      ]
+    },
+    {
+      "html": "templates/account/account_order_card.html",
+      "class": "account-order-card__id",
+      "tag": "h3",
+      "purpose": "id",
+      "original_classes": [
+        "font-semibold",
+        "text-sm"
+      ]
+    },
+    {
+      "html": "templates/account/account_order_card.html",
+      "class": "account-order-card__product",
+      "tag": "p",
+      "purpose": "product",
+      "original_classes": [
+        "text-xs",
+        "mt-2"
+      ]
+    },
+    {
+      "html": "templates/account/account_order_card.html",
+      "class": "account-order-card__status",
+      "tag": "span",
+      "purpose": "status",
+      "original_classes": [
+        "order-status"
+      ]
+    },
+    {
+      "html": "templates/account/account_orders.html",
+      "class": "account-orders__surface-card",
+      "tag": "section",
+      "purpose": "surface-card",
+      "original_classes": [
+        "surface-card",
+        "account-section",
+        "mt-7"
+      ]
+    },
+    {
+      "html": "templates/account/account_orders.html",
+      "class": "account-orders__surface-card-div",
+      "tag": "div",
+      "purpose": "surface-card-div",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "justify-between",
+        "gap-4"
+      ]
+    },
+    {
+      "html": "templates/account/account_orders.html",
+      "class": "account-orders__your-orders",
+      "tag": "h2",
+      "purpose": "your-orders",
+      "original_classes": [
+        "font-display",
+        "text-xl",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/account/account_password.html",
+      "class": "account-password__account-security",
+      "tag": "h2",
+      "purpose": "account-security",
+      "original_classes": [
+        "font-display",
+        "text-xl",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/account/account_password.html",
+      "class": "account-password__form-hint",
+      "tag": "p",
+      "purpose": "form-hint",
+      "original_classes": [
+        "form-hint",
+        "mt-3"
+      ]
+    },
+    {
+      "html": "templates/account/account_password.html",
+      "class": "account-password__stack-form",
+      "tag": "form",
+      "purpose": "stack-form",
+      "original_classes": [
+        "stack-form",
+        "mt-6"
+      ]
+    },
+    {
+      "html": "templates/account/account_profile.html",
+      "class": "account-profile__profile-delivery",
+      "tag": "h2",
+      "purpose": "profile-delivery",
+      "original_classes": [
+        "font-display",
+        "text-xl",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/account/account_profile.html",
+      "class": "account-profile__stack-form",
+      "tag": "form",
+      "purpose": "stack-form",
+      "original_classes": [
+        "stack-form",
+        "mt-6"
+      ]
+    },
+    {
+      "html": "templates/account/account_saved.html",
+      "class": "account-saved__surface-card",
+      "tag": "section",
+      "purpose": "surface-card",
+      "original_classes": [
+        "surface-card",
+        "account-section",
+        "mt-7"
+      ]
+    },
+    {
+      "html": "templates/account/account_saved.html",
+      "class": "account-saved__saved-instruments",
+      "tag": "h2",
+      "purpose": "saved-instruments",
+      "original_classes": [
+        "font-display",
+        "text-xl",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/account/account_saved_item.html",
+      "class": "account-saved-item__name",
+      "tag": "h3",
+      "purpose": "name",
+      "original_classes": [
+        "font-semibold",
+        "text-sm"
+      ]
+    },
+    {
+      "html": "templates/admin/admin.html",
+      "class": "admin__admin-page",
+      "tag": "div",
+      "purpose": "admin-page",
+      "original_classes": [
+        "admin-page",
+        "min-h-screen",
+        "bg-stone-50",
+        "dark:bg-ink"
+      ]
+    },
+    {
+      "html": "templates/admin/admin.html",
+      "class": "admin__admin-page-div",
+      "tag": "div",
+      "purpose": "admin-page-div",
+      "original_classes": [
+        "lg:pl-[270px]"
+      ]
+    },
+    {
+      "html": "templates/admin/admin.html",
+      "class": "admin__admin-view",
+      "tag": "main",
+      "purpose": "admin-view",
+      "original_classes": [
+        "p-5",
+        "sm:p-8",
+        "xl:p-10"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_aside.html",
+      "class": "admin-aside__udi-a-a-audia-flagship-aside",
+      "tag": "aside",
+      "purpose": "udi-a-a-audia-flagship-aside",
+      "original_classes": [
+        "fixed",
+        "inset-y-0",
+        "left-0",
+        "z-50",
+        "flex",
+        "w-[270px]",
+        "flex-col",
+        "border-r",
+        "border-zinc-200",
+        "bg-white",
+        "p-5",
+        "transition-transform",
+        "dark:border-white/10",
+        "dark:bg-[#0d0d10]",
+        "lg:translate-x-0",
+        "-translate-x-full"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_aside.html",
+      "class": "admin-aside__udi-a-a-layout",
+      "tag": "div",
+      "purpose": "udi-a-a-layout",
+      "original_classes": [
+        "flex",
+        "h-12",
+        "items-center",
+        "justify-between",
+        "px-2"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_aside.html",
+      "class": "admin-aside__overview",
+      "tag": "button",
+      "purpose": "overview",
+      "original_classes": [
+        "audia-mark",
+        "flex",
+        "items-center",
+        "text-left",
+        "text-lg"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_aside.html",
+      "class": "admin-aside__close-sidebar",
+      "tag": "button",
+      "purpose": "close-sidebar",
+      "original_classes": [
+        "icon-btn",
+        "lg:hidden"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_aside.html",
+      "class": "admin-aside__audia-flagship-main-storefront-layout",
+      "tag": "div",
+      "purpose": "audia-flagship-main-storefront-layout",
+      "original_classes": [
+        "mt-7",
+        "rounded-2xl",
+        "bg-zinc-100",
+        "p-3",
+        "dark:bg-white/[.055]"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_aside.html",
+      "class": "admin-aside__audia-flagship-main-storefront-layout-audia-flagship-main-storefront",
+      "tag": "div",
+      "purpose": "audia-flagship-main-storefront-layout",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "gap-3"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_aside.html",
+      "class": "admin-aside__layout",
+      "tag": "div",
+      "purpose": "layout",
+      "original_classes": [
+        "grid",
+        "h-10",
+        "w-10",
+        "place-items-center",
+        "rounded-xl",
+        "bg-zinc-950",
+        "text-white",
+        "dark:bg-acid",
+        "dark:text-ink"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_aside.html",
+      "class": "admin-aside__audia-flagship-main-storefront-layout-audia-flagship-main-storefront-aside-div-div-div",
+      "tag": "div",
+      "purpose": "audia-flagship-main-storefront-layout",
+      "original_classes": [
+        "min-w-0"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_aside.html",
+      "class": "admin-aside__store-name",
+      "tag": "p",
+      "purpose": "store-name",
+      "original_classes": [
+        "truncate",
+        "text-sm",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_aside.html",
+      "class": "admin-aside__main-storefront",
+      "tag": "p",
+      "purpose": "main-storefront",
+      "original_classes": [
+        "text-[10px]",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_aside.html",
+      "class": "admin-aside__icon",
+      "tag": "svg",
+      "purpose": "icon",
+      "original_classes": [
+        "lucide",
+        "lucide-chevron-down",
+        "ml-auto",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_aside.html",
+      "class": "admin-aside__workspace-overview-sales-directory-0-nav",
+      "tag": "nav",
+      "purpose": "workspace-overview-sales-directory-0-nav",
+      "original_classes": [
+        "mt-7",
+        "space-y-1"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_aside.html",
+      "class": "admin-aside__workspace",
+      "tag": "p",
+      "purpose": "workspace",
+      "original_classes": [
+        "mb-3",
+        "px-3",
+        "text-[9px]",
+        "font-bold",
+        "uppercase",
+        "tracking-[.18em]",
+        "text-zinc-400"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_aside.html",
+      "class": "admin-aside__overview-workspace-overview-sales-directory-0",
+      "tag": "button",
+      "purpose": "overview",
+      "original_classes": [
+        "flex",
+        "w-full",
+        "items-center",
+        "gap-3",
+        "rounded-xl",
+        "px-3",
+        "py-3",
+        "text-sm",
+        "font-medium",
+        "transition",
+        "bg-zinc-950",
+        "text-white",
+        "dark:bg-acid",
+        "dark:text-ink"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_aside.html",
+      "class": "admin-aside__sales",
+      "tag": "button",
+      "purpose": "sales",
+      "original_classes": [
+        "flex",
+        "w-full",
+        "items-center",
+        "gap-3",
+        "rounded-xl",
+        "px-3",
+        "py-3",
+        "text-sm",
+        "font-medium",
+        "transition",
+        "text-zinc-500",
+        "hover:bg-zinc-100",
+        "hover:text-zinc-950",
+        "dark:hover:bg-white/5",
+        "dark:hover:text-white"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_aside.html",
+      "class": "admin-aside__order-count",
+      "tag": "span",
+      "purpose": "order-count",
+      "original_classes": [
+        "ml-auto",
+        "rounded-full",
+        "px-2",
+        "py-0.5",
+        "text-[9px]",
+        "bg-zinc-100",
+        "dark:bg-white/5"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_aside.html",
+      "class": "admin-aside__products",
+      "tag": "button",
+      "purpose": "products",
+      "original_classes": [
+        "flex",
+        "w-full",
+        "items-center",
+        "gap-3",
+        "rounded-xl",
+        "px-3",
+        "py-3",
+        "text-sm",
+        "font-medium",
+        "transition",
+        "text-zinc-500",
+        "hover:bg-zinc-100",
+        "hover:text-zinc-950",
+        "dark:hover:bg-white/5",
+        "dark:hover:text-white"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_aside.html",
+      "class": "admin-aside__customers",
+      "tag": "button",
+      "purpose": "customers",
+      "original_classes": [
+        "flex",
+        "w-full",
+        "items-center",
+        "gap-3",
+        "rounded-xl",
+        "px-3",
+        "py-3",
+        "text-sm",
+        "font-medium",
+        "transition",
+        "text-zinc-500",
+        "hover:bg-zinc-100",
+        "hover:text-zinc-950",
+        "dark:hover:bg-white/5",
+        "dark:hover:text-white"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_aside.html",
+      "class": "admin-aside__settings-view-storefront-sign-out-layout",
+      "tag": "div",
+      "purpose": "settings-view-storefront-sign-out-layout",
+      "original_classes": [
+        "mt-auto",
+        "space-y-1",
+        "border-t",
+        "border-zinc-200",
+        "pt-4",
+        "dark:border-white/10"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_aside.html",
+      "class": "admin-aside__settings",
+      "tag": "button",
+      "purpose": "settings",
+      "original_classes": [
+        "flex",
+        "w-full",
+        "items-center",
+        "gap-3",
+        "rounded-xl",
+        "px-3",
+        "py-3",
+        "text-sm",
+        "text-zinc-500",
+        "hover:bg-zinc-100",
+        "dark:hover:bg-white/5"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_aside.html",
+      "class": "admin-aside__store",
+      "tag": "button",
+      "purpose": "store",
+      "original_classes": [
+        "flex",
+        "w-full",
+        "items-center",
+        "gap-3",
+        "rounded-xl",
+        "px-3",
+        "py-3",
+        "text-sm",
+        "text-zinc-500",
+        "hover:bg-zinc-100",
+        "dark:hover:bg-white/5"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_aside.html",
+      "class": "admin-aside__logout",
+      "tag": "button",
+      "purpose": "logout",
+      "original_classes": [
+        "w-full",
+        "px-3",
+        "pt-3",
+        "text-left",
+        "text-[11px]",
+        "text-zinc-400",
+        "hover:text-rose-500"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_customer.html",
+      "class": "admin-customer__customer-template-div",
+      "tag": "div",
+      "purpose": "customer-template-div",
+      "original_classes": [
+        "bg-white",
+        "p-5",
+        "dark:bg-panel"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_customer.html",
+      "class": "admin-customer__customer-template-div-div",
+      "tag": "div",
+      "purpose": "customer-template-div",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "gap-3"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_customer.html",
+      "class": "admin-customer__initials",
+      "tag": "div",
+      "purpose": "initials",
+      "original_classes": [
+        "grid",
+        "h-11",
+        "w-11",
+        "place-items-center",
+        "rounded-full",
+        "bg-zinc-100",
+        "text-sm",
+        "font-bold",
+        "dark:bg-white/5"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_customer.html",
+      "class": "admin-customer__customer",
+      "tag": "p",
+      "purpose": "customer",
+      "original_classes": [
+        "text-sm",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_customer.html",
+      "class": "admin-customer__email",
+      "tag": "p",
+      "purpose": "email",
+      "original_classes": [
+        "text-[10px]",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_customer.html",
+      "class": "admin-customer__customer-template-div-div-template-div-div",
+      "tag": "div",
+      "purpose": "customer-template-div",
+      "original_classes": [
+        "mt-5",
+        "flex",
+        "justify-between",
+        "border-t",
+        "border-zinc-100",
+        "pt-4",
+        "text-xs",
+        "dark:border-white/5"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_customer.html",
+      "class": "admin-customer__order",
+      "tag": "span",
+      "purpose": "order",
+      "original_classes": [
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_customer.html",
+      "class": "admin-customer__amount",
+      "tag": "span",
+      "purpose": "amount",
+      "original_classes": [
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_customers.html",
+      "class": "admin-customers__customer-records",
+      "tag": "p",
+      "purpose": "customer-records",
+      "original_classes": [
+        "text-sm",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_customers.html",
+      "class": "admin-customers__customers",
+      "tag": "h2",
+      "purpose": "customers",
+      "original_classes": [
+        "mt-1",
+        "font-display",
+        "text-3xl",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_customers.html",
+      "class": "admin-customers__input-shell",
+      "tag": "label",
+      "purpose": "input-shell",
+      "original_classes": [
+        "input-shell",
+        "mt-7"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_customers.html",
+      "class": "admin-customers__customer-query",
+      "tag": "input",
+      "purpose": "customer-query",
+      "original_classes": [
+        "w-full",
+        "bg-transparent",
+        "py-3",
+        "text-sm",
+        "outline-none"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_customers.html",
+      "class": "admin-customers__surface-card",
+      "tag": "div",
+      "purpose": "surface-card",
+      "original_classes": [
+        "surface-card",
+        "mt-7",
+        "overflow-hidden"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_customers.html",
+      "class": "admin-customers__customers-div",
+      "tag": "div",
+      "purpose": "customers",
+      "original_classes": [
+        "grid",
+        "gap-px",
+        "bg-zinc-200",
+        "dark:bg-white/10",
+        "sm:grid-cols-2",
+        "xl:grid-cols-3"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_header.html",
+      "class": "admin-header__administration-overview-aj-audia-admin-header",
+      "tag": "header",
+      "purpose": "administration-overview-aj-audia-admin-header",
+      "original_classes": [
+        "sticky",
+        "top-0",
+        "z-30",
+        "flex",
+        "h-[78px]",
+        "items-center",
+        "justify-between",
+        "border-b",
+        "border-zinc-200",
+        "bg-stone-50/90",
+        "px-5",
+        "backdrop-blur-xl",
+        "dark:border-white/10",
+        "dark:bg-ink/90",
+        "sm:px-8"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_header.html",
+      "class": "admin-header__administration-overview-layout",
+      "tag": "div",
+      "purpose": "administration-overview-layout",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "gap-3"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_header.html",
+      "class": "admin-header__sidebar",
+      "tag": "button",
+      "purpose": "sidebar",
+      "original_classes": [
+        "icon-btn",
+        "lg:hidden"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_header.html",
+      "class": "admin-header__administration",
+      "tag": "p",
+      "purpose": "administration",
+      "original_classes": [
+        "text-[10px]",
+        "uppercase",
+        "tracking-[.15em]",
+        "text-zinc-400"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_header.html",
+      "class": "admin-header__admin-title",
+      "tag": "h1",
+      "purpose": "admin-title",
+      "original_classes": [
+        "font-display",
+        "text-xl",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_header.html",
+      "class": "admin-header__aj-audia-admin-store-manager-layout",
+      "tag": "div",
+      "purpose": "aj-audia-admin-store-manager-layout",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "gap-2"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_header.html",
+      "class": "admin-header__notifications",
+      "tag": "button",
+      "purpose": "notifications",
+      "original_classes": [
+        "icon-btn",
+        "relative"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_header.html",
+      "class": "admin-header__notifications-span",
+      "tag": "span",
+      "purpose": "notifications-span",
+      "original_classes": [
+        "absolute",
+        "right-2",
+        "top-2",
+        "h-1.5",
+        "w-1.5",
+        "rounded-full",
+        "bg-rose-500"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_header.html",
+      "class": "admin-header__theme",
+      "tag": "button",
+      "purpose": "theme",
+      "original_classes": [
+        "theme-toggle",
+        "relative",
+        "flex",
+        "items-center",
+        "rounded-full",
+        "border",
+        "border-zinc-200",
+        "bg-white",
+        "text-zinc-700",
+        "shadow-sm",
+        "transition",
+        "hover:border-zinc-300",
+        "dark:border-white/10",
+        "dark:bg-white/[.05]",
+        "dark:text-zinc-200",
+        "h-10",
+        "w-10",
+        "justify-center"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_header.html",
+      "class": "admin-header__aj-audia-admin-store-manager-layout-aj-audia-admin-store-manager",
+      "tag": "div",
+      "purpose": "aj-audia-admin-store-manager-layout",
+      "original_classes": [
+        "ml-1",
+        "hidden",
+        "items-center",
+        "gap-3",
+        "border-l",
+        "border-zinc-200",
+        "pl-4",
+        "dark:border-white/10",
+        "sm:flex"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_header.html",
+      "class": "admin-header__aj-layout",
+      "tag": "div",
+      "purpose": "aj-layout",
+      "original_classes": [
+        "grid",
+        "h-9",
+        "w-9",
+        "place-items-center",
+        "rounded-full",
+        "bg-violet-100",
+        "text-xs",
+        "font-bold",
+        "text-violet-700",
+        "dark:bg-violet-400/15",
+        "dark:text-violet-300"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_header.html",
+      "class": "admin-header__admin-name",
+      "tag": "p",
+      "purpose": "admin-name",
+      "original_classes": [
+        "text-xs",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_header.html",
+      "class": "admin-header__store-manager",
+      "tag": "p",
+      "purpose": "store-manager",
+      "original_classes": [
+        "text-[10px]",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_order_status.html",
+      "class": "admin-order-status__stack-form",
+      "tag": "form",
+      "purpose": "stack-form",
+      "original_classes": [
+        "stack-form",
+        "mt-6"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_overview.html",
+      "class": "admin-overview__today",
+      "tag": "p",
+      "purpose": "today",
+      "original_classes": [
+        "text-sm",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_overview.html",
+      "class": "admin-overview__admin-greeting",
+      "tag": "h2",
+      "purpose": "admin-greeting",
+      "original_classes": [
+        "mt-1",
+        "font-display",
+        "text-3xl",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_overview.html",
+      "class": "admin-overview__stats-grid",
+      "tag": "div",
+      "purpose": "stats-grid",
+      "original_classes": [
+        "stats-grid",
+        "mt-7",
+        "grid",
+        "gap-4",
+        "sm:grid-cols-2",
+        "xl:grid-cols-4"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_overview.html",
+      "class": "admin-overview__stat-card",
+      "tag": "div",
+      "purpose": "stat-card",
+      "original_classes": [
+        "stat-card",
+        "surface-card",
+        "p-6"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_overview.html",
+      "class": "admin-overview__delivered-revenue",
+      "tag": "p",
+      "purpose": "delivered-revenue",
+      "original_classes": [
+        "mt-4",
+        "text-xs",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_overview.html",
+      "class": "admin-overview__gross-revenue",
+      "tag": "p",
+      "purpose": "gross-revenue",
+      "original_classes": [
+        "mt-2",
+        "font-display",
+        "text-3xl",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_overview.html",
+      "class": "admin-overview__stat-card",
+      "tag": "div",
+      "purpose": "stat-card",
+      "original_classes": [
+        "stat-card",
+        "surface-card",
+        "p-6"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_overview.html",
+      "class": "admin-overview__total-orders",
+      "tag": "p",
+      "purpose": "total-orders",
+      "original_classes": [
+        "mt-4",
+        "text-xs",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_overview.html",
+      "class": "admin-overview__total-orders-total-orders",
+      "tag": "p",
+      "purpose": "total-orders",
+      "original_classes": [
+        "mt-2",
+        "font-display",
+        "text-3xl",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_overview.html",
+      "class": "admin-overview__stat-card",
+      "tag": "div",
+      "purpose": "stat-card",
+      "original_classes": [
+        "stat-card",
+        "surface-card",
+        "p-6"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_overview.html",
+      "class": "admin-overview__new-customers",
+      "tag": "p",
+      "purpose": "new-customers",
+      "original_classes": [
+        "mt-4",
+        "text-xs",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_overview.html",
+      "class": "admin-overview__new-customers-new-customers",
+      "tag": "p",
+      "purpose": "new-customers",
+      "original_classes": [
+        "mt-2",
+        "font-display",
+        "text-3xl",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_overview.html",
+      "class": "admin-overview__stat-card",
+      "tag": "div",
+      "purpose": "stat-card",
+      "original_classes": [
+        "stat-card",
+        "surface-card",
+        "p-6"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_overview.html",
+      "class": "admin-overview__low-stock-items",
+      "tag": "p",
+      "purpose": "low-stock-items",
+      "original_classes": [
+        "mt-4",
+        "text-xs",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_overview.html",
+      "class": "admin-overview__low-stock-items-low-stock-items",
+      "tag": "p",
+      "purpose": "low-stock-items",
+      "original_classes": [
+        "mt-2",
+        "font-display",
+        "text-3xl",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_overview.html",
+      "class": "admin-overview__report-grid",
+      "tag": "div",
+      "purpose": "report-grid",
+      "original_classes": [
+        "report-grid",
+        "mt-6"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_overview.html",
+      "class": "admin-overview__surface-card",
+      "tag": "section",
+      "purpose": "surface-card",
+      "original_classes": [
+        "surface-card",
+        "p-6",
+        "revenue-chart"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_overview.html",
+      "class": "admin-overview__revenue-performance",
+      "tag": "h3",
+      "purpose": "revenue-performance",
+      "original_classes": [
+        "font-display",
+        "text-lg",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_overview.html",
+      "class": "admin-overview__delivered-orders-in-the-selected",
+      "tag": "p",
+      "purpose": "delivered-orders-in-the-selected",
+      "original_classes": [
+        "mt-1",
+        "text-xs",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_overview.html",
+      "class": "admin-overview__surface-card-revenue-performance-delivered-orders-in",
+      "tag": "section",
+      "purpose": "surface-card",
+      "original_classes": [
+        "surface-card",
+        "p-6"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_overview.html",
+      "class": "admin-overview__sales-by-category",
+      "tag": "h3",
+      "purpose": "sales-by-category",
+      "original_classes": [
+        "font-display",
+        "text-lg",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_overview.html",
+      "class": "admin-overview__delivered-revenue-sales-by-category-delivered-revenue",
+      "tag": "p",
+      "purpose": "delivered-revenue",
+      "original_classes": [
+        "mt-1",
+        "text-xs",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_overview.html",
+      "class": "admin-overview__surface-card-welcome-back-add-product-delivered",
+      "tag": "div",
+      "purpose": "surface-card",
+      "original_classes": [
+        "surface-card",
+        "mt-7",
+        "overflow-hidden"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_overview.html",
+      "class": "admin-overview__surface-card-div",
+      "tag": "div",
+      "purpose": "surface-card-div",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "justify-between",
+        "border-b",
+        "border-zinc-200",
+        "p-6",
+        "dark:border-white/10"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_overview.html",
+      "class": "admin-overview__recent-sales",
+      "tag": "h3",
+      "purpose": "recent-sales",
+      "original_classes": [
+        "font-display",
+        "text-lg",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_overview.html",
+      "class": "admin-overview__latest-completed-and-active-orders",
+      "tag": "p",
+      "purpose": "latest-completed-and-active-orders",
+      "original_classes": [
+        "mt-1",
+        "text-xs",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_overview.html",
+      "class": "admin-overview__sales",
+      "tag": "button",
+      "purpose": "sales",
+      "original_classes": [
+        "text-xs",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_overview.html",
+      "class": "admin-overview__surface-card-div-recent-sales-latest-completed-and",
+      "tag": "div",
+      "purpose": "surface-card-div",
+      "original_classes": [
+        "overflow-x-auto"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_overview.html",
+      "class": "admin-overview__surface-card-table",
+      "tag": "table",
+      "purpose": "surface-card-table",
+      "original_classes": [
+        "w-full",
+        "min-w-[680px]",
+        "text-left"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_overview.html",
+      "class": "admin-overview__surface-card-tr",
+      "tag": "tr",
+      "purpose": "surface-card-tr",
+      "original_classes": [
+        "text-[9px]",
+        "uppercase",
+        "tracking-widest",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_overview.html",
+      "class": "admin-overview__surface-card-th",
+      "tag": "th",
+      "purpose": "surface-card-th",
+      "original_classes": [
+        "px-6",
+        "py-4"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_overview.html",
+      "class": "admin-overview__surface-card-th",
+      "tag": "th",
+      "purpose": "surface-card-th",
+      "original_classes": [
+        "px-6",
+        "py-4"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_overview.html",
+      "class": "admin-overview__surface-card-th",
+      "tag": "th",
+      "purpose": "surface-card-th",
+      "original_classes": [
+        "px-6",
+        "py-4"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_overview.html",
+      "class": "admin-overview__surface-card-th",
+      "tag": "th",
+      "purpose": "surface-card-th",
+      "original_classes": [
+        "px-6",
+        "py-4"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_overview.html",
+      "class": "admin-overview__surface-card-th-order-customer-product-status-total",
+      "tag": "th",
+      "purpose": "surface-card-th",
+      "original_classes": [
+        "px-6",
+        "py-4",
+        "text-right"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_overview.html",
+      "class": "admin-overview__sales-rows",
+      "tag": "tbody",
+      "purpose": "sales-rows",
+      "original_classes": [
+        "divide-y",
+        "divide-zinc-100",
+        "dark:divide-white/5"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_product.html",
+      "class": "admin-product__surface-card",
+      "tag": "article",
+      "purpose": "surface-card",
+      "original_classes": [
+        "surface-card",
+        "flex",
+        "gap-4",
+        "p-4"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_product.html",
+      "class": "admin-product__image",
+      "tag": "img",
+      "purpose": "image",
+      "original_classes": [
+        "h-24",
+        "w-20",
+        "rounded-xl",
+        "object-cover"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_product.html",
+      "class": "admin-product__surface-card-div",
+      "tag": "div",
+      "purpose": "surface-card-div",
+      "original_classes": [
+        "min-w-0",
+        "flex-1"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_product.html",
+      "class": "admin-product__category",
+      "tag": "p",
+      "purpose": "category",
+      "original_classes": [
+        "text-[10px]",
+        "uppercase",
+        "tracking-widest",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_product.html",
+      "class": "admin-product__name",
+      "tag": "h3",
+      "purpose": "name",
+      "original_classes": [
+        "mt-2",
+        "text-sm",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_product.html",
+      "class": "admin-product__surface-card-div-edit",
+      "tag": "div",
+      "purpose": "surface-card-div",
+      "original_classes": [
+        "mt-4",
+        "flex",
+        "items-end",
+        "justify-between",
+        "gap-2"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_product.html",
+      "class": "admin-product__price",
+      "tag": "p",
+      "purpose": "price",
+      "original_classes": [
+        "text-sm",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_product.html",
+      "class": "admin-product__stock",
+      "tag": "p",
+      "purpose": "stock",
+      "original_classes": [
+        "mt-1",
+        "text-[10px]",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_products.html",
+      "class": "admin-products__catalog-management",
+      "tag": "p",
+      "purpose": "catalog-management",
+      "original_classes": [
+        "text-sm",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_products.html",
+      "class": "admin-products__products",
+      "tag": "h2",
+      "purpose": "products",
+      "original_classes": [
+        "mt-1",
+        "font-display",
+        "text-3xl",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_products.html",
+      "class": "admin-products__input-shell",
+      "tag": "label",
+      "purpose": "input-shell",
+      "original_classes": [
+        "input-shell",
+        "mt-7"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_products.html",
+      "class": "admin-products__product-query",
+      "tag": "input",
+      "purpose": "product-query",
+      "original_classes": [
+        "w-full",
+        "bg-transparent",
+        "py-3",
+        "text-sm",
+        "outline-none"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_products.html",
+      "class": "admin-products__admin-products",
+      "tag": "div",
+      "purpose": "admin-products",
+      "original_classes": [
+        "mt-7",
+        "grid",
+        "gap-4",
+        "sm:grid-cols-2",
+        "xl:grid-cols-3"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_recent_sale.html",
+      "class": "admin-recent-sale__recent-sale-template-tr",
+      "tag": "tr",
+      "purpose": "recent-sale-template-tr",
+      "original_classes": [
+        "text-xs",
+        "transition",
+        "hover:bg-zinc-50",
+        "dark:hover:bg-white/[.025]"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_recent_sale.html",
+      "class": "admin-recent-sale__id",
+      "tag": "td",
+      "purpose": "id",
+      "original_classes": [
+        "px-5",
+        "py-4",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_recent_sale.html",
+      "class": "admin-recent-sale__recent-sale-template-td",
+      "tag": "td",
+      "purpose": "recent-sale-template-td",
+      "original_classes": [
+        "px-5",
+        "py-4"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_recent_sale.html",
+      "class": "admin-recent-sale__customer",
+      "tag": "p",
+      "purpose": "customer",
+      "original_classes": [
+        "font-medium"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_recent_sale.html",
+      "class": "admin-recent-sale__email",
+      "tag": "p",
+      "purpose": "email",
+      "original_classes": [
+        "mt-1",
+        "text-[10px]",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_recent_sale.html",
+      "class": "admin-recent-sale__product",
+      "tag": "td",
+      "purpose": "product",
+      "original_classes": [
+        "max-w-[180px]",
+        "truncate",
+        "px-5",
+        "py-4",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_recent_sale.html",
+      "class": "admin-recent-sale__recent-sale-template-td",
+      "tag": "td",
+      "purpose": "recent-sale-template-td",
+      "original_classes": [
+        "px-5",
+        "py-4"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_recent_sale.html",
+      "class": "admin-recent-sale__status",
+      "tag": "span",
+      "purpose": "status",
+      "original_classes": [
+        "inline-flex",
+        "rounded-full",
+        "px-2.5",
+        "py-1",
+        "text-[11px]",
+        "font-semibold",
+        "bg-emerald-100",
+        "text-emerald-700",
+        "dark:bg-emerald-400/10",
+        "dark:text-emerald-300"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_recent_sale.html",
+      "class": "admin-recent-sale__amount",
+      "tag": "td",
+      "purpose": "amount",
+      "original_classes": [
+        "px-5",
+        "py-4",
+        "text-right",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_sale_row.html",
+      "class": "admin-sale-row__sale-row-template-tr",
+      "tag": "tr",
+      "purpose": "sale-row-template-tr",
+      "original_classes": [
+        "text-xs",
+        "hover:bg-zinc-50",
+        "dark:hover:bg-white/[.025]"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_sale_row.html",
+      "class": "admin-sale-row__id",
+      "tag": "td",
+      "purpose": "id",
+      "original_classes": [
+        "px-5",
+        "py-4",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_sale_row.html",
+      "class": "admin-sale-row__sale-row-template-td",
+      "tag": "td",
+      "purpose": "sale-row-template-td",
+      "original_classes": [
+        "px-5",
+        "py-4"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_sale_row.html",
+      "class": "admin-sale-row__customer",
+      "tag": "p",
+      "purpose": "customer",
+      "original_classes": [
+        "font-medium"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_sale_row.html",
+      "class": "admin-sale-row__email",
+      "tag": "p",
+      "purpose": "email",
+      "original_classes": [
+        "mt-1",
+        "text-[10px]",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_sale_row.html",
+      "class": "admin-sale-row__product",
+      "tag": "td",
+      "purpose": "product",
+      "original_classes": [
+        "max-w-[210px]",
+        "truncate",
+        "px-5",
+        "py-4",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_sale_row.html",
+      "class": "admin-sale-row__date",
+      "tag": "td",
+      "purpose": "date",
+      "original_classes": [
+        "px-5",
+        "py-4",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_sale_row.html",
+      "class": "admin-sale-row__payment",
+      "tag": "td",
+      "purpose": "payment",
+      "original_classes": [
+        "px-5",
+        "py-4",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_sale_row.html",
+      "class": "admin-sale-row__sale-row-template-td",
+      "tag": "td",
+      "purpose": "sale-row-template-td",
+      "original_classes": [
+        "px-5",
+        "py-4"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_sale_row.html",
+      "class": "admin-sale-row__status",
+      "tag": "span",
+      "purpose": "status",
+      "original_classes": [
+        "inline-flex",
+        "rounded-full",
+        "px-2.5",
+        "py-1",
+        "text-[11px]",
+        "font-semibold",
+        "bg-emerald-100",
+        "text-emerald-700",
+        "dark:bg-emerald-400/10",
+        "dark:text-emerald-300"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_sale_row.html",
+      "class": "admin-sale-row__amount",
+      "tag": "td",
+      "purpose": "amount",
+      "original_classes": [
+        "px-5",
+        "py-4",
+        "text-right",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_sale_row.html",
+      "class": "admin-sale-row__sale-row-template-td-td",
+      "tag": "td",
+      "purpose": "sale-row-template-td",
+      "original_classes": [
+        "pr-4"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_sale_row.html",
+      "class": "admin-sale-row__edit-order",
+      "tag": "button",
+      "purpose": "edit-order",
+      "original_classes": [
+        "icon-btn",
+        "h-8",
+        "w-8"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_sales.html",
+      "class": "admin-sales__sales-template-div",
+      "tag": "div",
+      "purpose": "sales-template-div",
+      "original_classes": [
+        "flex",
+        "flex-col",
+        "justify-between",
+        "gap-4",
+        "sm:flex-row",
+        "sm:items-end"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_sales.html",
+      "class": "admin-sales__all-storefront-transactions",
+      "tag": "p",
+      "purpose": "all-storefront-transactions",
+      "original_classes": [
+        "text-sm",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_sales.html",
+      "class": "admin-sales__sales-directory",
+      "tag": "h2",
+      "purpose": "sales-directory",
+      "original_classes": [
+        "mt-1",
+        "font-display",
+        "text-3xl",
+        "font-semibold",
+        "tracking-tight"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_sales.html",
+      "class": "admin-sales__export-sales",
+      "tag": "button",
+      "purpose": "export-sales",
+      "original_classes": [
+        "secondary-btn",
+        "self-start"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_sales.html",
+      "class": "admin-sales__surface-card",
+      "tag": "div",
+      "purpose": "surface-card",
+      "original_classes": [
+        "surface-card",
+        "mt-7",
+        "overflow-hidden"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_sales.html",
+      "class": "admin-sales__surface-card-div",
+      "tag": "div",
+      "purpose": "surface-card-div",
+      "original_classes": [
+        "flex",
+        "flex-col",
+        "gap-3",
+        "border-b",
+        "border-zinc-200",
+        "p-5",
+        "dark:border-white/10",
+        "sm:flex-row"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_sales.html",
+      "class": "admin-sales__input-shell",
+      "tag": "label",
+      "purpose": "input-shell",
+      "original_classes": [
+        "input-shell",
+        "flex-1"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_sales.html",
+      "class": "admin-sales__sales-query",
+      "tag": "input",
+      "purpose": "sales-query",
+      "original_classes": [
+        "w-full",
+        "bg-transparent",
+        "py-3",
+        "text-sm",
+        "outline-none"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_sales.html",
+      "class": "admin-sales__sales-status",
+      "tag": "select",
+      "purpose": "sales-status",
+      "original_classes": [
+        "appearance-none",
+        "bg-transparent",
+        "py-3",
+        "pr-6",
+        "text-sm",
+        "outline-none"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_sales.html",
+      "class": "admin-sales__surface-card-div-all-shipped-delivered-cancelled-processing",
+      "tag": "div",
+      "purpose": "surface-card-div",
+      "original_classes": [
+        "overflow-x-auto"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_sales.html",
+      "class": "admin-sales__surface-card-table",
+      "tag": "table",
+      "purpose": "surface-card-table",
+      "original_classes": [
+        "w-full",
+        "min-w-[900px]",
+        "text-left"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_sales.html",
+      "class": "admin-sales__surface-card-tr",
+      "tag": "tr",
+      "purpose": "surface-card-tr",
+      "original_classes": [
+        "bg-zinc-50",
+        "text-[9px]",
+        "uppercase",
+        "tracking-[.15em]",
+        "text-zinc-400",
+        "dark:bg-white/[.025]"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_sales.html",
+      "class": "admin-sales__surface-card-th",
+      "tag": "th",
+      "purpose": "surface-card-th",
+      "original_classes": [
+        "px-5",
+        "py-4"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_sales.html",
+      "class": "admin-sales__surface-card-th",
+      "tag": "th",
+      "purpose": "surface-card-th",
+      "original_classes": [
+        "px-5",
+        "py-4"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_sales.html",
+      "class": "admin-sales__surface-card-th",
+      "tag": "th",
+      "purpose": "surface-card-th",
+      "original_classes": [
+        "px-5",
+        "py-4"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_sales.html",
+      "class": "admin-sales__surface-card-th",
+      "tag": "th",
+      "purpose": "surface-card-th",
+      "original_classes": [
+        "px-5",
+        "py-4"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_sales.html",
+      "class": "admin-sales__surface-card-th",
+      "tag": "th",
+      "purpose": "surface-card-th",
+      "original_classes": [
+        "px-5",
+        "py-4"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_sales.html",
+      "class": "admin-sales__surface-card-th",
+      "tag": "th",
+      "purpose": "surface-card-th",
+      "original_classes": [
+        "px-5",
+        "py-4"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_sales.html",
+      "class": "admin-sales__surface-card-th-order-id-customer-product-date",
+      "tag": "th",
+      "purpose": "surface-card-th",
+      "original_classes": [
+        "px-5",
+        "py-4",
+        "text-right"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_sales.html",
+      "class": "admin-sales__surface-card-th-order-id-customer-product-date-div-table-thead-tr-th",
+      "tag": "th",
+      "purpose": "surface-card-th",
+      "original_classes": [
+        "w-12"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_sales.html",
+      "class": "admin-sales__sales-rows",
+      "tag": "tbody",
+      "purpose": "sales-rows",
+      "original_classes": [
+        "divide-y",
+        "divide-zinc-100",
+        "dark:divide-white/5"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_sales.html",
+      "class": "admin-sales__surface-card-div-all-shipped-delivered-cancelled-processing-template-div-div-div",
+      "tag": "div",
+      "purpose": "surface-card-div",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "justify-between",
+        "border-t",
+        "border-zinc-200",
+        "px-5",
+        "py-4",
+        "text-xs",
+        "text-zinc-500",
+        "dark:border-white/10"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_sales.html",
+      "class": "admin-sales__surface-card-div-showing-6-of-6-sales",
+      "tag": "div",
+      "purpose": "surface-card-div",
+      "original_classes": [
+        "flex",
+        "gap-2"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_sales.html",
+      "class": "admin-sales__sales-previous",
+      "tag": "button",
+      "purpose": "sales-previous",
+      "original_classes": [
+        "rounded-lg",
+        "border",
+        "border-zinc-200",
+        "px-3",
+        "py-2",
+        "dark:border-white/10"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_sales.html",
+      "class": "admin-sales__sales-next",
+      "tag": "button",
+      "purpose": "sales-next",
+      "original_classes": [
+        "rounded-lg",
+        "border",
+        "border-zinc-200",
+        "px-3",
+        "py-2",
+        "dark:border-white/10"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_settings.html",
+      "class": "admin-settings__settings",
+      "tag": "h2",
+      "purpose": "settings",
+      "original_classes": [
+        "mt-3",
+        "font-display",
+        "text-3xl",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_settings.html",
+      "class": "admin-settings__stack-form",
+      "tag": "form",
+      "purpose": "stack-form",
+      "original_classes": [
+        "stack-form",
+        "mt-7"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_settings.html",
+      "class": "admin-settings__your-administrator-account",
+      "tag": "h3",
+      "purpose": "your-administrator-account",
+      "original_classes": [
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_settings.html",
+      "class": "admin-settings__form-hint",
+      "tag": "p",
+      "purpose": "form-hint",
+      "original_classes": [
+        "form-hint",
+        "mt-2"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_settings.html",
+      "class": "admin-settings__admin-account",
+      "tag": "button",
+      "purpose": "admin-account",
+      "original_classes": [
+        "secondary-btn",
+        "mt-4"
+      ]
+    },
+    {
+      "html": "templates/admin/admin_sidebar_backdrop.html",
+      "class": "admin-sidebar-backdrop__close-sidebar",
+      "tag": "button",
+      "purpose": "close-sidebar",
+      "original_classes": [
+        "fixed",
+        "inset-0",
+        "z-40",
+        "bg-black/40",
+        "backdrop-blur-sm",
+        "lg:hidden"
+      ]
+    },
+    {
+      "html": "templates/auth/auth.html",
+      "class": "auth__auth-page",
+      "tag": "div",
+      "purpose": "auth-page",
+      "original_classes": [
+        "auth-page",
+        "grid",
+        "min-h-screen",
+        "bg-stone-50",
+        "dark:bg-ink",
+        "lg:grid-cols-[1.03fr_.97fr]"
+      ]
+    },
+    {
+      "html": "templates/auth/auth.html",
+      "class": "auth__auth-panel",
+      "tag": "div",
+      "purpose": "auth-panel",
+      "original_classes": [
+        "auth-panel",
+        "flex",
+        "min-h-screen",
+        "flex-col"
+      ]
+    },
+    {
+      "html": "templates/auth/auth.html",
+      "class": "auth__auth-panel-div",
+      "tag": "div",
+      "purpose": "auth-panel-div",
+      "original_classes": [
+        "mx-auto",
+        "flex",
+        "w-full",
+        "max-w-md",
+        "flex-1",
+        "flex-col",
+        "justify-center",
+        "px-6",
+        "pb-14",
+        "sm:px-8"
+      ]
+    },
+    {
+      "html": "templates/auth/auth.html",
+      "class": "auth__auth-panel-div-udi-a-a-secure-account",
+      "tag": "div",
+      "purpose": "auth-panel-div",
+      "original_classes": [
+        "mb-9",
+        "lg:hidden"
+      ]
+    },
+    {
+      "html": "templates/auth/auth.html",
+      "class": "auth__home",
+      "tag": "button",
+      "purpose": "home",
+      "original_classes": [
+        "audia-mark",
+        "flex",
+        "items-center",
+        "text-left",
+        "text-2xl"
+      ]
+    },
+    {
+      "html": "templates/auth/auth.html",
+      "class": "auth__auth-title",
+      "tag": "h1",
+      "purpose": "auth-title",
+      "original_classes": [
+        "mt-3",
+        "font-display",
+        "text-4xl",
+        "font-semibold",
+        "tracking-tight"
+      ]
+    },
+    {
+      "html": "templates/auth/auth.html",
+      "class": "auth__auth-subtitle",
+      "tag": "p",
+      "purpose": "auth-subtitle",
+      "original_classes": [
+        "mt-3",
+        "text-sm",
+        "leading-6",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/auth/auth.html",
+      "class": "auth__back-login",
+      "tag": "button",
+      "purpose": "back-login",
+      "original_classes": [
+        "mt-6",
+        "text-sm",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/auth/auth.html",
+      "class": "auth__signup",
+      "tag": "p",
+      "purpose": "signup",
+      "original_classes": [
+        "mt-7",
+        "text-center",
+        "text-xs",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/auth/auth.html",
+      "class": "auth__register",
+      "tag": "button",
+      "purpose": "register",
+      "original_classes": [
+        "font-semibold",
+        "text-zinc-950",
+        "hover:underline",
+        "dark:text-white"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_artwork.html",
+      "class": "auth-artwork__auth-art",
+      "tag": "div",
+      "purpose": "auth-art",
+      "original_classes": [
+        "auth-art",
+        "relative",
+        "hidden",
+        "overflow-hidden",
+        "bg-zinc-950",
+        "lg:block"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_artwork.html",
+      "class": "auth-artwork__auth-art-img",
+      "tag": "img",
+      "purpose": "auth-art-img",
+      "original_classes": [
+        "absolute",
+        "inset-0",
+        "h-full",
+        "w-full",
+        "object-cover",
+        "opacity-70"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_artwork.html",
+      "class": "auth-artwork__auth-art-div",
+      "tag": "div",
+      "purpose": "auth-art-div",
+      "original_classes": [
+        "absolute",
+        "inset-0",
+        "bg-gradient-to-t",
+        "from-black",
+        "via-black/15",
+        "to-black/30"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_artwork.html",
+      "class": "auth-artwork__auth-art-div-udi-a-a-audia-member",
+      "tag": "div",
+      "purpose": "auth-art-div",
+      "original_classes": [
+        "relative",
+        "flex",
+        "h-full",
+        "flex-col",
+        "justify-between",
+        "p-12",
+        "text-white",
+        "xl:p-16"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_artwork.html",
+      "class": "auth-artwork__home",
+      "tag": "button",
+      "purpose": "home",
+      "original_classes": [
+        "audia-mark",
+        "flex",
+        "items-center",
+        "text-left",
+        "text-2xl"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_artwork.html",
+      "class": "auth-artwork__auth-art-div-udi-a-a-audia-member-div-div-div",
+      "tag": "div",
+      "purpose": "auth-art-div",
+      "original_classes": [
+        "max-w-xl"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_artwork.html",
+      "class": "auth-artwork__audia-member-access",
+      "tag": "p",
+      "purpose": "audia-member-access",
+      "original_classes": [
+        "text-[10px]",
+        "font-semibold",
+        "uppercase",
+        "tracking-[.2em]",
+        "text-white/55"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_artwork.html",
+      "class": "auth-artwork__your-next-guitar-is-closer",
+      "tag": "h1",
+      "purpose": "your-next-guitar-is-closer",
+      "original_classes": [
+        "mt-5",
+        "font-display",
+        "text-5xl",
+        "font-semibold",
+        "leading-[1.03]",
+        "tracking-[-.04em]",
+        "xl:text-6xl"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_artwork.html",
+      "class": "auth-artwork__save-instruments-keep-your-guitar",
+      "tag": "p",
+      "purpose": "save-instruments-keep-your-guitar",
+      "original_classes": [
+        "mt-6",
+        "max-w-lg",
+        "leading-7",
+        "text-white/65"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_artwork.html",
+      "class": "auth-artwork__auth-art-div-audia-member-access-your-next",
+      "tag": "div",
+      "purpose": "auth-art-div",
+      "original_classes": [
+        "mt-9",
+        "flex",
+        "gap-7",
+        "text-xs",
+        "text-white/65"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_artwork.html",
+      "class": "auth-artwork__saved-gear",
+      "tag": "span",
+      "purpose": "saved-gear",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "gap-2"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_artwork.html",
+      "class": "auth-artwork__auth-art-svg",
+      "tag": "svg",
+      "purpose": "auth-art-svg",
+      "original_classes": [
+        "lucide",
+        "lucide-check",
+        "text-acid"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_artwork.html",
+      "class": "auth-artwork__order-history",
+      "tag": "span",
+      "purpose": "order-history",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "gap-2"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_artwork.html",
+      "class": "auth-artwork__auth-art-svg",
+      "tag": "svg",
+      "purpose": "auth-art-svg",
+      "original_classes": [
+        "lucide",
+        "lucide-check",
+        "text-acid"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_artwork.html",
+      "class": "auth-artwork__faster-checkout",
+      "tag": "span",
+      "purpose": "faster-checkout",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "gap-2"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_artwork.html",
+      "class": "auth-artwork__auth-art-svg",
+      "tag": "svg",
+      "purpose": "auth-art-svg",
+      "original_classes": [
+        "lucide",
+        "lucide-check",
+        "text-acid"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_artwork.html",
+      "class": "auth-artwork__audia-find-your-sound",
+      "tag": "p",
+      "purpose": "audia-find-your-sound",
+      "original_classes": [
+        "text-xs",
+        "text-white/40"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_form.html",
+      "class": "auth-form__full-name-email-address-password-form",
+      "tag": "form",
+      "purpose": "full-name-email-address-password-form",
+      "original_classes": [
+        "mt-7",
+        "space-y-5"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_form.html",
+      "class": "auth-form__name-wrap",
+      "tag": "label",
+      "purpose": "name-wrap",
+      "original_classes": [
+        "block"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_form.html",
+      "class": "auth-form__full-name",
+      "tag": "span",
+      "purpose": "full-name",
+      "original_classes": [
+        "mb-2",
+        "block",
+        "text-xs",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_form.html",
+      "class": "auth-form__input-shell",
+      "tag": "span",
+      "purpose": "input-shell",
+      "original_classes": [
+        "input-shell",
+        "rounded-xl",
+        "px-4"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_form.html",
+      "class": "auth-form__name",
+      "tag": "input",
+      "purpose": "name",
+      "original_classes": [
+        "w-full",
+        "bg-transparent",
+        "py-3.5",
+        "text-sm",
+        "outline-none"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_form.html",
+      "class": "auth-form__email-wrap",
+      "tag": "label",
+      "purpose": "email-wrap",
+      "original_classes": [
+        "block"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_form.html",
+      "class": "auth-form__email-address",
+      "tag": "span",
+      "purpose": "email-address",
+      "original_classes": [
+        "mb-2",
+        "block",
+        "text-xs",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_form.html",
+      "class": "auth-form__input-shell",
+      "tag": "span",
+      "purpose": "input-shell",
+      "original_classes": [
+        "input-shell",
+        "rounded-xl",
+        "px-4"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_form.html",
+      "class": "auth-form__email",
+      "tag": "input",
+      "purpose": "email",
+      "original_classes": [
+        "w-full",
+        "bg-transparent",
+        "py-3.5",
+        "text-sm",
+        "outline-none"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_form.html",
+      "class": "auth-form__password-wrap",
+      "tag": "label",
+      "purpose": "password-wrap",
+      "original_classes": [
+        "block"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_form.html",
+      "class": "auth-form__password",
+      "tag": "span",
+      "purpose": "password",
+      "original_classes": [
+        "mb-2",
+        "block",
+        "text-xs",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_form.html",
+      "class": "auth-form__input-shell",
+      "tag": "span",
+      "purpose": "input-shell",
+      "original_classes": [
+        "input-shell",
+        "rounded-xl",
+        "px-4"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_form.html",
+      "class": "auth-form__password-input",
+      "tag": "input",
+      "purpose": "password",
+      "original_classes": [
+        "w-full",
+        "bg-transparent",
+        "py-3.5",
+        "text-sm",
+        "outline-none"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_form.html",
+      "class": "auth-form__password-button",
+      "tag": "button",
+      "purpose": "password",
+      "original_classes": [
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_form.html",
+      "class": "auth-form__confirm-wrap",
+      "tag": "label",
+      "purpose": "confirm-wrap",
+      "original_classes": [
+        "block"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_form.html",
+      "class": "auth-form__confirm-password",
+      "tag": "span",
+      "purpose": "confirm-password",
+      "original_classes": [
+        "mb-2",
+        "block",
+        "text-xs",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_form.html",
+      "class": "auth-form__input-shell",
+      "tag": "span",
+      "purpose": "input-shell",
+      "original_classes": [
+        "input-shell",
+        "rounded-xl",
+        "px-4"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_form.html",
+      "class": "auth-form__confirm",
+      "tag": "input",
+      "purpose": "confirm",
+      "original_classes": [
+        "w-full",
+        "bg-transparent",
+        "py-3.5",
+        "text-sm",
+        "outline-none"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_form.html",
+      "class": "auth-form__login-options",
+      "tag": "div",
+      "purpose": "login-options",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "justify-between",
+        "text-xs"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_form.html",
+      "class": "auth-form__remember-me",
+      "tag": "label",
+      "purpose": "remember-me",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "gap-2",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_form.html",
+      "class": "auth-form__forgot",
+      "tag": "button",
+      "purpose": "forgot",
+      "original_classes": [
+        "font-semibold",
+        "hover:underline"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_form.html",
+      "class": "auth-form__login-error",
+      "tag": "p",
+      "purpose": "login-error",
+      "original_classes": [
+        "rounded-xl",
+        "bg-rose-50",
+        "px-4",
+        "py-3",
+        "text-xs",
+        "text-rose-600",
+        "dark:bg-rose-500/10",
+        "dark:text-rose-300"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_form.html",
+      "class": "auth-form__login-submit",
+      "tag": "button",
+      "purpose": "login-submit",
+      "original_classes": [
+        "primary-btn",
+        "w-full",
+        "py-4"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_header.html",
+      "class": "auth-header__back-to-store-header",
+      "tag": "header",
+      "purpose": "back-to-store-header",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "justify-between",
+        "p-5",
+        "sm:p-8"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_header.html",
+      "class": "auth-header__store",
+      "tag": "button",
+      "purpose": "store",
+      "original_classes": [
+        "secondary-btn",
+        "px-4",
+        "py-2.5"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_header.html",
+      "class": "auth-header__theme",
+      "tag": "button",
+      "purpose": "theme",
+      "original_classes": [
+        "theme-toggle",
+        "relative",
+        "flex",
+        "items-center",
+        "rounded-full",
+        "border",
+        "border-zinc-200",
+        "bg-white",
+        "text-zinc-700",
+        "shadow-sm",
+        "transition",
+        "hover:border-zinc-300",
+        "dark:border-white/10",
+        "dark:bg-white/[.05]",
+        "dark:text-zinc-200",
+        "h-10",
+        "w-10",
+        "justify-center"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_roles.html",
+      "class": "auth-roles__roles",
+      "tag": "div",
+      "purpose": "roles",
+      "original_classes": [
+        "mt-8",
+        "grid",
+        "grid-cols-2",
+        "rounded-2xl",
+        "bg-zinc-100",
+        "p-1.5",
+        "dark:bg-white/[.055]"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_roles.html",
+      "class": "auth-roles__role-customer",
+      "tag": "button",
+      "purpose": "role-customer",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "justify-center",
+        "gap-2",
+        "rounded-xl",
+        "px-4",
+        "py-3",
+        "text-xs",
+        "font-semibold",
+        "transition",
+        "bg-white",
+        "text-zinc-950",
+        "shadow-sm",
+        "dark:bg-zinc-800",
+        "dark:text-white"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_roles.html",
+      "class": "auth-roles__role-admin",
+      "tag": "button",
+      "purpose": "role-admin",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "justify-center",
+        "gap-2",
+        "rounded-xl",
+        "px-4",
+        "py-3",
+        "text-xs",
+        "font-semibold",
+        "transition",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog.html",
+      "class": "catalog__storefront",
+      "tag": "div",
+      "purpose": "storefront",
+      "original_classes": [
+        "storefront",
+        "min-h-screen",
+        "overflow-x-clip"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_announcement.html",
+      "class": "catalog__announcement",
+      "tag": "div",
+      "purpose": "announcement",
+      "original_classes": [
+        "announcement",
+        "px-5",
+        "py-2.5",
+        "text-center",
+        "font-semibold",
+        "uppercase",
+        "tracking-[.18em]"
+      ],
+      "css": "assets/css/catalog/catalog_announcement.css"
+    },
+    {
+      "html": "templates/catalog/catalog_announcement.html",
+      "class": "catalog__announcement-span",
+      "tag": "span",
+      "purpose": "announcement-span",
+      "original_classes": [
+        "mx-2",
+        "opacity-40"
+      ],
+      "css": "assets/css/catalog/catalog_announcement.css"
+    },
+    {
+      "html": "templates/catalog/catalog_guarantees.html",
+      "class": "catalog__shell",
+      "tag": "div",
+      "purpose": "shell",
+      "original_classes": [
+        "shell",
+        "grid",
+        "gap-4",
+        "py-14",
+        "sm:grid-cols-3"
+      ],
+      "css": "assets/css/catalog/catalog_guarantees.css"
+    },
+    {
+      "html": "templates/catalog/catalog_guarantees.html",
+      "class": "catalog__shell-div",
+      "tag": "div",
+      "purpose": "shell-div",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "gap-4",
+        "rounded-2xl",
+        "border",
+        "border-zinc-200",
+        "p-5",
+        "dark:border-white/10"
+      ],
+      "css": "assets/css/catalog/catalog_guarantees.css"
+    },
+    {
+      "html": "templates/catalog/catalog_guarantees.html",
+      "class": "catalog__authentic-gear",
+      "tag": "p",
+      "purpose": "authentic-gear",
+      "original_classes": [
+        "text-sm",
+        "font-semibold"
+      ],
+      "css": "assets/css/catalog/catalog_guarantees.css"
+    },
+    {
+      "html": "templates/catalog/catalog_guarantees.html",
+      "class": "catalog__official-products-with-warranty",
+      "tag": "p",
+      "purpose": "official-products-with-warranty",
+      "original_classes": [
+        "mt-1",
+        "text-xs",
+        "text-zinc-500"
+      ],
+      "css": "assets/css/catalog/catalog_guarantees.css"
+    },
+    {
+      "html": "templates/catalog/catalog_guarantees.html",
+      "class": "catalog__shell-div",
+      "tag": "div",
+      "purpose": "shell-div",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "gap-4",
+        "rounded-2xl",
+        "border",
+        "border-zinc-200",
+        "p-5",
+        "dark:border-white/10"
+      ],
+      "css": "assets/css/catalog/catalog_guarantees.css"
+    },
+    {
+      "html": "templates/catalog/catalog_guarantees.html",
+      "class": "catalog__hear-before-buying",
+      "tag": "p",
+      "purpose": "hear-before-buying",
+      "original_classes": [
+        "text-sm",
+        "font-semibold"
+      ],
+      "css": "assets/css/catalog/catalog_guarantees.css"
+    },
+    {
+      "html": "templates/catalog/catalog_guarantees.html",
+      "class": "catalog__tone-previews-on-key-models",
+      "tag": "p",
+      "purpose": "tone-previews-on-key-models",
+      "original_classes": [
+        "mt-1",
+        "text-xs",
+        "text-zinc-500"
+      ],
+      "css": "assets/css/catalog/catalog_guarantees.css"
+    },
+    {
+      "html": "templates/catalog/catalog_guarantees.html",
+      "class": "catalog__shell-div",
+      "tag": "div",
+      "purpose": "shell-div",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "gap-4",
+        "rounded-2xl",
+        "border",
+        "border-zinc-200",
+        "p-5",
+        "dark:border-white/10"
+      ],
+      "css": "assets/css/catalog/catalog_guarantees.css"
+    },
+    {
+      "html": "templates/catalog/catalog_guarantees.html",
+      "class": "catalog__player-first-support",
+      "tag": "p",
+      "purpose": "player-first-support",
+      "original_classes": [
+        "text-sm",
+        "font-semibold"
+      ],
+      "css": "assets/css/catalog/catalog_guarantees.css"
+    },
+    {
+      "html": "templates/catalog/catalog_guarantees.html",
+      "class": "catalog__help-choosing-and-setting-up",
+      "tag": "p",
+      "purpose": "help-choosing-and-setting-up",
+      "original_classes": [
+        "mt-1",
+        "text-xs",
+        "text-zinc-500"
+      ],
+      "css": "assets/css/catalog/catalog_guarantees.css"
+    },
+    {
+      "html": "templates/catalog/catalog_bundle.html",
+      "class": "catalog-bundle__description",
+      "tag": "p",
+      "purpose": "description",
+      "original_classes": [
+        "form-hint",
+        "mt-5"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_bundle.html",
+      "class": "catalog-bundle__bundle-detail-div",
+      "tag": "div",
+      "purpose": "bundle-detail-div",
+      "original_classes": [
+        "order-total",
+        "mt-5"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_bundle.html",
+      "class": "catalog-bundle__bundle-add",
+      "tag": "button",
+      "purpose": "bundle-add",
+      "original_classes": [
+        "primary-btn",
+        "w-full"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_bundles.html",
+      "class": "catalog-bundles__bundles",
+      "tag": "section",
+      "purpose": "bundles",
+      "original_classes": [
+        "shell",
+        "pb-24",
+        "sm:pb-28"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_bundles.html",
+      "class": "catalog-bundles__bundles-div",
+      "tag": "div",
+      "purpose": "bundles-div",
+      "original_classes": [
+        "grid",
+        "overflow-hidden",
+        "rounded-[2rem]",
+        "border",
+        "border-zinc-200",
+        "bg-white",
+        "shadow-sm",
+        "dark:border-white/10",
+        "dark:bg-panel",
+        "lg:grid-cols-2"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_bundles.html",
+      "class": "catalog-bundles__bundles-div-save-3-500-complete-starter",
+      "tag": "div",
+      "purpose": "bundles-div",
+      "original_classes": [
+        "relative",
+        "min-h-[430px]",
+        "overflow-hidden"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_bundles.html",
+      "class": "catalog-bundles__bundles-img",
+      "tag": "img",
+      "purpose": "bundles-img",
+      "original_classes": [
+        "absolute",
+        "inset-0",
+        "h-full",
+        "w-full",
+        "object-cover",
+        "transition",
+        "duration-1000",
+        "hover:scale-105"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_bundles.html",
+      "class": "catalog-bundles__save-3-500",
+      "tag": "span",
+      "purpose": "save-3-500",
+      "original_classes": [
+        "absolute",
+        "left-6",
+        "top-6",
+        "rounded-full",
+        "bg-white",
+        "px-3",
+        "py-1.5",
+        "text-[10px]",
+        "font-bold",
+        "uppercase",
+        "tracking-widest",
+        "text-zinc-950"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_bundles.html",
+      "class": "catalog-bundles__bundles-div-save-3-500-complete-starter-section-div-div",
+      "tag": "div",
+      "purpose": "bundles-div",
+      "original_classes": [
+        "flex",
+        "flex-col",
+        "justify-center",
+        "p-8",
+        "sm:p-12",
+        "lg:p-16"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_bundles.html",
+      "class": "catalog-bundles__everything-after-the-guitar",
+      "tag": "h2",
+      "purpose": "everything-after-the-guitar",
+      "original_classes": [
+        "mt-3",
+        "font-display",
+        "text-4xl",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_bundles.html",
+      "class": "catalog-bundles__a-matched-practice-amp-padded",
+      "tag": "p",
+      "purpose": "a-matched-practice-amp-padded",
+      "original_classes": [
+        "mt-4",
+        "leading-7",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_bundles.html",
+      "class": "catalog-bundles__bundles-div-complete-starter-rig-everything-after",
+      "tag": "div",
+      "purpose": "bundles-div",
+      "original_classes": [
+        "mt-7",
+        "grid",
+        "grid-cols-2",
+        "gap-3",
+        "text-sm"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_bundles.html",
+      "class": "catalog-bundles__bundles-div-15w-practice-amp-padded-gig",
+      "tag": "div",
+      "purpose": "bundles-div",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "gap-2"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_bundles.html",
+      "class": "catalog-bundles__bundles-svg",
+      "tag": "svg",
+      "purpose": "bundles-svg",
+      "original_classes": [
+        "lucide",
+        "lucide-check",
+        "text-emerald-500"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_bundles.html",
+      "class": "catalog-bundles__bundles-div-15w-practice-amp-padded-gig",
+      "tag": "div",
+      "purpose": "bundles-div",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "gap-2"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_bundles.html",
+      "class": "catalog-bundles__bundles-svg",
+      "tag": "svg",
+      "purpose": "bundles-svg",
+      "original_classes": [
+        "lucide",
+        "lucide-check",
+        "text-emerald-500"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_bundles.html",
+      "class": "catalog-bundles__bundles-div-15w-practice-amp-padded-gig",
+      "tag": "div",
+      "purpose": "bundles-div",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "gap-2"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_bundles.html",
+      "class": "catalog-bundles__bundles-svg",
+      "tag": "svg",
+      "purpose": "bundles-svg",
+      "original_classes": [
+        "lucide",
+        "lucide-check",
+        "text-emerald-500"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_bundles.html",
+      "class": "catalog-bundles__bundles-div-15w-practice-amp-padded-gig",
+      "tag": "div",
+      "purpose": "bundles-div",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "gap-2"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_bundles.html",
+      "class": "catalog-bundles__bundles-svg",
+      "tag": "svg",
+      "purpose": "bundles-svg",
+      "original_classes": [
+        "lucide",
+        "lucide-check",
+        "text-emerald-500"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_bundles.html",
+      "class": "catalog-bundles__bundles-div-15w-practice-amp-padded-gig",
+      "tag": "div",
+      "purpose": "bundles-div",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "gap-2"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_bundles.html",
+      "class": "catalog-bundles__bundles-svg",
+      "tag": "svg",
+      "purpose": "bundles-svg",
+      "original_classes": [
+        "lucide",
+        "lucide-check",
+        "text-emerald-500"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_bundles.html",
+      "class": "catalog-bundles__bundles-div-15w-practice-amp-padded-gig",
+      "tag": "div",
+      "purpose": "bundles-div",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "gap-2"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_bundles.html",
+      "class": "catalog-bundles__bundles-svg",
+      "tag": "svg",
+      "purpose": "bundles-svg",
+      "original_classes": [
+        "lucide",
+        "lucide-check",
+        "text-emerald-500"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_bundles.html",
+      "class": "catalog-bundles__bundles-div-complete-starter-rig-everything-after-section-div-div-div",
+      "tag": "div",
+      "purpose": "bundles-div",
+      "original_classes": [
+        "mt-8",
+        "flex",
+        "items-end",
+        "gap-3"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_bundles.html",
+      "class": "catalog-bundles__19-990",
+      "tag": "span",
+      "purpose": "19-990",
+      "original_classes": [
+        "font-display",
+        "text-3xl",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_bundles.html",
+      "class": "catalog-bundles__line-through",
+      "tag": "span",
+      "purpose": "line-through",
+      "original_classes": [
+        "pb-1",
+        "text-sm",
+        "text-zinc-500",
+        "line-through"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_bundles.html",
+      "class": "catalog-bundles__bundle",
+      "tag": "button",
+      "purpose": "bundle",
+      "original_classes": [
+        "primary-btn",
+        "mt-7",
+        "self-start"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_cart.html",
+      "class": "catalog-cart__cart-template-div",
+      "tag": "div",
+      "purpose": "cart-template-div",
+      "original_classes": [
+        "fixed",
+        "inset-0",
+        "z-50"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_cart.html",
+      "class": "catalog-cart__close-cart",
+      "tag": "button",
+      "purpose": "close-cart",
+      "original_classes": [
+        "absolute",
+        "inset-0",
+        "bg-black/55",
+        "backdrop-blur-sm"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_cart.html",
+      "class": "catalog-cart__cart-panel",
+      "tag": "aside",
+      "purpose": "cart-panel",
+      "original_classes": [
+        "cart-panel",
+        "absolute",
+        "right-0",
+        "top-0",
+        "flex",
+        "h-full",
+        "w-full",
+        "max-w-md",
+        "flex-col",
+        "bg-white",
+        "shadow-2xl",
+        "dark:bg-[#101014]"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_cart.html",
+      "class": "catalog-cart__cart-panel-div",
+      "tag": "div",
+      "purpose": "cart-panel-div",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "justify-between",
+        "border-b",
+        "border-zinc-200",
+        "px-6",
+        "py-5",
+        "dark:border-white/10"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_cart.html",
+      "class": "catalog-cart__cart-panel-div-your-cart-1-items",
+      "tag": "div",
+      "purpose": "cart-panel-div",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "gap-3"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_cart.html",
+      "class": "catalog-cart__your-cart",
+      "tag": "h2",
+      "purpose": "your-cart",
+      "original_classes": [
+        "font-display",
+        "text-xl",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_cart.html",
+      "class": "catalog-cart__cart-count",
+      "tag": "span",
+      "purpose": "cart-count",
+      "original_classes": [
+        "text-xs",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_cart.html",
+      "class": "catalog-cart__cart-body",
+      "tag": "div",
+      "purpose": "cart-body",
+      "original_classes": [
+        "flex-1",
+        "overflow-y-auto",
+        "p-6"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_cart.html",
+      "class": "catalog-cart__cart-footer",
+      "tag": "div",
+      "purpose": "cart-footer",
+      "original_classes": [
+        "border-t",
+        "border-zinc-200",
+        "p-6",
+        "dark:border-white/10"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_cart.html",
+      "class": "catalog-cart__cart-footer-div",
+      "tag": "div",
+      "purpose": "cart-footer-div",
+      "original_classes": [
+        "flex",
+        "justify-between"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_cart.html",
+      "class": "catalog-cart__subtotal",
+      "tag": "span",
+      "purpose": "subtotal",
+      "original_classes": [
+        "text-sm",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_cart.html",
+      "class": "catalog-cart__subtotal-subtotal-12-990",
+      "tag": "span",
+      "purpose": "subtotal",
+      "original_classes": [
+        "font-display",
+        "text-xl",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_cart.html",
+      "class": "catalog-cart__checkout",
+      "tag": "button",
+      "purpose": "checkout",
+      "original_classes": [
+        "primary-btn",
+        "mt-5",
+        "w-full"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_cart_badge.html",
+      "class": "catalog-cart-badge__cart-badge-template-span",
+      "tag": "span",
+      "purpose": "cart-badge-template-span",
+      "original_classes": [
+        "absolute",
+        "-right-0.5",
+        "-top-0.5",
+        "grid",
+        "h-5",
+        "w-5",
+        "place-items-center",
+        "rounded-full",
+        "bg-zinc-950",
+        "text-[10px]",
+        "font-bold",
+        "text-white",
+        "dark:bg-acid",
+        "dark:text-ink"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_cart_empty.html",
+      "class": "catalog-cart-empty__cart-empty-template-div",
+      "tag": "div",
+      "purpose": "cart-empty-template-div",
+      "original_classes": [
+        "grid",
+        "h-full",
+        "place-items-center",
+        "text-center"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_cart_empty.html",
+      "class": "catalog-cart-empty__cart-empty-template-svg",
+      "tag": "svg",
+      "purpose": "cart-empty-template-svg",
+      "original_classes": [
+        "lucide",
+        "lucide-shopping-bag",
+        "mx-auto",
+        "text-zinc-300",
+        "dark:text-zinc-700"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_cart_empty.html",
+      "class": "catalog-cart-empty__your-cart-is-empty",
+      "tag": "p",
+      "purpose": "your-cart-is-empty",
+      "original_classes": [
+        "mt-4",
+        "text-sm",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_cart_item.html",
+      "class": "catalog-cart-item__cart-item-template-div",
+      "tag": "div",
+      "purpose": "cart-item-template-div",
+      "original_classes": [
+        "flex",
+        "gap-4"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_cart_item.html",
+      "class": "catalog-cart-item__image",
+      "tag": "img",
+      "purpose": "image",
+      "original_classes": [
+        "h-24",
+        "w-20",
+        "rounded-xl",
+        "object-cover"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_cart_item.html",
+      "class": "catalog-cart-item__cart-item-template-div-audia-demo-electric-001-12",
+      "tag": "div",
+      "purpose": "cart-item-template-div",
+      "original_classes": [
+        "flex",
+        "min-w-0",
+        "flex-1",
+        "flex-col"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_cart_item.html",
+      "class": "catalog-cart-item__brand",
+      "tag": "p",
+      "purpose": "brand",
+      "original_classes": [
+        "text-[10px]",
+        "uppercase",
+        "tracking-widest",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_cart_item.html",
+      "class": "catalog-cart-item__name",
+      "tag": "p",
+      "purpose": "name",
+      "original_classes": [
+        "mt-1",
+        "truncate",
+        "text-sm",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_cart_item.html",
+      "class": "catalog-cart-item__cart-item-template-div-audia-demo-electric-001-12-template-div-div-div",
+      "tag": "div",
+      "purpose": "cart-item-template-div",
+      "original_classes": [
+        "mt-auto",
+        "flex",
+        "items-center",
+        "justify-between"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_cart_item.html",
+      "class": "catalog-cart-item__price",
+      "tag": "span",
+      "purpose": "price",
+      "original_classes": [
+        "text-sm",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_cart_item.html",
+      "class": "catalog-cart-item__cart-item-template-div-12-990-1",
+      "tag": "div",
+      "purpose": "cart-item-template-div",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "gap-3",
+        "rounded-full",
+        "border",
+        "border-zinc-200",
+        "px-2",
+        "py-1",
+        "dark:border-white/10"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_cart_item.html",
+      "class": "catalog-cart-item__quantity",
+      "tag": "span",
+      "purpose": "quantity",
+      "original_classes": [
+        "text-xs"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_cart_items.html",
+      "class": "catalog-cart-items__cart-items-template-div",
+      "tag": "div",
+      "purpose": "cart-items-template-div",
+      "original_classes": [
+        "space-y-5"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_categories.html",
+      "class": "catalog-categories__categories",
+      "tag": "section",
+      "purpose": "categories",
+      "original_classes": [
+        "shell",
+        "py-24",
+        "sm:py-28"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_categories.html",
+      "class": "catalog-categories__categories-div",
+      "tag": "div",
+      "purpose": "categories-div",
+      "original_classes": [
+        "mb-10",
+        "flex",
+        "flex-col",
+        "justify-between",
+        "gap-4",
+        "sm:flex-row",
+        "sm:items-end"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_categories.html",
+      "class": "catalog-categories__start-with-the-instrument-family",
+      "tag": "p",
+      "purpose": "start-with-the-instrument-family",
+      "original_classes": [
+        "max-w-sm",
+        "text-sm",
+        "leading-6",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_categories.html",
+      "class": "catalog-categories__categories-div-browse-the-collection-choose-your",
+      "tag": "div",
+      "purpose": "categories-div",
+      "original_classes": [
+        "grid",
+        "gap-4",
+        "sm:grid-cols-2",
+        "lg:grid-cols-4"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_categories.html",
+      "class": "catalog-categories__category",
+      "tag": "button",
+      "purpose": "category",
+      "original_classes": [
+        "category-card",
+        "group",
+        "relative",
+        "h-[390px]",
+        "w-full",
+        "overflow-hidden",
+        "rounded-2xl",
+        "bg-zinc-900",
+        "text-left",
+        "shadow-sm"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_categories.html",
+      "class": "catalog-categories__category-img",
+      "tag": "img",
+      "purpose": "category-img",
+      "original_classes": [
+        "h-full",
+        "w-full",
+        "object-cover",
+        "transition",
+        "duration-700",
+        "group-hover:scale-105"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_categories.html",
+      "class": "catalog-categories__category-div",
+      "tag": "div",
+      "purpose": "category-div",
+      "original_classes": [
+        "absolute",
+        "inset-0",
+        "bg-gradient-to-t",
+        "from-black/90",
+        "via-black/15",
+        "to-transparent"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_categories.html",
+      "class": "catalog-categories__category-div-01-models-10-electric",
+      "tag": "div",
+      "purpose": "category-div",
+      "original_classes": [
+        "absolute",
+        "inset-x-0",
+        "bottom-0",
+        "flex",
+        "items-end",
+        "justify-between",
+        "p-6",
+        "text-white"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_categories.html",
+      "class": "catalog-categories__01-models-10",
+      "tag": "p",
+      "purpose": "01-models-10",
+      "original_classes": [
+        "text-[10px]",
+        "uppercase",
+        "tracking-[.16em]",
+        "text-white/55"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_categories.html",
+      "class": "catalog-categories__electric",
+      "tag": "h3",
+      "purpose": "electric",
+      "original_classes": [
+        "mt-2",
+        "font-display",
+        "text-2xl",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_categories.html",
+      "class": "catalog-categories__category-span",
+      "tag": "span",
+      "purpose": "category-span",
+      "original_classes": [
+        "grid",
+        "h-10",
+        "w-10",
+        "place-items-center",
+        "rounded-full",
+        "border",
+        "border-white/30",
+        "bg-white/10",
+        "backdrop-blur",
+        "transition",
+        "group-hover:bg-white",
+        "group-hover:text-zinc-950"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_categories.html",
+      "class": "catalog-categories__category",
+      "tag": "button",
+      "purpose": "category",
+      "original_classes": [
+        "category-card",
+        "group",
+        "relative",
+        "h-[390px]",
+        "w-full",
+        "overflow-hidden",
+        "rounded-2xl",
+        "bg-zinc-900",
+        "text-left",
+        "shadow-sm"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_categories.html",
+      "class": "catalog-categories__category-img",
+      "tag": "img",
+      "purpose": "category-img",
+      "original_classes": [
+        "h-full",
+        "w-full",
+        "object-cover",
+        "transition",
+        "duration-700",
+        "group-hover:scale-105"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_categories.html",
+      "class": "catalog-categories__category-div",
+      "tag": "div",
+      "purpose": "category-div",
+      "original_classes": [
+        "absolute",
+        "inset-0",
+        "bg-gradient-to-t",
+        "from-black/90",
+        "via-black/15",
+        "to-transparent"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_categories.html",
+      "class": "catalog-categories__category-div-02-models-10-acoustic",
+      "tag": "div",
+      "purpose": "category-div",
+      "original_classes": [
+        "absolute",
+        "inset-x-0",
+        "bottom-0",
+        "flex",
+        "items-end",
+        "justify-between",
+        "p-6",
+        "text-white"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_categories.html",
+      "class": "catalog-categories__02-models-10",
+      "tag": "p",
+      "purpose": "02-models-10",
+      "original_classes": [
+        "text-[10px]",
+        "uppercase",
+        "tracking-[.16em]",
+        "text-white/55"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_categories.html",
+      "class": "catalog-categories__acoustic",
+      "tag": "h3",
+      "purpose": "acoustic",
+      "original_classes": [
+        "mt-2",
+        "font-display",
+        "text-2xl",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_categories.html",
+      "class": "catalog-categories__category-span",
+      "tag": "span",
+      "purpose": "category-span",
+      "original_classes": [
+        "grid",
+        "h-10",
+        "w-10",
+        "place-items-center",
+        "rounded-full",
+        "border",
+        "border-white/30",
+        "bg-white/10",
+        "backdrop-blur",
+        "transition",
+        "group-hover:bg-white",
+        "group-hover:text-zinc-950"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_categories.html",
+      "class": "catalog-categories__category",
+      "tag": "button",
+      "purpose": "category",
+      "original_classes": [
+        "category-card",
+        "group",
+        "relative",
+        "h-[390px]",
+        "w-full",
+        "overflow-hidden",
+        "rounded-2xl",
+        "bg-zinc-900",
+        "text-left",
+        "shadow-sm"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_categories.html",
+      "class": "catalog-categories__category-img",
+      "tag": "img",
+      "purpose": "category-img",
+      "original_classes": [
+        "h-full",
+        "w-full",
+        "object-cover",
+        "transition",
+        "duration-700",
+        "group-hover:scale-105"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_categories.html",
+      "class": "catalog-categories__category-div",
+      "tag": "div",
+      "purpose": "category-div",
+      "original_classes": [
+        "absolute",
+        "inset-0",
+        "bg-gradient-to-t",
+        "from-black/90",
+        "via-black/15",
+        "to-transparent"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_categories.html",
+      "class": "catalog-categories__category-div-03-models-10-classical",
+      "tag": "div",
+      "purpose": "category-div",
+      "original_classes": [
+        "absolute",
+        "inset-x-0",
+        "bottom-0",
+        "flex",
+        "items-end",
+        "justify-between",
+        "p-6",
+        "text-white"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_categories.html",
+      "class": "catalog-categories__03-models-10",
+      "tag": "p",
+      "purpose": "03-models-10",
+      "original_classes": [
+        "text-[10px]",
+        "uppercase",
+        "tracking-[.16em]",
+        "text-white/55"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_categories.html",
+      "class": "catalog-categories__classical",
+      "tag": "h3",
+      "purpose": "classical",
+      "original_classes": [
+        "mt-2",
+        "font-display",
+        "text-2xl",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_categories.html",
+      "class": "catalog-categories__category-span",
+      "tag": "span",
+      "purpose": "category-span",
+      "original_classes": [
+        "grid",
+        "h-10",
+        "w-10",
+        "place-items-center",
+        "rounded-full",
+        "border",
+        "border-white/30",
+        "bg-white/10",
+        "backdrop-blur",
+        "transition",
+        "group-hover:bg-white",
+        "group-hover:text-zinc-950"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_categories.html",
+      "class": "catalog-categories__category",
+      "tag": "button",
+      "purpose": "category",
+      "original_classes": [
+        "category-card",
+        "group",
+        "relative",
+        "h-[390px]",
+        "w-full",
+        "overflow-hidden",
+        "rounded-2xl",
+        "bg-zinc-900",
+        "text-left",
+        "shadow-sm"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_categories.html",
+      "class": "catalog-categories__category-img",
+      "tag": "img",
+      "purpose": "category-img",
+      "original_classes": [
+        "h-full",
+        "w-full",
+        "object-cover",
+        "transition",
+        "duration-700",
+        "group-hover:scale-105"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_categories.html",
+      "class": "catalog-categories__category-div",
+      "tag": "div",
+      "purpose": "category-div",
+      "original_classes": [
+        "absolute",
+        "inset-0",
+        "bg-gradient-to-t",
+        "from-black/90",
+        "via-black/15",
+        "to-transparent"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_categories.html",
+      "class": "catalog-categories__category-div-04-models-10-bass",
+      "tag": "div",
+      "purpose": "category-div",
+      "original_classes": [
+        "absolute",
+        "inset-x-0",
+        "bottom-0",
+        "flex",
+        "items-end",
+        "justify-between",
+        "p-6",
+        "text-white"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_categories.html",
+      "class": "catalog-categories__04-models-10",
+      "tag": "p",
+      "purpose": "04-models-10",
+      "original_classes": [
+        "text-[10px]",
+        "uppercase",
+        "tracking-[.16em]",
+        "text-white/55"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_categories.html",
+      "class": "catalog-categories__bass",
+      "tag": "h3",
+      "purpose": "bass",
+      "original_classes": [
+        "mt-2",
+        "font-display",
+        "text-2xl",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_categories.html",
+      "class": "catalog-categories__category-span",
+      "tag": "span",
+      "purpose": "category-span",
+      "original_classes": [
+        "grid",
+        "h-10",
+        "w-10",
+        "place-items-center",
+        "rounded-full",
+        "border",
+        "border-white/30",
+        "bg-white/10",
+        "backdrop-blur",
+        "transition",
+        "group-hover:bg-white",
+        "group-hover:text-zinc-950"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_checkout.html",
+      "class": "catalog-checkout__stack-form-div",
+      "tag": "div",
+      "purpose": "stack-form-div",
+      "original_classes": [
+        "order-total"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_footer.html",
+      "class": "catalog-footer__udi-a-a-a-guitar-footer",
+      "tag": "footer",
+      "purpose": "udi-a-a-a-guitar-footer",
+      "original_classes": [
+        "border-t",
+        "border-zinc-200",
+        "bg-white",
+        "pt-16",
+        "dark:border-white/10",
+        "dark:bg-ink"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_footer.html",
+      "class": "catalog-footer__shell",
+      "tag": "div",
+      "purpose": "shell",
+      "original_classes": [
+        "shell",
+        "grid",
+        "gap-12",
+        "pb-14",
+        "sm:grid-cols-2",
+        "lg:grid-cols-[1.4fr_repeat(3,1fr)]"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_footer.html",
+      "class": "catalog-footer__home",
+      "tag": "button",
+      "purpose": "home",
+      "original_classes": [
+        "audia-mark",
+        "flex",
+        "items-center",
+        "text-left",
+        "text-lg"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_footer.html",
+      "class": "catalog-footer__a-guitar-only-marketplace-helping",
+      "tag": "p",
+      "purpose": "a-guitar-only-marketplace-helping",
+      "original_classes": [
+        "mt-6",
+        "max-w-xs",
+        "text-sm",
+        "leading-6",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_footer.html",
+      "class": "catalog-footer__shop",
+      "tag": "h3",
+      "purpose": "shop",
+      "original_classes": [
+        "text-xs",
+        "font-semibold",
+        "uppercase",
+        "tracking-[.18em]"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_footer.html",
+      "class": "catalog-footer__shell-div",
+      "tag": "div",
+      "purpose": "shell-div",
+      "original_classes": [
+        "mt-5",
+        "flex",
+        "flex-col",
+        "gap-3"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_footer.html",
+      "class": "catalog-footer__category",
+      "tag": "a",
+      "purpose": "category",
+      "original_classes": [
+        "text-sm",
+        "text-zinc-500",
+        "transition",
+        "hover:text-zinc-950",
+        "dark:hover:text-white"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_footer.html",
+      "class": "catalog-footer__category",
+      "tag": "a",
+      "purpose": "category",
+      "original_classes": [
+        "text-sm",
+        "text-zinc-500",
+        "transition",
+        "hover:text-zinc-950",
+        "dark:hover:text-white"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_footer.html",
+      "class": "catalog-footer__category",
+      "tag": "a",
+      "purpose": "category",
+      "original_classes": [
+        "text-sm",
+        "text-zinc-500",
+        "transition",
+        "hover:text-zinc-950",
+        "dark:hover:text-white"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_footer.html",
+      "class": "catalog-footer__category",
+      "tag": "a",
+      "purpose": "category",
+      "original_classes": [
+        "text-sm",
+        "text-zinc-500",
+        "transition",
+        "hover:text-zinc-950",
+        "dark:hover:text-white"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_footer.html",
+      "class": "catalog-footer__services",
+      "tag": "h3",
+      "purpose": "services",
+      "original_classes": [
+        "text-xs",
+        "font-semibold",
+        "uppercase",
+        "tracking-[.18em]"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_footer.html",
+      "class": "catalog-footer__shell-div",
+      "tag": "div",
+      "purpose": "shell-div",
+      "original_classes": [
+        "mt-5",
+        "flex",
+        "flex-col",
+        "gap-3"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_footer.html",
+      "class": "catalog-footer__finder",
+      "tag": "a",
+      "purpose": "finder",
+      "original_classes": [
+        "text-sm",
+        "text-zinc-500",
+        "transition",
+        "hover:text-zinc-950",
+        "dark:hover:text-white"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_footer.html",
+      "class": "catalog-footer__sound-previews",
+      "tag": "a",
+      "purpose": "sound-previews",
+      "original_classes": [
+        "text-sm",
+        "text-zinc-500",
+        "transition",
+        "hover:text-zinc-950",
+        "dark:hover:text-white"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_footer.html",
+      "class": "catalog-footer__bundles",
+      "tag": "a",
+      "purpose": "bundles",
+      "original_classes": [
+        "text-sm",
+        "text-zinc-500",
+        "transition",
+        "hover:text-zinc-950",
+        "dark:hover:text-white"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_footer.html",
+      "class": "catalog-footer__support-info",
+      "tag": "a",
+      "purpose": "support-info",
+      "original_classes": [
+        "text-sm",
+        "text-zinc-500",
+        "transition",
+        "hover:text-zinc-950",
+        "dark:hover:text-white"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_footer.html",
+      "class": "catalog-footer__support",
+      "tag": "h3",
+      "purpose": "support",
+      "original_classes": [
+        "text-xs",
+        "font-semibold",
+        "uppercase",
+        "tracking-[.18em]"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_footer.html",
+      "class": "catalog-footer__shell-div",
+      "tag": "div",
+      "purpose": "shell-div",
+      "original_classes": [
+        "mt-5",
+        "flex",
+        "flex-col",
+        "gap-3"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_footer.html",
+      "class": "catalog-footer__order-tracking",
+      "tag": "a",
+      "purpose": "order-tracking",
+      "original_classes": [
+        "text-sm",
+        "text-zinc-500",
+        "transition",
+        "hover:text-zinc-950",
+        "dark:hover:text-white"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_footer.html",
+      "class": "catalog-footer__support-info",
+      "tag": "a",
+      "purpose": "support-info",
+      "original_classes": [
+        "text-sm",
+        "text-zinc-500",
+        "transition",
+        "hover:text-zinc-950",
+        "dark:hover:text-white"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_footer.html",
+      "class": "catalog-footer__support-info",
+      "tag": "a",
+      "purpose": "support-info",
+      "original_classes": [
+        "text-sm",
+        "text-zinc-500",
+        "transition",
+        "hover:text-zinc-950",
+        "dark:hover:text-white"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_footer.html",
+      "class": "catalog-footer__support-info",
+      "tag": "a",
+      "purpose": "support-info",
+      "original_classes": [
+        "text-sm",
+        "text-zinc-500",
+        "transition",
+        "hover:text-zinc-950",
+        "dark:hover:text-white"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_footer.html",
+      "class": "catalog-footer__2026-audia-guitar-marketplace-admin-layout",
+      "tag": "div",
+      "purpose": "2026-audia-guitar-marketplace-admin-layout",
+      "original_classes": [
+        "border-t",
+        "border-zinc-200",
+        "dark:border-white/10"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_footer.html",
+      "class": "catalog-footer__shell-2026-audia-guitar-marketplace-admin",
+      "tag": "div",
+      "purpose": "shell",
+      "original_classes": [
+        "shell",
+        "flex",
+        "flex-col",
+        "justify-between",
+        "gap-3",
+        "py-6",
+        "text-[11px]",
+        "text-zinc-500",
+        "sm:flex-row"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_footer.html",
+      "class": "catalog-footer__admin-login",
+      "tag": "button",
+      "purpose": "admin-login",
+      "original_classes": [
+        "hover:text-zinc-950",
+        "dark:hover:text-white"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_header.html",
+      "class": "catalog-header__store-header",
+      "tag": "header",
+      "purpose": "store-header",
+      "original_classes": [
+        "store-header",
+        "sticky",
+        "top-0",
+        "z-40",
+        "border-b",
+        "border-zinc-200/80",
+        "bg-stone-50/90",
+        "backdrop-blur-xl",
+        "dark:border-white/10",
+        "dark:bg-ink/90"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_header.html",
+      "class": "catalog-header__shell",
+      "tag": "div",
+      "purpose": "shell",
+      "original_classes": [
+        "shell",
+        "flex",
+        "h-[76px]",
+        "items-center",
+        "justify-between"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_header.html",
+      "class": "catalog-header__home",
+      "tag": "button",
+      "purpose": "home",
+      "original_classes": [
+        "audia-mark",
+        "flex",
+        "items-center",
+        "text-left",
+        "text-lg"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_header.html",
+      "class": "catalog-header__shell-nav",
+      "tag": "nav",
+      "purpose": "shell-nav",
+      "original_classes": [
+        "hidden",
+        "items-center",
+        "gap-8",
+        "text-sm",
+        "font-medium",
+        "text-zinc-600",
+        "dark:text-zinc-400",
+        "lg:flex"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_header.html",
+      "class": "catalog-header__finder",
+      "tag": "button",
+      "purpose": "finder",
+      "original_classes": [
+        "nav-link",
+        "flex",
+        "items-center",
+        "gap-2"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_header.html",
+      "class": "catalog-header__shell-div",
+      "tag": "div",
+      "purpose": "shell-div",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "gap-1.5"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_header.html",
+      "class": "catalog-header__theme",
+      "tag": "button",
+      "purpose": "theme",
+      "original_classes": [
+        "theme-toggle",
+        "relative",
+        "flex",
+        "items-center",
+        "rounded-full",
+        "border",
+        "border-zinc-200",
+        "bg-white",
+        "text-zinc-700",
+        "shadow-sm",
+        "transition",
+        "hover:border-zinc-300",
+        "dark:border-white/10",
+        "dark:bg-white/[.05]",
+        "dark:text-zinc-200",
+        "h-10",
+        "w-10",
+        "justify-center"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_header.html",
+      "class": "catalog-header__account",
+      "tag": "button",
+      "purpose": "account",
+      "original_classes": [
+        "icon-btn",
+        "hidden",
+        "sm:grid"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_header.html",
+      "class": "catalog-header__cart",
+      "tag": "button",
+      "purpose": "cart",
+      "original_classes": [
+        "icon-btn",
+        "relative"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_header.html",
+      "class": "catalog-header__menu",
+      "tag": "button",
+      "purpose": "menu",
+      "original_classes": [
+        "icon-btn",
+        "lg:hidden"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_hero.html",
+      "class": "catalog-hero__top",
+      "tag": "section",
+      "purpose": "top",
+      "original_classes": [
+        "hero-section",
+        "relative",
+        "overflow-hidden",
+        "border-b",
+        "border-zinc-200",
+        "dark:border-white/10"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_hero.html",
+      "class": "catalog-hero__hero-mesh",
+      "tag": "div",
+      "purpose": "hero-mesh",
+      "original_classes": [
+        "hero-mesh",
+        "absolute",
+        "inset-0"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_hero.html",
+      "class": "catalog-hero__shell",
+      "tag": "div",
+      "purpose": "shell",
+      "original_classes": [
+        "shell",
+        "hero-layout",
+        "relative",
+        "grid",
+        "items-center",
+        "gap-12",
+        "py-16",
+        "lg:grid-cols-[1.05fr_1fr]",
+        "lg:py-10"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_hero.html",
+      "class": "catalog-hero__hero-copy",
+      "tag": "div",
+      "purpose": "hero-copy",
+      "original_classes": [
+        "hero-copy",
+        "relative",
+        "z-10",
+        "max-w-xl"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_hero.html",
+      "class": "catalog-hero__make-some-noise",
+      "tag": "h1",
+      "purpose": "make-some-noise",
+      "original_classes": [
+        "mt-5",
+        "font-display",
+        "text-[clamp(3.4rem,7.5vw,7rem)]",
+        "font-semibold",
+        "leading-[.88]",
+        "tracking-[-.065em]"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_hero.html",
+      "class": "catalog-hero__discover-guitars-chosen-for-feel",
+      "tag": "p",
+      "purpose": "discover-guitars-chosen-for-feel",
+      "original_classes": [
+        "mt-7",
+        "max-w-lg",
+        "text-base",
+        "leading-7",
+        "text-zinc-600",
+        "dark:text-zinc-400",
+        "sm:text-lg"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_hero.html",
+      "class": "catalog-hero__hero-copy-div",
+      "tag": "div",
+      "purpose": "hero-copy-div",
+      "original_classes": [
+        "mt-9",
+        "flex",
+        "flex-col",
+        "gap-3",
+        "sm:flex-row"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_hero.html",
+      "class": "catalog-hero__hero-stats",
+      "tag": "div",
+      "purpose": "hero-stats",
+      "original_classes": [
+        "hero-stats",
+        "mt-12",
+        "grid",
+        "grid-cols-3",
+        "border-t",
+        "border-zinc-200",
+        "pt-6",
+        "dark:border-white/10"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_hero.html",
+      "class": "catalog-hero__hero-stats-div",
+      "tag": "div",
+      "purpose": "hero-stats-div",
+      "original_classes": [
+        "font-display",
+        "text-xl",
+        "font-semibold",
+        "sm:text-2xl"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_hero.html",
+      "class": "catalog-hero__hero-stats-div-120-instruments",
+      "tag": "div",
+      "purpose": "hero-stats-div",
+      "original_classes": [
+        "mt-1",
+        "text-[9px]",
+        "uppercase",
+        "tracking-[.16em]",
+        "text-zinc-500",
+        "sm:text-[10px]"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_hero.html",
+      "class": "catalog-hero__hero-stats-div",
+      "tag": "div",
+      "purpose": "hero-stats-div",
+      "original_classes": [
+        "font-display",
+        "text-xl",
+        "font-semibold",
+        "sm:text-2xl"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_hero.html",
+      "class": "catalog-hero__hero-stats-div-4-9-buyer-rating",
+      "tag": "div",
+      "purpose": "hero-stats-div",
+      "original_classes": [
+        "mt-1",
+        "text-[9px]",
+        "uppercase",
+        "tracking-[.16em]",
+        "text-zinc-500",
+        "sm:text-[10px]"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_hero.html",
+      "class": "catalog-hero__hero-stats-div",
+      "tag": "div",
+      "purpose": "hero-stats-div",
+      "original_classes": [
+        "font-display",
+        "text-xl",
+        "font-semibold",
+        "sm:text-2xl"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_hero.html",
+      "class": "catalog-hero__hero-stats-div-2-year-warranty",
+      "tag": "div",
+      "purpose": "hero-stats-div",
+      "original_classes": [
+        "mt-1",
+        "text-[9px]",
+        "uppercase",
+        "tracking-[.16em]",
+        "text-zinc-500",
+        "sm:text-[10px]"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_hero.html",
+      "class": "catalog-hero__hero-visual",
+      "tag": "div",
+      "purpose": "hero-visual",
+      "original_classes": [
+        "hero-visual",
+        "relative"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_hero.html",
+      "class": "catalog-hero__hero-photo",
+      "tag": "div",
+      "purpose": "hero-photo",
+      "original_classes": [
+        "hero-photo",
+        "absolute",
+        "overflow-hidden",
+        "bg-zinc-900"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_hero.html",
+      "class": "catalog-hero__hero-photo-img",
+      "tag": "img",
+      "purpose": "hero-photo-img",
+      "original_classes": [
+        "h-full",
+        "w-full",
+        "object-cover",
+        "object-center",
+        "transition",
+        "duration-1000",
+        "hover:scale-[1.025]"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_hero.html",
+      "class": "catalog-hero__hero-photo-div",
+      "tag": "div",
+      "purpose": "hero-photo-div",
+      "original_classes": [
+        "absolute",
+        "inset-0",
+        "bg-gradient-to-t",
+        "from-black/75",
+        "via-transparent",
+        "to-black/5"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_hero.html",
+      "class": "catalog-hero__hero-photo-caption",
+      "tag": "div",
+      "purpose": "hero-photo-caption",
+      "original_classes": [
+        "hero-photo-caption",
+        "absolute",
+        "bottom-6",
+        "left-6",
+        "right-6",
+        "flex",
+        "items-end",
+        "justify-between",
+        "gap-3",
+        "text-white",
+        "sm:left-8",
+        "sm:right-8"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_hero.html",
+      "class": "catalog-hero__featured-sound",
+      "tag": "p",
+      "purpose": "featured-sound",
+      "original_classes": [
+        "text-[10px]",
+        "font-semibold",
+        "uppercase",
+        "tracking-[.18em]",
+        "text-white/60"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_hero.html",
+      "class": "catalog-hero__midnight-drive",
+      "tag": "h2",
+      "purpose": "midnight-drive",
+      "original_classes": [
+        "mt-2",
+        "font-display",
+        "text-2xl",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_hero.html",
+      "class": "catalog-hero__warm-humbuckers-crisp-overdrive",
+      "tag": "p",
+      "purpose": "warm-humbuckers-crisp-overdrive",
+      "original_classes": [
+        "mt-1",
+        "text-xs",
+        "text-white/60"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_hero.html",
+      "class": "catalog-hero__sound",
+      "tag": "button",
+      "purpose": "sound",
+      "original_classes": [
+        "h-11",
+        "gap-2",
+        "px-4",
+        "inline-flex",
+        "items-center",
+        "justify-center",
+        "rounded-full",
+        "bg-white",
+        "text-zinc-950",
+        "shadow-lg",
+        "transition",
+        "hover:scale-105"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_hero.html",
+      "class": "catalog-hero__hear-the-tone",
+      "tag": "span",
+      "purpose": "hear-the-tone",
+      "original_classes": [
+        "text-xs",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_hero.html",
+      "class": "catalog-hero__setup-note",
+      "tag": "div",
+      "purpose": "setup-note",
+      "original_classes": [
+        "setup-note",
+        "absolute",
+        "right-0",
+        "top-3",
+        "rounded-2xl",
+        "border",
+        "border-zinc-200",
+        "bg-white",
+        "p-4",
+        "shadow-xl",
+        "dark:border-white/10",
+        "dark:bg-zinc-900",
+        "sm:right-1",
+        "sm:top-12"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_hero.html",
+      "class": "catalog-hero__setup-note-div",
+      "tag": "div",
+      "purpose": "setup-note-div",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "gap-3"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_hero.html",
+      "class": "catalog-hero__free-setup",
+      "tag": "p",
+      "purpose": "free-setup",
+      "original_classes": [
+        "text-xs",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_hero.html",
+      "class": "catalog-hero__ready-to-play-on-arrival",
+      "tag": "p",
+      "purpose": "ready-to-play-on-arrival",
+      "original_classes": [
+        "mt-0.5",
+        "text-[10px]",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_hero.html",
+      "class": "catalog-hero__shell-good-gear-great-possibilities-your",
+      "tag": "div",
+      "purpose": "shell",
+      "original_classes": [
+        "shell",
+        "flex",
+        "flex-wrap",
+        "items-center",
+        "justify-between",
+        "gap-4"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_hero.html",
+      "class": "catalog-hero__your-sound-starts-here",
+      "tag": "span",
+      "purpose": "your-sound-starts-here",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "gap-2"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_navigation.html",
+      "class": "catalog-navigation__shell",
+      "tag": "nav",
+      "purpose": "shell",
+      "original_classes": [
+        "shell",
+        "overflow-hidden",
+        "border-t",
+        "border-zinc-200",
+        "dark:border-white/10",
+        "lg:hidden"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_navigation.html",
+      "class": "catalog-navigation__shell-div",
+      "tag": "div",
+      "purpose": "shell-div",
+      "original_classes": [
+        "flex",
+        "flex-col",
+        "gap-1",
+        "py-4",
+        "text-sm"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_navigation.html",
+      "class": "catalog-navigation__mobile-link",
+      "tag": "a",
+      "purpose": "mobile-link",
+      "original_classes": [
+        "rounded-xl",
+        "px-3",
+        "py-3",
+        "hover:bg-zinc-100",
+        "dark:hover:bg-white/5"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_navigation.html",
+      "class": "catalog-navigation__mobile-link",
+      "tag": "a",
+      "purpose": "mobile-link",
+      "original_classes": [
+        "rounded-xl",
+        "px-3",
+        "py-3",
+        "hover:bg-zinc-100",
+        "dark:hover:bg-white/5"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_navigation.html",
+      "class": "catalog-navigation__mobile-link",
+      "tag": "a",
+      "purpose": "mobile-link",
+      "original_classes": [
+        "rounded-xl",
+        "px-3",
+        "py-3",
+        "hover:bg-zinc-100",
+        "dark:hover:bg-white/5"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_navigation.html",
+      "class": "catalog-navigation__mobile-link",
+      "tag": "a",
+      "purpose": "mobile-link",
+      "original_classes": [
+        "rounded-xl",
+        "px-3",
+        "py-3",
+        "hover:bg-zinc-100",
+        "dark:hover:bg-white/5"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_navigation.html",
+      "class": "catalog-navigation__finder",
+      "tag": "button",
+      "purpose": "finder",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "gap-2",
+        "rounded-xl",
+        "px-3",
+        "py-3",
+        "text-left"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_navigation.html",
+      "class": "catalog-navigation__account",
+      "tag": "button",
+      "purpose": "account",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "gap-2",
+        "rounded-xl",
+        "px-3",
+        "py-3",
+        "text-left"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_product_card.html",
+      "class": "catalog-product-card__product-card",
+      "tag": "article",
+      "purpose": "product-card",
+      "original_classes": [
+        "product-card",
+        "group"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_product_card.html",
+      "class": "catalog-product-card__product-image",
+      "tag": "div",
+      "purpose": "product-image",
+      "original_classes": [
+        "product-image",
+        "relative",
+        "aspect-[4/4.5]",
+        "overflow-hidden",
+        "rounded-[1.15rem]",
+        "bg-zinc-100",
+        "dark:bg-zinc-900"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_product_card.html",
+      "class": "catalog-product-card__image",
+      "tag": "img",
+      "purpose": "image",
+      "original_classes": [
+        "h-full",
+        "w-full",
+        "object-cover",
+        "transition",
+        "duration-700",
+        "group-hover:scale-[1.04]"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_product_card.html",
+      "class": "catalog-product-card__badge",
+      "tag": "span",
+      "purpose": "badge",
+      "original_classes": [
+        "absolute",
+        "left-3",
+        "top-3",
+        "rounded-full",
+        "bg-white/90",
+        "px-3",
+        "py-1.5",
+        "text-[9px]",
+        "font-bold",
+        "uppercase",
+        "tracking-[.12em]",
+        "text-zinc-950",
+        "backdrop-blur"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_product_card.html",
+      "class": "catalog-product-card__like",
+      "tag": "button",
+      "purpose": "like",
+      "original_classes": [
+        "absolute",
+        "right-3",
+        "top-3",
+        "grid",
+        "h-9",
+        "w-9",
+        "place-items-center",
+        "rounded-full",
+        "bg-white/90",
+        "text-zinc-950",
+        "shadow-sm"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_product_card.html",
+      "class": "catalog-product-card__product-image-div",
+      "tag": "div",
+      "purpose": "product-image-div",
+      "original_classes": [
+        "absolute",
+        "bottom-3",
+        "right-3"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_product_card.html",
+      "class": "catalog-product-card__sound",
+      "tag": "button",
+      "purpose": "sound",
+      "original_classes": [
+        "h-10",
+        "w-10",
+        "inline-flex",
+        "items-center",
+        "justify-center",
+        "rounded-full",
+        "bg-white",
+        "text-zinc-950",
+        "shadow-lg",
+        "transition",
+        "hover:scale-105"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_product_card.html",
+      "class": "catalog-product-card__product-details",
+      "tag": "div",
+      "purpose": "product-details",
+      "original_classes": [
+        "product-details",
+        "px-1",
+        "pb-2",
+        "pt-5"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_product_card.html",
+      "class": "catalog-product-card__product-details-div",
+      "tag": "div",
+      "purpose": "product-details-div",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "justify-between",
+        "text-[10px]",
+        "uppercase",
+        "tracking-[.14em]",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_product_card.html",
+      "class": "catalog-product-card__normal-case",
+      "tag": "span",
+      "purpose": "normal-case",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "gap-1",
+        "normal-case",
+        "tracking-normal"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_product_card.html",
+      "class": "catalog-product-card__normal-case-svg",
+      "tag": "svg",
+      "purpose": "normal-case-svg",
+      "original_classes": [
+        "lucide",
+        "lucide-star",
+        "fill-amber-400",
+        "text-amber-400"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_product_card.html",
+      "class": "catalog-product-card__name",
+      "tag": "h3",
+      "purpose": "name",
+      "original_classes": [
+        "mt-2",
+        "font-display",
+        "text-lg",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_product_card.html",
+      "class": "catalog-product-card__description",
+      "tag": "p",
+      "purpose": "description",
+      "original_classes": [
+        "mt-2",
+        "min-h-[40px]",
+        "text-xs",
+        "leading-5",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_product_card.html",
+      "class": "catalog-product-card__product-details-div-audia-demo-electric-0-0",
+      "tag": "div",
+      "purpose": "product-details-div",
+      "original_classes": [
+        "mt-5",
+        "flex",
+        "items-center",
+        "justify-between"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_product_card.html",
+      "class": "catalog-product-card__price",
+      "tag": "p",
+      "purpose": "price",
+      "original_classes": [
+        "text-lg",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_product_card.html",
+      "class": "catalog-product-card__stock",
+      "tag": "p",
+      "purpose": "stock",
+      "original_classes": [
+        "mt-0.5",
+        "text-[10px]",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_product_card.html",
+      "class": "catalog-product-card__add",
+      "tag": "button",
+      "purpose": "add",
+      "original_classes": [
+        "grid",
+        "h-11",
+        "w-11",
+        "place-items-center",
+        "rounded-full",
+        "bg-zinc-950",
+        "text-white",
+        "transition",
+        "hover:scale-105",
+        "dark:bg-acid",
+        "dark:text-ink"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_products.html",
+      "class": "catalog-products__shop",
+      "tag": "section",
+      "purpose": "shop",
+      "original_classes": [
+        "border-y",
+        "border-zinc-200",
+        "bg-white",
+        "py-24",
+        "dark:border-white/10",
+        "dark:bg-[#0c0c0f]",
+        "sm:py-28"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_products.html",
+      "class": "catalog-products__shell-div",
+      "tag": "div",
+      "purpose": "shell-div",
+      "original_classes": [
+        "flex",
+        "flex-col",
+        "justify-between",
+        "gap-7",
+        "lg:flex-row",
+        "lg:items-end"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_products.html",
+      "class": "catalog-products__form-hint",
+      "tag": "p",
+      "purpose": "form-hint",
+      "original_classes": [
+        "form-hint",
+        "mt-3"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_products.html",
+      "class": "catalog-products__products",
+      "tag": "div",
+      "purpose": "products",
+      "original_classes": [
+        "mt-9",
+        "grid",
+        "gap-x-5",
+        "gap-y-12",
+        "sm:grid-cols-2",
+        "lg:grid-cols-3"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_products.html",
+      "class": "catalog-products__no-products",
+      "tag": "div",
+      "purpose": "no-products",
+      "original_classes": [
+        "mt-9",
+        "rounded-2xl",
+        "border",
+        "border-dashed",
+        "border-zinc-300",
+        "py-20",
+        "text-center",
+        "text-sm",
+        "text-zinc-500",
+        "dark:border-white/15"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_support.html",
+      "class": "catalog-support__form-hint",
+      "tag": "p",
+      "purpose": "form-hint",
+      "original_classes": [
+        "form-hint",
+        "mt-5"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_support.html",
+      "class": "catalog-support__support-email",
+      "tag": "a",
+      "purpose": "support-email",
+      "original_classes": [
+        "secondary-btn",
+        "mt-5"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_tracking.html",
+      "class": "catalog-tracking__track",
+      "tag": "section",
+      "purpose": "track",
+      "original_classes": [
+        "border-y",
+        "border-zinc-200",
+        "bg-zinc-100",
+        "py-24",
+        "dark:border-white/10",
+        "dark:bg-white/[.02]"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_tracking.html",
+      "class": "catalog-tracking__shell",
+      "tag": "div",
+      "purpose": "shell",
+      "original_classes": [
+        "shell",
+        "grid",
+        "gap-12",
+        "lg:grid-cols-[.72fr_1.28fr]",
+        "lg:items-center"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_tracking.html",
+      "class": "catalog-tracking__enter-your-order-number-to",
+      "tag": "p",
+      "purpose": "enter-your-order-number-to",
+      "original_classes": [
+        "mt-4",
+        "leading-7",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_tracking.html",
+      "class": "catalog-tracking__input-shell",
+      "tag": "div",
+      "purpose": "input-shell",
+      "original_classes": [
+        "input-shell",
+        "mt-7",
+        "max-w-md",
+        "p-1.5",
+        "pl-5"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_tracking.html",
+      "class": "catalog-tracking__order",
+      "tag": "input",
+      "purpose": "order",
+      "original_classes": [
+        "min-w-0",
+        "flex-1",
+        "bg-transparent",
+        "py-2",
+        "text-sm",
+        "outline-none"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_tracking.html",
+      "class": "catalog-tracking__track-track",
+      "tag": "button",
+      "purpose": "track",
+      "original_classes": [
+        "rounded-full",
+        "bg-zinc-950",
+        "px-5",
+        "py-2.5",
+        "text-xs",
+        "font-bold",
+        "text-white",
+        "dark:bg-white",
+        "dark:text-zinc-950"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_tracking.html",
+      "class": "catalog-tracking__surface-card",
+      "tag": "div",
+      "purpose": "surface-card",
+      "original_classes": [
+        "surface-card",
+        "p-6",
+        "sm:p-8"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_tracking.html",
+      "class": "catalog-tracking__surface-card-div",
+      "tag": "div",
+      "purpose": "surface-card-div",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "justify-between"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_tracking.html",
+      "class": "catalog-tracking__order-order-example-delivery-journey",
+      "tag": "p",
+      "purpose": "order",
+      "original_classes": [
+        "text-xs",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_tracking.html",
+      "class": "catalog-tracking__example-delivery-journey",
+      "tag": "p",
+      "purpose": "example-delivery-journey",
+      "original_classes": [
+        "mt-1",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_tracking.html",
+      "class": "catalog-tracking__in-transit",
+      "tag": "span",
+      "purpose": "in-transit",
+      "original_classes": [
+        "rounded-full",
+        "bg-blue-100",
+        "px-3",
+        "py-1.5",
+        "text-[10px]",
+        "font-semibold",
+        "uppercase",
+        "tracking-widest",
+        "text-blue-700",
+        "dark:bg-blue-400/10",
+        "dark:text-blue-300"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_tracking.html",
+      "class": "catalog-tracking__surface-card-div-order-example-delivery-journey-in",
+      "tag": "div",
+      "purpose": "surface-card-div",
+      "original_classes": [
+        "mt-10",
+        "grid",
+        "grid-cols-4"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_tracking.html",
+      "class": "catalog-tracking__surface-card-div-processing-shipped-out-for-delivery",
+      "tag": "div",
+      "purpose": "surface-card-div",
+      "original_classes": [
+        "relative",
+        "text-center"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_tracking.html",
+      "class": "catalog-tracking__surface-card-div-processing",
+      "tag": "div",
+      "purpose": "surface-card-div",
+      "original_classes": [
+        "relative",
+        "z-10",
+        "mx-auto",
+        "grid",
+        "h-10",
+        "w-10",
+        "place-items-center",
+        "rounded-full",
+        "border",
+        "border-zinc-950",
+        "bg-zinc-950",
+        "text-white",
+        "dark:border-acid",
+        "dark:bg-acid",
+        "dark:text-ink"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_tracking.html",
+      "class": "catalog-tracking__surface-card-div-processing-div-div-div-div-div",
+      "tag": "div",
+      "purpose": "surface-card-div",
+      "original_classes": [
+        "absolute",
+        "left-1/2",
+        "top-5",
+        "h-px",
+        "w-full",
+        "bg-zinc-950",
+        "dark:bg-acid"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_tracking.html",
+      "class": "catalog-tracking__processing",
+      "tag": "p",
+      "purpose": "processing",
+      "original_classes": [
+        "mt-3",
+        "text-[9px]",
+        "text-zinc-500",
+        "sm:text-[11px]"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_tracking.html",
+      "class": "catalog-tracking__surface-card-div-processing-shipped-out-for-delivery",
+      "tag": "div",
+      "purpose": "surface-card-div",
+      "original_classes": [
+        "relative",
+        "text-center"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_tracking.html",
+      "class": "catalog-tracking__surface-card-div-shipped",
+      "tag": "div",
+      "purpose": "surface-card-div",
+      "original_classes": [
+        "relative",
+        "z-10",
+        "mx-auto",
+        "grid",
+        "h-10",
+        "w-10",
+        "place-items-center",
+        "rounded-full",
+        "border",
+        "border-zinc-950",
+        "bg-zinc-950",
+        "text-white",
+        "dark:border-acid",
+        "dark:bg-acid",
+        "dark:text-ink"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_tracking.html",
+      "class": "catalog-tracking__surface-card-div-shipped-div-div-div-div-div",
+      "tag": "div",
+      "purpose": "surface-card-div",
+      "original_classes": [
+        "absolute",
+        "left-1/2",
+        "top-5",
+        "h-px",
+        "w-full",
+        "bg-zinc-950",
+        "dark:bg-acid"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_tracking.html",
+      "class": "catalog-tracking__shipped",
+      "tag": "p",
+      "purpose": "shipped",
+      "original_classes": [
+        "mt-3",
+        "text-[9px]",
+        "text-zinc-500",
+        "sm:text-[11px]"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_tracking.html",
+      "class": "catalog-tracking__surface-card-div-processing-shipped-out-for-delivery",
+      "tag": "div",
+      "purpose": "surface-card-div",
+      "original_classes": [
+        "relative",
+        "text-center"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_tracking.html",
+      "class": "catalog-tracking__surface-card-div-out-for-delivery",
+      "tag": "div",
+      "purpose": "surface-card-div",
+      "original_classes": [
+        "relative",
+        "z-10",
+        "mx-auto",
+        "grid",
+        "h-10",
+        "w-10",
+        "place-items-center",
+        "rounded-full",
+        "border",
+        "border-zinc-200",
+        "bg-white",
+        "text-zinc-400",
+        "dark:border-white/10",
+        "dark:bg-panel"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_tracking.html",
+      "class": "catalog-tracking__surface-card-div-out-for-delivery-div-div-div-div-div",
+      "tag": "div",
+      "purpose": "surface-card-div",
+      "original_classes": [
+        "absolute",
+        "left-1/2",
+        "top-5",
+        "h-px",
+        "w-full",
+        "bg-zinc-200",
+        "dark:bg-white/10"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_tracking.html",
+      "class": "catalog-tracking__out-for-delivery",
+      "tag": "p",
+      "purpose": "out-for-delivery",
+      "original_classes": [
+        "mt-3",
+        "text-[9px]",
+        "text-zinc-500",
+        "sm:text-[11px]"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_tracking.html",
+      "class": "catalog-tracking__surface-card-div-processing-shipped-out-for-delivery",
+      "tag": "div",
+      "purpose": "surface-card-div",
+      "original_classes": [
+        "relative",
+        "text-center"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_tracking.html",
+      "class": "catalog-tracking__surface-card-div-delivered",
+      "tag": "div",
+      "purpose": "surface-card-div",
+      "original_classes": [
+        "relative",
+        "z-10",
+        "mx-auto",
+        "grid",
+        "h-10",
+        "w-10",
+        "place-items-center",
+        "rounded-full",
+        "border",
+        "border-zinc-200",
+        "bg-white",
+        "text-zinc-400",
+        "dark:border-white/10",
+        "dark:bg-panel"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_tracking.html",
+      "class": "catalog-tracking__delivered",
+      "tag": "p",
+      "purpose": "delivered",
+      "original_classes": [
+        "mt-3",
+        "text-[9px]",
+        "text-zinc-500",
+        "sm:text-[11px]"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_tracking.html",
+      "class": "catalog-tracking__surface-card-div-order-example-delivery-journey-in-section-div-div-div",
+      "tag": "div",
+      "purpose": "surface-card-div",
+      "original_classes": [
+        "mt-7",
+        "flex",
+        "justify-between",
+        "border-t",
+        "border-zinc-200",
+        "pt-5",
+        "text-xs",
+        "dark:border-white/10"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_tracking.html",
+      "class": "catalog-tracking__estimated-arrival",
+      "tag": "span",
+      "purpose": "estimated-arrival",
+      "original_classes": [
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/catalog/catalog_tracking.html",
+      "class": "catalog-tracking__thursday-sep-10",
+      "tag": "span",
+      "purpose": "thursday-sep-10",
+      "original_classes": [
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/chatbot/chatbot.html",
+      "class": "chatbot-toggle",
+      "tag": "button",
+      "purpose": "chat",
+      "original_classes": [
+        "fixed",
+        "bottom-5",
+        "right-5",
+        "z-40",
+        "grid",
+        "h-14",
+        "w-14",
+        "place-items-center",
+        "rounded-full",
+        "bg-zinc-950",
+        "text-white",
+        "shadow-2xl",
+        "transition",
+        "hover:scale-105",
+        "dark:bg-acid",
+        "dark:text-ink"
+      ]
+    },
+    {
+      "html": "templates/chatbot/chatbot_message.html",
+      "class": "chatbot-message",
+      "tag": "div",
+      "purpose": "message",
+      "original_classes": [
+        "max-w-[86%]",
+        "rounded-2xl",
+        "px-4",
+        "py-3",
+        "text-xs",
+        "leading-5",
+        "bg-zinc-100",
+        "dark:bg-white/[.07]"
+      ]
+    },
+    {
+      "html": "templates/chatbot/chatbot_panel.html",
+      "class": "chatbot-panel",
+      "tag": "div",
+      "purpose": "chat-panel",
+      "original_classes": [
+        "chat-panel",
+        "fixed",
+        "bottom-24",
+        "right-4",
+        "z-40",
+        "flex",
+        "h-[510px]",
+        "w-[calc(100%-2rem)]",
+        "max-w-sm",
+        "flex-col",
+        "overflow-hidden",
+        "rounded-3xl",
+        "border",
+        "border-zinc-200",
+        "bg-white",
+        "shadow-2xl",
+        "dark:border-white/10",
+        "dark:bg-[#101014]"
+      ]
+    },
+    {
+      "html": "templates/chatbot/chatbot_panel.html",
+      "class": "chatbot-panel__header",
+      "tag": "div",
+      "purpose": "chat-panel-div",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "gap-3",
+        "border-b",
+        "border-zinc-200",
+        "p-4",
+        "dark:border-white/10"
+      ]
+    },
+    {
+      "html": "templates/chatbot/chatbot_panel.html",
+      "class": "chatbot-panel__avatar",
+      "tag": "div",
+      "purpose": "chat-panel-div",
+      "original_classes": [
+        "grid",
+        "h-10",
+        "w-10",
+        "place-items-center",
+        "rounded-full",
+        "bg-zinc-950",
+        "text-white",
+        "dark:bg-acid",
+        "dark:text-ink"
+      ]
+    },
+    {
+      "html": "templates/chatbot/chatbot_panel.html",
+      "class": "chatbot-panel__title",
+      "tag": "p",
+      "purpose": "audi-customer-guide",
+      "original_classes": [
+        "font-display",
+        "text-sm",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/chatbot/chatbot_panel.html",
+      "class": "chatbot-panel__availability",
+      "tag": "p",
+      "purpose": "available-now",
+      "original_classes": [
+        "text-[10px]",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/chatbot/chatbot_panel.html",
+      "class": "chatbot-panel__messages",
+      "tag": "div",
+      "purpose": "messages",
+      "original_classes": [
+        "flex-1",
+        "space-y-3",
+        "overflow-y-auto",
+        "p-4"
+      ]
+    },
+    {
+      "html": "templates/chatbot/chatbot_panel.html",
+      "class": "chatbot-panel__form",
+      "tag": "form",
+      "purpose": "chat-panel-form",
+      "original_classes": [
+        "flex",
+        "gap-2",
+        "border-t",
+        "border-zinc-200",
+        "p-3",
+        "dark:border-white/10"
+      ]
+    },
+    {
+      "html": "templates/chatbot/chatbot_panel.html",
+      "class": "chatbot-panel__input",
+      "tag": "input",
+      "purpose": "chat-input",
+      "original_classes": [
+        "min-w-0",
+        "flex-1",
+        "rounded-full",
+        "bg-zinc-100",
+        "px-4",
+        "text-xs",
+        "outline-none",
+        "dark:bg-white/[.06]"
+      ]
+    },
+    {
+      "html": "templates/chatbot/chatbot_panel.html",
+      "class": "chatbot-panel__send",
+      "tag": "button",
+      "purpose": "send-message",
+      "original_classes": [
+        "grid",
+        "h-10",
+        "w-10",
+        "place-items-center",
+        "rounded-full",
+        "bg-zinc-950",
+        "text-white",
+        "dark:bg-acid",
+        "dark:text-ink"
+      ]
+    },
+    {
+      "html": "templates/chatbot/chatbot_suggestions.html",
+      "class": "chatbot-suggestions",
+      "tag": "div",
+      "purpose": "chat-suggestions-template-div",
+      "original_classes": [
+        "flex",
+        "flex-wrap",
+        "gap-2"
+      ]
+    },
+    {
+      "html": "templates/chatbot/chatbot_suggestions.html",
+      "class": "chatbot-suggestions__option",
+      "tag": "button",
+      "purpose": "chat-suggestion",
+      "original_classes": [
+        "rounded-full",
+        "border",
+        "border-zinc-200",
+        "px-3",
+        "py-2",
+        "text-[10px]",
+        "text-zinc-500",
+        "hover:border-zinc-500",
+        "dark:border-white/10"
+      ]
+    },
+    {
+      "html": "templates/chatbot/chatbot_suggestions.html",
+      "class": "chatbot-suggestions__option",
+      "tag": "button",
+      "purpose": "chat-suggestion",
+      "original_classes": [
+        "rounded-full",
+        "border",
+        "border-zinc-200",
+        "px-3",
+        "py-2",
+        "text-[10px]",
+        "text-zinc-500",
+        "hover:border-zinc-500",
+        "dark:border-white/10"
+      ]
+    },
+    {
+      "html": "templates/chatbot/chatbot_suggestions.html",
+      "class": "chatbot-suggestions__option",
+      "tag": "button",
+      "purpose": "chat-suggestion",
+      "original_classes": [
+        "rounded-full",
+        "border",
+        "border-zinc-200",
+        "px-3",
+        "py-2",
+        "text-[10px]",
+        "text-zinc-500",
+        "hover:border-zinc-500",
+        "dark:border-white/10"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter.html",
+      "class": "search-filter__layout",
+      "tag": "div",
+      "purpose": "layout",
+      "original_classes": [
+        "flex",
+        "flex-col",
+        "gap-3",
+        "sm:flex-row"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder.html",
+      "class": "search-filter-finder__finder-template-div",
+      "tag": "div",
+      "purpose": "finder-template-div",
+      "original_classes": [
+        "fixed",
+        "inset-0",
+        "z-[60]",
+        "grid",
+        "place-items-center",
+        "p-4"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder.html",
+      "class": "search-filter-finder__close-finder",
+      "tag": "button",
+      "purpose": "close-finder",
+      "original_classes": [
+        "absolute",
+        "inset-0",
+        "bg-black/65",
+        "backdrop-blur-md"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder.html",
+      "class": "search-filter-finder__finder-modal",
+      "tag": "div",
+      "purpose": "finder-modal",
+      "original_classes": [
+        "finder-modal",
+        "relative",
+        "w-full",
+        "max-w-2xl",
+        "overflow-hidden",
+        "rounded-[2rem]",
+        "bg-white",
+        "shadow-2xl",
+        "dark:bg-panel"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder.html",
+      "class": "search-filter-finder__finder-modal-div",
+      "tag": "div",
+      "purpose": "finder-modal-div",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "justify-between",
+        "border-b",
+        "border-zinc-200",
+        "p-6",
+        "dark:border-white/10"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder.html",
+      "class": "search-filter-finder__finder-modal-div-audia-guitar-finder-four-quick",
+      "tag": "div",
+      "purpose": "finder-modal-div",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "gap-3"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder.html",
+      "class": "search-filter-finder__audia-guitar-finder",
+      "tag": "p",
+      "purpose": "audia-guitar-finder",
+      "original_classes": [
+        "font-display",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder.html",
+      "class": "search-filter-finder__four-quick-questions",
+      "tag": "p",
+      "purpose": "four-quick-questions",
+      "original_classes": [
+        "text-[10px]",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder.html",
+      "class": "search-filter-finder__finder-body",
+      "tag": "div",
+      "purpose": "finder-body",
+      "original_classes": [
+        "p-7",
+        "sm:p-10"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder.html",
+      "class": "search-filter-finder__progress",
+      "tag": "div",
+      "purpose": "progress",
+      "original_classes": [
+        "mb-8",
+        "flex",
+        "gap-2"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder.html",
+      "class": "search-filter-finder__progress-span",
+      "tag": "span",
+      "purpose": "progress-span",
+      "original_classes": [
+        "h-1",
+        "flex-1",
+        "rounded-full",
+        "bg-zinc-950",
+        "dark:bg-acid"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder.html",
+      "class": "search-filter-finder__progress-span-span",
+      "tag": "span",
+      "purpose": "progress-span",
+      "original_classes": [
+        "h-1",
+        "flex-1",
+        "rounded-full",
+        "bg-zinc-200",
+        "dark:bg-white/10"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder.html",
+      "class": "search-filter-finder__progress-span-span",
+      "tag": "span",
+      "purpose": "progress-span",
+      "original_classes": [
+        "h-1",
+        "flex-1",
+        "rounded-full",
+        "bg-zinc-200",
+        "dark:bg-white/10"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder.html",
+      "class": "search-filter-finder__progress-span-span",
+      "tag": "span",
+      "purpose": "progress-span",
+      "original_classes": [
+        "h-1",
+        "flex-1",
+        "rounded-full",
+        "bg-zinc-200",
+        "dark:bg-white/10"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder.html",
+      "class": "search-filter-finder__question-title",
+      "tag": "h2",
+      "purpose": "question-title",
+      "original_classes": [
+        "mt-3",
+        "font-display",
+        "text-3xl",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder.html",
+      "class": "search-filter-finder__budget",
+      "tag": "div",
+      "purpose": "budget",
+      "original_classes": [
+        "mt-10"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder.html",
+      "class": "search-filter-finder__budget-value",
+      "tag": "div",
+      "purpose": "budget-value",
+      "original_classes": [
+        "mb-7",
+        "text-center",
+        "font-display",
+        "text-4xl",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder.html",
+      "class": "search-filter-finder__budget-input",
+      "tag": "input",
+      "purpose": "budget-input",
+      "original_classes": [
+        "range-acid",
+        "w-full"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder.html",
+      "class": "search-filter-finder__budget-div",
+      "tag": "div",
+      "purpose": "budget-div",
+      "original_classes": [
+        "mt-3",
+        "flex",
+        "justify-between",
+        "text-xs",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder.html",
+      "class": "search-filter-finder__options",
+      "tag": "div",
+      "purpose": "options",
+      "original_classes": [
+        "mt-9",
+        "grid",
+        "gap-3",
+        "sm:grid-cols-2"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder.html",
+      "class": "search-filter-finder__finder-next",
+      "tag": "button",
+      "purpose": "finder-next",
+      "original_classes": [
+        "primary-btn",
+        "mt-10",
+        "w-full"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder_banner.html",
+      "class": "search-filter-finder-banner__shell",
+      "tag": "section",
+      "purpose": "shell",
+      "original_classes": [
+        "shell",
+        "py-24",
+        "sm:py-28"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder_banner.html",
+      "class": "search-filter-finder-banner__finder-banner",
+      "tag": "div",
+      "purpose": "finder-banner",
+      "original_classes": [
+        "finder-banner",
+        "relative",
+        "overflow-hidden",
+        "rounded-[2rem]",
+        "bg-zinc-950",
+        "px-7",
+        "py-16",
+        "text-white",
+        "dark:bg-gradient-to-br",
+        "dark:from-[#1c1330]",
+        "dark:via-zinc-950",
+        "dark:to-zinc-950",
+        "sm:px-12",
+        "lg:px-20",
+        "lg:py-20"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder_banner.html",
+      "class": "search-filter-finder-banner__finder-banner-div",
+      "tag": "div",
+      "purpose": "finder-banner-div",
+      "original_classes": [
+        "absolute",
+        "-right-28",
+        "-top-28",
+        "h-80",
+        "w-80",
+        "rounded-full",
+        "bg-violet-500/25",
+        "blur-[100px]"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder_banner.html",
+      "class": "search-filter-finder-banner__finder-banner-div-guitar-finder-four-questions-a",
+      "tag": "div",
+      "purpose": "finder-banner-div",
+      "original_classes": [
+        "relative",
+        "grid",
+        "items-center",
+        "gap-12",
+        "lg:grid-cols-[1fr_.72fr]"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder_banner.html",
+      "class": "search-filter-finder-banner__guitar-finder",
+      "tag": "p",
+      "purpose": "guitar-finder",
+      "original_classes": [
+        "text-[10px]",
+        "font-semibold",
+        "uppercase",
+        "tracking-[.2em]",
+        "text-acid"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder_banner.html",
+      "class": "search-filter-finder-banner__four-questions-a-much-better",
+      "tag": "h2",
+      "purpose": "four-questions-a-much-better",
+      "original_classes": [
+        "mt-4",
+        "font-display",
+        "text-4xl",
+        "font-semibold",
+        "leading-tight",
+        "tracking-tight",
+        "sm:text-6xl"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder_banner.html",
+      "class": "search-filter-finder-banner__choose-your-budget-experience-preferred",
+      "tag": "p",
+      "purpose": "choose-your-budget-experience-preferred",
+      "original_classes": [
+        "mt-5",
+        "max-w-xl",
+        "leading-7",
+        "text-zinc-400"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder_banner.html",
+      "class": "search-filter-finder-banner__finder",
+      "tag": "button",
+      "purpose": "finder",
+      "original_classes": [
+        "primary-btn",
+        "mt-8"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder_banner.html",
+      "class": "search-filter-finder-banner__finder-profile",
+      "tag": "div",
+      "purpose": "finder-profile",
+      "original_classes": [
+        "finder-profile",
+        "rounded-3xl",
+        "border",
+        "border-white/10",
+        "bg-white/[.055]",
+        "p-6",
+        "backdrop-blur"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder_banner.html",
+      "class": "search-filter-finder-banner__example-profile",
+      "tag": "p",
+      "purpose": "example-profile",
+      "original_classes": [
+        "text-xs",
+        "font-semibold",
+        "uppercase",
+        "tracking-[.16em]",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder_banner.html",
+      "class": "search-filter-finder-banner__finder-profile-div",
+      "tag": "div",
+      "purpose": "finder-profile-div",
+      "original_classes": [
+        "mt-6",
+        "divide-y",
+        "divide-white/10"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder_banner.html",
+      "class": "search-filter-finder-banner__finder-profile-div-budget-10k-20k-experience-beginner",
+      "tag": "div",
+      "purpose": "finder-profile-div",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "justify-between",
+        "py-4",
+        "text-sm"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder_banner.html",
+      "class": "search-filter-finder-banner__budget",
+      "tag": "span",
+      "purpose": "budget",
+      "original_classes": [
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder_banner.html",
+      "class": "search-filter-finder-banner__10k-20k",
+      "tag": "span",
+      "purpose": "10k-20k",
+      "original_classes": [
+        "font-medium"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder_banner.html",
+      "class": "search-filter-finder-banner__finder-profile-div-budget-10k-20k-experience-beginner",
+      "tag": "div",
+      "purpose": "finder-profile-div",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "justify-between",
+        "py-4",
+        "text-sm"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder_banner.html",
+      "class": "search-filter-finder-banner__experience",
+      "tag": "span",
+      "purpose": "experience",
+      "original_classes": [
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder_banner.html",
+      "class": "search-filter-finder-banner__beginner",
+      "tag": "span",
+      "purpose": "beginner",
+      "original_classes": [
+        "font-medium"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder_banner.html",
+      "class": "search-filter-finder-banner__finder-profile-div-budget-10k-20k-experience-beginner",
+      "tag": "div",
+      "purpose": "finder-profile-div",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "justify-between",
+        "py-4",
+        "text-sm"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder_banner.html",
+      "class": "search-filter-finder-banner__genre",
+      "tag": "span",
+      "purpose": "genre",
+      "original_classes": [
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder_banner.html",
+      "class": "search-filter-finder-banner__rock",
+      "tag": "span",
+      "purpose": "rock",
+      "original_classes": [
+        "font-medium"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder_banner.html",
+      "class": "search-filter-finder-banner__finder-profile-div-budget-10k-20k-experience-beginner",
+      "tag": "div",
+      "purpose": "finder-profile-div",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "justify-between",
+        "py-4",
+        "text-sm"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder_banner.html",
+      "class": "search-filter-finder-banner__type",
+      "tag": "span",
+      "purpose": "type",
+      "original_classes": [
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder_banner.html",
+      "class": "search-filter-finder-banner__electric",
+      "tag": "span",
+      "purpose": "electric",
+      "original_classes": [
+        "font-medium"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder_match.html",
+      "class": "search-filter-finder-match__finder-match-template-div",
+      "tag": "div",
+      "purpose": "finder-match-template-div",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "gap-4",
+        "rounded-2xl",
+        "border",
+        "border-zinc-200",
+        "p-3",
+        "dark:border-white/10"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder_match.html",
+      "class": "search-filter-finder-match__finder-match-template-div-1-electric-001-electric-beginner",
+      "tag": "div",
+      "purpose": "finder-match-template-div",
+      "original_classes": [
+        "relative"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder_match.html",
+      "class": "search-filter-finder-match__image",
+      "tag": "img",
+      "purpose": "image",
+      "original_classes": [
+        "h-20",
+        "w-16",
+        "rounded-xl",
+        "object-cover"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder_match.html",
+      "class": "search-filter-finder-match__rank",
+      "tag": "span",
+      "purpose": "rank",
+      "original_classes": [
+        "absolute",
+        "-left-2",
+        "-top-2",
+        "grid",
+        "h-6",
+        "w-6",
+        "place-items-center",
+        "rounded-full",
+        "bg-zinc-950",
+        "text-[10px]",
+        "font-bold",
+        "text-white",
+        "dark:bg-acid",
+        "dark:text-ink"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder_match.html",
+      "class": "search-filter-finder-match__finder-match-template-div-1-electric-001-electric-beginner-template-div-div",
+      "tag": "div",
+      "purpose": "finder-match-template-div",
+      "original_classes": [
+        "min-w-0",
+        "flex-1"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder_match.html",
+      "class": "search-filter-finder-match__name",
+      "tag": "p",
+      "purpose": "name",
+      "original_classes": [
+        "truncate",
+        "text-sm",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder_match.html",
+      "class": "search-filter-finder-match__category",
+      "tag": "p",
+      "purpose": "category",
+      "original_classes": [
+        "mt-1",
+        "text-xs",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder_match.html",
+      "class": "search-filter-finder-match__price",
+      "tag": "p",
+      "purpose": "price",
+      "original_classes": [
+        "mt-2",
+        "text-sm",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder_match.html",
+      "class": "search-filter-finder-match__add-match",
+      "tag": "button",
+      "purpose": "add-match",
+      "original_classes": [
+        "grid",
+        "h-10",
+        "w-10",
+        "place-items-center",
+        "rounded-full",
+        "bg-zinc-950",
+        "text-white",
+        "dark:bg-acid",
+        "dark:text-ink"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder_option.html",
+      "class": "search-filter-finder-option__finder-option",
+      "tag": "button",
+      "purpose": "finder-option",
+      "original_classes": [
+        "rounded-2xl",
+        "border",
+        "p-5",
+        "text-left",
+        "text-sm",
+        "transition",
+        "border-zinc-950",
+        "bg-zinc-950",
+        "text-white",
+        "dark:border-acid",
+        "dark:bg-acid/10",
+        "dark:text-acid"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder_results.html",
+      "class": "search-filter-finder-results__finder-results",
+      "tag": "div",
+      "purpose": "finder-results",
+      "original_classes": [
+        "p-7",
+        "sm:p-10"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder_results.html",
+      "class": "search-filter-finder-results__your-closest-matches",
+      "tag": "h2",
+      "purpose": "your-closest-matches",
+      "original_classes": [
+        "mt-3",
+        "font-display",
+        "text-3xl",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder_results.html",
+      "class": "search-filter-finder-results__matches",
+      "tag": "div",
+      "purpose": "matches",
+      "original_classes": [
+        "mt-7",
+        "space-y-3"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder_results.html",
+      "class": "search-filter-finder-results__finder-restart",
+      "tag": "button",
+      "purpose": "finder-restart",
+      "original_classes": [
+        "secondary-btn",
+        "mt-6",
+        "w-full"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_search.html",
+      "class": "search-filter-search__input-shell",
+      "tag": "label",
+      "purpose": "input-shell",
+      "original_classes": [
+        "input-shell",
+        "min-w-[270px]"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_search.html",
+      "class": "search-filter-search__search",
+      "tag": "input",
+      "purpose": "search",
+      "original_classes": [
+        "w-full",
+        "bg-transparent",
+        "py-3",
+        "text-sm",
+        "outline-none"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_sort.html",
+      "class": "search-filter-sort__sort",
+      "tag": "select",
+      "purpose": "sort",
+      "original_classes": [
+        "appearance-none",
+        "bg-transparent",
+        "py-3",
+        "pr-4",
+        "text-sm",
+        "outline-none"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_types.html",
+      "class": "search-filter-types__all-electric-acoustic-classical-bass-layout",
+      "tag": "div",
+      "purpose": "all-electric-acoustic-classical-bass-layout",
+      "original_classes": [
+        "mt-8",
+        "flex",
+        "gap-2",
+        "overflow-x-auto",
+        "pb-2"
+      ]
+    },
+    {
+      "html": "templates/shared/base.html",
+      "class": "base__root",
+      "tag": "div",
+      "purpose": "root",
+      "original_classes": [
+        "min-h-screen",
+        "bg-stone-50",
+        "text-zinc-950",
+        "transition-colors",
+        "duration-300",
+        "dark:bg-ink",
+        "dark:text-white"
+      ]
+    },
+    {
+      "html": "templates/shared/dialog.html",
+      "class": "dialog__dialog-title",
+      "tag": "h2",
+      "purpose": "dialog-title",
+      "original_classes": [
+        "font-display",
+        "text-2xl",
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/shared/order_detail.html",
+      "class": "order-detail__status",
+      "tag": "div",
+      "purpose": "status",
+      "original_classes": [
+        "order-status"
+      ]
+    },
+    {
+      "html": "templates/shared/order_detail.html",
+      "class": "order-detail__instruments-gear",
+      "tag": "h3",
+      "purpose": "instruments-gear",
+      "original_classes": [
+        "font-semibold"
+      ]
+    },
+    {
+      "html": "templates/shared/order_detail.html",
+      "class": "order-detail__items",
+      "tag": "ul",
+      "purpose": "items",
+      "original_classes": [
+        "order-items"
+      ]
+    },
+    {
+      "html": "templates/shared/order_detail.html",
+      "class": "order-detail__order-detail-div",
+      "tag": "div",
+      "purpose": "order-detail-div",
+      "original_classes": [
+        "order-total"
+      ]
+    },
+    {
+      "html": "templates/shared/practice_links.html",
+      "class": "practice-links__guitar-practice",
+      "tag": "nav",
+      "purpose": "guitar-practice",
+      "original_classes": [
+        "shell",
+        "flex",
+        "flex-wrap",
+        "items-center",
+        "gap-3",
+        "py-3",
+        "text-sm",
+        "border-b",
+        "border-zinc-200",
+        "dark:border-white/10"
+      ]
+    },
+    {
+      "html": "templates/shared/practice_links.html",
+      "class": "practice-links__guitar-tuner",
+      "tag": "a",
+      "purpose": "guitar-tuner",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "gap-2"
+      ]
+    },
+    {
+      "html": "templates/shared/practice_links.html",
+      "class": "practice-links__guitar-lessons",
+      "tag": "a",
+      "purpose": "guitar-lessons",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "gap-2"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_roles.html",
+      "class": "auth-roles__option--selected",
+      "js": "assets/js/auth/auth.js",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "justify-center",
+        "gap-2",
+        "rounded-xl",
+        "px-4",
+        "py-3",
+        "text-xs",
+        "font-semibold",
+        "transition",
+        "bg-white",
+        "text-zinc-950",
+        "shadow-sm",
+        "dark:bg-zinc-800",
+        "dark:text-white"
+      ]
+    },
+    {
+      "html": "templates/auth/auth_roles.html",
+      "class": "auth-roles__option",
+      "js": "assets/js/auth/auth.js",
+      "original_classes": [
+        "flex",
+        "items-center",
+        "justify-center",
+        "gap-2",
+        "rounded-xl",
+        "px-4",
+        "py-3",
+        "text-xs",
+        "font-semibold",
+        "transition",
+        "text-zinc-500"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder_option.html",
+      "class": "search-filter-option--selected",
+      "js": "assets/js/search_filter/search_filter.js",
+      "original_classes": [
+        "rounded-2xl",
+        "border",
+        "p-5",
+        "text-left",
+        "text-sm",
+        "transition",
+        "border-zinc-950",
+        "bg-zinc-950",
+        "text-white",
+        "dark:border-acid",
+        "dark:bg-acid/10",
+        "dark:text-acid"
+      ]
+    },
+    {
+      "html": "templates/search_filter/search_filter_finder_option.html",
+      "class": "search-filter-option",
+      "js": "assets/js/search_filter/search_filter.js",
+      "original_classes": [
+        "rounded-2xl",
+        "border",
+        "p-5",
+        "text-left",
+        "text-sm",
+        "transition",
+        "border-zinc-200",
+        "hover:border-zinc-400",
+        "dark:border-white/10"
+      ]
+    },
+    {
+      "html": "templates/chatbot/chatbot_message.html",
+      "class": "chatbot-message--customer",
+      "js": "assets/js/chatbot/chatbot_ui.js",
+      "original_classes": [
+        "max-w-[86%]",
+        "rounded-2xl",
+        "px-4",
+        "py-3",
+        "text-xs",
+        "leading-5",
+        "ml-auto",
+        "bg-zinc-950",
+        "text-white",
+        "dark:bg-acid",
+        "dark:text-ink"
+      ]
+    }
+  ],
+  "created_files": [
+    "assets/css/account/account_header.css",
+    "assets/css/account/account_order_card.css",
+    "assets/css/account/account_orders.css",
+    "assets/css/account/account_password.css",
+    "assets/css/account/account_profile.css",
+    "assets/css/account/account_saved.css",
+    "assets/css/account/account_saved_item.css",
+    "assets/css/admin/admin_aside.css",
+    "assets/css/admin/admin_customer.css",
+    "assets/css/admin/admin_customers.css",
+    "assets/css/admin/admin_header.css",
+    "assets/css/admin/admin_notifications.css",
+    "assets/css/admin/admin_order_status.css",
+    "assets/css/admin/admin_overview.css",
+    "assets/css/admin/admin_product.css",
+    "assets/css/admin/admin_product_form.css",
+    "assets/css/admin/admin_products.css",
+    "assets/css/admin/admin_recent_sale.css",
+    "assets/css/admin/admin_sale_row.css",
+    "assets/css/admin/admin_sales.css",
+    "assets/css/admin/admin_settings.css",
+    "assets/css/admin/admin_sidebar_backdrop.css",
+    "assets/css/auth/auth_artwork.css",
+    "assets/css/auth/auth_form.css",
+    "assets/css/auth/auth_header.css",
+    "assets/css/auth/auth_roles.css",
+    "assets/css/catalog/catalog_announcement.css",
+    "assets/css/catalog/catalog_bundle.css",
+    "assets/css/catalog/catalog_bundles.css",
+    "assets/css/catalog/catalog_cart.css",
+    "assets/css/catalog/catalog_cart_badge.css",
+    "assets/css/catalog/catalog_cart_empty.css",
+    "assets/css/catalog/catalog_cart_item.css",
+    "assets/css/catalog/catalog_cart_items.css",
+    "assets/css/catalog/catalog_categories.css",
+    "assets/css/catalog/catalog_checkout.css",
+    "assets/css/catalog/catalog_footer.css",
+    "assets/css/catalog/catalog_guarantees.css",
+    "assets/css/catalog/catalog_header.css",
+    "assets/css/catalog/catalog_hero.css",
+    "assets/css/catalog/catalog_navigation.css",
+    "assets/css/catalog/catalog_product_card.css",
+    "assets/css/catalog/catalog_products.css",
+    "assets/css/catalog/catalog_support.css",
+    "assets/css/catalog/catalog_tracking.css",
+    "assets/css/chatbot/chatbot_message.css",
+    "assets/css/chatbot/chatbot_panel.css",
+    "assets/css/chatbot/chatbot_suggestions.css",
+    "assets/css/landing/landing_categories.css",
+    "assets/css/landing/landing_footer.css",
+    "assets/css/landing/landing_header.css",
+    "assets/css/landing/landing_hero.css",
+    "assets/css/landing/landing_join.css",
+    "assets/css/landing/landing_overview.css",
+    "assets/css/landing/landing_steps.css",
+    "assets/css/lessons/lessons_chord_detail.css",
+    "assets/css/lessons/lessons_chord_diagram.css",
+    "assets/css/lessons/lessons_chords.css",
+    "assets/css/lessons/lessons_getting_started.css",
+    "assets/css/lessons/lessons_strumming.css",
+    "assets/css/lessons/lessons_strumming_pattern.css",
+    "assets/css/search_filter/search_filter_check.css",
+    "assets/css/search_filter/search_filter_finder.css",
+    "assets/css/search_filter/search_filter_finder_banner.css",
+    "assets/css/search_filter/search_filter_finder_match.css",
+    "assets/css/search_filter/search_filter_finder_option.css",
+    "assets/css/search_filter/search_filter_finder_results.css",
+    "assets/css/search_filter/search_filter_search.css",
+    "assets/css/search_filter/search_filter_sort.css",
+    "assets/css/search_filter/search_filter_types.css",
+    "assets/css/shared/animations.css",
+    "assets/css/shared/base.css",
+    "assets/css/shared/components.css",
+    "assets/css/shared/dialog.css",
+    "assets/css/shared/empty_state.css",
+    "assets/css/shared/icons.css",
+    "assets/css/shared/notice.css",
+    "assets/css/shared/order_detail.css",
+    "assets/css/shared/practice_base.css",
+    "assets/css/shared/practice_links.css",
+    "assets/css/tuner/tuner_meter.css",
+    "assets/css/tuner/tuner_strings.css",
+    "templates/account/account_header.html",
+    "templates/account/account_order_card.html",
+    "templates/account/account_orders.html",
+    "templates/account/account_password.html",
+    "templates/account/account_profile.html",
+    "templates/account/account_saved.html",
+    "templates/account/account_saved_item.html",
+    "templates/admin/admin_aside.html",
+    "templates/admin/admin_customer.html",
+    "templates/admin/admin_customers.html",
+    "templates/admin/admin_header.html",
+    "templates/admin/admin_notifications.html",
+    "templates/admin/admin_order_status.html",
+    "templates/admin/admin_overview.html",
+    "templates/admin/admin_product.html",
+    "templates/admin/admin_product_form.html",
+    "templates/admin/admin_products.html",
+    "templates/admin/admin_recent_sale.html",
+    "templates/admin/admin_sale_row.html",
+    "templates/admin/admin_sales.html",
+    "templates/admin/admin_settings.html",
+    "templates/admin/admin_sidebar_backdrop.html",
+    "templates/auth/auth_artwork.html",
+    "templates/auth/auth_form.html",
+    "templates/auth/auth_header.html",
+    "templates/auth/auth_roles.html",
+    "templates/catalog/catalog_announcement.html",
+    "templates/catalog/catalog_bundles.html",
+    "templates/catalog/catalog_cart_badge.html",
+    "templates/catalog/catalog_cart_empty.html",
+    "templates/catalog/catalog_cart_item.html",
+    "templates/catalog/catalog_cart_items.html",
+    "templates/catalog/catalog_categories.html",
+    "templates/catalog/catalog_footer.html",
+    "templates/catalog/catalog_guarantees.html",
+    "templates/catalog/catalog_header.html",
+    "templates/catalog/catalog_hero.html",
+    "templates/catalog/catalog_products.html",
+    "templates/catalog/catalog_tracking.html",
+    "templates/chatbot/chatbot_message.html",
+    "templates/chatbot/chatbot_panel.html",
+    "templates/chatbot/chatbot_suggestions.html",
+    "templates/landing/landing_categories.html",
+    "templates/landing/landing_footer.html",
+    "templates/landing/landing_header.html",
+    "templates/landing/landing_hero.html",
+    "templates/landing/landing_join.html",
+    "templates/landing/landing_overview.html",
+    "templates/landing/landing_steps.html",
+    "templates/lessons/lessons_strumming_pattern.html",
+    "templates/search_filter/search_filter_check.html",
+    "templates/search_filter/search_filter_finder_match.html",
+    "templates/search_filter/search_filter_finder_option.html",
+    "templates/search_filter/search_filter_finder_results.html",
+    "templates/search_filter/search_filter_search.html",
+    "templates/search_filter/search_filter_sort.html",
+    "templates/shared/dialog.html",
+    "templates/shared/icons.html",
+    "templates/shared/order_detail.html",
+    "templates/tuner/tuner_meter.html",
+    "templates/tuner/tuner_strings.html"
+  ],
+  "utility_tokens": [
+    "-left-2",
+    "-right-0.5",
+    "-right-28",
+    "-top-0.5",
+    "-top-2",
+    "-top-28",
+    "-top-7",
+    "-translate-x-1/2",
+    "-translate-x-full",
+    "absolute",
+    "appearance-none",
+    "aspect-[4/4.5]",
+    "backdrop-blur",
+    "backdrop-blur-md",
+    "backdrop-blur-sm",
+    "backdrop-blur-xl",
+    "bg-amber-100",
+    "bg-amber-400",
+    "bg-black/40",
+    "bg-black/55",
+    "bg-black/65",
+    "bg-blue-100",
+    "bg-cyan-500",
+    "bg-emerald-100",
+    "bg-gradient-to-t",
+    "bg-rose-100",
+    "bg-rose-400",
+    "bg-rose-50",
+    "bg-rose-500",
+    "bg-stone-50",
+    "bg-stone-50/90",
+    "bg-transparent",
+    "bg-violet-100",
+    "bg-violet-500",
+    "bg-violet-500/25",
+    "bg-white",
+    "bg-white/10",
+    "bg-white/15",
+    "bg-white/90",
+    "bg-white/[.055]",
+    "bg-zinc-100",
+    "bg-zinc-200",
+    "bg-zinc-50",
+    "bg-zinc-900",
+    "bg-zinc-950",
+    "block",
+    "blur-[100px]",
+    "border",
+    "border-b",
+    "border-dashed",
+    "border-l",
+    "border-r",
+    "border-t",
+    "border-white/10",
+    "border-white/30",
+    "border-y",
+    "border-zinc-100",
+    "border-zinc-200",
+    "border-zinc-200/80",
+    "border-zinc-300",
+    "border-zinc-950",
+    "bottom-0",
+    "bottom-24",
+    "bottom-3",
+    "bottom-5",
+    "bottom-6",
+    "dark:bg-[#0c0c0f]",
+    "dark:bg-[#0d0d10]",
+    "dark:bg-[#101014]",
+    "dark:bg-acid",
+    "dark:bg-acid/10",
+    "dark:bg-amber-400/10",
+    "dark:bg-amber-400/15",
+    "dark:bg-black/10",
+    "dark:bg-blue-400/10",
+    "dark:bg-blue-400/15",
+    "dark:bg-emerald-400/10",
+    "dark:bg-emerald-400/15",
+    "dark:bg-gradient-to-br",
+    "dark:bg-ink",
+    "dark:bg-ink/90",
+    "dark:bg-panel",
+    "dark:bg-rose-400/10",
+    "dark:bg-rose-500/10",
+    "dark:bg-violet-400/15",
+    "dark:bg-white",
+    "dark:bg-white/10",
+    "dark:bg-white/5",
+    "dark:bg-white/[.025]",
+    "dark:bg-white/[.02]",
+    "dark:bg-white/[.055]",
+    "dark:bg-white/[.05]",
+    "dark:bg-white/[.06]",
+    "dark:bg-white/[.07]",
+    "dark:bg-zinc-800",
+    "dark:bg-zinc-900",
+    "dark:border-acid",
+    "dark:border-white/10",
+    "dark:border-white/15",
+    "dark:border-white/5",
+    "dark:divide-white/5",
+    "dark:from-[#1c1330]",
+    "dark:hover:bg-white/20",
+    "dark:hover:bg-white/5",
+    "dark:hover:bg-white/[.025]",
+    "dark:hover:text-white",
+    "dark:text-acid",
+    "dark:text-amber-300",
+    "dark:text-blue-300",
+    "dark:text-emerald-300",
+    "dark:text-ink",
+    "dark:text-rose-300",
+    "dark:text-violet-300",
+    "dark:text-white",
+    "dark:text-zinc-200",
+    "dark:text-zinc-300",
+    "dark:text-zinc-400",
+    "dark:text-zinc-700",
+    "dark:text-zinc-950",
+    "dark:to-zinc-950",
+    "dark:via-zinc-950",
+    "divide-white/10",
+    "divide-y",
+    "divide-zinc-100",
+    "duration-1000",
+    "duration-300",
+    "duration-700",
+    "fill-amber-400",
+    "fixed",
+    "flex",
+    "flex-1",
+    "flex-col",
+    "flex-wrap",
+    "font-bold",
+    "font-display",
+    "font-medium",
+    "font-semibold",
+    "from-amber-500/30",
+    "from-black",
+    "from-black/75",
+    "from-black/90",
+    "from-cyan-500/30",
+    "from-rose-500/30",
+    "from-violet-500/30",
+    "gap-1",
+    "gap-1.5",
+    "gap-12",
+    "gap-2",
+    "gap-3",
+    "gap-4",
+    "gap-6",
+    "gap-7",
+    "gap-8",
+    "gap-px",
+    "gap-x-5",
+    "gap-y-12",
+    "grid",
+    "grid-cols-2",
+    "grid-cols-3",
+    "grid-cols-4",
+    "group",
+    "group-hover:bg-white",
+    "group-hover:block",
+    "group-hover:scale-105",
+    "group-hover:scale-[1.04]",
+    "group-hover:text-zinc-950",
+    "h-1",
+    "h-1.5",
+    "h-10",
+    "h-11",
+    "h-12",
+    "h-14",
+    "h-2",
+    "h-20",
+    "h-24",
+    "h-5",
+    "h-6",
+    "h-64",
+    "h-8",
+    "h-80",
+    "h-9",
+    "h-[390px]",
+    "h-[510px]",
+    "h-[76px]",
+    "h-[78px]",
+    "h-full",
+    "h-px",
+    "hidden",
+    "hover:bg-violet-300",
+    "hover:bg-zinc-100",
+    "hover:bg-zinc-50",
+    "hover:border-zinc-300",
+    "hover:border-zinc-400",
+    "hover:border-zinc-500",
+    "hover:scale-105",
+    "hover:scale-[1.025]",
+    "hover:text-rose-500",
+    "hover:text-zinc-950",
+    "hover:underline",
+    "inline-flex",
+    "inset-0",
+    "inset-x-0",
+    "inset-y-0",
+    "items-center",
+    "items-end",
+    "items-start",
+    "justify-between",
+    "justify-center",
+    "leading-5",
+    "leading-6",
+    "leading-7",
+    "leading-[.88]",
+    "leading-[1.03]",
+    "leading-tight",
+    "left-0",
+    "left-1/2",
+    "left-3",
+    "left-6",
+    "lg:block",
+    "lg:flex",
+    "lg:flex-row",
+    "lg:grid-cols-2",
+    "lg:grid-cols-3",
+    "lg:grid-cols-4",
+    "lg:grid-cols-[.72fr_1.28fr]",
+    "lg:grid-cols-[1.03fr_.97fr]",
+    "lg:grid-cols-[1.05fr_1fr]",
+    "lg:grid-cols-[1.4fr_repeat(3,1fr)]",
+    "lg:grid-cols-[1fr_.72fr]",
+    "lg:hidden",
+    "lg:items-center",
+    "lg:items-end",
+    "lg:p-16",
+    "lg:pl-[270px]",
+    "lg:px-20",
+    "lg:py-10",
+    "lg:py-20",
+    "lg:translate-x-0",
+    "line-clamp-2",
+    "max-w-2xl",
+    "max-w-[180px]",
+    "max-w-[210px]",
+    "max-w-[86%]",
+    "max-w-lg",
+    "max-w-md",
+    "max-w-sm",
+    "max-w-xl",
+    "max-w-xs",
+    "mb-10",
+    "mb-2",
+    "mb-3",
+    "mb-7",
+    "mb-8",
+    "mb-9",
+    "min-h-[40px]",
+    "min-h-[430px]",
+    "min-h-screen",
+    "min-w-0",
+    "min-w-[270px]",
+    "min-w-[680px]",
+    "min-w-[900px]",
+    "ml-1",
+    "ml-2",
+    "ml-auto",
+    "mr-2",
+    "mt-0.5",
+    "mt-1",
+    "mt-10",
+    "mt-12",
+    "mt-2",
+    "mt-3",
+    "mt-4",
+    "mt-5",
+    "mt-6",
+    "mt-7",
+    "mt-8",
+    "mt-9",
+    "mt-auto",
+    "mx-2",
+    "mx-auto",
+    "object-center",
+    "object-cover",
+    "opacity-40",
+    "opacity-70",
+    "outline-none",
+    "overflow-hidden",
+    "overflow-x-auto",
+    "overflow-x-clip",
+    "overflow-y-auto",
+    "p-1.5",
+    "p-12",
+    "p-3",
+    "p-4",
+    "p-5",
+    "p-6",
+    "p-7",
+    "p-8",
+    "pb-1",
+    "pb-14",
+    "pb-2",
+    "pb-24",
+    "pl-4",
+    "pl-5",
+    "place-items-center",
+    "pr-4",
+    "pr-6",
+    "pt-16",
+    "pt-3",
+    "pt-4",
+    "pt-5",
+    "pt-6",
+    "px-1",
+    "px-2",
+    "px-2.5",
+    "px-3",
+    "px-4",
+    "px-5",
+    "px-6",
+    "px-7",
+    "py-0.5",
+    "py-1",
+    "py-1.5",
+    "py-14",
+    "py-16",
+    "py-2",
+    "py-2.5",
+    "py-20",
+    "py-24",
+    "py-3",
+    "py-3.5",
+    "py-4",
+    "py-5",
+    "py-6",
+    "relative",
+    "right-0",
+    "right-2",
+    "right-3",
+    "right-4",
+    "right-5",
+    "right-6",
+    "rounded",
+    "rounded-2xl",
+    "rounded-3xl",
+    "rounded-[1.15rem]",
+    "rounded-[2rem]",
+    "rounded-full",
+    "rounded-lg",
+    "rounded-t-md",
+    "rounded-xl",
+    "self-start",
+    "shadow-2xl",
+    "shadow-lg",
+    "shadow-md",
+    "shadow-sm",
+    "shadow-xl",
+    "sm:flex",
+    "sm:flex-row",
+    "sm:gap-3",
+    "sm:grid",
+    "sm:grid-cols-2",
+    "sm:grid-cols-3",
+    "sm:items-end",
+    "sm:left-8",
+    "sm:p-10",
+    "sm:p-12",
+    "sm:p-6",
+    "sm:p-8",
+    "sm:pb-28",
+    "sm:px-12",
+    "sm:px-8",
+    "sm:py-28",
+    "sm:right-1",
+    "sm:right-8",
+    "sm:text-2xl",
+    "sm:text-6xl",
+    "sm:text-[10px]",
+    "sm:text-[11px]",
+    "sm:text-lg",
+    "sm:top-12",
+    "space-y-1",
+    "space-y-3",
+    "space-y-5",
+    "space-y-6",
+    "sticky",
+    "text-2xl",
+    "text-3xl",
+    "text-4xl",
+    "text-5xl",
+    "text-[10px]",
+    "text-[11px]",
+    "text-[9px]",
+    "text-[clamp(3.4rem,7.5vw,7rem)]",
+    "text-acid",
+    "text-amber-400",
+    "text-amber-500",
+    "text-amber-700",
+    "text-base",
+    "text-blue-700",
+    "text-center",
+    "text-emerald-500",
+    "text-emerald-700",
+    "text-left",
+    "text-lg",
+    "text-outline",
+    "text-right",
+    "text-rose-500",
+    "text-rose-600",
+    "text-rose-700",
+    "text-sm",
+    "text-violet-700",
+    "text-white",
+    "text-white/40",
+    "text-white/55",
+    "text-white/60",
+    "text-white/65",
+    "text-xl",
+    "text-xs",
+    "text-zinc-300",
+    "text-zinc-400",
+    "text-zinc-500",
+    "text-zinc-600",
+    "text-zinc-700",
+    "text-zinc-950",
+    "to-black/30",
+    "to-black/5",
+    "to-transparent",
+    "top-0",
+    "top-2",
+    "top-3",
+    "top-5",
+    "top-6",
+    "tracking-[-.04em]",
+    "tracking-[-.065em]",
+    "tracking-[.12em]",
+    "tracking-[.14em]",
+    "tracking-[.15em]",
+    "tracking-[.16em]",
+    "tracking-[.18em]",
+    "tracking-[.2em]",
+    "tracking-normal",
+    "tracking-tight",
+    "tracking-widest",
+    "transition",
+    "transition-colors",
+    "transition-transform",
+    "translate-x-0",
+    "truncate",
+    "uppercase",
+    "via-black/15",
+    "via-transparent",
+    "w-1.5",
+    "w-10",
+    "w-11",
+    "w-12",
+    "w-14",
+    "w-16",
+    "w-20",
+    "w-5",
+    "w-6",
+    "w-8",
+    "w-80",
+    "w-9",
+    "w-[270px]",
+    "w-[74px]",
+    "w-[calc(100%-2rem)]",
+    "w-full",
+    "xl:grid-cols-3",
+    "xl:grid-cols-4",
+    "xl:grid-cols-[1.55fr_.75fr]",
+    "xl:p-10",
+    "xl:p-16",
+    "xl:text-6xl",
+    "z-10",
+    "z-30",
+    "z-40",
+    "z-50",
+    "z-[60]"
+  ]
+}

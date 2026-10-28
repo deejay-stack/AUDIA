@@ -1,0 +1,206 @@
+/* ==================================================
+   COMPONENT: ADMIN HEADER
+   HTML FILE: templates/admin/admin_header.html
+   PURPOSE: Admin header presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/admin/admin.js.
+   ================================================== */
+
+.admin-header__store-manager {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.admin-header__notifications-span {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  height: 0.375rem;
+  width: 0.375rem;
+  border-radius: 9999px;
+  background-color: rgb(244, 63, 94);
+}
+
+.admin-header__notifications {
+  position: relative;
+}
+
+.admin-header__theme {
+  position: relative;
+  display: flex;
+  height: 2.5rem;
+  width: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9px;
+  border-width: 1px;
+  border-color: var(--line);
+  background-color: rgb(255, 255, 255);
+  color: rgb(63, 63, 70);
+  box-shadow: none;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.admin-header__administration-overview-aj-audia-admin-header {
+  position: sticky;
+  top: 0px;
+  z-index: 30;
+  display: flex;
+  height: 78px;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom-width: 1px;
+  border-color: rgb(228, 228, 231);
+  background-color: rgba(250, 250, 249, 0.9);
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  backdrop-filter: none;
+}
+
+.admin-header__aj-audia-admin-store-manager-layout-aj-audia-admin-store-manager {
+  margin-left: 0.25rem;
+  display: none;
+  align-items: center;
+  gap: 0.75rem;
+  border-left-width: 1px;
+  border-color: rgb(228, 228, 231);
+  padding-left: 1rem;
+}
+
+.admin-header__administration-overview-layout {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.admin-header__aj-audia-admin-store-manager-layout {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.admin-header__aj-layout {
+  display: grid;
+  height: 2.25rem;
+  width: 2.25rem;
+  place-items: center;
+  border-radius: 9999px;
+  background-color: rgb(237, 233, 254);
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 700;
+  color: rgb(109, 40, 217);
+}
+
+.admin-header__admin-title {
+  font-family: "Space Grotesk", Inter, ui-sans-serif, system-ui;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+}
+
+.admin-header__administration {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgb(161, 161, 170);
+}
+
+.admin-header__admin-name {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 600;
+}
+
+.admin-header__theme:hover {
+  border-color: rgb(212, 212, 216);
+}
+
+/* Dark theme. */
+.dark .admin-header__administration-overview-aj-audia-admin-header {
+  border-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(13, 12, 18, 0.9);
+}
+
+/* Dark theme. */
+.dark .admin-header__aj-audia-admin-store-manager-layout-aj-audia-admin-store-manager {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Dark theme. */
+.dark .admin-header__theme {
+  border-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.05);
+  color: rgb(228, 228, 231);
+}
+
+/* Dark theme. */
+.dark .admin-header__aj-layout {
+  background-color: rgba(167, 139, 250, 0.15);
+  color: rgb(196, 181, 253);
+}
+
+/* Screen size or accessibility preference: (min-width: 640px). */
+@media (min-width: 640px) {
+  .admin-header__aj-audia-admin-store-manager-layout-aj-audia-admin-store-manager {
+    display: flex;
+  }
+
+  .admin-header__administration-overview-aj-audia-admin-header {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Screen size or accessibility preference: (min-width: 1024px). */
+@media (min-width: 1024px) {
+  .admin-header__sidebar {
+    display: none;
+  }
+}
+
+.admin-page .admin-header__aj-layout > * {
+  min-width: 0px;
+}
+
+/* Screen size or accessibility preference: (max-width: 639px). */
+@media (max-width: 639px) {
+  .admin-page main > div > .admin-header__administration-overview-aj-audia-admin-header {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .admin-page main > div > .admin-header__administration-overview-layout {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .admin-page main > div > .admin-header__aj-audia-admin-store-manager-layout {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .admin-page main > div > .admin-header__theme {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+}
+
+.admin-page header {
+  background: color-mix(in srgb, var(--page) 92%, transparent);
+  border-color: var(--line);
+}
+
+/* Dark theme. */
+.dark .admin-page header {
+  background: color-mix(in srgb, var(--page) 92%, transparent);
+  border-color: var(--line);
+}
+
+/* Screen size or accessibility preference: (max-width: 639px). */
+@media (max-width: 639px) {
+  .admin-page header {
+    padding-inline: 12px;
+  }
+}

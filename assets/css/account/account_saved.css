@@ -1,0 +1,46 @@
+/* ==================================================
+   COMPONENT: ACCOUNT SAVED
+   HTML FILE: templates/account/account_saved.html
+   PURPOSE: Account saved presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/account/account.js.
+   ================================================== */
+
+.account-saved__surface-card {
+  margin-top: 1.75rem;
+}
+
+.account-saved__saved-instruments {
+  font-family: "Space Grotesk", Inter, ui-sans-serif, system-ui;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+}
+
+.saved-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0px, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.finder-profile-summary {
+  margin-top: 28px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--line);
+  padding-top: 24px;
+}
+
+/* Screen size or accessibility preference: (max-width: 639px). */
+@media (max-width: 639px) {
+  .saved-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .finder-profile-summary {
+    align-items: start;
+    flex-direction: column;
+  }
+}

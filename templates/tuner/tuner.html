@@ -1,3 +1,6 @@
+<!-- MODULE: TUNER | COMPONENT: Tuner
+     PURPOSE: Tuner structure. CSS: assets/css/tuner/tuner.css
+     JS: assets/js/tuner/tuner.js (pitch: assets/js/tuner/tuner_pitch.js). Preserve IDs and data-action/data-field hooks. -->
 {% extends "shared/practice_base.html" %} {% block practice_content %}
 <div class="practice-heading">
   <p class="section-label">AUDIA practice studio</p>
@@ -11,6 +14,8 @@
     <p id="tuner-microphone" class="tuner-microphone" role="status">
       Microphone inactive
     </p>
+    <!-- tuner.js updates the live note, frequency, cents, and status as you play.
+         Appearance: tuner.css. Meter appearance and tuning colors: tuner_meter.css. -->
     <div class="tuner-readout" aria-label="Detected pitch">
       <p class="tuner-note">
         <span id="tuner-note">—</span
@@ -20,24 +25,8 @@
       <p id="tuner-cents" class="tuner-cents">— cents</p>
     </div>
     <p id="tuner-status" class="tuner-status" role="status">Play a string</p>
-    <div
-      id="tuner-meter"
-      class="tuner-meter"
-      role="meter"
-      aria-label="Tuning deviation in cents"
-      aria-valuemin="-50"
-      aria-valuemax="50"
-      aria-valuenow="0"
-      aria-valuetext="No reliable pitch"
-    >
-      <div class="tuner-meter-track">
-        <span class="tuner-meter-center" aria-hidden="true"></span
-        ><span id="tuner-indicator" class="tuner-indicator" hidden></span>
-      </div>
-      <div class="tuner-meter-labels" aria-hidden="true">
-        <span>Flat −50</span><span>In tune</span><span>+50 Sharp</span>
-      </div>
-    </div>
+    <!-- Component: tuner meter | CSS: assets/css/tuner/tuner_meter.css -->
+    {% include 'tuner/tuner_meter.html' %}
     <div class="practice-actions tuner-controls">
       <button id="tuner-start" type="button" class="primary-btn">
         Start Tuner
@@ -59,15 +48,8 @@
         From the thickest string to the thinnest. The matching string lights up
         automatically.
       </p>
-      <ol class="tuner-strings" reversed>
-        {% for note, frequency in [('E2', '82.41'), ('A2', '110.00'), ('D3',
-        '146.83'), ('G3', '196.00'), ('B3', '246.94'), ('E4', '329.63')] %}
-        <li data-tuning-note="{{ note }}">
-          <span>String {{ 7 - loop.index }}</span><strong>{{ note }}</strong
-          ><span>{{ frequency }} Hz</span>
-        </li>
-        {% endfor %}
-      </ol>
+      <!-- Component: tuner strings | CSS: assets/css/tuner/tuner_strings.css -->
+      {% include 'tuner/tuner_strings.html' %}
     </section>
     <section class="practice-card tuner-tips">
       <h2>A little preparation</h2>

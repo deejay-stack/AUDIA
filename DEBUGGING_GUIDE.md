@@ -1,22 +1,31 @@
 # AUDIA debugging map
 
+For colors, backgrounds, text sizes, and HTML text edits, start with
+[CSS_EDITING_GUIDE.md](docs/CSS_EDITING_GUIDE.md). It explains matching files,
+theme/state rules, shared styles, and text supplied by JavaScript or the database.
+
+For the current UI file pairs, start with
+[FRONTEND_COMPONENT_MAP.md](docs/FRONTEND_COMPONENT_MAP.md). Each independent
+component has a matching HTML/CSS filename, and the file headers identify its
+JavaScript controller. The table below continues the trace into the backend.
+
 When your instructor removes code, locate the component first, then trace its
 HTML → JavaScript → API/Python flow. CSS controls appearance. Primary files
 use the same component name in each language.
 
 | Broken behavior | Start here | Then trace |
 | --- | --- | --- |
-| Catalog page missing or wrong template | `app.py`: `shop()` → `templates/catalog/catalog.html` | Matching catalog CSS/JS and included `catalog_*.html` fragments |
+| Catalog page missing or wrong template | `app.py`: `shop()` → `templates/catalog/catalog.html` | Matching catalog CSS/JS and labeled sections in `catalog.html` |
 | Products do not load | `assets/js/catalog/catalog.js`: `/products` request, `renderProducts()` | Network `/api/products` → `modules/search_filter/search_filter.py`: `products()` → `modules/catalog/catalog.py`: `products_data()` |
-| Name, description, price, stock or image missing | `templates/catalog/catalog_product_card.html` | `catalog.js`: `renderProducts()`; `Product.public()` in `modules/database/models.py` |
-| Add to Cart or quantity buttons fail | `assets/js/catalog/catalog.js`: `addToCart()`, `renderCart()`, `changeQuantity()` | `templates/catalog/catalog_cart.html`; stock limits; shared cart storage |
-| Purchase/checkout fails | `templates/catalog/catalog_checkout.html`, `catalog.js`: `openCheckout()` | POST `/api/orders` → `modules/orders/orders.py`; inspect CSRF, request key, stock and order data |
-| Search, type filtering or sorting fails | `assets/js/search_filter/search_filter.js`: `filterProducts()`, `handleAction()`, input/change listeners | `search_filter.html`, `search_filter_types.html`; server `products()` handles API query/type filtering |
-| Budget/skill Finder stops advancing or returns no results | `search_filter.js`: `renderFinder()`, `finishFinder()` | `search_filter_finder.html`; POST `/api/finder` → `search_filter.py`: `finder()`; profile restoration |
-| Search/Finder layout broken | `assets/css/search_filter/search_filter.css` | Its templates plus shared input/button utility styles; catalog includes these fragments |
+| Name, description, price, stock or image missing | `templates/catalog/catalog.html` | `catalog.js`: `renderProducts()`; `Product.public()` in `modules/database/models.py` |
+| Add to Cart or quantity buttons fail | `assets/js/catalog/catalog.js`: `addToCart()`, `renderCart()`, `changeQuantity()` | `templates/catalog/catalog.html`; stock limits; shared cart storage |
+| Purchase/checkout fails | `templates/catalog/catalog.html`, `catalog.js`: `openCheckout()` | POST `/api/orders` → `modules/orders/orders.py`; inspect CSRF, request key, stock and order data |
+| Search, type filtering or sorting fails | `assets/js/search_filter/search_filter.js`: `filterProducts()`, `handleAction()`, input/change listeners | `search_filter.html`, `search_filter.html`; server `products()` handles API query/type filtering |
+| Budget/skill Finder stops advancing or returns no results | `search_filter.js`: `renderFinder()`, `finishFinder()` | `search_filter.html`; POST `/api/finder` → `search_filter.py`: `finder()`; profile restoration |
+| Search/Finder layout broken | `assets/css/search_filter/search_filter.css` | Its matching component sheets plus shared input/button primitives; catalog includes these fragments |
 | Chat window does not open/send | `assets/js/chatbot/chatbot.js`: `initChatbot()` | `chatbot.html`, `chatbot_ui.js`, `chatbot_api.js`; shared startup calls the initializer |
 | Chat returns an error or wrong recommendation | POST `/api/chat` → `modules/chatbot/chatbot.py` | `modules/chatbot/ai/ai.py`: `ask_audia()`, `extract_product_filters()`, `retrieve_products_with_filters()`, `retrieve_documents()`, `enrich_documents_with_live_data()` |
-| Chat wrapping/size/busy controls broken | `assets/css/chatbot/chatbot.css` | `templates/shared/base.html` loads it; shared panel/utility tokens apply too |
+| Chat wrapping/size/busy controls broken | `assets/css/chatbot/chatbot.css` | Imports `chatbot_panel.css`, `chatbot_message.css` and `chatbot_suggestions.css`; shared base loads the entry |
 | Product knowledge not indexed | `modules/chatbot/ai/ai_rag_sync.py` | `build_product_document()`, `sync_products_to_rag()`, embeddings in `ai.py`; existing `sync-rag` CLI |
 | Tuner page or controls missing | `modules/tuner/tuner.py`, `templates/tuner/tuner.html` | `assets/js/tuner/tuner.js`: `mountTuner()`, `startTuner()`, `stopTuner()`, `renderPitch()` |
 | Wrong guitar note/flat/sharp indication | `assets/js/tuner/tuner_pitch.js` | `detectPitch()`, `describePitch()`, `PitchStabilizer`; run `node tests/tuner-pitch.cjs` |

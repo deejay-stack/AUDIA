@@ -1,0 +1,70 @@
+/* ==================================================
+   COMPONENT: TUNER METER
+   HTML FILE: templates/tuner/tuner_meter.html
+   PURPOSE: Tuner meter presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/tuner/tuner.js (pitch: assets/js/tuner/tuner_pitch.js).
+   ================================================== */
+
+.tuner-meter {
+  margin-top: 24px;
+}
+
+.tuner-meter-track {
+  position: relative;
+  height: 36px;
+  margin-inline: 8px;
+  border-bottom: 2px solid var(--line);
+  background: repeating-linear-gradient( 90deg, var(--line) 0 1px, transparent 1px 10% );
+}
+
+.tuner-meter-center {
+  position: absolute;
+  left: 45%;
+  width: 10%;
+  height: 100%;
+  background: var(--mint);
+  opacity: 0.18;
+  border-radius: 4px;
+}
+
+.tuner-meter-center::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  height: 100%;
+  width: 2px;
+  background: var(--text);
+}
+
+.tuner-indicator {
+  position: absolute;
+  left: 50%;
+  top: -5px;
+  width: 4px;
+  height: 45px;
+  background: var(--accent);
+  border-radius: 4px;
+  transform: translateX(-50%);
+  transition: left 100ms linear;
+}
+
+.tuner-meter-labels {
+  display: flex;
+  justify-content: space-between;
+  gap: 4px;
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+/* Screen size or accessibility preference: (prefers-reduced-motion: reduce). */
+@media (prefers-reduced-motion: reduce) {
+  .tuner-indicator {
+    transition: none;
+  }
+}
+
+/* Appearance while this tuning state is active. */
+.tuner-container[data-tuning="in-tune"] .tuner-indicator {
+  background: var(--mint);
+}

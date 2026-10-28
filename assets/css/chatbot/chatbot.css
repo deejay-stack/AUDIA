@@ -1,19 +1,32 @@
-/* Chat */
-.chat-panel {
-  max-height: calc(100dvh - 120px);
-  border-radius: 14px;
-  border-color: var(--line);
+/* ==================================================
+   COMPONENT: FLOATING SUPPORT BUTTON AND COMPONENT COMPOSITION
+   HTML FILE: templates/chatbot/chatbot.html
+   PURPOSE: Floating support button and component composition presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/chatbot/chatbot.js; assets/js/chatbot/chatbot_ui.js; assets/js/chatbot/chatbot_api.js.
+   ================================================== */
+
+@import url("chatbot_message.css");
+@import url("chatbot_panel.css");
+@import url("chatbot_suggestions.css");
+
+.chatbot-toggle {
+  position: fixed;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  z-index: 40;
+  display: grid;
+  height: 3.5rem;
+  width: 3.5rem;
+  place-items: center;
+  border-radius: 9999px;
+  background-color: #62cfa0;
+  color: #101014;
+  box-shadow: 0 0 #0000, 0 0 #0000, 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
 }
 
-/* Keep long replies readable and controls visibly busy without changing the layout. */
-.chat-panel [data-field="messages"] {
-  min-height: 0;
-}
-.chat-panel [data-field="message"] {
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-}
-.chat-panel :disabled {
-  cursor: wait;
-  opacity: 0.6;
+.chatbot-toggle:hover {
+  transform: scale(1.05);
 }

@@ -1,0 +1,40 @@
+/* ==================================================
+   COMPONENT: ORDER DETAIL DIALOG
+   HTML FILE: templates/shared/order_detail.html
+   PURPOSE: Order detail dialog presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/shared/app.js; assets/js/shared/shared.js; assets/js/shared/theme.js.
+   ================================================== */
+
+.order-detail__instruments-gear {
+  font-weight: 600;
+}
+
+.detail-list {
+  display: grid;
+  grid-template-columns: 130px minmax(0px, 1fr);
+  gap: 12px 20px;
+  margin: 24px 0px;
+  font-size: 13px;
+}
+
+.detail-list dt {
+  color: var(--muted);
+}
+
+.detail-list dd {
+  overflow-wrap: anywhere;
+}
+
+.order-detail__items {
+  display: grid;
+  gap: 10px;
+  margin: 16px 0px;
+  font-size: 13px;
+}
+
+/* Screen size or accessibility preference: (max-width: 639px). */
+@media (max-width: 639px) {
+  .detail-list {
+    grid-template-columns: 100px minmax(0px, 1fr);
+  }
+}

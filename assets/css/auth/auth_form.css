@@ -1,0 +1,173 @@
+/* ==================================================
+   COMPONENT: AUTH FORM
+   HTML FILE: templates/auth/auth_form.html
+   PURPOSE: Auth form presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/auth/auth.js.
+   ================================================== */
+
+.auth-form__remember-me {
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.auth-form__password-button {
+  color: var(--muted);
+}
+
+.auth-form__confirm-password {
+  margin-bottom: 0.5rem;
+  display: block;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 600;
+}
+
+.auth-form__email-address {
+  margin-bottom: 0.5rem;
+  display: block;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 600;
+}
+
+.auth-form__full-name {
+  margin-bottom: 0.5rem;
+  display: block;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 600;
+}
+
+.auth-form__password {
+  margin-bottom: 0.5rem;
+  display: block;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 600;
+}
+
+.auth-form__full-name-email-address-password-form {
+  margin-top: 1.75rem;
+}
+
+.auth-form__confirm-wrap {
+  display: block;
+}
+
+.auth-form__email-wrap {
+  display: block;
+}
+
+.auth-form__name-wrap {
+  display: block;
+}
+
+.auth-form__password-wrap {
+  display: block;
+}
+
+.auth-form__login-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.auth-form__confirm {
+  width: 100%;
+  background-color: transparent;
+  padding-top: 0.875rem;
+  padding-bottom: 0.875rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  outline: transparent solid 2px;
+  outline-offset: 2px;
+}
+
+.auth-form__email {
+  width: 100%;
+  background-color: transparent;
+  padding-top: 0.875rem;
+  padding-bottom: 0.875rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  outline: transparent solid 2px;
+  outline-offset: 2px;
+}
+
+.auth-form__login-submit {
+  width: 100%;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.auth-form__name {
+  width: 100%;
+  background-color: transparent;
+  padding-top: 0.875rem;
+  padding-bottom: 0.875rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  outline: transparent solid 2px;
+  outline-offset: 2px;
+}
+
+.auth-form__password-input {
+  width: 100%;
+  background-color: transparent;
+  padding-top: 0.875rem;
+  padding-bottom: 0.875rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  outline: transparent solid 2px;
+  outline-offset: 2px;
+}
+
+.auth-form__full-name-email-address-password-form > :not([hidden]) ~ :not([hidden]) {
+  margin-top: 1.25rem;
+  margin-bottom: 0px;
+}
+
+.auth-form__input-shell {
+  border-radius: 8px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.auth-form__login-error {
+  border-radius: 0.75rem;
+  background-color: rgb(255, 241, 242);
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: rgb(225, 29, 72);
+}
+
+.auth-form__forgot {
+  font-weight: 600;
+}
+
+.auth-form__forgot:hover {
+  text-decoration-line: underline;
+}
+
+/* Dark theme. */
+.dark .auth-form__login-error {
+  background-color: rgba(244, 63, 94, 0.1);
+  color: rgb(253, 164, 175);
+}
+
+.form-success {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: var(--soft);
+  border-radius: 10px;
+  font-size: 13px;
+  color: var(--mint);
+}

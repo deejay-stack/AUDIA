@@ -1,0 +1,73 @@
+/* ==================================================
+   COMPONENT: PRACTICE PAGE SHELL
+   HTML FILE: templates/shared/practice_base.html
+   PURPOSE: Practice page shell presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/shared/app.js; assets/js/shared/shared.js; assets/js/shared/theme.js.
+   ================================================== */
+
+.practice-page {
+  min-height: 100vh;
+  background: var(--page);
+  color: var(--text);
+}
+
+.practice-header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding-block: 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.practice-header .audia-mark {
+  font-size: 22px;
+}
+
+.practice-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  margin-left: auto;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.practice-nav a {
+  padding-block: 6px;
+}
+
+.practice-nav a:hover {
+  color: var(--accent);
+}
+
+.practice-nav a[aria-current] {
+  color: var(--accent);
+}
+
+.practice-main {
+  max-width: 1200px;
+  padding-block: 40px 80px;
+}
+
+/* Screen size or accessibility preference: (max-width: 767px). */
+@media (max-width: 767px) {
+  .practice-header {
+    gap: 12px;
+  }
+
+  .practice-header > .icon-btn {
+    margin-left: auto;
+  }
+
+  .practice-nav {
+    order: 3;
+    width: 100%;
+    margin-left: 0px;
+    gap: 8px 20px;
+  }
+
+  .practice-main {
+    padding-block: 28px 64px;
+  }
+}

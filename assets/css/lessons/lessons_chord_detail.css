@@ -1,0 +1,33 @@
+/* ==================================================
+   COMPONENT: LESSONS CHORD DETAIL
+   HTML FILE: templates/lessons/lessons_chord_detail.html
+   PURPOSE: Lessons chord detail presentation; preserve existing colors, states and breakpoints.
+   JS: No lesson controller: Jinja renders the content; assets/js/shared/app.js handles navigation/theme.
+   ================================================== */
+
+.chord-detail-layout {
+  display: grid;
+  grid-template-columns: minmax(0px, 1fr) minmax(0px, 2fr);
+  gap: 24px;
+}
+
+.chord-detail-diagram {
+  text-align: center;
+  align-self: start;
+}
+
+.chord-detail-diagram h2 {
+  font-size: 36px;
+  color: var(--accent);
+}
+
+.chord-detail-diagram .chord-legend {
+  margin-bottom: 0px;
+}
+
+/* Screen size or accessibility preference: (max-width: 900px). */
+@media (max-width: 900px) {
+  .chord-detail-layout {
+    grid-template-columns: minmax(0px, 1fr);
+  }
+}

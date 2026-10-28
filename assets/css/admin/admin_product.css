@@ -1,0 +1,80 @@
+/* ==================================================
+   COMPONENT: ADMIN PRODUCT
+   HTML FILE: templates/admin/admin_product.html
+   PURPOSE: Admin product presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/admin/admin.js.
+   ================================================== */
+
+.admin-product__stock {
+  color: var(--muted);
+  margin-top: 0.25rem;
+  font-size: 10px;
+}
+
+.admin-product__category {
+  color: var(--muted);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.admin-product__name {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+}
+
+.admin-product__surface-card-div-edit {
+  margin-top: 1rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.admin-product__surface-card {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.admin-product__image {
+  height: 6rem;
+  width: 5rem;
+  border-radius: 0.75rem;
+  object-fit: cover;
+}
+
+.admin-product__surface-card-div {
+  min-width: 0px;
+  flex: 1 1 0%;
+}
+
+.admin-product__price {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+}
+
+/* Screen size or accessibility preference: (max-width: 639px). */
+@media (max-width: 639px) {
+  .admin-page main > div > .admin-product__surface-card {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .admin-page main > div > .admin-product__surface-card-div-edit {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+}
+
+[data-field="admin-products"] .secondary-btn {
+  padding: 9px 12px;
+  font-size: 11px;
+}
+
+[data-field="admin-products"] h3 {
+  overflow-wrap: anywhere;
+}

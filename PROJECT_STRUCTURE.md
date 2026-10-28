@@ -2,6 +2,10 @@
 
 AUDIA — Guitar E-Commerce Platform. **Find Your Sound.**
 
+Catalog and search/filter each now use one HTML file and one CSS file, with
+`SECTION:` comments for navigation. Their current file pairs are in the table
+below. File inventories farther down record the earlier component migration.
+
 The five core functionalities have matching folder names and primary filenames
 across Python, HTML, CSS, and JavaScript. Search/filter code has been separated
 from catalog display/purchase code. The existing interface, content, API paths,
@@ -25,17 +29,15 @@ files and functions, including dependencies between components.
 ## What belongs in each folder
 
 **Catalog:** product access, availability, saved instruments, store information,
-product cards, cart, checkout, bundles, and order tracking. The main HTML file
-composes `catalog_product_card.html`, `catalog_cart.html`,
-`catalog_checkout.html`, `catalog_bundle.html`, `catalog_navigation.html`,
-and `catalog_support.html`. Server-side order transactions stay in
+product cards, cart, checkout, bundles, and order tracking. All catalog markup is in `catalog/catalog.html`, and all catalog CSS is in
+`catalog/catalog.css`. Labeled section comments identify each part. Server-side order transactions stay in
 `modules/orders/orders.py`; they are shared with account/admin views.
 
 **Search/filter:** existing name/brand text search, guitar-type filters, price
 and rating sorting, and the four-question budget/skill/style/type Finder.
-`search_filter_types.html` contains type chips;
-`search_filter_finder_banner.html` contains its entry section;
-`search_filter_finder.html` contains modal/question/result templates.
+All search/filter markup is in `search_filter/search_filter.html`, and its styles
+are in `search_filter/search_filter.css`. The template has labeled toolbar, type
+chips, banner, and Finder sections, selected where the catalog includes it.
 The JavaScript owns query/sort/Finder state, and the Python file owns the
 existing `/api/products` list filtering and `/api/finder` handlers. These
 handlers attach to the existing `catalog` blueprint before registration,

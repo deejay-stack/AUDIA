@@ -1,0 +1,14 @@
+<!-- MODULE: ADMIN | COMPONENT: Admin order status
+     PURPOSE: Admin order status structure. CSS: assets/css/admin/admin_order_status.css
+     JS: assets/js/admin/admin.js. Preserve IDs and data-action/data-field hooks. -->
+<template id="order-status-template">
+  <form method="post" class="stack-form admin-order-status__stack-form">
+    <label>Update order status<select name="status" required></select></label>
+    <p class="form-hint">
+      Cancelled and refunded orders return their items to inventory. Refund
+      status records an offline refund; it does not transfer money.
+    </p>
+    <p class="form-error" data-field="form-error" role="alert" hidden></p>
+    <button type="submit" class="primary-btn">Update order</button>
+  </form>
+</template>

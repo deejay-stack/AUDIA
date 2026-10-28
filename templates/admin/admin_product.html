@@ -1,0 +1,22 @@
+<!-- MODULE: ADMIN | COMPONENT: Admin product
+     PURPOSE: Admin product structure. CSS: assets/css/admin/admin_product.css
+     JS: assets/js/admin/admin.js. Preserve IDs and data-action/data-field hooks. -->
+<template id="admin-product-template">
+  <article class="surface-card admin-product__surface-card">
+    <img data-field="image" alt="" class="admin-product__image" />
+    <div class="admin-product__surface-card-div">
+      <p
+        class="admin-product__category"
+        data-field="category"
+      ></p>
+      <h3 class="admin-product__name" data-field="name"></h3>
+      <div class="admin-product__surface-card-div-edit">
+        <div>
+          <p class="admin-product__price" data-field="price"></p>
+          <p class="admin-product__stock" data-field="stock"></p>
+        </div>
+        <button class="secondary-btn" data-action="edit-product">Edit</button>
+      </div>
+    </div>
+  </article>
+</template>

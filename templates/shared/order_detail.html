@@ -1,0 +1,29 @@
+<!-- MODULE: SHARED | COMPONENT: Order detail dialog
+     PURPOSE: Order detail dialog structure. CSS: assets/css/shared/order_detail.css
+     JS: assets/js/shared/app.js; assets/js/shared/shared.js; assets/js/shared/theme.js. Preserve IDs and data-action/data-field hooks. -->
+<template id="order-detail-template">
+  <div class="order-detail">
+    <div class="order-status order-detail__status" data-field="status"></div>
+    <dl class="detail-list">
+      <dt>Placed</dt>
+      <dd data-field="date"></dd>
+      <dt>Customer</dt>
+      <dd data-field="customer"></dd>
+      <dt>Delivery address</dt>
+      <dd data-field="address"></dd>
+      <dt>Phone</dt>
+      <dd data-field="phone"></dd>
+      <dt>Payment</dt>
+      <dd data-field="payment"></dd>
+    </dl>
+    <h3 class="order-detail__instruments-gear">Instruments &amp; gear</h3>
+    <ul class="order-items order-detail__items" data-field="items"></ul>
+    <div class="order-total order-detail__order-detail-div">
+      <span>Total</span><strong data-field="total"></strong>
+    </div>
+    <p class="form-hint">
+      For changes or delivery assistance, contact the store with your order
+      number.
+    </p>
+  </div>
+</template>

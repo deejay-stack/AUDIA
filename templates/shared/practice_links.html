@@ -1,9 +1,12 @@
-<nav class="shell flex flex-wrap items-center gap-3 py-3 text-sm border-b border-zinc-200 dark:border-white/10" aria-label="Guitar practice">
-  <a class="flex items-center gap-2" href="{{ url_for('tuner.index') }}">
+<!-- MODULE: SHARED | COMPONENT: Practice navigation strip
+     PURPOSE: Practice navigation strip structure. CSS: assets/css/shared/practice_links.css
+     JS: assets/js/shared/app.js; assets/js/shared/shared.js; assets/js/shared/theme.js. Preserve IDs and data-action/data-field hooks. -->
+<nav class="shell practice-links__guitar-practice" aria-label="Guitar practice">
+  <a class="practice-links__guitar-tuner" href="{{ url_for('tuner.index') }}">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 10v4m4-8v12m4-15v18m4-15v12m4-8v4"/></svg>
     Guitar Tuner
   </a>
-  <a class="flex items-center gap-2" href="{{ url_for('lessons.index') }}">
+  <a class="practice-links__guitar-lessons" href="{{ url_for('lessons.index') }}">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 5C9 3 5 3 2 4v15c3-1 7-1 10 1 3-2 7-2 10-1V4c-3-1-7-1-10 1Zm0 0v15"/></svg>
     Guitar Lessons
   </a>

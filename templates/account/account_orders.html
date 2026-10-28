@@ -1,0 +1,14 @@
+<!-- MODULE: ACCOUNT | COMPONENT: Account orders
+     PURPOSE: Account orders structure. CSS: assets/css/account/account_orders.css
+     JS: assets/js/account/account.js. Preserve IDs and data-action/data-field hooks. -->
+<section class="surface-card account-section account-orders__surface-card">
+      <div class="account-orders__surface-card-div">
+        <h2 class="account-orders__your-orders">Your orders</h2>
+        <button class="secondary-btn" data-action="refresh-orders">
+          Refresh
+        </button>
+      </div>
+      <div class="account-orders" data-field="orders">
+        <p class="empty-state">Loading your orders…</p>
+      </div>
+    </section>

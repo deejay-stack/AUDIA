@@ -1,0 +1,88 @@
+/* ==================================================
+   COMPONENT: ADMIN RECENT SALE
+   HTML FILE: templates/admin/admin_recent_sale.html
+   PURPOSE: Admin recent sale presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/admin/admin.js.
+   ================================================== */
+
+.admin-recent-sale__product {
+  color: var(--muted);
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.admin-recent-sale__email {
+  color: var(--muted);
+  margin-top: 0.25rem;
+  font-size: 10px;
+}
+
+.admin-recent-sale__status {
+  display: inline-flex;
+  border-radius: 9999px;
+  background-color: rgb(209, 250, 229);
+  padding-left: 0.625rem;
+  padding-right: 0.625rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  font-size: 11px;
+  font-weight: 600;
+  color: rgb(4, 120, 87);
+}
+
+.admin-recent-sale__amount {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  text-align: right;
+  font-weight: 600;
+}
+
+.admin-recent-sale__id {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  font-weight: 600;
+}
+
+.admin-recent-sale__recent-sale-template-td {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.admin-recent-sale__recent-sale-template-tr {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.admin-recent-sale__customer {
+  font-weight: 500;
+}
+
+.admin-recent-sale__recent-sale-template-tr:hover {
+  background-color: rgb(250, 250, 250);
+}
+
+/* Dark theme. */
+.dark .admin-recent-sale__status {
+  background-color: rgba(52, 211, 153, 0.1);
+  color: rgb(110, 231, 183);
+}
+
+/* Dark theme. */
+.dark .admin-recent-sale__recent-sale-template-tr:hover {
+  background-color: rgba(255, 255, 255, 0.024);
+}

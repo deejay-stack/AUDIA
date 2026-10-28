@@ -1,0 +1,91 @@
+/* ==================================================
+   COMPONENT: ADMIN CUSTOMER
+   HTML FILE: templates/admin/admin_customer.html
+   PURPOSE: Admin customer presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/admin/admin.js.
+   ================================================== */
+
+.admin-customer__order {
+  color: var(--muted);
+}
+
+.admin-customer__email {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.admin-customer__customer-template-div-div-template-div-div {
+  margin-top: 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  border-top-width: 1px;
+  border-color: rgb(244, 244, 245);
+  padding-top: 1rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.admin-customer__customer-template-div-div {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.admin-customer__initials {
+  display: grid;
+  height: 2.75rem;
+  width: 2.75rem;
+  place-items: center;
+  border-radius: 9999px;
+  background-color: rgb(244, 244, 245);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 700;
+}
+
+.admin-customer__customer-template-div {
+  background-color: rgb(255, 255, 255);
+  padding: 1.25rem;
+}
+
+.admin-customer__customer {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+}
+
+.admin-customer__amount {
+  font-weight: 600;
+}
+
+/* Dark theme. */
+.dark .admin-customer__customer-template-div-div-template-div-div {
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Dark theme. */
+.dark .admin-customer__customer-template-div {
+  background-color: rgb(23, 21, 30);
+}
+
+/* Dark theme. */
+.dark .admin-customer__initials {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.admin-page .admin-customer__initials > * {
+  min-width: 0px;
+}
+
+/* Screen size or accessibility preference: (max-width: 639px). */
+@media (max-width: 639px) {
+  .admin-page main > div > .admin-customer__customer-template-div-div {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .admin-page main > div > .admin-customer__customer-template-div-div-template-div-div {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+}

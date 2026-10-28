@@ -1,0 +1,43 @@
+/* ==================================================
+   COMPONENT: LANDING JOIN
+   HTML FILE: templates/landing/landing_join.html
+   PURPOSE: Landing join presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/shared/app.js (navigation/theme); assets/js/shared/shared.js (reveals).
+   ================================================== */
+
+.landing-join .section-title {
+  margin-top: 18px;
+  font-weight: 600;
+}
+
+.landing-join {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  padding-top: 40px;
+  padding-bottom: 50px;
+  border-top: 1px solid var(--line);
+}
+
+.landing-join h2 {
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+}
+
+.landing-join p:last-child {
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.landing-join > button {
+  flex-shrink: 0;
+}
+
+/* Screen size or accessibility preference: (max-width: 767px). */
+@media (max-width: 767px) {
+  .landing-join {
+    align-items: start;
+    flex-direction: column;
+  }
+}

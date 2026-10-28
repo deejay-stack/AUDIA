@@ -1,3 +1,6 @@
+<!-- MODULE: SHARED | COMPONENT: Practice page shell
+     PURPOSE: Practice page shell structure. CSS: assets/css/shared/practice_base.css
+     JS: assets/js/shared/app.js; assets/js/shared/shared.js; assets/js/shared/theme.js. Preserve IDs and data-action/data-field hooks. -->
 {% extends "shared/base.html" %}
 {% block content %}
 <div class="practice-page">
@@ -15,6 +18,7 @@
   <main class="shell practice-main">
     {% block practice_content %}{% endblock %}
   </main>
+  <!-- Component: chatbot | CSS: assets/css/chatbot/chatbot.css -->
   {% include 'chatbot/chatbot.html' %}
 </div>
 {% endblock %}

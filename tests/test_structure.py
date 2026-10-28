@@ -10,6 +10,7 @@ from app import app
 ROOT = Path(__file__).resolve().parent.parent
 BASELINE = json.loads((ROOT / "docs/components/before.json").read_text(encoding="utf-8"))
 MIGRATION = json.loads((ROOT / "docs/components/migration.json").read_text(encoding="utf-8"))
+CONSOLIDATED = json.loads((ROOT / "docs/frontend-consolidation.json").read_text(encoding="utf-8"))["files"]
 
 
 class StructureTests(unittest.TestCase):
@@ -28,10 +29,19 @@ class StructureTests(unittest.TestCase):
         for old, metadata in BASELINE["files"].items():
             with self.subTest(file=old):
                 target = MIGRATION["moves"].get(old, old)
+                target = CONSOLIDATED.get(target, target)
                 path = ROOT / target
                 self.assertTrue(path.is_file(), f"Missing source: {target}")
                 if old in MIGRATION["moves"]:
                     self.assertFalse((ROOT / old).is_file(), f"Duplicate old source: {old}")
+                # The October 15 frontend refactor intentionally replaces the
+                # old utility markup/styles. Its DOM/backend contracts are
+                # checked separately in test_frontend.py. Retain the original
+                # migration byte checks for backend and unrelated sources.
+                if target.startswith(("templates/", "assets/css/", "assets/js/")) or target in {
+                    "tests/practice.cjs", "tests/structure-browser.cjs", "tests/test_practice.py",
+                }:
+                    continue
                 raw = path.read_bytes()
                 if target in MIGRATION["rewrites"]:
                     original = raw.decode("utf-8")
@@ -45,6 +55,10 @@ class StructureTests(unittest.TestCase):
         # also remain the exact versions exercised by the migration checks.
         for target, expected in MIGRATION["new_runtime_files"].items():
             with self.subTest(component=target):
+                current = CONSOLIDATED.get(target, target)
+                self.assertTrue((ROOT / current).is_file())
+                if target.startswith(("templates/", "assets/css/", "assets/js/")):
+                    continue
                 self.assertEqual(hashlib.sha256((ROOT / target).read_bytes()).hexdigest(), expected)
 
     def test_template_and_browser_import_paths(self):

@@ -1,0 +1,33 @@
+<!-- MODULE: LANDING | COMPONENT: Landing header
+     PURPOSE: Landing header structure. CSS: assets/css/landing/landing_header.css
+     JS: assets/js/shared/app.js (navigation/theme); assets/js/shared/shared.js (reveals). Preserve IDs and data-action/data-field hooks. -->
+<header class="landing-header">
+    <div class="shell landing-nav">
+      <a class="audia-mark" href="#welcome" aria-label="AUDIA home"
+        ><span class="mark-a">A</span>UDI<span class="mark-a">A</span></a
+      >
+      <nav aria-label="About AUDIA">
+        <a href="#about-audia">About</a>
+        <a href="#guitar-families">Guitar families</a>
+        <a href="#how-it-works">How it works</a>
+      </nav>
+      <div class="landing-nav-actions">
+        <button
+          class="landing-theme"
+          data-action="theme"
+          aria-label="Switch to light mode"
+        ></button>
+        <button class="secondary-btn" data-action="sign-in" data-auth-entry>
+          Sign in
+        </button>
+        <button
+          class="secondary-btn"
+          data-action="browse"
+          data-member-entry
+          hidden
+        >
+          Browse guitars
+        </button>
+      </div>
+    </div>
+  </header>

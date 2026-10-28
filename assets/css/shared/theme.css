@@ -1,0 +1,31 @@
+/* COMPONENT: Shared light and dark colors
+   HTML FILE: templates/shared/base.html
+   Edit a value here to change that color throughout the site.
+   For one component, edit its color or background in its own CSS file instead.
+   :root = light theme; html.dark = dark theme, selected by the theme button. */
+
+:root {
+  --page: #f8f7fb;
+  --surface: #ffffff;
+  --soft: #f0edf6;
+  --line: #e3deec;
+  --text: #211b2e;
+  --muted: #70687c;
+  --accent: #7143d6;
+  --mint: #22734d;
+  --grid: rgba(112, 85, 155, 0.07);
+  --shadow: 0 12px 40px -24px rgba(57, 33, 96, 0.3);
+}
+
+html.dark {
+  --page: #0d0c12;
+  --surface: #17151e;
+  --soft: #211d2b;
+  --line: #302939;
+  --text: #f5f1fb;
+  --muted: #aaa1b7;
+  --accent: #bb9bff;
+  --mint: #b8f5d0;
+  --grid: rgba(197, 173, 235, 0.065);
+  --shadow: 0 12px 40px -24px rgba(0, 0, 0, 0.65);
+}

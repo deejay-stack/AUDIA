@@ -1,0 +1,514 @@
+/* ==================================================
+   COMPONENT: ADMIN SIDEBAR NAVIGATION
+   HTML FILE: templates/admin/admin_aside.html
+   PURPOSE: Admin sidebar navigation presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/admin/admin.js.
+   ================================================== */
+
+.admin-sidebar__link {
+  color: var(--muted);
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 0.75rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.admin-aside__store {
+  color: var(--muted);
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 0.75rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.admin-aside__settings {
+  color: var(--muted);
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 0.75rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.admin-aside__sales {
+  color: var(--muted);
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 0.75rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.admin-aside__products {
+  color: var(--muted);
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 0.75rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.admin-aside__main-storefront {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.admin-aside__icon {
+  color: var(--muted);
+  margin-left: auto;
+}
+
+.admin-aside__customers {
+  color: var(--muted);
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 0.75rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.admin-aside__udi-a-a-audia-flagship-aside {
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  z-index: 50;
+  display: flex;
+  width: 270px;
+  flex-direction: column;
+  border-right-width: 1px;
+  border-color: rgb(228, 228, 231);
+  background-color: rgb(255, 255, 255);
+  padding: 1.25rem;
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.admin-aside__workspace {
+  margin-bottom: 0.75rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgb(161, 161, 170);
+}
+
+.admin-aside__order-count {
+  margin-left: auto;
+  border-radius: 9999px;
+  background-color: rgb(244, 244, 245);
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.125rem;
+  padding-bottom: 0.125rem;
+  font-size: 9px;
+}
+
+.admin-aside__audia-flagship-main-storefront-layout {
+  margin-top: 1.75rem;
+  border-radius: 1rem;
+  background-color: rgb(244, 244, 245);
+  padding: 0.75rem;
+}
+
+.admin-aside__workspace-overview-sales-directory-0-nav {
+  margin-top: 1.75rem;
+}
+
+.admin-aside__settings-view-storefront-sign-out-layout {
+  margin-top: auto;
+  border-top-width: 1px;
+  border-color: rgb(228, 228, 231);
+  padding-top: 1rem;
+}
+
+.admin-aside__audia-flagship-main-storefront-layout-audia-flagship-main-storefront {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.admin-aside__overview {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  font-size: 1.125rem;
+  line-height: 1;
+}
+
+.admin-aside__overview-workspace-overview-sales-directory-0 {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 0.75rem;
+  background-color: rgb(9, 9, 11);
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  color: rgb(255, 255, 255);
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.admin-aside__udi-a-a-layout {
+  display: flex;
+  height: 3rem;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.admin-sidebar__link--selected {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 0.75rem;
+  background-color: rgb(9, 9, 11);
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  color: rgb(255, 255, 255);
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.admin-aside__layout {
+  display: grid;
+  height: 2.5rem;
+  width: 2.5rem;
+  place-items: center;
+  border-radius: 0.75rem;
+  background-color: rgb(9, 9, 11);
+  color: rgb(255, 255, 255);
+}
+
+.admin-aside__logout {
+  width: 100%;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.75rem;
+  text-align: left;
+  font-size: 11px;
+  color: rgb(161, 161, 170);
+}
+
+.admin-aside__audia-flagship-main-storefront-layout-audia-flagship-main-storefront-aside-div-div-div {
+  min-width: 0px;
+}
+
+.is-sidebar-closed {
+  transform: translate(-100%, 0) rotate(0) skewX(0) skewY(0) scale(1);
+}
+
+.is-sidebar-open {
+  transform: translate(0px, 0) rotate(0) skewX(0) skewY(0) scale(1);
+}
+
+.admin-aside__settings-view-storefront-sign-out-layout > :not([hidden]) ~ :not([hidden]) {
+  margin-top: 0.25rem;
+  margin-bottom: 0px;
+}
+
+.admin-aside__workspace-overview-sales-directory-0-nav > :not([hidden]) ~ :not([hidden]) {
+  margin-top: 0.25rem;
+  margin-bottom: 0px;
+}
+
+.admin-aside__store-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+}
+
+.admin-aside__customers:hover {
+  background-color: rgb(244, 244, 245);
+  color: rgb(9, 9, 11);
+}
+
+.admin-aside__products:hover {
+  background-color: rgb(244, 244, 245);
+  color: rgb(9, 9, 11);
+}
+
+.admin-aside__sales:hover {
+  background-color: rgb(244, 244, 245);
+  color: rgb(9, 9, 11);
+}
+
+.admin-aside__settings:hover {
+  background-color: rgb(244, 244, 245);
+}
+
+.admin-aside__store:hover {
+  background-color: rgb(244, 244, 245);
+}
+
+.admin-sidebar__link:hover {
+  background-color: rgb(244, 244, 245);
+}
+
+.admin-aside__logout:hover {
+  color: rgb(244, 63, 94);
+}
+
+/* Dark theme. */
+.dark .admin-aside__settings-view-storefront-sign-out-layout {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Dark theme. */
+.dark .admin-aside__udi-a-a-audia-flagship-aside {
+  border-color: rgba(255, 255, 255, 0.1);
+  background-color: rgb(13, 13, 16);
+}
+
+/* Dark theme. */
+.dark .admin-aside__layout {
+  background-color: rgb(184, 245, 208);
+  color: rgb(13, 12, 18);
+}
+
+/* Dark theme. */
+.dark .admin-aside__overview-workspace-overview-sales-directory-0 {
+  background-color: rgb(184, 245, 208);
+  color: rgb(13, 12, 18);
+}
+
+/* Dark theme. */
+.dark .admin-sidebar__link--selected {
+  background-color: rgb(184, 245, 208);
+  color: rgb(13, 12, 18);
+}
+
+/* Dark theme. */
+.dark .admin-aside__order-count {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Dark theme. */
+.dark .admin-aside__audia-flagship-main-storefront-layout {
+  background-color: rgba(255, 255, 255, 0.055);
+}
+
+/* Dark theme. */
+.dark .admin-aside__customers:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: rgb(255, 255, 255);
+}
+
+/* Dark theme. */
+.dark .admin-aside__products:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: rgb(255, 255, 255);
+}
+
+/* Dark theme. */
+.dark .admin-aside__sales:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: rgb(255, 255, 255);
+}
+
+/* Dark theme. */
+.dark .admin-aside__settings:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Dark theme. */
+.dark .admin-aside__store:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Dark theme. */
+.dark .admin-sidebar__link:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Screen size or accessibility preference: (min-width: 1024px). */
+@media (min-width: 1024px) {
+  .admin-aside__close-sidebar {
+    display: none;
+  }
+
+  .admin-aside__udi-a-a-audia-flagship-aside {
+    transform: translate(0px, 0) rotate(0) skewX(0) skewY(0) scale(1);
+  }
+}
+
+.admin-page aside nav button.admin-aside__layout {
+  color: var(--accent);
+  background: var(--soft);
+  box-shadow: inset 3px 0 var(--accent);
+}
+
+.admin-page aside nav button.admin-aside__overview-workspace-overview-sales-directory-0 {
+  color: var(--accent);
+  background: var(--soft);
+  box-shadow: inset 3px 0 var(--accent);
+}
+
+.admin-page aside nav button.admin-sidebar__link--selected {
+  color: var(--accent);
+  background: var(--soft);
+  box-shadow: inset 3px 0 var(--accent);
+}
+
+.admin-page .admin-aside__layout > * {
+  min-width: 0px;
+}
+
+/* Screen size or accessibility preference: (max-width: 639px). */
+@media (max-width: 639px) {
+  .admin-page main > div > .admin-aside__audia-flagship-main-storefront-layout-audia-flagship-main-storefront {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .admin-page main > div > .admin-aside__customers {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .admin-page main > div > .admin-aside__overview {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .admin-page main > div > .admin-aside__overview-workspace-overview-sales-directory-0 {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .admin-page main > div > .admin-aside__products {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .admin-page main > div > .admin-aside__sales {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .admin-page main > div > .admin-aside__settings {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .admin-page main > div > .admin-aside__store {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .admin-page main > div > .admin-aside__udi-a-a-audia-flagship-aside {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .admin-page main > div > .admin-aside__udi-a-a-layout {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .admin-page main > div > .admin-sidebar__link {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .admin-page main > div > .admin-sidebar__link--selected {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+}
+
+.admin-page aside nav button.primary-btn {
+  color: var(--accent);
+  background: var(--soft);
+  box-shadow: inset 3px 0 var(--accent);
+}
+
+.admin-page aside nav button.filter-chip-active {
+  color: var(--accent);
+  background: var(--soft);
+  box-shadow: inset 3px 0 var(--accent);
+}
+
+.admin-page aside {
+  border-color: var(--line);
+  background: var(--surface);
+}
+
+.admin-page aside nav button {
+  border-radius: 7px;
+}

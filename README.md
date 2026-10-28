@@ -75,6 +75,15 @@ Reset requests use a generic response for unknown accounts. Links expire after 3
 
 ## Structure
 
+Start with [CSS_EDITING_GUIDE.md](docs/CSS_EDITING_GUIDE.md) for beginner steps
+to find a component, change its appearance, and understand dynamic text.
+
+Use [FRONTEND_COMPONENT_MAP.md](docs/FRONTEND_COMPONENT_MAP.md) for the current
+HTML/CSS/JavaScript file pairs and student debugging steps. The frontend now uses
+traditional component CSS, with no Tailwind utilities or build dependency.
+See [FRONTEND_REFACTOR_REPORT.md](docs/FRONTEND_REFACTOR_REPORT.md) for the full
+file inventory and verification results.
+
 See [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) for the full before/after trees,
 every file move, the route comparison, and a guide to editing each feature.
 Use [DEBUGGING_GUIDE.md](DEBUGGING_GUIDE.md) to find the files/functions for a broken component.
@@ -130,7 +139,7 @@ Start with `app.py`. It creates `app = Flask(...)`, registers the existing featu
 | `/tuner` | `tuner/tuner.html` | `tuner/tuner.css` | `tuner/tuner.js`, `tuner/tuner_pitch.js` |
 | `/lessons` and lesson details | `lessons/lessons.html` and `lessons_*.html` | `lessons/lessons.css` | Static Jinja pages; no separate controller |
 
-For example, to change a product card, edit `templates/catalog/catalog_product_card.html` and `assets/css/catalog/catalog.css`. The main `catalog.html` includes the component fragments. Product cards, cart and checkout have matching `catalog_*.html` fragments in the same folder. Search/sort controls, guitar-type filters, and the budget/skill Finder live in `search_filter/`. The chatbot has its own included template. The administration page similarly keeps its related sections together. Comment headings mark the sections. Repeated cards and popups use HTML `<template>` blocks within these component files; JavaScript fills them with data from the API.
+For a product card, edit the PRODUCT CARD section in `templates/catalog/catalog.html` and `assets/css/catalog/catalog.css`. The same files contain catalog layout, cart, checkout, bundles, and tracking. Search, sorting, type chips, and Guitar Finder are together in `templates/search_filter/search_filter.html` and `assets/css/search_filter/search_filter.css`. Search for `SECTION:` to navigate. Shared layout, chatbot, and other features keep their own files. Repeated cards and popups retain their HTML `<template>` blocks; JavaScript fills them with API data.
 
 `templates/shared/components.html`, `assets/css/shared/shared.css`, and `assets/js/shared/shared.js` contain elements used by several pages. `assets/js/shared/app.js` starts the current page and handles navigation, sign-out, and theme controls. `assets/js/shared/theme.js` applies the saved theme before the page appears. Flask still serves assets at `/static/`. Templates do not contain inline CSS; shared animation helpers apply movement styles at runtime.
 

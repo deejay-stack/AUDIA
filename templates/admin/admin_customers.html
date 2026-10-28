@@ -1,0 +1,24 @@
+<!-- MODULE: ADMIN | COMPONENT: Admin customers
+     PURPOSE: Admin customers structure. CSS: assets/css/admin/admin_customers.css
+     JS: assets/js/admin/admin.js. Preserve IDs and data-action/data-field hooks. -->
+<template id="customers-template">
+  <div
+    data-motion='{"initial":{"opacity":0,"y":10},"animate":{"opacity":1,"y":0},"viewport":false}'
+  >
+    <p class="admin-customers__customer-records">Customer records</p>
+    <h2 class="admin-customers__customers">Customers</h2>
+    <label class="input-shell admin-customers__input-shell"
+      ><input
+        class="admin-customers__customer-query"
+        placeholder="Search customers"
+        aria-label="Search customers"
+        data-field="customer-query"
+    /></label>
+    <div class="surface-card admin-customers__surface-card">
+      <div
+        class="admin-customers__customers-div"
+        data-field="customers"
+      ></div>
+    </div>
+  </div>
+</template>

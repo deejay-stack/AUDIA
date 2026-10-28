@@ -15,7 +15,7 @@ export function createChatUI(host) {
     const bubble = clone("message");
     if (role === "user") {
       bubble.className =
-        "max-w-[86%] rounded-2xl px-4 py-3 text-xs leading-5 ml-auto bg-zinc-950 text-white dark:bg-acid dark:text-ink";
+        "chatbot-message--customer";
     }
     // Both customer text and model responses are untrusted plain text.
     bubble.textContent = message;

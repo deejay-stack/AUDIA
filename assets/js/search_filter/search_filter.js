@@ -20,9 +20,9 @@ const questions = [
   },
 ];
 const selectedOption =
-  "rounded-2xl border p-5 text-left text-sm transition border-zinc-950 bg-zinc-950 text-white dark:border-acid dark:bg-acid/10 dark:text-acid";
+  "search-filter-option--selected";
 const plainOption =
-  "rounded-2xl border p-5 text-left text-sm transition border-zinc-200 hover:border-zinc-400 dark:border-white/10";
+  "search-filter-option";
 
 export function mountSearchFilter(page, app, { renderProducts, closeMobile, addToCart }) {
   let filter = app.catalogCategory || "All";
@@ -82,7 +82,7 @@ export function mountSearchFilter(page, app, { renderProducts, closeMobile, addT
       text(body, "question-number", `Question ${finderStep + 1} of 4`);
       text(body, "question-title", question.title);
       [...field(body, "progress").children].forEach((bar, i) => {
-        bar.className = `h-1 flex-1 rounded-full ${i <= finderStep ? "bg-zinc-950 dark:bg-acid" : "bg-zinc-200 dark:bg-white/10"}`;
+        bar.className = i <= finderStep ? "search-filter-progress--complete" : "search-filter-progress";
       });
       field(body, "budget").hidden = finderStep !== 0;
       text(body, "budget-value", peso(answers.budget));

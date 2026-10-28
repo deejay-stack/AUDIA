@@ -78,7 +78,7 @@ export function mountStore(page, app) {
         "fill",
         saved.has(product.id) ? "currentColor" : "none",
       );
-      heart.classList.toggle("text-rose-500", saved.has(product.id));
+      heart.classList.toggle("is-saved", saved.has(product.id));
       $(card, '[data-action="add"]').setAttribute(
         "aria-label",
         `Add ${product.name} to cart`,

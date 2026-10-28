@@ -1,0 +1,6 @@
+<!-- MODULE: LESSONS | COMPONENT: Strumming pattern diagram
+     PURPOSE: Strumming pattern diagram structure. CSS: assets/css/lessons/lessons_strumming_pattern.css
+     JS: No lesson controller: Jinja renders the content; assets/js/shared/app.js handles navigation/theme. Preserve IDs and data-action/data-field hooks. -->
+<div class="strumming-pattern" role="group" aria-label="{{ pattern.name }} with beat counts">
+{% for stroke in pattern.strokes %}<div class="strumming-beat"><span class="strumming-stroke{% if stroke == '–' %} strumming-rest{% endif %}">{{ stroke }}<span aria-hidden="true">{{ '↓' if stroke == 'D' else '↑' if stroke == 'U' else '·' }}</span></span><span class="strumming-count">{{ (loop.index0 // 2) + 1 if loop.index0 % 2 == 0 else '&' }}</span></div>{% endfor %}
+</div>

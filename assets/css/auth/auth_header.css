@@ -1,0 +1,56 @@
+/* ==================================================
+   COMPONENT: AUTH HEADER
+   HTML FILE: templates/auth/auth_header.html
+   PURPOSE: Auth header presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/auth/auth.js.
+   ================================================== */
+
+.auth-header__theme {
+  position: relative;
+  display: flex;
+  height: 2.5rem;
+  width: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9px;
+  border-width: 1px;
+  border-color: var(--line);
+  background-color: rgb(255, 255, 255);
+  color: rgb(63, 63, 70);
+  box-shadow: none;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.auth-header__back-to-store-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem;
+}
+
+.auth-header__store {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+}
+
+.auth-header__theme:hover {
+  border-color: rgb(212, 212, 216);
+}
+
+/* Dark theme. */
+.dark .auth-header__theme {
+  border-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.05);
+  color: rgb(228, 228, 231);
+}
+
+/* Screen size or accessibility preference: (min-width: 640px). */
+@media (min-width: 640px) {
+  .auth-header__back-to-store-header {
+    padding: 2rem;
+  }
+}

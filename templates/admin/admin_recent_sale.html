@@ -1,0 +1,23 @@
+<!-- MODULE: ADMIN | COMPONENT: Admin recent sale
+     PURPOSE: Admin recent sale structure. CSS: assets/css/admin/admin_recent_sale.css
+     JS: assets/js/admin/admin.js. Preserve IDs and data-action/data-field hooks. -->
+<template id="recent-sale-template">
+  <tr class="admin-recent-sale__recent-sale-template-tr">
+    <td class="admin-recent-sale__id" data-field="id"></td>
+    <td class="admin-recent-sale__recent-sale-template-td">
+      <p class="admin-recent-sale__customer" data-field="customer"></p>
+      <p class="admin-recent-sale__email" data-field="email"></p>
+    </td>
+    <td
+      class="admin-recent-sale__product"
+      data-field="product"
+    ></td>
+    <td class="admin-recent-sale__recent-sale-template-td">
+      <span
+        class="admin-recent-sale__status"
+        data-field="status"
+      ></span>
+    </td>
+    <td class="admin-recent-sale__amount" data-field="amount"></td>
+  </tr>
+</template>

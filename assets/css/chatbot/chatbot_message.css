@@ -1,0 +1,43 @@
+/* ==================================================
+   COMPONENT: ASSISTANT/CUSTOMER MESSAGE
+   HTML FILE: templates/chatbot/chatbot_message.html
+   PURPOSE: Assistant/customer message presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/chatbot/chatbot.js; assets/js/chatbot/chatbot_ui.js; assets/js/chatbot/chatbot_api.js.
+   ================================================== */
+
+.chatbot-message--customer {
+  margin-left: auto;
+  max-width: 86%;
+  border-radius: 1rem;
+  background-color: rgb(9, 9, 11);
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+  color: rgb(255, 255, 255);
+}
+
+.chatbot-message {
+  max-width: 86%;
+  border-radius: 1rem;
+  background-color: rgb(244, 244, 245);
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+}
+
+/* Dark theme. */
+.dark .chatbot-message--customer {
+  background-color: rgb(112, 214, 153);
+  color: rgb(13, 12, 18);
+}
+
+/* Dark theme. */
+.dark .chatbot-message {
+  background-color: rgba(255, 255, 255, 0.07);
+}

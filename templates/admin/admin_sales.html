@@ -1,0 +1,165 @@
+<!-- MODULE: ADMIN | COMPONENT: Admin sales
+     PURPOSE: Admin sales structure. CSS: assets/css/admin/admin_sales.css
+     JS: assets/js/admin/admin.js. Preserve IDs and data-action/data-field hooks. -->
+<template id="sales-template">
+  <div
+    data-motion='{"initial":{"opacity":0,"y":10},"animate":{"opacity":1,"y":0},"viewport":false}'
+  >
+    <div class="admin-sales__sales-template-div">
+      <div>
+        <p class="admin-sales__all-storefront-transactions">All storefront transactions</p>
+        <h2 class="admin-sales__sales-directory">
+          Sales directory
+        </h2>
+      </div>
+      <button class="secondary-btn admin-sales__export-sales" data-action="export-sales">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="15"
+          height="15"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-download"
+          aria-hidden="true"
+        >
+          <path d="M12 15V3"></path>
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <path d="m7 10 5 5 5-5"></path>
+        </svg>
+        Export CSV
+      </button>
+    </div>
+    <div class="surface-card admin-sales__surface-card">
+      <div
+        class="admin-sales__surface-card-div"
+      >
+        <label class="input-shell admin-sales__input-shell">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-search"
+            aria-hidden="true"
+          >
+            <path d="m21 21-4.34-4.34"></path>
+            <circle cx="11" cy="11" r="8"></circle>
+          </svg>
+          <input
+            class="admin-sales__sales-query"
+            placeholder="Search order, customer, email, or product"
+            value=""
+            data-field="sales-query"
+            aria-label="Search sales"
+          />
+        </label>
+        <label class="input-shell">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-sliders-horizontal"
+            aria-hidden="true"
+          >
+            <path d="M10 5H3"></path>
+            <path d="M12 19H3"></path>
+            <path d="M14 3v4"></path>
+            <path d="M16 17v4"></path>
+            <path d="M21 12h-9"></path>
+            <path d="M21 19h-5"></path>
+            <path d="M21 5h-7"></path>
+            <path d="M8 10v4"></path>
+            <path d="M8 12H3"></path>
+          </svg>
+          <select
+            class="admin-sales__sales-status"
+            data-field="sales-status"
+            aria-label="Order status"
+          >
+            <option selected="">All</option>
+            <option>Shipped</option>
+            <option>Delivered</option>
+            <option>Cancelled</option>
+            <option>Processing</option>
+            <option>Pending</option>
+            <option>Refunded</option>
+          </select>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="13"
+            height="13"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-chevron-down"
+            aria-hidden="true"
+          >
+            <path d="m6 9 6 6 6-6"></path>
+          </svg>
+        </label>
+      </div>
+      <div class="admin-sales__surface-card-div-all-shipped-delivered-cancelled-processing">
+        <table class="admin-sales__surface-card-table">
+          <thead>
+            <tr
+              class="admin-sales__surface-card-tr"
+            >
+              <th class="admin-sales__surface-card-th">Order ID</th>
+              <th class="admin-sales__surface-card-th">Customer</th>
+              <th class="admin-sales__surface-card-th">Product</th>
+              <th class="admin-sales__surface-card-th">Date</th>
+              <th class="admin-sales__surface-card-th">Payment</th>
+              <th class="admin-sales__surface-card-th">Status</th>
+              <th class="admin-sales__surface-card-th-order-id-customer-product-date">Total</th>
+              <th class="admin-sales__surface-card-th-order-id-customer-product-date-div-table-thead-tr-th"></th>
+            </tr>
+          </thead>
+          <tbody
+            class="admin-sales__sales-rows"
+            data-field="sales-rows"
+          ></tbody>
+        </table>
+        <p class="empty-state" data-field="sales-empty" hidden>
+          No orders match your search.
+        </p>
+      </div>
+      <div
+        class="admin-sales__surface-card-div-all-shipped-delivered-cancelled-processing-template-div-div-div"
+      >
+        <span data-field="sales-count">Showing 6 of 6 sales</span>
+        <div class="admin-sales__surface-card-div-showing-6-of-6-sales">
+          <button
+            class="admin-sales__sales-previous"
+            data-action="sales-previous"
+          >
+            Previous
+          </button>
+          <button
+            class="admin-sales__sales-next"
+            data-action="sales-next"
+          >
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

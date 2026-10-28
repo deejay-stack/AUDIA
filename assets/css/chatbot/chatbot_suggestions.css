@@ -1,0 +1,39 @@
+/* ==================================================
+   COMPONENT: CHAT SUGGESTIONS
+   HTML FILE: templates/chatbot/chatbot_suggestions.html
+   PURPOSE: Chat suggestions presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/chatbot/chatbot.js; assets/js/chatbot/chatbot_ui.js; assets/js/chatbot/chatbot_api.js.
+   ================================================== */
+
+.chatbot-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.chatbot-suggestions__option {
+  border-radius: 9999px;
+  border-width: 1px;
+  border-color: rgb(228, 228, 231);
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-size: 10px;
+  color: rgb(113, 113, 122);
+}
+
+.chatbot-suggestions__option:hover {
+  border-color: rgb(113, 113, 122);
+}
+
+/* Dark theme. */
+.dark .chatbot-suggestions__option {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.storefront .chatbot-suggestions__option,
+.auth-page .chatbot-suggestions__option,
+.admin-page .chatbot-suggestions__option {
+  color: var(--muted);
+}

@@ -1,0 +1,419 @@
+/* COMPONENT: Browser defaults
+   HTML FILE: templates/shared/base.html
+   Consistent starting values for HTML elements. Component styles live in their matching CSS file. */
+
+* {
+  box-sizing: border-box;
+  border-width: 0px;
+  border-style: solid;
+  border-color: rgb(229, 231, 235);
+}
+
+::before {
+  box-sizing: border-box;
+  border-width: 0px;
+  border-style: solid;
+  border-color: rgb(229, 231, 235);
+}
+
+::after {
+  box-sizing: border-box;
+  border-width: 0px;
+  border-style: solid;
+  border-color: rgb(229, 231, 235);
+}
+
+html {
+  line-height: 1.5;
+  text-size-adjust: 100%;
+  tab-size: 4;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-feature-settings: normal;
+  font-variation-settings: normal;
+  -webkit-tap-highlight-color: transparent;
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+  color-scheme: light;
+}
+
+:host {
+  line-height: 1.5;
+  text-size-adjust: 100%;
+  tab-size: 4;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-feature-settings: normal;
+  font-variation-settings: normal;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  line-height: inherit;
+  margin: 0px;
+  min-width: 320px;
+  transition: background-color 0.3s;
+  background: var(--page);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+hr {
+  height: 0px;
+  color: inherit;
+  border-top-width: 1px;
+  margin: 0px;
+}
+
+abbr:where([title]) {
+  text-decoration: underline dotted;
+}
+
+h1 {
+  font-size: inherit;
+  font-weight: inherit;
+  margin: 0px;
+}
+
+h2 {
+  font-size: inherit;
+  font-weight: inherit;
+  margin: 0px;
+}
+
+h3 {
+  font-size: inherit;
+  font-weight: inherit;
+  margin: 0px;
+}
+
+h4 {
+  font-size: inherit;
+  font-weight: inherit;
+  margin: 0px;
+}
+
+h5 {
+  font-size: inherit;
+  font-weight: inherit;
+  margin: 0px;
+}
+
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+  margin: 0px;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+b {
+  font-weight: bolder;
+}
+
+strong {
+  font-weight: bolder;
+}
+
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-feature-settings: normal;
+  font-variation-settings: normal;
+  font-size: 1em;
+}
+
+kbd {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-feature-settings: normal;
+  font-variation-settings: normal;
+  font-size: 1em;
+}
+
+samp {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-feature-settings: normal;
+  font-variation-settings: normal;
+  font-size: 1em;
+}
+
+pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-feature-settings: normal;
+  font-variation-settings: normal;
+  font-size: 1em;
+  margin: 0px;
+}
+
+small {
+  font-size: 80%;
+}
+
+sub {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+  bottom: -0.25em;
+}
+
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+  top: -0.5em;
+}
+
+table {
+  text-indent: 0px;
+  border-color: inherit;
+  border-collapse: collapse;
+}
+
+button {
+  font-family: inherit;
+  font-feature-settings: inherit;
+  font-variation-settings: inherit;
+  font-size: 100%;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  margin: 0px;
+  padding: 0px;
+  text-transform: none;
+  appearance: button;
+  background-color: transparent;
+  background-image: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+input {
+  font-family: inherit;
+  font-feature-settings: inherit;
+  font-variation-settings: inherit;
+  font-size: 100%;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  margin: 0px;
+  padding: 0px;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  min-width: 0px;
+}
+
+optgroup {
+  font-family: inherit;
+  font-feature-settings: inherit;
+  font-variation-settings: inherit;
+  font-size: 100%;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  margin: 0px;
+  padding: 0px;
+}
+
+select {
+  font-family: inherit;
+  font-feature-settings: inherit;
+  font-variation-settings: inherit;
+  font-size: 100%;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  margin: 0px;
+  padding: 0px;
+  text-transform: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  min-width: 0px;
+}
+
+textarea {
+  font-family: inherit;
+  font-feature-settings: inherit;
+  font-variation-settings: inherit;
+  font-size: 100%;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  margin: 0px;
+  padding: 0px;
+  resize: vertical;
+}
+
+input:where([type="button"]) {
+  appearance: button;
+  background-color: transparent;
+  background-image: none;
+}
+
+input:where([type="reset"]) {
+  appearance: button;
+  background-color: transparent;
+  background-image: none;
+}
+
+input:where([type="submit"]) {
+  appearance: button;
+  background-color: transparent;
+  background-image: none;
+}
+
+progress {
+  vertical-align: baseline;
+}
+
+::-webkit-inner-spin-button {
+  height: auto;
+}
+
+::-webkit-outer-spin-button {
+  height: auto;
+}
+
+[type="search"] {
+  appearance: textfield;
+  outline-offset: -2px;
+}
+
+::-webkit-search-decoration {
+  appearance: none;
+}
+
+::-webkit-file-upload-button {
+  appearance: button;
+  font: inherit;
+}
+
+summary {
+  display: list-item;
+}
+
+blockquote {
+  margin: 0px;
+}
+
+dl {
+  margin: 0px;
+}
+
+dd {
+  margin: 0px;
+}
+
+figure {
+  margin: 0px;
+}
+
+p {
+  margin: 0px;
+}
+
+fieldset {
+  margin: 0px;
+  padding: 0px;
+}
+
+legend {
+  padding: 0px;
+}
+
+ol {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+ul {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+menu {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+dialog {
+  padding: 0px;
+}
+
+input::placeholder {
+  opacity: 1;
+  color: rgb(156, 163, 175);
+}
+
+textarea::placeholder {
+  opacity: 1;
+  color: rgb(156, 163, 175);
+}
+
+[role="button"] {
+  cursor: pointer;
+}
+
+:disabled {
+  cursor: default;
+}
+
+img {
+  display: block;
+  vertical-align: middle;
+  max-width: 100%;
+  height: auto;
+}
+
+svg {
+  display: block;
+  vertical-align: middle;
+}
+
+video {
+  display: block;
+  vertical-align: middle;
+  max-width: 100%;
+  height: auto;
+}
+
+canvas {
+  display: block;
+  vertical-align: middle;
+}
+
+audio {
+  display: block;
+  vertical-align: middle;
+}
+
+iframe {
+  display: block;
+  vertical-align: middle;
+}
+
+embed {
+  display: block;
+  vertical-align: middle;
+}
+
+object {
+  display: block;
+  vertical-align: middle;
+}
+
+[hidden]:where(:not([hidden="until-found"])) {
+  display: none;
+}

@@ -1,9 +1,9 @@
 import { $, field, icon, api } from "../shared/shared.js";
 
 const selectedRole =
-  "flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-xs font-semibold transition bg-white text-zinc-950 shadow-sm dark:bg-zinc-800 dark:text-white";
+  "auth-roles__option--selected";
 const plainRole =
-  "flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-xs font-semibold transition text-zinc-500";
+  "auth-roles__option";
 
 export function mountAuth(page, app, initialRole) {
   let role = initialRole === "admin" ? "admin" : "customer";

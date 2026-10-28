@@ -1,6 +1,22 @@
 // Microphone lifecycle and UI for the tuner only. No recordings or audio uploads.
 import { detectPitch, describePitch, PitchStabilizer } from "./tuner_pitch.js";
 
+// Only the visual marker position is dynamic. Its timing is owned by tuner_meter.css.
+const indicatorPositions = new WeakMap();
+function positionIndicator(node, percent) {
+  const previous = indicatorPositions.get(node);
+  if (previous?.percent === percent) return;
+  const style = getComputedStyle(node);
+  const start = style.left;
+  const duration = parseFloat(style.transitionDuration) * 1000;
+  const easing = style.transitionTimingFunction;
+  previous?.animation.cancel();
+  const animation = node.animate([{ left: start }, { left: `${percent}%` }], {
+    duration, easing, fill: "forwards",
+  });
+  indicatorPositions.set(node, { animation, percent });
+}
+
 export function mountTuner(page) {
   const find = (id) => page.querySelector(`#tuner-${id}`);
   const startButton = find("start");
@@ -69,7 +85,7 @@ export function mountTuner(page) {
     container.dataset.tuning = pitch.tuning;
     const cents = Math.max(-50, Math.min(50, pitch.cents));
     find("indicator").hidden = false;
-    find("indicator").style.left = `${50 + cents}%`;
+    positionIndicator(find("indicator"), 50 + cents);
     find("meter").setAttribute("aria-valuenow", cents.toFixed(1));
     find("meter").setAttribute("aria-valuetext", `${pitch.note}${pitch.octave}, ${rounded} cents, ${pitch.status}`);
     page.querySelectorAll("[data-tuning-note]").forEach((node) => {

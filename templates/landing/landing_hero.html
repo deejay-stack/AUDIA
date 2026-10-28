@@ -1,0 +1,52 @@
+<!-- MODULE: LANDING | COMPONENT: Landing hero
+     PURPOSE: Landing hero structure. CSS: assets/css/landing/landing_hero.css
+     JS: assets/js/shared/app.js (navigation/theme); assets/js/shared/shared.js (reveals). Preserve IDs and data-action/data-field hooks. -->
+<section id="welcome" class="shell landing-hero">
+      <div class="landing-hero-copy">
+        <p class="section-label">Meet AUDIA</p>
+        <h1>
+          Your sound.<br /><span class="hero-gradient"
+            >Your starting point.</span
+          >
+        </h1>
+        <p>
+          A place to discover guitars and find what fits your music. AUDIA
+          brings instrument details, guided recommendations, and a simple
+          shopping experience together in one account.
+        </p>
+        <div class="landing-actions">
+          <button class="primary-btn" data-action="register" data-auth-entry>
+            Create an account <span aria-hidden="true">↗</span>
+          </button>
+          <button
+            class="primary-btn"
+            data-action="browse"
+            data-member-entry
+            hidden
+          >
+            Explore the catalog <span aria-hidden="true">↗</span>
+          </button>
+          <a class="landing-text-link" href="#about-audia"
+            >Take a quick look <span aria-hidden="true">↓</span></a
+          >
+        </div>
+        <p class="landing-access-note">
+          Sign in to browse all instruments, save favorites, and shop.
+        </p>
+        <div class="landing-hero-details">
+          <span>Four guitar families</span
+          ><span>One place to find your sound</span>
+        </div>
+      </div>
+      <figure class="landing-hero-photo">
+        <img
+          src="{{ url_for('static', filename='images/guitar_front.jpg') }}"
+          alt="Acoustic guitar in a studio with instruments and amplifiers"
+          fetchpriority="high"
+        />
+        <figcaption>
+          <span>A little inspiration</span
+          ><strong>Every player starts somewhere.</strong>
+        </figcaption>
+      </figure>
+    </section>

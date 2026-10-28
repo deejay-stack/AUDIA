@@ -1,0 +1,23 @@
+/* ==================================================
+   COMPONENT: LANDING FOOTER
+   HTML FILE: templates/landing/landing_footer.html
+   PURPOSE: Landing footer presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/shared/app.js (navigation/theme); assets/js/shared/shared.js (reveals).
+   ================================================== */
+
+.landing-footer {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  padding-block: 28px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.landing-footer .audia-mark {
+  color: var(--text);
+  letter-spacing: 0.2em;
+}

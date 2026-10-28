@@ -1,0 +1,36 @@
+/* ==================================================
+   COMPONENT: PRACTICE NAVIGATION STRIP
+   HTML FILE: templates/shared/practice_links.html
+   PURPOSE: Practice navigation strip presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/shared/app.js; assets/js/shared/shared.js; assets/js/shared/theme.js.
+   ================================================== */
+
+.practice-links__guitar-lessons {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.practice-links__guitar-practice {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  border-bottom-width: 1px;
+  border-color: rgb(228, 228, 231);
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.practice-links__guitar-tuner {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Dark theme. */
+.dark .practice-links__guitar-practice {
+  border-color: rgba(255, 255, 255, 0.1);
+}

@@ -1,0 +1,21 @@
+/* ==================================================
+   COMPONENT: GLOBAL HTML SHELL
+   HTML FILE: templates/shared/base.html
+   PURPOSE: Global HTML shell presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/shared/app.js; assets/js/shared/shared.js; assets/js/shared/theme.js.
+   ================================================== */
+
+.base__root {
+  min-height: 100vh;
+  background-color: rgb(250, 250, 249);
+  color: rgb(9, 9, 11);
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+/* Dark theme. */
+.dark .base__root {
+  background-color: rgb(13, 12, 18);
+  color: rgb(255, 255, 255);
+}

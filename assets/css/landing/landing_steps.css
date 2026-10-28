@@ -1,0 +1,71 @@
+/* ==================================================
+   COMPONENT: LANDING STEPS
+   HTML FILE: templates/landing/landing_steps.html
+   PURPOSE: Landing steps presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/shared/app.js (navigation/theme); assets/js/shared/shared.js (reveals).
+   ================================================== */
+
+.landing-how .section-title {
+  margin-top: 18px;
+  font-weight: 600;
+}
+
+.landing-steps p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.85;
+  margin-top: 8px;
+}
+
+.landing-how {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  padding-top: 25px;
+  padding-bottom: 90px;
+}
+
+.landing-how-intro {
+  margin-top: 22px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.landing-steps {
+  display: grid;
+  gap: 24px;
+}
+
+.landing-steps li {
+  display: flex;
+  gap: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+.landing-steps li > span {
+  color: var(--accent);
+  font-size: 13px;
+}
+
+.landing-steps h3 {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* Screen size or accessibility preference: (max-width: 1023px). */
+@media (max-width: 1023px) {
+  .landing-how {
+    gap: 40px;
+  }
+}
+
+/* Screen size or accessibility preference: (max-width: 767px). */
+@media (max-width: 767px) {
+  .landing-how {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding-bottom: 50px;
+  }
+}

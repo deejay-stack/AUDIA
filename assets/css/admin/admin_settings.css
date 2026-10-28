@@ -1,0 +1,41 @@
+/* ==================================================
+   COMPONENT: ADMIN SETTINGS
+   HTML FILE: templates/admin/admin_settings.html
+   PURPOSE: Admin settings presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/admin/admin.js.
+   ================================================== */
+
+.admin-settings__form-hint {
+  margin-top: 0.5rem;
+}
+
+.admin-settings__settings {
+  margin-top: 0.75rem;
+  font-family: "Space Grotesk", Inter, ui-sans-serif, system-ui;
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 600;
+}
+
+.admin-settings__admin-account {
+  margin-top: 1rem;
+}
+
+.admin-settings__stack-form {
+  margin-top: 1.75rem;
+}
+
+.admin-settings__your-administrator-account {
+  font-weight: 600;
+}
+
+.settings-panel {
+  max-width: 660px;
+  padding: 30px;
+}
+
+.settings-security {
+  margin-top: 30px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}

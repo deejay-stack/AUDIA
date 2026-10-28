@@ -1,5 +1,14 @@
-<div class="flex flex-col gap-3 sm:flex-row">
-  <label class="input-shell min-w-[270px]">
+<!-- MODULE: SEARCH_FILTER | COMPONENT: Search, filters, and Guitar Finder
+     CSS: assets/css/search_filter/search_filter.css
+     JS: assets/js/search_filter/search_filter.js. Keep existing IDs and data hooks.
+     This one file has four labeled sections. catalog.html chooses which section
+     to show with search_filter_section so the page layout stays the same. -->
+
+{% if search_filter_section|default('toolbar') == 'toolbar' %}
+<!-- SECTION: TOOLBAR -->
+<div class="search-filter__layout">
+  <!-- SECTION: SEARCH -->
+  <label class="input-shell search-filter-search__input-shell">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="16"
@@ -17,13 +26,15 @@
       <circle cx="11" cy="11" r="8"></circle>
     </svg>
     <input
-      class="w-full bg-transparent py-3 text-sm outline-none"
+      class="search-filter-search__search"
       placeholder="Search guitars or brands"
       aria-label="Search guitars or brands"
       value=""
       data-field="search"
     />
   </label>
+
+  <!-- SECTION: SORT -->
   <label class="input-shell">
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +60,7 @@
       <path d="M8 12H3"></path>
     </svg>
     <select
-      class="appearance-none bg-transparent py-3 pr-4 text-sm outline-none"
+      class="search-filter-sort__sort"
       data-field="sort"
       aria-label="Sort instruments"
     >
@@ -75,3 +86,360 @@
     </svg>
   </label>
 </div>
+
+{% elif search_filter_section == 'types' %}
+<!-- SECTION: TYPES -->
+<div class="search-filter-types__all-electric-acoustic-classical-bass-layout">
+  <button
+    class="filter-chip filter-chip-active"
+    data-action="filter"
+    data-category="All"
+  >
+    All
+  </button>
+  <button class="filter-chip" data-action="filter" data-category="Electric">
+    Electric
+  </button>
+  <button class="filter-chip" data-action="filter" data-category="Acoustic">
+    Acoustic
+  </button>
+  <button class="filter-chip" data-action="filter" data-category="Classical">
+    Classical
+  </button>
+  <button class="filter-chip" data-action="filter" data-category="Bass">
+    Bass
+  </button>
+</div>
+
+{% elif search_filter_section == 'banner' %}
+<!-- SECTION: BANNER -->
+<section class="shell search-filter-finder-banner__shell">
+  <div
+    class=""
+    data-motion='{"initial":{"opacity":0,"y":28},"animate":{"opacity":1,"y":0},"transition":{"duration":0.7,"delay":0,"ease":[0.22,1,0.36,1]},"viewport":true}'
+  >
+    <div class="finder-banner search-filter-finder-banner__finder-banner">
+      <div class="search-filter-finder-banner__finder-banner-div"></div>
+      <div
+        class="search-filter-finder-banner__finder-banner-div-guitar-finder-four-questions-a"
+      >
+        <div>
+          <p class="search-filter-finder-banner__guitar-finder">
+            Guitar finder
+          </p>
+          <h2 class="search-filter-finder-banner__four-questions-a-much-better">
+            Four questions.<br />A much better shortlist.
+          </h2>
+          <p
+            class="search-filter-finder-banner__choose-your-budget-experience-preferred"
+          >
+            Choose your budget, experience, preferred style, and guitar type.
+            AUDIA will narrow the catalog to practical matches.
+          </p>
+          <button
+            class="primary-btn search-filter-finder-banner__finder"
+            data-action="finder"
+          >
+            Start guitar finder
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="17"
+              height="17"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-compass"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="10"></circle>
+              <path
+                d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"
+              ></path>
+            </svg>
+          </button>
+        </div>
+        <div class="finder-profile search-filter-finder-banner__finder-profile">
+          <p class="search-filter-finder-banner__example-profile">
+            Example profile
+          </p>
+          <div class="search-filter-finder-banner__finder-profile-div">
+            <div
+              class="search-filter-finder-banner__finder-profile-div-budget-10k-20k-experience-beginner"
+            >
+              <span class="search-filter-finder-banner__budget">Budget</span>
+              <span class="search-filter-finder-banner__10k-20k"
+                >₱10k – ₱20k</span
+              >
+            </div>
+            <div
+              class="search-filter-finder-banner__finder-profile-div-budget-10k-20k-experience-beginner"
+            >
+              <span class="search-filter-finder-banner__experience"
+                >Experience</span
+              >
+              <span class="search-filter-finder-banner__beginner"
+                >Beginner</span
+              >
+            </div>
+            <div
+              class="search-filter-finder-banner__finder-profile-div-budget-10k-20k-experience-beginner"
+            >
+              <span class="search-filter-finder-banner__genre">Genre</span>
+              <span class="search-filter-finder-banner__rock">Rock</span>
+            </div>
+            <div
+              class="search-filter-finder-banner__finder-profile-div-budget-10k-20k-experience-beginner"
+            >
+              <span class="search-filter-finder-banner__type">Type</span>
+              <span class="search-filter-finder-banner__electric"
+                >Electric</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% elif search_filter_section == 'finder' %}
+<!-- SECTION: FINDER -->
+<template id="finder-template">
+  <div class="search-filter-finder__finder-template-div">
+    <button
+      class="search-filter-finder__close-finder"
+      aria-label="Close finder"
+      data-motion='{"initial":{"opacity":0},"animate":{"opacity":1},"viewport":false}'
+      data-action="close-finder"
+    ></button>
+    <div
+      class="finder-modal search-filter-finder__finder-modal"
+      data-motion='{"initial":{"opacity":0,"y":28,"scale":0.98},"animate":{"opacity":1,"y":0,"scale":1},"viewport":false}'
+    >
+      <div class="search-filter-finder__finder-modal-div">
+        <div
+          class="search-filter-finder__finder-modal-div-audia-guitar-finder-four-quick"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-compass"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <path
+              d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"
+            ></path>
+          </svg>
+          <div>
+            <p class="search-filter-finder__audia-guitar-finder">
+              AUDIA Guitar Finder
+            </p>
+            <p class="search-filter-finder__four-quick-questions">
+              Four quick questions
+            </p>
+          </div>
+        </div>
+        <button class="icon-btn" data-action="close-finder">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-x"
+            aria-hidden="true"
+          >
+            <path d="M18 6 6 18"></path>
+            <path d="m6 6 12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="search-filter-finder__finder-body" data-field="finder-body">
+        <div class="search-filter-finder__progress" data-field="progress">
+          <span class="search-filter-finder__progress-span"></span>
+          <span class="search-filter-finder__progress-span-span"></span>
+          <span class="search-filter-finder__progress-span-span"></span>
+          <span class="search-filter-finder__progress-span-span"></span>
+        </div>
+        <p class="section-label" data-field="question-number">
+          Question 1 of 4
+        </p>
+        <h2
+          class="search-filter-finder__question-title"
+          data-field="question-title"
+        >
+          What is your budget?
+        </h2>
+        <div class="search-filter-finder__budget" data-field="budget">
+          <div
+            class="search-filter-finder__budget-value"
+            data-field="budget-value"
+          >
+            ₱20,000
+          </div>
+          <input
+            type="range"
+            min="8000"
+            max="60000"
+            step="1000"
+            class="range-acid search-filter-finder__budget-input"
+            value="20000"
+            data-field="budget-input"
+          />
+          <div class="search-filter-finder__budget-div">
+            <span>₱8,000</span>
+            <span>₱60,000</span>
+          </div>
+        </div>
+        <div
+          class="search-filter-finder__options"
+          data-field="options"
+          hidden=""
+        ></div>
+        <button
+          class="primary-btn search-filter-finder__finder-next"
+          data-action="finder-next"
+        >
+          Continue
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-arrow-right"
+            aria-hidden="true"
+          >
+            <path d="M5 12h14"></path>
+            <path d="m12 5 7 7-7 7"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</template>
+
+<!-- Finder Results -->
+<!-- SECTION: FINDER RESULTS -->
+<template id="finder-results-template">
+  <div
+    class="search-filter-finder-results__finder-results"
+    data-field="finder-results"
+  >
+    <p class="section-label">Recommended for you</p>
+    <h2 class="search-filter-finder-results__your-closest-matches">
+      Your closest matches.
+    </h2>
+    <div
+      class="search-filter-finder-results__matches"
+      data-field="matches"
+    ></div>
+    <button
+      class="secondary-btn search-filter-finder-results__finder-restart"
+      data-action="finder-restart"
+    >
+      Start again
+    </button>
+  </div>
+</template>
+
+<!-- Finder Match -->
+<!-- SECTION: FINDER MATCH -->
+<template id="finder-match-template">
+  <div class="search-filter-finder-match__finder-match-template-div">
+    <div
+      class="search-filter-finder-match__finder-match-template-div-1-electric-001-electric-beginner"
+    >
+      <img
+        src="{{ url_for('static', filename='images/electric/Amber_Flame.png') }}"
+        alt=""
+        class="search-filter-finder-match__image"
+        data-field="image"
+      />
+      <span class="search-filter-finder-match__rank" data-field="rank">1</span>
+    </div>
+    <div
+      class="search-filter-finder-match__finder-match-template-div-1-electric-001-electric-beginner-template-div-div"
+    >
+      <p class="search-filter-finder-match__name" data-field="name">
+        ELECTRIC_001
+      </p>
+      <p class="search-filter-finder-match__category" data-field="category">
+        Electric · Beginner
+      </p>
+      <p class="search-filter-finder-match__price" data-field="price">
+        ₱12,990
+      </p>
+    </div>
+    <button
+      class="search-filter-finder-match__add-match"
+      data-action="add-match"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="lucide lucide-plus"
+        aria-hidden="true"
+      >
+        <path d="M5 12h14"></path>
+        <path d="M12 5v14"></path>
+      </svg>
+    </button>
+  </div>
+</template>
+
+<!-- Finder Option -->
+<!-- SECTION: FINDER OPTION -->
+<template id="finder-option-template">
+  <button
+    class="search-filter-finder-option__finder-option"
+    data-action="finder-option"
+  ></button>
+</template>
+
+<!-- Check -->
+<!-- SECTION: CHECK -->
+<template id="check-template">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="15"
+    height="15"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    class="lucide lucide-check float-right"
+    aria-hidden="true"
+  >
+    <path d="M20 6 9 17l-5-5"></path>
+  </svg>
+</template>
+{% endif %}

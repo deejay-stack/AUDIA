@@ -1,0 +1,51 @@
+/* ==================================================
+   COMPONENT: LESSONS GETTING STARTED
+   HTML FILE: templates/lessons/lessons_getting_started.html
+   PURPOSE: Lessons getting started presentation; preserve existing colors, states and breakpoints.
+   JS: No lesson controller: Jinja renders the content; assets/js/shared/app.js handles navigation/theme.
+   ================================================== */
+
+.lesson-topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  margin-bottom: 24px;
+  color: var(--accent);
+  font-size: 13px;
+}
+
+.lesson-basics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0px, 1fr));
+  gap: 24px;
+}
+
+.lesson-wide {
+  grid-column: 1 / -1;
+}
+
+.lesson-definitions dt {
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 16px;
+}
+
+.lesson-definitions dd {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.8;
+  margin-top: 4px;
+}
+
+.lesson-string-list {
+  margin-top: 16px;
+  font-size: 14px;
+  line-height: 2;
+}
+
+/* Screen size or accessibility preference: (max-width: 767px). */
+@media (max-width: 767px) {
+  .lesson-basics-grid {
+    grid-template-columns: minmax(0px, 1fr);
+  }
+}

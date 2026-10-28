@@ -55,6 +55,21 @@ function frame(values = {}) {
   if (transform.length) result.transform = transform.join(" ");
   return result;
 }
+// Presentation frames stay in the animation API, not inline style attributes.
+const presentationFrames = new WeakMap();
+function presentFrame(node, values, pending = false) {
+  presentationFrames.get(node)?.cancel();
+  node.dataset.motionState = pending ? "pending" : "ready";
+  if (pending) {
+    presentationFrames.set(node, node.animate([values, values], { duration: 1, fill: "forwards" }));
+  } else {
+    // All existing final poses are full opacity and neutral translation/scale.
+    // Keep settled presentation in animations.css, without a persistent effect layer.
+    if ("opacity" in values) node.dataset.motionOpacity = String(values.opacity);
+    if ("transform" in values) node.dataset.motionTransform = "settled";
+    if (values.height === "auto") node.dataset.motionHeight = "auto";
+  }
+}
 export function animate(root) {
   const nodes = [
     ...(root.matches?.("[data-motion]") ? [root] : []),
@@ -65,7 +80,7 @@ export function animate(root) {
     const config = JSON.parse(node.dataset.motion);
     const start = frame(config.initial);
     const end = frame(config.animate);
-    Object.assign(node.style, end);
+    presentFrame(node, end);
     node.removeAttribute("data-motion");
     if (reduced) continue;
     const run = () => {
@@ -78,11 +93,11 @@ export function animate(root) {
       });
     };
     if (config.viewport) {
-      Object.assign(node.style, start);
+      presentFrame(node, start, true);
       const observer = new IntersectionObserver(
         (entries) => {
           if (entries.some((entry) => entry.isIntersecting)) {
-            Object.assign(node.style, end);
+            presentFrame(node, end);
             run();
             observer.disconnect();
             revealObservers.delete(node);

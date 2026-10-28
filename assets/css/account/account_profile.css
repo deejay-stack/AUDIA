@@ -1,0 +1,17 @@
+/* ==================================================
+   COMPONENT: ACCOUNT PROFILE
+   HTML FILE: templates/account/account_profile.html
+   PURPOSE: Account profile presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/account/account.js.
+   ================================================== */
+
+.account-profile__stack-form {
+  margin-top: 1.5rem;
+}
+
+.account-profile__profile-delivery {
+  font-family: "Space Grotesk", Inter, ui-sans-serif, system-ui;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+}

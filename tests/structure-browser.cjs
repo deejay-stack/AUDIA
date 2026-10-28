@@ -126,6 +126,8 @@ function sameAppearance(before, after) {
         for (const width of [375, 1440]) {
           await page.setViewportSize({ width, height: 1000 });
           await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+          // Let Chromium finish applying resized media queries before the full-page capture.
+          await page.waitForTimeout(150);
           assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `${route} overflow`);
           const name = `${role}-${route.slice(1).replaceAll('/', '-') || 'landing'}-${theme}-${width}.png`;
           const target = path.join(directory, phase, name);

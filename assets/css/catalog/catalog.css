@@ -1,29 +1,2043 @@
-/* Styles for templates/catalog/catalog.html. */
+/* ==================================================
+   COMPONENT: CATALOG PAGE COMPOSITION
+   HTML FILE: templates/catalog/catalog.html
+   PURPOSE: Catalog page composition presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/catalog/catalog.js.
+   ================================================== */
 
-/* Storefront */
-/* Editorial hero: a fine grid, spectral color, and an instrument-inspired signal. */
 
-.hero-section {
+
+/* SECTION: ANNOUNCEMENT */
+
+/* ==================================================
+   COMPONENT: DELIVERY ANNOUNCEMENT
+   HTML FILE: templates/catalog/catalog.html
+   PURPOSE: Delivery announcement presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/catalog/catalog.js.
+   ================================================== */
+
+.catalog__announcement-span {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  opacity: 0.4;
+}
+
+.catalog__announcement {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  text-align: center;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+.announcement {
+  background: rgb(223, 208, 250);
+  color: rgb(53, 32, 79);
+  border-bottom: 1px solid rgba(185, 160, 230, 0.24);
+  font-size: 9px;
+  line-height: 1.6;
+}
+
+/* Dark theme. */
+.dark .announcement {
+  border-bottom: 1px solid rgba(185, 160, 230, 0.24);
+  font-size: 9px;
+  line-height: 1.6;
+  background: rgb(38, 32, 49);
+  color: rgb(213, 192, 242);
+}
+
+/* Screen size or accessibility preference: (max-width: 639px). */
+@media (max-width: 639px) {
+  .announcement {
+    padding-inline: 16px;
+    font-size: 8px;
+    letter-spacing: 0.09em;
+  }
+}
+
+
+
+/* SECTION: BUNDLE */
+
+/* ==================================================
+   COMPONENT: CATALOG BUNDLE
+   HTML FILE: templates/catalog/catalog.html
+   PURPOSE: Catalog bundle presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/catalog/catalog.js.
+   ================================================== */
+
+.catalog-bundle__bundle-detail-div {
+  margin-top: 1.25rem;
+}
+
+.catalog-bundle__description {
+  margin-top: 1.25rem;
+}
+
+.catalog-bundle__bundle-add {
+  width: 100%;
+}
+
+.bundle-image {
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+
+
+/* SECTION: BUNDLES */
+
+/* ==================================================
+   COMPONENT: CATALOG BUNDLES
+   HTML FILE: templates/catalog/catalog.html
+   PURPOSE: Catalog bundles presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/catalog/catalog.js.
+   ================================================== */
+
+.catalog-bundles__line-through {
+  color: var(--muted);
+  padding-bottom: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  text-decoration-line: line-through;
+}
+
+.catalog-bundles__a-matched-practice-amp-padded {
+  color: var(--muted);
+  margin-top: 1rem;
+  line-height: 1.75rem;
+}
+
+.catalog-bundles__bundles-img {
+  position: absolute;
+  inset: 0px;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 1000ms;
+}
+
+.catalog-bundles__save-3-500 {
+  position: absolute;
+  left: 1.5rem;
+  top: 1.5rem;
+  border-radius: 9999px;
+  background-color: rgb(255, 255, 255);
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgb(9, 9, 11);
+}
+
+.catalog-bundles__bundles-div-save-3-500-complete-starter {
+  position: relative;
+  min-height: 430px;
+  overflow: hidden;
+}
+
+.catalog-bundles__everything-after-the-guitar {
+  margin-top: 0.75rem;
+  font-family: "Space Grotesk", Inter, ui-sans-serif, system-ui;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  font-weight: 600;
+}
+
+.catalog-bundles__bundle {
+  margin-top: 1.75rem;
+  align-self: flex-start;
+}
+
+.catalog-bundles__bundles-div-complete-starter-rig-everything-after {
+  margin-top: 1.75rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0px, 1fr));
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.catalog-bundles__bundles-div-complete-starter-rig-everything-after-section-div-div-div {
+  margin-top: 2rem;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem;
+}
+
+.catalog-bundles__bundles-div-15w-practice-amp-padded-gig {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.catalog-bundles__bundles-div-save-3-500-complete-starter-section-div-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.catalog-bundles__bundles-div {
+  display: grid;
+  overflow: hidden;
+  border-radius: 2rem;
+  border-width: 1px;
+  border-color: rgb(228, 228, 231);
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 0 #0000, 0 0 #0000, 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+.catalog-bundles__bundles {
+  padding-bottom: 6rem;
+}
+
+.catalog-bundles__19-990 {
+  font-family: "Space Grotesk", Inter, ui-sans-serif, system-ui;
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 600;
+}
+
+.catalog-bundles__bundles-svg {
+  color: rgb(16, 185, 129);
+}
+
+.catalog-bundles__bundles-img:hover {
+  transform: scale(1.05);
+}
+
+/* Dark theme. */
+.dark .catalog-bundles__bundles-div {
+  border-color: rgba(255, 255, 255, 0.1);
+  background-color: rgb(23, 21, 30);
+}
+
+/* Screen size or accessibility preference: (min-width: 640px). */
+@media (min-width: 640px) {
+  .catalog-bundles__bundles-div-save-3-500-complete-starter-section-div-div {
+    padding: 3rem;
+  }
+
+  .catalog-bundles__bundles {
+    padding-bottom: 7rem;
+  }
+}
+
+/* Screen size or accessibility preference: (min-width: 1024px). */
+@media (min-width: 1024px) {
+  .catalog-bundles__bundles-div {
+    grid-template-columns: repeat(2, minmax(0px, 1fr));
+  }
+
+  .catalog-bundles__bundles-div-save-3-500-complete-starter-section-div-div {
+    padding: 4rem;
+  }
+}
+
+.catalog-hero__hero-stats .catalog-bundles__19-990 {
+  font-size: 25px;
+  letter-spacing: -0.05em;
+}
+
+.catalog-hero__hero-stats .catalog-bundles__everything-after-the-guitar {
+  font-size: 25px;
+  letter-spacing: -0.05em;
+}
+
+.catalog-categories__category .catalog-bundles__save-3-500 {
+  border-radius: 7px;
+}
+
+/* Screen size or accessibility preference: (max-width: 639px). */
+@media (max-width: 639px) {
+  .catalog-hero__hero-stats .catalog-bundles__19-990 {
+    font-size: 22px;
+  }
+
+  .catalog-hero__hero-stats .catalog-bundles__everything-after-the-guitar {
+    font-size: 22px;
+  }
+
+  #categories > .catalog-bundles__bundles-div {
+    grid-template-columns: repeat(2, minmax(0px, 1fr));
+    gap: 10px;
+  }
+
+  #categories > .catalog-bundles__bundles-div-complete-starter-rig-everything-after {
+    grid-template-columns: repeat(2, minmax(0px, 1fr));
+    gap: 10px;
+  }
+}
+
+#bundles > div {
+  border-radius: 12px;
+  border-color: var(--line);
+  background: var(--surface);
+}
+
+#bundles h2 {
+  letter-spacing: -0.05em;
+  line-height: 1.12;
+}
+
+/* Screen size or accessibility preference: (max-width: 639px). */
+@media (max-width: 639px) {
+  #bundles {
+    padding-bottom: 64px;
+  }
+
+  #bundles > div > div:first-child {
+    min-height: 290px;
+  }
+
+  #bundles h2 {
+    font-size: 32px;
+  }
+}
+
+
+
+/* SECTION: CART */
+
+/* ==================================================
+   COMPONENT: CART PANEL
+   HTML FILE: templates/catalog/catalog.html
+   PURPOSE: Cart panel presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/catalog/catalog.js.
+   ================================================== */
+
+.catalog-cart__subtotal {
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.catalog-cart__cart-count {
+  color: var(--muted);
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.catalog-cart__cart-template-div {
+  position: fixed;
+  inset: 0px;
+  z-index: 50;
+}
+
+.catalog-cart__cart-panel {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  max-width: 28rem;
+  flex-direction: column;
+  box-shadow: 0 0 #0000, 0 0 #0000, 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  background: var(--surface);
+  color: var(--text);
+  border-left: 1px solid var(--line);
+}
+
+.catalog-cart__close-cart {
+  position: absolute;
+  inset: 0px;
+  background-color: rgba(0, 0, 0, 0.55);
+  backdrop-filter: none;
+}
+
+.catalog-cart__checkout {
+  margin-top: 1.25rem;
+  width: 100%;
+}
+
+.catalog-cart__cart-footer-div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.catalog-cart__cart-panel-div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom-width: 1px;
+  border-color: rgb(228, 228, 231);
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
+.catalog-cart__cart-panel-div-your-cart-1-items {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.catalog-cart__cart-body {
+  flex: 1 1 0%;
+  overflow-y: auto;
+  padding: 1.5rem;
+}
+
+.catalog-cart__cart-footer {
+  border-top-width: 1px;
+  border-color: rgb(228, 228, 231);
+  padding: 1.5rem;
+}
+
+.catalog-cart__subtotal-subtotal-12-990 {
+  font-family: "Space Grotesk", Inter, ui-sans-serif, system-ui;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+}
+
+.catalog-cart__your-cart {
+  font-family: "Space Grotesk", Inter, ui-sans-serif, system-ui;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+}
+
+/* Dark theme. */
+.dark .catalog-cart__cart-panel {
+  background: var(--surface);
+  border-color: var(--line);
+  background-color: rgb(16, 16, 20);
+}
+
+/* Dark theme. */
+.dark .catalog-cart__cart-footer {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Dark theme. */
+.dark .catalog-cart__cart-panel-div {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Screen size or accessibility preference: (prefers-reduced-motion: reduce). */
+@media (prefers-reduced-motion: reduce) {
+  .catalog-cart__cart-panel[data-motion-state] {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
+.catalog-hero__hero-stats .catalog-cart__subtotal-subtotal-12-990 {
+  font-size: 25px;
+  letter-spacing: -0.05em;
+}
+
+.catalog-hero__hero-stats .catalog-cart__your-cart {
+  font-size: 25px;
+  letter-spacing: -0.05em;
+}
+
+/* Screen size or accessibility preference: (max-width: 639px). */
+@media (max-width: 639px) {
+  .catalog-hero__hero-stats .catalog-cart__subtotal-subtotal-12-990 {
+    font-size: 22px;
+  }
+
+  .catalog-hero__hero-stats .catalog-cart__your-cart {
+    font-size: 22px;
+  }
+
+  .catalog-categories__category .catalog-cart__cart-body {
+    padding: 14px;
+  }
+
+  .catalog-categories__category .catalog-cart__cart-footer {
+    padding: 14px;
+  }
+
+  .catalog-categories__category .catalog-cart__cart-body > span {
+    height: 27px;
+    width: 27px;
+    flex-shrink: 0;
+  }
+
+  .catalog-categories__category .catalog-cart__cart-footer > span {
+    height: 27px;
+    width: 27px;
+    flex-shrink: 0;
+  }
+
+  .catalog-categories__category .catalog-cart__cart-body p {
+    font-size: 8px;
+    letter-spacing: 0.04em;
+  }
+
+  .catalog-categories__category .catalog-cart__cart-footer p {
+    font-size: 8px;
+    letter-spacing: 0.04em;
+  }
+}
+
+/* Screen size or accessibility preference: (max-width: 359px). */
+@media (max-width: 359px) {
+  .catalog-categories__category .catalog-cart__cart-body {
+    padding: 10px;
+  }
+
+  .catalog-categories__category .catalog-cart__cart-footer {
+    padding: 10px;
+  }
+
+  .catalog-categories__category .catalog-cart__cart-body > span {
+    width: 23px;
+    height: 23px;
+  }
+
+  .catalog-categories__category .catalog-cart__cart-footer > span {
+    width: 23px;
+    height: 23px;
+  }
+}
+
+
+
+/* SECTION: CART BADGE */
+
+/* ==================================================
+   COMPONENT: CATALOG CART BADGE
+   HTML FILE: templates/catalog/catalog.html
+   PURPOSE: Catalog cart badge presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/catalog/catalog.js.
+   ================================================== */
+
+.catalog-cart-badge__cart-badge-template-span {
+  position: absolute;
+  right: -0.125rem;
+  top: -0.125rem;
+  display: grid;
+  height: 1.25rem;
+  width: 1.25rem;
+  place-items: center;
+  border-radius: 9999px;
+  background-color: rgb(9, 9, 11);
+  font-size: 10px;
+  font-weight: 700;
+  color: rgb(255, 255, 255);
+}
+
+/* Dark theme. */
+.dark .catalog-cart-badge__cart-badge-template-span {
+  background-color: rgb(184, 245, 208);
+  color: rgb(13, 12, 18);
+}
+
+.catalog-categories__category .catalog-cart-badge__cart-badge-template-span {
+  border-radius: 7px;
+}
+
+/* Screen size or accessibility preference: (max-width: 639px). */
+@media (max-width: 639px) {
+  #categories > .catalog-cart-badge__cart-badge-template-span {
+    grid-template-columns: repeat(2, minmax(0px, 1fr));
+    gap: 10px;
+  }
+}
+
+
+
+/* SECTION: CART EMPTY */
+
+/* ==================================================
+   COMPONENT: CATALOG CART EMPTY
+   HTML FILE: templates/catalog/catalog.html
+   PURPOSE: Catalog cart empty presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/catalog/catalog.js.
+   ================================================== */
+
+.catalog-cart-empty__your-cart-is-empty {
+  color: var(--muted);
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.catalog-cart-empty__cart-empty-template-svg {
+  margin-left: auto;
+  margin-right: auto;
+  color: rgb(212, 212, 216);
+}
+
+.catalog-cart-empty__cart-empty-template-div {
+  display: grid;
+  height: 100%;
+  place-items: center;
+  text-align: center;
+}
+
+/* Dark theme. */
+.dark .catalog-cart-empty__cart-empty-template-svg {
+  color: rgb(63, 63, 70);
+}
+
+/* Screen size or accessibility preference: (max-width: 639px). */
+@media (max-width: 639px) {
+  #categories > .catalog-cart-empty__cart-empty-template-div {
+    grid-template-columns: repeat(2, minmax(0px, 1fr));
+    gap: 10px;
+  }
+}
+
+
+
+/* SECTION: CART ITEM */
+
+/* ==================================================
+   COMPONENT: CATALOG CART ITEM
+   HTML FILE: templates/catalog/catalog.html
+   PURPOSE: Catalog cart item presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/catalog/catalog.js.
+   ================================================== */
+
+.catalog-cart-item__brand {
+  color: var(--muted);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.catalog-cart-item__name {
+  margin-top: 0.25rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+}
+
+.catalog-cart-item__cart-item-template-div-audia-demo-electric-001-12-template-div-div-div {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.catalog-cart-item__cart-item-template-div {
+  display: flex;
+  gap: 1rem;
+}
+
+.catalog-cart-item__cart-item-template-div-12-990-1 {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 9999px;
+  border-width: 1px;
+  border-color: rgb(228, 228, 231);
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.catalog-cart-item__cart-item-template-div-audia-demo-electric-001-12 {
+  display: flex;
+  min-width: 0px;
+  flex: 1 1 0%;
+  flex-direction: column;
+}
+
+.catalog-cart-item__image {
+  height: 6rem;
+  width: 5rem;
+  border-radius: 0.75rem;
+  object-fit: cover;
+}
+
+.catalog-cart-item__price {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+}
+
+.catalog-cart-item__quantity {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+/* Dark theme. */
+.dark .catalog-cart-item__cart-item-template-div-12-990-1 {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.catalog-categories__category .catalog-cart-item__cart-item-template-div-12-990-1 {
+  border-radius: 7px;
+}
+
+
+
+/* SECTION: CART ITEMS */
+
+/* ==================================================
+   COMPONENT: CATALOG CART ITEMS
+   HTML FILE: templates/catalog/catalog.html
+   PURPOSE: Catalog cart items presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/catalog/catalog.js.
+   ================================================== */
+
+.catalog-cart-items__cart-items-template-div > :not([hidden]) ~ :not([hidden]) {
+  margin-top: 1.25rem;
+  margin-bottom: 0px;
+}
+
+
+
+/* SECTION: CATEGORIES */
+
+/* ==================================================
+   COMPONENT: CATALOG CATEGORIES
+   HTML FILE: templates/catalog/catalog.html
+   PURPOSE: Catalog categories presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/catalog/catalog.js.
+   ================================================== */
+
+.catalog-categories__start-with-the-instrument-family {
+  color: var(--muted);
+  max-width: 24rem;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+}
+
+.catalog-categories__category-div {
+  position: absolute;
+  inset: 0px;
+  background-image: none;
+}
+
+.catalog-categories__category-div-01-models-10-electric {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 1.5rem;
+  color: rgb(255, 255, 255);
+}
+
+.catalog-categories__category-div-02-models-10-acoustic {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 1.5rem;
+  color: rgb(255, 255, 255);
+}
+
+.catalog-categories__category-div-03-models-10-classical {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 1.5rem;
+  color: rgb(255, 255, 255);
+}
+
+.catalog-categories__category-div-04-models-10-bass {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 1.5rem;
+  color: rgb(255, 255, 255);
+}
+
+.catalog-categories__category {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background-color: rgb(24, 24, 27);
+  text-align: left;
+  box-shadow: 0 0 #0000, 0 0 #0000, 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  height: 320px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.catalog-categories__categories-div {
+  margin-bottom: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.catalog-categories__acoustic {
+  margin-top: 0.5rem;
+  font-family: "Space Grotesk", Inter, ui-sans-serif, system-ui;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 600;
+}
+
+.catalog-categories__bass {
+  margin-top: 0.5rem;
+  font-family: "Space Grotesk", Inter, ui-sans-serif, system-ui;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 600;
+}
+
+.catalog-categories__classical {
+  margin-top: 0.5rem;
+  font-family: "Space Grotesk", Inter, ui-sans-serif, system-ui;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 600;
+}
+
+.catalog-categories__electric {
+  margin-top: 0.5rem;
+  font-family: "Space Grotesk", Inter, ui-sans-serif, system-ui;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 600;
+}
+
+.catalog-categories__categories-div-browse-the-collection-choose-your {
+  display: grid;
+  gap: 1rem;
+}
+
+.catalog-categories__category-span {
+  display: grid;
+  height: 2.5rem;
+  width: 2.5rem;
+  place-items: center;
+  border-width: 1px;
+  border-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: none;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  border-radius: 7px;
+}
+
+.catalog-categories__category-img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  background: rgb(202, 199, 195);
+  filter: none;
+  transition: filter 0.6s, transform 0.7s;
+}
+
+.catalog-categories__categories {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+.catalog-categories__01-models-10 {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.catalog-categories__02-models-10 {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.catalog-categories__03-models-10 {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.catalog-categories__04-models-10 {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.is-hover-group:hover .catalog-categories__category-img {
+  transform: scale(1.05);
+}
+
+.is-hover-group:hover .catalog-categories__category-span {
+  background-color: rgb(255, 255, 255);
+  color: rgb(9, 9, 11);
+}
+
+/* Screen size or accessibility preference: (min-width: 640px). */
+@media (min-width: 640px) {
+  .catalog-categories__categories-div-browse-the-collection-choose-your {
+    grid-template-columns: repeat(2, minmax(0px, 1fr));
+  }
+
+  .catalog-categories__categories-div {
+    flex-direction: row;
+    align-items: flex-end;
+  }
+
+  .catalog-categories__categories {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+  }
+}
+
+/* Screen size or accessibility preference: (min-width: 1024px). */
+@media (min-width: 1024px) {
+  .catalog-categories__categories-div-browse-the-collection-choose-your {
+    grid-template-columns: repeat(4, minmax(0px, 1fr));
+  }
+}
+
+/* Screen size or accessibility preference: (prefers-reduced-motion: no-preference). */
+@media (prefers-reduced-motion: no-preference) {
+  .catalog-categories__category:hover {
+    transform: translateY(-7px);
+  }
+}
+
+.catalog-hero__hero-stats .catalog-categories__acoustic {
+  font-size: 25px;
+  letter-spacing: -0.05em;
+}
+
+.catalog-hero__hero-stats .catalog-categories__bass {
+  font-size: 25px;
+  letter-spacing: -0.05em;
+}
+
+.catalog-hero__hero-stats .catalog-categories__classical {
+  font-size: 25px;
+  letter-spacing: -0.05em;
+}
+
+.catalog-hero__hero-stats .catalog-categories__electric {
+  font-size: 25px;
+  letter-spacing: -0.05em;
+}
+
+.catalog-categories__category:hover img {
+  filter: saturate(1);
+}
+
+.catalog-categories__category[data-category="Electric"] img {
+  object-position: 66% center;
+}
+
+.catalog-categories__category[data-category="Classical"] img {
+  object-position: 35% center;
+}
+
+.catalog-categories__category[data-category="Bass"] img {
+  object-position: left center;
+}
+
+.catalog-categories__category::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0px;
+  border-radius: inherit;
+  box-shadow: rgba(255, 255, 255, 0.06) 0px 0px 0px 1px inset;
+}
+
+.catalog-categories__category h3 {
+  letter-spacing: -0.04em;
+}
+
+/* Screen size or accessibility preference: (max-width: 1023px). */
+@media (max-width: 1023px) {
+  .catalog-categories__category {
+    height: 310px;
+  }
+}
+
+/* Screen size or accessibility preference: (max-width: 639px). */
+@media (max-width: 639px) {
+  .catalog-hero__hero-stats .catalog-categories__acoustic {
+    font-size: 22px;
+  }
+
+  .catalog-hero__hero-stats .catalog-categories__bass {
+    font-size: 22px;
+  }
+
+  .catalog-hero__hero-stats .catalog-categories__classical {
+    font-size: 22px;
+  }
+
+  .catalog-hero__hero-stats .catalog-categories__electric {
+    font-size: 22px;
+  }
+
+  .catalog-categories__categories-div-browse-the-collection-choose-your {
+    grid-template-columns: repeat(2, minmax(0px, 1fr));
+    gap: 10px;
+  }
+
+  #categories > .catalog-categories__category-span {
+    grid-template-columns: repeat(2, minmax(0px, 1fr));
+    gap: 10px;
+  }
+
+  .catalog-categories__category {
+    height: 245px;
+  }
+
+  .catalog-categories__category-div-01-models-10-electric {
+    padding: 14px;
+  }
+
+  .catalog-categories__category-div-02-models-10-acoustic {
+    padding: 14px;
+  }
+
+  .catalog-categories__category-div-03-models-10-classical {
+    padding: 14px;
+  }
+
+  .catalog-categories__category-div-04-models-10-bass {
+    padding: 14px;
+  }
+
+  .catalog-categories__category h3 {
+    font-size: 20px;
+  }
+
+  .catalog-categories__category .catalog-categories__category-div-01-models-10-electric > span {
+    height: 27px;
+    width: 27px;
+    flex-shrink: 0;
+  }
+
+  .catalog-categories__category .catalog-categories__category-div-02-models-10-acoustic > span {
+    height: 27px;
+    width: 27px;
+    flex-shrink: 0;
+  }
+
+  .catalog-categories__category .catalog-categories__category-div-03-models-10-classical > span {
+    height: 27px;
+    width: 27px;
+    flex-shrink: 0;
+  }
+
+  .catalog-categories__category .catalog-categories__category-div-04-models-10-bass > span {
+    height: 27px;
+    width: 27px;
+    flex-shrink: 0;
+  }
+
+  .catalog-categories__01-models-10 {
+    font-size: 8px;
+    letter-spacing: 0.04em;
+  }
+
+  .catalog-categories__02-models-10 {
+    font-size: 8px;
+    letter-spacing: 0.04em;
+  }
+
+  .catalog-categories__03-models-10 {
+    font-size: 8px;
+    letter-spacing: 0.04em;
+  }
+
+  .catalog-categories__04-models-10 {
+    font-size: 8px;
+    letter-spacing: 0.04em;
+  }
+}
+
+/* Screen size or accessibility preference: (max-width: 359px). */
+@media (max-width: 359px) {
+  .catalog-categories__category-div-01-models-10-electric {
+    padding: 10px;
+  }
+
+  .catalog-categories__category-div-02-models-10-acoustic {
+    padding: 10px;
+  }
+
+  .catalog-categories__category-div-03-models-10-classical {
+    padding: 10px;
+  }
+
+  .catalog-categories__category-div-04-models-10-bass {
+    padding: 10px;
+  }
+
+  .catalog-categories__category h3 {
+    font-size: 18px;
+  }
+
+  .catalog-categories__category .catalog-categories__category-div-01-models-10-electric > span {
+    width: 23px;
+    height: 23px;
+  }
+
+  .catalog-categories__category .catalog-categories__category-div-02-models-10-acoustic > span {
+    width: 23px;
+    height: 23px;
+  }
+
+  .catalog-categories__category .catalog-categories__category-div-03-models-10-classical > span {
+    width: 23px;
+    height: 23px;
+  }
+
+  .catalog-categories__category .catalog-categories__category-div-04-models-10-bass > span {
+    width: 23px;
+    height: 23px;
+  }
+}
+
+.catalog-categories__category .primary-btn {
+  border-radius: 7px;
+}
+
+.catalog-categories__category .secondary-btn {
+  border-radius: 7px;
+}
+
+.catalog-categories__category .icon-btn {
+  border-radius: 7px;
+}
+
+.catalog-categories__category .input-shell {
+  border-radius: 7px;
+}
+
+.catalog-categories__category .filter-chip {
+  border-radius: 7px;
+}
+
+#categories {
+  position: relative;
+}
+
+/* Screen size or accessibility preference: (max-width: 639px). */
+@media (max-width: 639px) {
+  #categories {
+    padding-block: 64px;
+  }
+}
+
+
+
+/* SECTION: CHECKOUT */
+
+/* ==================================================
+   COMPONENT: CHECKOUT FORM
+   HTML FILE: templates/catalog/catalog.html
+   PURPOSE: Checkout form presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/catalog/catalog.js.
+   ================================================== */
+
+[data-form="checkout"] .order-total {
+  margin-top: 4px;
+  padding-bottom: 0px;
+}
+
+
+
+/* SECTION: FOOTER */
+
+/* ==================================================
+   COMPONENT: CATALOG FOOTER
+   HTML FILE: templates/catalog/catalog.html
+   PURPOSE: Catalog footer presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/catalog/catalog.js.
+   ================================================== */
+
+.catalog-footer__support-info {
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.catalog-footer__sound-previews {
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.catalog-footer__shell-2026-audia-guitar-marketplace-admin {
+  color: var(--muted);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  font-size: 11px;
+}
+
+.catalog-footer__order-tracking {
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.catalog-footer__finder {
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.catalog-footer__category {
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.catalog-footer__bundles {
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.catalog-footer__a-guitar-only-marketplace-helping {
+  color: var(--muted);
+  margin-top: 1.5rem;
+  max-width: 20rem;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+}
+
+.catalog-footer__shell-div {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.catalog-footer__home {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  font-size: 1.125rem;
+  line-height: 1;
+}
+
+.catalog-footer__shell {
+  display: grid;
+  gap: 3rem;
+  padding-bottom: 3.5rem;
+}
+
+.catalog-footer__2026-audia-guitar-marketplace-admin-layout {
+  border-top-width: 1px;
+  border-color: rgb(228, 228, 231);
+}
+
+.catalog-footer__udi-a-a-a-guitar-footer {
+  border-top-width: 1px;
+  border-color: rgb(228, 228, 231);
+  background-color: rgb(255, 255, 255);
+  padding-top: 4rem;
+}
+
+.catalog-footer__services {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+.catalog-footer__shop {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+.catalog-footer__support {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+.catalog-footer__admin-login:hover {
+  color: rgb(9, 9, 11);
+}
+
+.catalog-footer__bundles:hover {
+  color: rgb(9, 9, 11);
+}
+
+.catalog-footer__category:hover {
+  color: rgb(9, 9, 11);
+}
+
+.catalog-footer__finder:hover {
+  color: rgb(9, 9, 11);
+}
+
+.catalog-footer__order-tracking:hover {
+  color: rgb(9, 9, 11);
+}
+
+.catalog-footer__sound-previews:hover {
+  color: rgb(9, 9, 11);
+}
+
+.catalog-footer__support-info:hover {
+  color: rgb(9, 9, 11);
+}
+
+/* Dark theme. */
+.dark .catalog-footer__2026-audia-guitar-marketplace-admin-layout {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Dark theme. */
+.dark .catalog-footer__udi-a-a-a-guitar-footer {
+  border-color: rgba(255, 255, 255, 0.1);
+  background-color: rgb(13, 12, 18);
+}
+
+/* Dark theme. */
+.dark .catalog-footer__admin-login:hover {
+  color: rgb(255, 255, 255);
+}
+
+/* Dark theme. */
+.dark .catalog-footer__bundles:hover {
+  color: rgb(255, 255, 255);
+}
+
+/* Dark theme. */
+.dark .catalog-footer__category:hover {
+  color: rgb(255, 255, 255);
+}
+
+/* Dark theme. */
+.dark .catalog-footer__finder:hover {
+  color: rgb(255, 255, 255);
+}
+
+/* Dark theme. */
+.dark .catalog-footer__order-tracking:hover {
+  color: rgb(255, 255, 255);
+}
+
+/* Dark theme. */
+.dark .catalog-footer__sound-previews:hover {
+  color: rgb(255, 255, 255);
+}
+
+/* Dark theme. */
+.dark .catalog-footer__support-info:hover {
+  color: rgb(255, 255, 255);
+}
+
+/* Screen size or accessibility preference: (min-width: 640px). */
+@media (min-width: 640px) {
+  .catalog-footer__shell {
+    grid-template-columns: repeat(2, minmax(0px, 1fr));
+  }
+
+  .catalog-footer__shell-2026-audia-guitar-marketplace-admin {
+    flex-direction: row;
+  }
+}
+
+/* Screen size or accessibility preference: (min-width: 1024px). */
+@media (min-width: 1024px) {
+  .catalog-footer__shell {
+    grid-template-columns: 1.4fr repeat(3, 1fr);
+  }
+}
+
+/* Screen size or accessibility preference: (max-width: 639px). */
+@media (max-width: 639px) {
+  #categories > .catalog-footer__shell {
+    grid-template-columns: repeat(2, minmax(0px, 1fr));
+    gap: 10px;
+  }
+}
+
+.storefront footer {
+  border-color: var(--line);
+  background: var(--surface);
+}
+
+.storefront footer .audia-mark {
+  font-size: 27px;
+}
+
+.storefront footer h3 {
+  color: var(--accent);
+  font-size: 10px;
+}
+
+
+
+/* SECTION: GUARANTEES */
+
+/* ==================================================
+   COMPONENT: STORE GUARANTEES
+   HTML FILE: templates/catalog/catalog.html
+   PURPOSE: Store guarantees presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/catalog/catalog.js.
+   ================================================== */
+
+.catalog__help-choosing-and-setting-up {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: rgb(113, 113, 122);
+}
+
+.catalog__official-products-with-warranty {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: rgb(113, 113, 122);
+}
+
+/* SECTION: PAGE LAYOUT */
+
+.catalog__tone-previews-on-key-models {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: rgb(113, 113, 122);
+}
+
+.catalog__shell-div {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 1rem;
+  border-width: 1px;
+  border-color: rgb(228, 228, 231);
+  padding: 1.25rem;
+}
+
+.catalog__shell {
+  display: grid;
+  gap: 1rem;
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
+}
+
+.catalog__authentic-gear {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+}
+
+.catalog__hear-before-buying {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+}
+
+.catalog__player-first-support {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+}
+
+/* Dark theme. */
+.dark .catalog__shell-div {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Screen size or accessibility preference: (min-width: 640px). */
+@media (min-width: 640px) {
+  .catalog__shell {
+    grid-template-columns: repeat(3, minmax(0px, 1fr));
+  }
+}
+
+/* Screen size or accessibility preference: (max-width: 639px). */
+@media (max-width: 639px) {
+  #categories > .catalog__shell {
+    grid-template-columns: repeat(2, minmax(0px, 1fr));
+    gap: 10px;
+  }
+}
+
+
+
+/* SECTION: HEADER */
+
+/* ==================================================
+   COMPONENT: CATALOG HEADER
+   HTML FILE: templates/catalog/catalog.html
+   PURPOSE: Catalog header presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/catalog/catalog.js.
+   ================================================== */
+
+.nav-link {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  position: relative;
+}
+
+.nav-link:hover {
+  color: rgb(9, 9, 11);
+}
+
+/* Dark theme. */
+.dark .nav-link:hover {
+  color: rgb(255, 255, 255);
+}
+
+.catalog-header__cart {
+  position: relative;
+}
+
+.catalog-header__theme {
+  position: relative;
+  display: flex;
+  height: 2.5rem;
+  width: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9px;
+  border-width: 1px;
+  border-color: var(--line);
+  background-color: rgb(255, 255, 255);
+  color: rgb(63, 63, 70);
+  box-shadow: none;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.catalog-header__store-header {
+  position: sticky;
+  top: 0px;
+  z-index: 40;
+  border-bottom-width: 1px;
+  border-color: rgba(228, 228, 231, 0.8);
+  background-color: rgba(250, 250, 249, 0.9);
+  backdrop-filter: none;
+}
+
+.catalog-header__finder {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.catalog-header__home {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  font-size: 1.125rem;
+  line-height: 1;
+}
+
+.catalog-header__shell {
+  display: flex;
+  height: 76px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.catalog-header__shell-div {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.catalog-header__account {
+  display: none;
+}
+
+.catalog-header__shell-nav {
+  display: none;
+  align-items: center;
+  gap: 2rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  color: rgb(82, 82, 91);
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  height: 1px;
+  inset: auto 0px -7px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.2s;
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+.catalog-header__theme:hover {
+  border-color: rgb(212, 212, 216);
+}
+
+/* Dark theme. */
+.dark .catalog-header__store-header {
+  border-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(13, 12, 18, 0.9);
+}
+
+/* Dark theme. */
+.dark .catalog-header__theme {
+  border-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.05);
+  color: rgb(228, 228, 231);
+}
+
+/* Dark theme. */
+.dark .catalog-header__shell-nav {
+  color: rgb(161, 161, 170);
+}
+
+/* Screen size or accessibility preference: (min-width: 640px). */
+@media (min-width: 640px) {
+  .catalog-header__account {
+    display: grid;
+  }
+}
+
+/* Screen size or accessibility preference: (min-width: 1024px). */
+@media (min-width: 1024px) {
+  .catalog-header__shell-nav {
+    display: flex;
+  }
+
+  .catalog-header__menu {
+    display: none;
+  }
+}
+
+.catalog-categories__category .catalog-header__theme {
+  border-radius: 7px;
+}
+
+/* Screen size or accessibility preference: (max-width: 639px). */
+@media (max-width: 639px) {
+  .catalog-header__shell {
+    height: 68px;
+    gap: 8px;
+  }
+
+  .catalog-header__home {
+    font-size: 16px;
+    letter-spacing: 0.22em;
+  }
+
+  .store-header .icon-btn {
+    width: 36px;
+    height: 38px;
+  }
+
+  .catalog-header__theme {
+    width: 36px;
+    height: 38px;
+  }
+}
+
+.storefront .store-header {
+  background: color-mix(in srgb, var(--page) 92%, transparent);
+  border-color: var(--line);
+}
+
+/* Dark theme. */
+.dark .storefront .store-header {
+  background: color-mix(in srgb, var(--page) 92%, transparent);
+  border-color: var(--line);
+}
+
+
+
+/* SECTION: HERO */
+
+/* ==================================================
+   COMPONENT: CATALOG HERO
+   HTML FILE: templates/catalog/catalog.html
+   PURPOSE: Catalog hero presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/catalog/catalog.js.
+   ================================================== */
+
+.catalog-hero__ready-to-play-on-arrival {
+  color: var(--muted);
+  margin-top: 0.125rem;
+  font-size: 10px;
+}
+
+.catalog-hero__hero-stats-div-4-9-buyer-rating {
+  color: var(--muted);
+  margin-top: 0.25rem;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+.catalog-hero__hero-stats-div-2-year-warranty {
+  color: var(--muted);
+  margin-top: 0.25rem;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+.catalog-hero__hero-stats-div-120-instruments {
+  color: var(--muted);
+  margin-top: 0.25rem;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+.catalog-hero__hero-mesh {
+  position: absolute;
+  inset: 0px;
+  background: radial-gradient(circle at 82% 22%, rgba(124, 58, 237, 0.16), transparent 28%), radial-gradient(circle at 35% 78%, rgba(200, 255, 61, 0.13), transparent 25%);
+  pointer-events: none;
+  background-image: radial-gradient(ellipse at 78% 35%, #a77ce32b, transparent 50%), linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: auto, 76px 76px, 76px 76px;
+  mask-image: linear-gradient(black 55%, transparent);
+}
+
+.catalog-hero__hero-photo {
+  position: absolute;
+  overflow: hidden;
+  background-color: rgb(24, 24, 27);
+  inset: 32px 24px 38px;
+  border-radius: 10px;
+  transform: rotate(-3deg);
+  border: 6px solid var(--surface);
+  outline: 1px solid var(--line);
+  box-shadow: rgba(53, 32, 79, 0.4) 0px 28px 75px -30px;
+}
+
+.catalog-hero__hero-photo-caption {
+  position: absolute;
+  left: 1.5rem;
+  right: 1.5rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.75rem;
+  color: rgb(255, 255, 255);
+  flex-wrap: wrap;
+  bottom: 68px;
+}
+
+.catalog-hero__hero-photo-div {
+  position: absolute;
+  inset: 0px;
+  background-image: none;
+}
+
+.catalog-hero__setup-note {
+  position: absolute;
+  right: 0px;
+  top: 0.75rem;
+  border-width: 1px;
+  padding: 1rem;
+  z-index: 2;
+  border-radius: 9px;
+  background: var(--surface);
+  border-color: var(--line);
+  box-shadow: var(--shadow);
+  animation: 7s ease-in-out 0s infinite normal none running note-float;
+}
+
+.catalog-hero__hero-copy {
+  position: relative;
+  z-index: 10;
+  max-width: 36rem;
+}
+
+.catalog-hero__hero-visual {
+  position: relative;
+  min-height: 565px;
+  isolation: isolate;
+}
+
+.catalog-hero__shell {
+  position: relative;
+  display: grid;
+  align-items: center;
+  gap: 3rem;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  min-height: 710px;
+}
+
+.catalog-hero__top {
+  position: relative;
+  overflow: hidden;
+  border-bottom-width: 1px;
   border-color: var(--line);
   background: var(--page);
 }
 
-.hero-mesh {
-  pointer-events: none;
-  background-image:
-    radial-gradient(ellipse at 78% 35%, #a77ce32b, transparent 50%),
-    linear-gradient(var(--grid) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-  background-size:
-    auto,
-    76px 76px,
-    76px 76px;
-  -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent);
-  mask-image: linear-gradient(to bottom, black 55%, transparent);
+.catalog-hero__warm-humbuckers-crisp-overdrive {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: rgba(255, 255, 255, 0.6);
 }
 
-.hero-layout {
-  min-height: 710px;
+.catalog-hero__hero-stats {
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0px, 1fr));
+  border-top-width: 1px;
+  padding-top: 1.5rem;
+  max-width: 440px;
+  border-color: var(--line);
+  gap: 16px;
+}
+
+.catalog-hero__midnight-drive {
+  margin-top: 0.5rem;
+  font-family: "Space Grotesk", Inter, ui-sans-serif, system-ui;
+  line-height: 2rem;
+  font-weight: 600;
+  font-size: 23px;
+}
+
+.catalog-hero__make-some-noise {
+  margin-top: 1.25rem;
+  font-family: "Space Grotesk", Inter, ui-sans-serif, system-ui;
+  font-weight: 600;
+  font-size: clamp(4.4rem, 7.9vw, 7.4rem);
+  line-height: 0.98;
+  letter-spacing: -0.075em;
+}
+
+.catalog-hero__discover-guitars-chosen-for-feel {
+  margin-top: 1.75rem;
+  max-width: 32rem;
+  font-size: 1rem;
+  line-height: 1.75rem;
+  color: rgb(82, 82, 91);
+}
+
+.catalog-hero__hero-copy-div {
+  margin-top: 2.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.catalog-hero__setup-note-div {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.catalog-hero__shell-good-gear-great-possibilities-your {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--muted);
+  font: 9px ui-monospace, monospace;
+  letter-spacing: 0.13em;
+}
+
+.catalog-hero__your-sound-starts-here {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.catalog-hero__sound {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: rgb(255, 255, 255);
+  padding-left: 1rem;
+  padding-right: 1rem;
+  color: rgb(9, 9, 11);
+  box-shadow: 0 0 #0000, 0 0 #0000, 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  flex-shrink: 0;
+  border-radius: 6px;
+  height: 38px;
+}
+
+.catalog-hero__hero-photo-img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center center;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 1000ms;
+  filter: saturate(0.7);
+}
+
+.catalog-hero__hero-stats-div {
+  font-family: "Space Grotesk", Inter, ui-sans-serif, system-ui;
+  line-height: 1.75rem;
+  font-weight: 600;
+  font-size: 25px;
+  letter-spacing: -0.05em;
+}
+
+.catalog-hero__featured-sound {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.catalog-hero__free-setup {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 600;
+}
+
+.catalog-hero__hear-the-tone {
+  line-height: 1rem;
+  font-weight: 600;
+  font-size: 10px;
+}
+
+/* Dark theme. */
+.dark .catalog-hero__setup-note {
+  background: var(--surface);
+  border-color: rgba(255, 255, 255, 0.1);
+  background-color: rgb(24, 24, 27);
+}
+
+.catalog-hero__sound:hover {
+  transform: scale(1.05);
+}
+
+.catalog-hero__hero-photo-img:hover {
+  transform: scale(1.025);
+}
+
+/* Dark theme. */
+.dark .catalog-hero__hero-stats {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Dark theme. */
+.dark .catalog-hero__top {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Dark theme. */
+.dark .catalog-hero__discover-guitars-chosen-for-feel {
+  color: rgb(161, 161, 170);
+}
+
+/* Screen size or accessibility preference: (min-width: 640px). */
+@media (min-width: 640px) {
+  .catalog-hero__hero-photo-caption {
+    left: 2rem;
+    right: 2rem;
+  }
+
+  .catalog-hero__setup-note {
+    right: 0.25rem;
+    top: 3rem;
+  }
+
+  .catalog-hero__hero-copy-div {
+    flex-direction: row;
+  }
+
+  .catalog-hero__hero-stats-div {
+    line-height: 2rem;
+  }
+
+  .catalog-hero__hero-stats-div-120-instruments {
+    font-size: 10px;
+  }
+
+  .catalog-hero__hero-stats-div-2-year-warranty {
+    font-size: 10px;
+  }
+
+  .catalog-hero__hero-stats-div-4-9-buyer-rating {
+    font-size: 10px;
+  }
+
+  .catalog-hero__discover-guitars-chosen-for-feel {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+}
+
+/* Screen size or accessibility preference: (min-width: 1024px). */
+@media (min-width: 1024px) {
+  .catalog-hero__shell {
+    grid-template-columns: 1.05fr 1fr;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
 }
 
 .hero-eyebrow {
@@ -49,103 +2063,33 @@
   flex-shrink: 0;
 }
 
-.hero-copy h1 {
-  font-size: clamp(4.4rem, 7.9vw, 7.4rem);
-  line-height: 0.98;
-  letter-spacing: -0.075em;
-}
-
-.hero-copy > p:not(.section-label) {
+.catalog-hero__hero-copy > p:not(.section-label) {
   max-width: 430px;
   font-size: 15px;
   line-height: 1.9;
   color: var(--muted);
 }
 
-.hero-gradient {
-  color: #8453d6;
-  background: linear-gradient(110deg, #6940bb 5%, #a668d5 45%, #477d86 90%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.dark .hero-gradient {
-  background-image: linear-gradient(
-    110deg,
-    #c1a0ff 5%,
-    #d3b5fb 45%,
-    #a7edcb 95%
-  );
-}
-
-.hero-stats {
-  max-width: 440px;
-  border-color: var(--line);
-  gap: 16px;
-}
-
-.hero-stats > div + div {
+.catalog-hero__hero-stats > div + div {
   border-left: 1px solid var(--line);
   padding-left: 22px;
 }
 
-.hero-stats .font-display {
+.catalog-hero__hero-stats .catalog-hero__make-some-noise {
   font-size: 25px;
   letter-spacing: -0.05em;
 }
 
-.hero-visual {
-  min-height: 565px;
-  isolation: isolate;
+.catalog-hero__hero-stats .catalog-hero__midnight-drive {
+  font-size: 25px;
+  letter-spacing: -0.05em;
 }
 
-.hero-photo {
-  inset: 32px 24px 38px 24px;
-  border-radius: 10px;
-  transform: rotate(-3deg);
-  border: 6px solid var(--surface);
-  outline: 1px solid var(--line);
-  box-shadow: 0 28px 75px -30px #35204f66;
+.catalog-hero__hero-photo-caption > div {
+  min-width: 0px;
 }
 
-.hero-photo img {
-  filter: saturate(0.7);
-}
-
-.hero-photo-caption {
-  flex-wrap: wrap;
-  bottom: 68px;
-}
-
-.hero-photo-caption > div {
-  min-width: 0;
-}
-
-.hero-photo-caption h2 {
-  font-size: 23px;
-}
-
-.hero-photo-caption button {
-  flex-shrink: 0;
-  border-radius: 6px;
-  height: 38px;
-}
-
-.hero-photo-caption button span {
-  font-size: 10px;
-}
-
-.setup-note {
-  z-index: 2;
-  border-radius: 9px;
-  background: var(--surface);
-  border-color: var(--line);
-  box-shadow: var(--shadow);
-  animation: note-float 7s ease-in-out infinite;
-}
-
-.setup-note svg {
+.catalog-hero__setup-note svg {
   color: var(--accent);
 }
 
@@ -212,9 +2156,7 @@
 }
 
 .sound-signature-type {
-  font:
-    8px ui-monospace,
-    monospace;
+  font: 8px ui-monospace, monospace;
   letter-spacing: 0.08em;
   color: var(--muted);
   border-left: 1px solid var(--line);
@@ -235,7 +2177,7 @@
   height: 45%;
   border-radius: 2px;
   background: var(--accent);
-  animation: signal 1.8s ease-in-out infinite alternate;
+  animation: 1.8s ease-in-out 0s infinite alternate none running signal;
 }
 
 .sound-wave i:nth-child(3n) {
@@ -244,7 +2186,7 @@
   background: var(--mint);
 }
 
-.sound-wave i:nth-child(3n + 1) {
+.sound-wave i:nth-child(3n+1) {
   height: 60%;
   animation-delay: -1.2s;
 }
@@ -255,69 +2197,649 @@
 }
 
 .hero-bottom {
-  padding: 18px 0;
+  padding: 18px 0px;
   border-top: 1px solid var(--line);
   background: color-mix(in srgb, var(--surface) 55%, transparent);
 }
 
-.hero-bottom .shell {
-  color: var(--muted);
-  font:
-    9px ui-monospace,
-    monospace;
-  letter-spacing: 0.13em;
-}
-
-/* Collections and commerce surfaces. */
-
-#categories {
-  position: relative;
-}
-
-.category-card {
-  height: 320px;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-}
-
-.category-card img {
-  object-fit: cover;
-  background: #cac7c3;
-  filter: none;
-  transition:
-    filter 0.6s,
-    transform 0.7s;
-}
-
-.category-card:hover img {
-  filter: saturate(1);
-}
-
-.category-card[data-category="Electric"] img {
-  object-position: 66% center;
-}
-.category-card[data-category="Classical"] img {
-  object-position: 35% center;
-}
-.category-card[data-category="Bass"] img {
-  object-position: left center;
-}
-
-.category-card::after {
-  content: "";
-  pointer-events: none;
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  box-shadow: inset 0 0 0 1px #ffffff0f;
-}
-
-.category-card h3 {
-  letter-spacing: -0.04em;
-}
-
-.category-card .rounded-full {
+.catalog-categories__category .catalog-hero__sound {
   border-radius: 7px;
+}
+
+/* Screen size or accessibility preference: (min-width: 1600px). */
+@media (min-width: 1600px) {
+  .catalog-hero__shell {
+    min-height: 770px;
+  }
+}
+
+/* Screen size or accessibility preference: (max-width: 1023px). */
+@media (max-width: 1023px) {
+  .catalog-hero__shell {
+    gap: 40px;
+    padding-top: 56px;
+    padding-bottom: 46px;
+  }
+
+  .catalog-hero__hero-copy {
+    max-width: 650px;
+  }
+
+  .catalog-hero__make-some-noise {
+    font-size: clamp(4.8rem, 10vw, 6.8rem);
+  }
+
+  .catalog-hero__hero-visual {
+    min-height: 510px;
+    width: 100%;
+    max-width: 650px;
+    margin-inline: auto;
+  }
+
+  .catalog-hero__hero-photo {
+    inset: 15px 24px 32px;
+  }
+
+  .catalog-hero__hero-photo-img {
+    object-position: center 45%;
+  }
+
+  .sound-orbit {
+    max-width: 100%;
+  }
+}
+
+/* Screen size or accessibility preference: (max-width: 639px). */
+@media (max-width: 639px) {
+  .catalog-hero__shell {
+    padding-top: 38px;
+    gap: 30px;
+  }
+
+  .catalog-hero__make-some-noise {
+    font-size: clamp(3.6rem, 14vw, 5.5rem);
+  }
+
+  .catalog-hero__hero-copy > p:not(.section-label) {
+    font-size: 14px;
+  }
+
+  .catalog-hero__hero-copy-div {
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .catalog-hero__hero-copy .primary-btn {
+    padding: 13px 14px;
+    font-size: 11px;
+    gap: 7px;
+  }
+
+  .catalog-hero__hero-copy .secondary-btn {
+    padding: 13px 14px;
+    font-size: 11px;
+    gap: 7px;
+  }
+
+  .catalog-hero__hero-stats {
+    margin-top: 30px;
+    gap: 10px;
+  }
+
+  .catalog-hero__hero-stats > div + div {
+    padding-left: 15px;
+  }
+
+  .catalog-hero__hero-stats-div {
+    font-size: 22px;
+  }
+
+  .catalog-hero__hero-stats .catalog-hero__make-some-noise {
+    font-size: 22px;
+  }
+
+  .catalog-hero__hero-stats .catalog-hero__midnight-drive {
+    font-size: 22px;
+  }
+
+  .catalog-hero__hero-visual {
+    min-height: 410px;
+  }
+
+  .catalog-hero__hero-photo {
+    inset: 22px 9px 38px;
+    border-width: 4px;
+    transform: rotate(-2deg);
+  }
+
+  .catalog-hero__hero-photo-caption {
+    left: 17px;
+    right: 17px;
+    bottom: 58px;
+  }
+
+  .catalog-hero__midnight-drive {
+    font-size: 20px;
+  }
+
+  .catalog-hero__warm-humbuckers-crisp-overdrive {
+    font-size: 10px;
+  }
+
+  .catalog-hero__sound {
+    padding-inline: 10px;
+  }
+
+  .catalog-hero__setup-note {
+    padding: 12px;
+    top: 0px;
+  }
+
+  .sound-signature {
+    left: 0px;
+    bottom: 5px;
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .catalog-hero__shell-good-gear-great-possibilities-your {
+    font-size: 8px;
+    gap: 13px;
+  }
+
+  #categories > .catalog-hero__hero-stats {
+    grid-template-columns: repeat(2, minmax(0px, 1fr));
+    gap: 10px;
+  }
+
+  #categories > .catalog-hero__shell {
+    grid-template-columns: repeat(2, minmax(0px, 1fr));
+    gap: 10px;
+  }
+
+  #shop .catalog-hero__hero-copy-div.catalog-hero__hero-stats {
+    gap: 20px;
+  }
+
+  #shop .catalog-hero__hero-copy-div.catalog-hero__shell {
+    gap: 20px;
+  }
+}
+
+/* Screen size or accessibility preference: (max-width: 359px). */
+@media (max-width: 359px) {
+  .catalog-hero__hero-copy .primary-btn {
+    padding-inline: 10px;
+    font-size: 10px;
+  }
+
+  .catalog-hero__hero-copy .secondary-btn {
+    padding-inline: 10px;
+    font-size: 10px;
+  }
+}
+
+.catalog-hero__hero-stats .section-title {
+  font-size: 30px;
+  letter-spacing: -0.05em;
+}
+
+/* Screen size or accessibility preference: (max-width: 639px). */
+@media (max-width: 639px) {
+  .catalog-hero__hero-stats .section-title {
+    font-size: 22px;
+  }
+}
+
+.hero-gradient {
+  color: rgb(132, 83, 214);
+  background: linear-gradient(110deg, rgb(105, 64, 187) 5%, rgb(166, 104, 213) 45%, rgb(71, 125, 134) 90%) text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Dark theme. */
+.dark .hero-gradient {
+  background-image: linear-gradient(110deg, rgb(193, 160, 255) 5%, rgb(211, 181, 251) 45%, rgb(167, 237, 203) 95%);
+}
+
+
+
+/* SECTION: NAVIGATION */
+
+/* ==================================================
+   COMPONENT: CATALOG NAVIGATION
+   HTML FILE: templates/catalog/catalog.html
+   PURPOSE: Catalog navigation presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/catalog/catalog.js.
+   ================================================== */
+
+.catalog-navigation__account {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 0.75rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  text-align: left;
+}
+
+.catalog-navigation__finder {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 0.75rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  text-align: left;
+}
+
+.catalog-navigation__shell-div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.catalog-navigation__shell {
+  overflow: hidden;
+  border-top-width: 1px;
+  border-color: rgb(228, 228, 231);
+}
+
+.catalog-navigation__mobile-link {
+  border-radius: 0.75rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.catalog-navigation__mobile-link:hover {
+  background-color: rgb(244, 244, 245);
+}
+
+/* Dark theme. */
+.dark .catalog-navigation__shell {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Dark theme. */
+.dark .catalog-navigation__mobile-link:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Screen size or accessibility preference: (min-width: 1024px). */
+@media (min-width: 1024px) {
+  .catalog-navigation__shell {
+    display: none;
+  }
+}
+
+
+
+/* SECTION: PRODUCT CARD */
+
+/* ==================================================
+   COMPONENT: PRODUCT CARD
+   HTML FILE: templates/catalog/catalog.html
+   PURPOSE: Product card presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/catalog/catalog.js.
+   ================================================== */
+
+.catalog-product-card__stock {
+  color: var(--muted);
+  margin-top: 0.125rem;
+  font-size: 10px;
+}
+
+.catalog-product-card__product-details-div {
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 9px;
+}
+
+.catalog-product-card__description {
+  color: var(--muted);
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+  min-height: 8.75rem;
+}
+
+.catalog-product-card__product-card {
+  height: 100%;
+  overflow: hidden;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.catalog-product-card__badge {
+  position: absolute;
+  left: 0.75rem;
+  top: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgb(9, 9, 11);
+  backdrop-filter: none;
+  border-radius: 4px;
+  font-size: 8px;
+}
+
+.catalog-product-card__like {
+  position: absolute;
+  right: 0.75rem;
+  top: 0.75rem;
+  display: grid;
+  height: 2.25rem;
+  width: 2.25rem;
+  place-items: center;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: rgb(9, 9, 11);
+  box-shadow: 0 0 #0000, 0 0 #0000, 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+.catalog-product-card__product-image-div {
+  position: absolute;
+  bottom: 0.75rem;
+  right: 0.75rem;
+}
+
+.catalog-product-card__product-image {
+  position: relative;
+  overflow: hidden;
+  background-color: rgb(244, 244, 245);
+  aspect-ratio: 4 / 5;
+  border-radius: 7px;
+}
+
+.catalog-product-card__name {
+  margin-top: 0.5rem;
+  font-family: "Space Grotesk", Inter, ui-sans-serif, system-ui;
+  line-height: 1.75rem;
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: -0.035em;
+}
+
+.catalog-product-card__product-details-div-audia-demo-electric-0-0 {
+  margin-top: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+}
+
+.catalog-product-card__normal-case {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  text-transform: none;
+  letter-spacing: 0em;
+}
+
+.catalog-product-card__sound {
+  display: inline-flex;
+  height: 2.5rem;
+  width: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background-color: rgb(255, 255, 255);
+  color: rgb(9, 9, 11);
+  box-shadow: 0 0 #0000, 0 0 #0000, 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.catalog-product-card__add {
+  display: grid;
+  place-items: center;
+  background-color: rgb(9, 9, 11);
+  color: rgb(255, 255, 255);
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  border-radius: 7px;
+  width: 39px;
+  height: 39px;
+}
+
+.catalog-product-card__image {
+  height: 100%;
+  width: 100%;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 700ms;
+  object-fit: contain;
+  filter: none;
+}
+
+.catalog-product-card__normal-case-svg {
+  fill: rgb(251, 191, 36);
+  color: rgb(251, 191, 36);
+}
+
+.catalog-product-card__product-details {
+  padding: 20px 14px 14px;
+}
+
+.catalog-product-card__price {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+}
+
+.is-saved {
+  color: rgb(244, 63, 94);
+}
+
+.catalog-product-card__add:hover {
+  transform: scale(1.05);
+}
+
+.catalog-product-card__sound:hover {
+  transform: scale(1.05);
+}
+
+.is-hover-group:hover .catalog-product-card__image {
+  transform: scale(1.04);
+}
+
+/* Dark theme. */
+.dark .catalog-product-card__add {
+  background-color: rgb(184, 245, 208);
+  color: rgb(13, 12, 18);
+}
+
+/* Dark theme. */
+.dark .catalog-product-card__product-image {
+  background-color: rgb(24, 24, 27);
+}
+
+.catalog-hero__hero-stats .catalog-product-card__name {
+  font-size: 25px;
+  letter-spacing: -0.05em;
+}
+
+.catalog-categories__category .catalog-product-card__add {
+  border-radius: 7px;
+}
+
+.catalog-categories__category .catalog-product-card__badge {
+  border-radius: 7px;
+}
+
+.catalog-categories__category .catalog-product-card__like {
+  border-radius: 7px;
+}
+
+.catalog-categories__category .catalog-product-card__sound {
+  border-radius: 7px;
+}
+
+.catalog-product-card__product-card:hover {
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+  box-shadow: rgba(113, 67, 214, 0.3) 0px 12px 32px -16px;
+}
+
+/* Screen size or accessibility preference: (max-width: 639px). */
+@media (max-width: 639px) {
+  .catalog-hero__hero-stats .catalog-product-card__name {
+    font-size: 22px;
+  }
+
+  #categories > .catalog-product-card__add {
+    grid-template-columns: repeat(2, minmax(0px, 1fr));
+    gap: 10px;
+  }
+
+  #categories > .catalog-product-card__like {
+    grid-template-columns: repeat(2, minmax(0px, 1fr));
+    gap: 10px;
+  }
+
+  .catalog-product-card__product-image {
+    aspect-ratio: 1.2 / 1;
+  }
+}
+
+
+
+/* SECTION: PRODUCTS */
+
+/* ==================================================
+   COMPONENT: PRODUCT GRID
+   HTML FILE: templates/catalog/catalog.html
+   PURPOSE: Product grid presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/catalog/catalog.js.
+   ================================================== */
+
+.catalog-products__no-products {
+  color: var(--muted);
+  margin-top: 2.25rem;
+  border-radius: 1rem;
+  border-width: 1px;
+  border-style: dashed;
+  border-color: rgb(212, 212, 216);
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  text-align: center;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.catalog-products__form-hint {
+  margin-top: 0.75rem;
+}
+
+.catalog-products__products {
+  margin-top: 2.25rem;
+  display: grid;
+  column-gap: 1.25rem;
+  row-gap: 3rem;
+}
+
+.catalog-products__shell-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.75rem;
+}
+
+.catalog-products__shop {
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-color: rgb(228, 228, 231);
+  background-color: rgb(255, 255, 255);
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+/* Dark theme. */
+.dark .catalog-products__shop {
+  border-color: rgba(255, 255, 255, 0.1);
+  background-color: rgb(12, 12, 15);
+}
+
+/* Dark theme. */
+.dark .catalog-products__no-products {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Screen size or accessibility preference: (min-width: 640px). */
+@media (min-width: 640px) {
+  .catalog-products__products {
+    grid-template-columns: repeat(2, minmax(0px, 1fr));
+  }
+
+  .catalog-products__shop {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+  }
+}
+
+/* Screen size or accessibility preference: (min-width: 1024px). */
+@media (min-width: 1024px) {
+  .catalog-products__products {
+    grid-template-columns: repeat(3, minmax(0px, 1fr));
+  }
+
+  .catalog-products__shell-div {
+    flex-direction: row;
+    align-items: flex-end;
+  }
+}
+
+/* Screen size or accessibility preference: (max-width: 639px). */
+@media (max-width: 639px) {
+  .catalog-hero__hero-copy > .catalog-products__no-products {
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .catalog-hero__hero-copy > .catalog-products__products {
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  #categories > .catalog-products__products {
+    grid-template-columns: repeat(2, minmax(0px, 1fr));
+    gap: 10px;
+  }
+
+  #shop .catalog-products__no-products.catalog-products__products {
+    gap: 20px;
+  }
+
+  .catalog-products__products {
+    gap: 20px;
+  }
 }
 
 #shop {
@@ -325,21 +2847,34 @@
   border-color: var(--line);
 }
 
-/* Search/filter banner rules live in search_filter/search_filter.css. */
-#bundles > div {
-  border-radius: 12px;
-  border-color: var(--line);
-  background: var(--surface);
+/* Screen size or accessibility preference: (max-width: 639px). */
+@media (max-width: 639px) {
+  #shop {
+    padding-block: 64px;
+  }
+
+  #shop .input-shell {
+    min-width: 0px;
+  }
 }
 
-#bundles h2 {
-  letter-spacing: -0.05em;
-  line-height: 1.12;
+
+
+/* SECTION: SUPPORT */
+
+/* ==================================================
+   COMPONENT: CATALOG SUPPORT
+   HTML FILE: templates/catalog/catalog.html
+   PURPOSE: Catalog support presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/catalog/catalog.js.
+   ================================================== */
+
+.catalog-support__form-hint {
+  margin-top: 1.25rem;
 }
 
-#track {
-  border-color: var(--line);
-  background: linear-gradient(120deg, var(--soft), var(--page));
+.catalog-support__support-email {
+  margin-top: 1.25rem;
 }
 
 .storefront main > .shell:last-child > div {
@@ -353,289 +2888,464 @@
   color: var(--accent);
 }
 
-.storefront footer {
-  border-color: var(--line);
-  background: var(--surface);
-}
 
-.storefront footer .audia-mark {
-  font-size: 27px;
-}
 
-.storefront footer h3 {
-  color: var(--accent);
-  font-size: 10px;
-}
+/* SECTION: TRACKING */
 
-/* Product Card */
-#shop .product-card {
-  height: 100%;
-  overflow: hidden;
-  padding: 8px;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: var(--surface);
-  box-shadow: var(--shadow);
-  transition:
-    border-color 0.25s,
-    box-shadow 0.25s;
-}
+/* ==================================================
+   COMPONENT: CATALOG TRACKING
+   HTML FILE: templates/catalog/catalog.html
+   PURPOSE: Catalog tracking presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/catalog/catalog.js.
+   ================================================== */
 
-#shop .product-card:hover {
-  border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
-  box-shadow: 0 12px 32px -16px #7143d64d;
-}
-
-.product-image {
-  aspect-ratio: 4 / 5;
-  border-radius: 7px;
-}
-
-.product-image img {
-  object-fit: contain;
-  filter: none;
-}
-
-.product-details [data-field="description"] {
-  min-height: 8.75rem;
-}
-
-.product-image > span {
-  border-radius: 4px;
-  font-size: 8px;
-}
-
-.product-details {
-  padding: 20px 14px 14px;
-}
-
-.product-details > div:first-child {
-  flex-wrap: wrap;
-  gap: 6px;
+.catalog-tracking__shipped {
+  color: var(--muted);
+  margin-top: 0.75rem;
   font-size: 9px;
 }
 
-.product-details > div:last-child {
-  border-top: 1px solid var(--line);
-  padding-top: 16px;
+.catalog-tracking__processing {
+  color: var(--muted);
+  margin-top: 0.75rem;
+  font-size: 9px;
 }
 
-.product-details > div:last-child > button {
-  border-radius: 7px;
-  width: 39px;
-  height: 39px;
+.catalog-tracking__out-for-delivery {
+  color: var(--muted);
+  margin-top: 0.75rem;
+  font-size: 9px;
 }
 
-.product-details h3 {
-  font-size: 20px;
-  letter-spacing: -0.035em;
+.catalog-tracking__order-order-example-delivery-journey {
+  color: var(--muted);
+  font-size: 0.75rem;
+  line-height: 1rem;
 }
 
-/* Search/filter modal rules live in search_filter/search_filter.css. */
-/* Cart */
-.cart-panel {
-  border-left: 1px solid var(--line);
+.catalog-tracking__estimated-arrival {
+  color: var(--muted);
 }
 
-/* Checkout */
-[data-form="checkout"] .order-total {
-  margin-top: 4px;
-  padding-bottom: 0;
+.catalog-tracking__enter-your-order-number-to {
+  color: var(--muted);
+  margin-top: 1rem;
+  line-height: 1.75rem;
 }
 
-/* Bundle Detail */
-.bundle-image {
+.catalog-tracking__delivered {
+  color: var(--muted);
+  margin-top: 0.75rem;
+  font-size: 9px;
+}
+
+.catalog-tracking__surface-card-div-out-for-delivery-div-div-div-div-div {
+  position: absolute;
+  left: 50%;
+  top: 1.25rem;
+  height: 1px;
   width: 100%;
-  height: 230px;
-  object-fit: cover;
-  border-radius: 12px;
+  background-color: rgb(228, 228, 231);
 }
 
-/* Responsive layout */
-@media (min-width: 1600px) {
-  .hero-layout {
-    min-height: 770px;
-  }
+.catalog-tracking__surface-card-div-processing-div-div-div-div-div {
+  position: absolute;
+  left: 50%;
+  top: 1.25rem;
+  height: 1px;
+  width: 100%;
+  background-color: rgb(9, 9, 11);
 }
-@media (max-width: 1023px) {
-  .hero-layout {
-    gap: 40px;
-    padding-top: 56px;
-    padding-bottom: 46px;
-  }
-  .hero-copy {
-    max-width: 650px;
-  }
-  .hero-copy h1 {
-    font-size: clamp(4.8rem, 10vw, 6.8rem);
-  }
-  .hero-visual {
-    min-height: 510px;
-    width: 100%;
-    max-width: 650px;
-    margin-inline: auto;
-  }
-  .hero-photo {
-    inset: 15px 24px 32px;
-  }
-  .hero-photo img {
-    -o-object-position: center 45%;
-    object-position: center 45%;
-  }
-  .sound-orbit {
-    max-width: 100%;
-  }
-  .category-card {
-    height: 310px;
-  }
+
+.catalog-tracking__surface-card-div-shipped-div-div-div-div-div {
+  position: absolute;
+  left: 50%;
+  top: 1.25rem;
+  height: 1px;
+  width: 100%;
+  background-color: rgb(9, 9, 11);
 }
-@media (max-width: 639px) {
-  .announcement {
-    padding-inline: 16px;
-    font-size: 8px;
-    letter-spacing: 0.09em;
+
+.catalog-tracking__surface-card-div-delivered {
+  position: relative;
+  z-index: 10;
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  height: 2.5rem;
+  width: 2.5rem;
+  place-items: center;
+  border-radius: 9999px;
+  border-width: 1px;
+  border-color: rgb(228, 228, 231);
+  background-color: rgb(255, 255, 255);
+  color: rgb(161, 161, 170);
+}
+
+.catalog-tracking__surface-card-div-out-for-delivery {
+  position: relative;
+  z-index: 10;
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  height: 2.5rem;
+  width: 2.5rem;
+  place-items: center;
+  border-radius: 9999px;
+  border-width: 1px;
+  border-color: rgb(228, 228, 231);
+  background-color: rgb(255, 255, 255);
+  color: rgb(161, 161, 170);
+}
+
+.catalog-tracking__surface-card-div-processing {
+  position: relative;
+  z-index: 10;
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  height: 2.5rem;
+  width: 2.5rem;
+  place-items: center;
+  border-radius: 9999px;
+  border-width: 1px;
+  border-color: rgb(9, 9, 11);
+  background-color: rgb(9, 9, 11);
+  color: rgb(255, 255, 255);
+}
+
+.catalog-tracking__surface-card-div-processing-shipped-out-for-delivery {
+  position: relative;
+  text-align: center;
+}
+
+.catalog-tracking__surface-card-div-shipped {
+  position: relative;
+  z-index: 10;
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  height: 2.5rem;
+  width: 2.5rem;
+  place-items: center;
+  border-radius: 9999px;
+  border-width: 1px;
+  border-color: rgb(9, 9, 11);
+  background-color: rgb(9, 9, 11);
+  color: rgb(255, 255, 255);
+}
+
+.catalog-tracking__example-delivery-journey {
+  margin-top: 0.25rem;
+  font-weight: 600;
+}
+
+.catalog-tracking__surface-card-div-order-example-delivery-journey-in {
+  margin-top: 2.5rem;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0px, 1fr));
+}
+
+.catalog-tracking__input-shell {
+  margin-top: 1.75rem;
+  max-width: 28rem;
+  padding: 0.375rem;
+  padding-left: 1.25rem;
+}
+
+.catalog-tracking__surface-card-div-order-example-delivery-journey-in-section-div-div-div {
+  margin-top: 1.75rem;
+  display: flex;
+  justify-content: space-between;
+  border-top-width: 1px;
+  border-color: rgb(228, 228, 231);
+  padding-top: 1.25rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.catalog-tracking__surface-card-div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.catalog-tracking__shell {
+  display: grid;
+  gap: 3rem;
+}
+
+.catalog-tracking__order {
+  min-width: 0px;
+  flex: 1 1 0%;
+  background-color: transparent;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  outline: transparent solid 2px;
+  outline-offset: 2px;
+}
+
+.catalog-tracking__in-transit {
+  border-radius: 9999px;
+  background-color: rgb(219, 234, 254);
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgb(29, 78, 216);
+}
+
+.catalog-tracking__track-track {
+  border-radius: 9999px;
+  background-color: rgb(9, 9, 11);
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 700;
+  color: rgb(255, 255, 255);
+}
+
+.catalog-tracking__track {
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-color: rgb(228, 228, 231);
+  background-color: rgb(244, 244, 245);
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+.catalog-tracking__surface-card {
+  padding: 1.5rem;
+}
+
+.catalog-tracking__thursday-sep-10 {
+  font-weight: 600;
+}
+
+/* Dark theme. */
+.dark .catalog-tracking__surface-card-div-processing {
+  border-color: rgb(184, 245, 208);
+  background-color: rgb(184, 245, 208);
+  color: rgb(13, 12, 18);
+}
+
+/* Dark theme. */
+.dark .catalog-tracking__surface-card-div-shipped {
+  border-color: rgb(184, 245, 208);
+  background-color: rgb(184, 245, 208);
+  color: rgb(13, 12, 18);
+}
+
+/* Dark theme. */
+.dark .catalog-tracking__surface-card-div-delivered {
+  border-color: rgba(255, 255, 255, 0.1);
+  background-color: rgb(23, 21, 30);
+}
+
+/* Dark theme. */
+.dark .catalog-tracking__surface-card-div-order-example-delivery-journey-in-section-div-div-div {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Dark theme. */
+.dark .catalog-tracking__surface-card-div-out-for-delivery {
+  border-color: rgba(255, 255, 255, 0.1);
+  background-color: rgb(23, 21, 30);
+}
+
+/* Dark theme. */
+.dark .catalog-tracking__track {
+  border-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* Dark theme. */
+.dark .catalog-tracking__surface-card-div-processing-div-div-div-div-div {
+  background-color: rgb(184, 245, 208);
+}
+
+/* Dark theme. */
+.dark .catalog-tracking__surface-card-div-shipped-div-div-div-div-div {
+  background-color: rgb(184, 245, 208);
+}
+
+/* Dark theme. */
+.dark .catalog-tracking__in-transit {
+  background-color: rgba(96, 165, 250, 0.1);
+  color: rgb(147, 197, 253);
+}
+
+/* Dark theme. */
+.dark .catalog-tracking__track-track {
+  background-color: rgb(255, 255, 255);
+  color: rgb(9, 9, 11);
+}
+
+/* Dark theme. */
+.dark .catalog-tracking__surface-card-div-out-for-delivery-div-div-div-div-div {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Screen size or accessibility preference: (min-width: 640px). */
+@media (min-width: 640px) {
+  .catalog-tracking__surface-card {
+    padding: 2rem;
   }
-  .store-header .shell {
-    height: 68px;
-    gap: 8px;
-  }
-  .store-header .audia-mark {
-    font-size: 16px;
-    letter-spacing: 0.22em;
-  }
-  .store-header .icon-btn,
-  .store-header .theme-toggle {
-    width: 36px;
-    height: 38px;
-  }
-  .hero-layout {
-    padding-top: 38px;
-    gap: 30px;
-  }
-  .hero-copy h1 {
-    font-size: clamp(3.6rem, 14vw, 5.5rem);
-  }
-  .hero-copy > p:not(.section-label) {
-    font-size: 14px;
-  }
-  .hero-copy > .mt-9 {
-    flex-direction: row;
-    gap: 10px;
-  }
-  .hero-copy .primary-btn,
-  .hero-copy .secondary-btn {
-    padding: 13px 14px;
+
+  .catalog-tracking__delivered {
     font-size: 11px;
-    gap: 7px;
   }
-  .hero-stats {
-    margin-top: 30px;
+
+  .catalog-tracking__out-for-delivery {
+    font-size: 11px;
+  }
+
+  .catalog-tracking__processing {
+    font-size: 11px;
+  }
+
+  .catalog-tracking__shipped {
+    font-size: 11px;
+  }
+}
+
+/* Screen size or accessibility preference: (min-width: 1024px). */
+@media (min-width: 1024px) {
+  .catalog-tracking__shell {
+    grid-template-columns: 0.72fr 1.28fr;
+    align-items: center;
+  }
+}
+
+.catalog-categories__category .catalog-tracking__in-transit {
+  border-radius: 7px;
+}
+
+.catalog-categories__category .catalog-tracking__surface-card-div-delivered {
+  border-radius: 7px;
+}
+
+.catalog-categories__category .catalog-tracking__surface-card-div-out-for-delivery {
+  border-radius: 7px;
+}
+
+.catalog-categories__category .catalog-tracking__surface-card-div-processing {
+  border-radius: 7px;
+}
+
+.catalog-categories__category .catalog-tracking__surface-card-div-shipped {
+  border-radius: 7px;
+}
+
+.catalog-categories__category .catalog-tracking__track-track {
+  border-radius: 7px;
+}
+
+/* Screen size or accessibility preference: (max-width: 639px). */
+@media (max-width: 639px) {
+  #categories > .catalog-tracking__shell {
+    grid-template-columns: repeat(2, minmax(0px, 1fr));
     gap: 10px;
   }
-  .hero-stats > div + div {
-    padding-left: 15px;
-  }
-  .hero-stats .font-display {
-    font-size: 22px;
-  }
-  .hero-visual {
-    min-height: 410px;
-  }
-  .hero-photo {
-    inset: 22px 9px 38px;
-    border-width: 4px;
-    transform: rotate(-2deg);
-  }
-  .hero-photo-caption {
-    left: 17px;
-    right: 17px;
-    bottom: 58px;
-  }
-  .hero-photo-caption h2 {
-    font-size: 20px;
-  }
-  .hero-photo-caption p:last-child {
-    font-size: 10px;
-  }
-  .hero-photo-caption button {
-    padding-inline: 10px;
-  }
-  .setup-note {
-    padding: 12px;
-    top: 0;
-  }
-  .sound-signature {
-    left: 0;
-    bottom: 5px;
-    padding: 12px;
-    gap: 12px;
-  }
-  .hero-bottom .shell {
-    font-size: 8px;
-    gap: 13px;
-  }
-  #categories,
-  #shop,
-  #track {
-    padding-block: 64px;
-  }
-  #categories > .grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  #categories > .catalog-tracking__surface-card-div-delivered {
+    grid-template-columns: repeat(2, minmax(0px, 1fr));
     gap: 10px;
   }
-  .category-card {
-    height: 245px;
+
+  #categories > .catalog-tracking__surface-card-div-order-example-delivery-journey-in {
+    grid-template-columns: repeat(2, minmax(0px, 1fr));
+    gap: 10px;
   }
-  .category-card .p-6 {
+
+  #categories > .catalog-tracking__surface-card-div-out-for-delivery {
+    grid-template-columns: repeat(2, minmax(0px, 1fr));
+    gap: 10px;
+  }
+
+  #categories > .catalog-tracking__surface-card-div-processing {
+    grid-template-columns: repeat(2, minmax(0px, 1fr));
+    gap: 10px;
+  }
+
+  #categories > .catalog-tracking__surface-card-div-shipped {
+    grid-template-columns: repeat(2, minmax(0px, 1fr));
+    gap: 10px;
+  }
+
+  .catalog-categories__category .catalog-tracking__surface-card {
     padding: 14px;
   }
-  .category-card h3 {
-    font-size: 20px;
-  }
-  .category-card .p-6 > span {
+
+  .catalog-categories__category .catalog-tracking__surface-card > span {
     height: 27px;
     width: 27px;
     flex-shrink: 0;
   }
-  .category-card .p-6 p {
+
+  .catalog-categories__category .catalog-tracking__surface-card p {
     font-size: 8px;
     letter-spacing: 0.04em;
   }
-  #shop .input-shell {
-    min-width: 0;
-  }
-  #shop .mt-9.grid {
-    gap: 20px;
-  }
-  .product-image {
-    aspect-ratio: 1.2;
-  }
-/* Search/filter mobile rules live in search_filter/search_filter.css. */
-  #bundles {
-    padding-bottom: 64px;
-  }
-  #bundles > div > div:first-child {
-    min-height: 290px;
-  }
-  #bundles h2 {
-    font-size: 32px;
-  }
-/* Search/filter spacing rules live in search_filter/search_filter.css. */
 }
+
+/* Screen size or accessibility preference: (max-width: 359px). */
 @media (max-width: 359px) {
-  .hero-copy .primary-btn,
-  .hero-copy .secondary-btn {
-    padding-inline: 10px;
-    font-size: 10px;
-  }
-  .category-card .p-6 {
+  .catalog-categories__category .catalog-tracking__surface-card {
     padding: 10px;
   }
-  .category-card h3 {
-    font-size: 18px;
-  }
-  .category-card .p-6 > span {
+
+  .catalog-categories__category .catalog-tracking__surface-card > span {
     width: 23px;
     height: 23px;
+  }
+}
+
+#track {
+  border-color: var(--line);
+  background: linear-gradient(120deg, var(--soft), var(--page));
+}
+
+/* Screen size or accessibility preference: (max-width: 639px). */
+@media (max-width: 639px) {
+  #track {
+    padding-block: 64px;
+  }
+}
+
+
+.catalog__tone-previews-on-key-models {
+  color: var(--muted);
+}
+
+.catalog__official-products-with-warranty {
+  color: var(--muted);
+}
+
+.catalog__help-choosing-and-setting-up {
+  color: var(--muted);
+}
+
+.catalog__storefront {
+  min-height: 100vh;
+  overflow-x: clip;
+  background: var(--page);
+  color: var(--text);
+}
+
+/* Screen size or accessibility preference: (prefers-reduced-motion: reduce). */
+@media (prefers-reduced-motion: reduce) {
+  .storefront main [data-motion-state] {
+    transform: none !important;
+    opacity: 1 !important;
   }
 }

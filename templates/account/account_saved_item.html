@@ -1,0 +1,17 @@
+<!-- MODULE: ACCOUNT | COMPONENT: Account saved item
+     PURPOSE: Account saved item structure. CSS: assets/css/account/account_saved_item.css
+     JS: assets/js/account/account.js. Preserve IDs and data-action/data-field hooks. -->
+<template id="saved-item-template">
+  <article class="saved-item">
+    <img data-field="image" alt="" />
+    <div>
+      <h3 class="account-saved-item__name" data-field="name"></h3>
+      <p class="form-hint" data-field="price"></p>
+      <div class="form-actions">
+        <button class="secondary-btn" data-action="saved-shop">
+          Shop instrument</button
+        ><button class="danger-btn" data-action="unsave">Remove</button>
+      </div>
+    </div>
+  </article>
+</template>

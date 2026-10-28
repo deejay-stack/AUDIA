@@ -1,0 +1,34 @@
+/* ==================================================
+   COMPONENT: ACCOUNT SAVED ITEM
+   HTML FILE: templates/account/account_saved_item.html
+   PURPOSE: Account saved item presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/account/account.js.
+   ================================================== */
+
+.account-saved-item__name {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+}
+
+.saved-item {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  min-width: 0px;
+}
+
+.saved-item img {
+  width: 80px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 9px;
+}
+
+.saved-item > div {
+  min-width: 0px;
+}
+
+.saved-item .form-actions {
+  justify-content: flex-start;
+}

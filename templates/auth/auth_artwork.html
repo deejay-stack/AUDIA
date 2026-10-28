@@ -1,0 +1,98 @@
+<!-- MODULE: AUTH | COMPONENT: Auth artwork
+     PURPOSE: Auth artwork structure. CSS: assets/css/auth/auth_artwork.css
+     JS: assets/js/auth/auth.js. Preserve IDs and data-action/data-field hooks. -->
+<div class="auth-art auth-artwork__auth-art">
+    <img
+      src="{{ url_for('static', filename='images/guitar_performance.jpg') }}"
+      alt="Guitarist on stage"
+      class="auth-artwork__auth-art-img"
+      data-motion='{"initial":{"scale":1.08},"animate":{"scale":1},"transition":{"duration":1.3,"ease":[0.22,1,0.36,1]},"viewport":false}'
+    />
+    <div
+      class="auth-artwork__auth-art-div"
+    ></div>
+    <div
+      class="auth-artwork__auth-art-div-udi-a-a-audia-member"
+    >
+      <button
+        class="audia-mark auth-artwork__home"
+        aria-label="Go to AUDIA home"
+        data-action="home"
+      >
+        <span class="mark-a">A</span>UDI<span class="mark-a">A</span>
+      </button>
+      <div class="auth-artwork__auth-art-div-udi-a-a-audia-member-div-div-div">
+        <p
+          class="auth-artwork__audia-member-access"
+        >
+          AUDIA member access
+        </p>
+        <h1
+          class="auth-artwork__your-next-guitar-is-closer"
+        >
+          Your next guitar is closer than you think.
+        </h1>
+        <p class="auth-artwork__save-instruments-keep-your-guitar">
+          Save instruments, keep your Guitar Finder results, review purchases,
+          and track every delivery from one account.
+        </p>
+        <div class="auth-artwork__auth-art-div-audia-member-access-your-next">
+          <span class="auth-artwork__saved-gear"
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-check auth-artwork__auth-art-svg"
+              aria-hidden="true"
+            >
+              <path d="M20 6 9 17l-5-5"></path>
+            </svg>
+            Saved gear</span
+          >
+          <span class="auth-artwork__order-history"
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-check auth-artwork__auth-art-svg"
+              aria-hidden="true"
+            >
+              <path d="M20 6 9 17l-5-5"></path>
+            </svg>
+            Order history</span
+          >
+          <span class="auth-artwork__faster-checkout"
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-check auth-artwork__auth-art-svg"
+              aria-hidden="true"
+            >
+              <path d="M20 6 9 17l-5-5"></path>
+            </svg>
+            Faster checkout</span
+          >
+        </div>
+      </div>
+      <p class="auth-artwork__audia-find-your-sound">AUDIA — Find Your Sound.</p>
+    </div>
+  </div>

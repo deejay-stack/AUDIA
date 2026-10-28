@@ -1,3 +1,6 @@
+<!-- MODULE: LESSONS | COMPONENT: Lessons strumming
+     PURPOSE: Lessons strumming structure. CSS: assets/css/lessons/lessons_strumming.css
+     JS: No lesson controller: Jinja renders the content; assets/js/shared/app.js handles navigation/theme. Preserve IDs and data-action/data-field hooks. -->
 {% extends "shared/practice_base.html" %}
 {% block practice_content %}
 <a class="practice-link" href="{{ url_for('lessons.index') }}">← All lessons</a>
@@ -5,9 +8,8 @@
 <section class="surface-card practice-card"><h2>Learn the strokes</h2><p><strong>D ↓ = Downstroke:</strong> move from thick strings toward thin strings. <strong>U ↑ = Upstroke:</strong> move back toward the thick strings, brushing lightly.</p><p>In 4/4 time, count <strong>1 &amp; 2 &amp; 3 &amp; 4 &amp;</strong>. Each number is a beat (a quarter note). The &amp; halfway between beats makes eighth notes. A dash means pass over the strings without striking them.</p></section>
 <div class="strumming-lessons">
 {% for pattern in patterns %}
-<section class="surface-card practice-card"><h2>{{ pattern.name }}</h2><div class="strumming-pattern" role="group" aria-label="{{ pattern.name }} with beat counts">
-{% for stroke in pattern.strokes %}<div class="strumming-beat"><span class="strumming-stroke{% if stroke == '–' %} strumming-rest{% endif %}">{{ stroke }}<span aria-hidden="true">{{ '↓' if stroke == 'D' else '↑' if stroke == 'U' else '·' }}</span></span><span class="strumming-count">{{ (loop.index0 // 2) + 1 if loop.index0 % 2 == 0 else '&' }}</span></div>{% endfor %}
-</div><p>{{ pattern.description }}</p></section>
+<section class="surface-card practice-card"><h2>{{ pattern.name }}</h2><!-- Component: lessons strumming pattern | CSS: assets/css/lessons/lessons_strumming_pattern.css -->
+{% include 'lessons/lessons_strumming_pattern.html' %}<p>{{ pattern.description }}</p></section>
 {% endfor %}
 </div>
 <section class="practice-card"><h2>Keep it comfortable</h2><ul class="lesson-steps"><li>Hold your pick with a relaxed grip and keep your wrist loose.</li><li>Start slowly, around 60 beats per minute on a metronome. Play one downstroke per click first.</li><li>Keep the same motion through silent gaps. Listen for even spacing between strokes.</li><li>Practice on one chord before changing chords. Increase the tempo only when the pattern feels steady.</li></ul><div class="practice-actions"><a class="secondary-btn" href="{{ url_for('lessons.chords') }}">Choose a practice chord</a><a class="practice-link" href="{{ url_for('tuner.index') }}">Tune up before practice →</a></div></section>

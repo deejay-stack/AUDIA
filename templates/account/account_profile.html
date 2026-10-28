@@ -1,0 +1,33 @@
+<!-- MODULE: ACCOUNT | COMPONENT: Account profile
+     PURPOSE: Account profile structure. CSS: assets/css/account/account_profile.css
+     JS: assets/js/account/account.js. Preserve IDs and data-action/data-field hooks. -->
+<section class="surface-card account-section">
+        <h2 class="account-profile__profile-delivery">
+          Profile &amp; delivery
+        </h2>
+        <form method="post" class="stack-form account-profile__stack-form" data-form="profile">
+          <label
+            >Full name<input
+              name="name"
+              required
+              minlength="2"
+              maxlength="100"
+              autocomplete="name" /></label
+          ><label
+            >Email address<input name="email" type="email" disabled /></label
+          ><label
+            >Phone number<input
+              name="phone"
+              maxlength="30"
+              autocomplete="tel" /></label
+          ><label
+            >Delivery address<textarea
+              name="address"
+              maxlength="500"
+              autocomplete="street-address"
+            ></textarea>
+          </label>
+          <p class="form-error" role="alert" data-field="form-error" hidden></p>
+          <button class="primary-btn" type="submit">Save profile</button>
+        </form>
+      </section>

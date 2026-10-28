@@ -1,0 +1,44 @@
+/* ==================================================
+   COMPONENT: ADMIN ORDER STATUS
+   HTML FILE: templates/admin/admin_order_status.html
+   PURPOSE: Admin order status presentation; preserve existing colors, states and breakpoints.
+   JS: assets/js/admin/admin.js.
+   ================================================== */
+
+.admin-order-status__stack-form {
+  margin-top: 1.5rem;
+}
+
+.status-delivered {
+  color: var(--mint);
+}
+
+.status-cancelled {
+  color: rgb(190, 18, 60);
+  background: rgba(251, 113, 133, 0.1);
+}
+
+.status-refunded {
+  color: rgb(190, 18, 60);
+  background: rgba(251, 113, 133, 0.1);
+}
+
+/* Dark theme. */
+.dark .status-cancelled {
+  color: rgb(253, 164, 175);
+}
+
+/* Dark theme. */
+.dark .status-refunded {
+  color: rgb(253, 164, 175);
+}
+
+.status-pending {
+  color: rgb(161, 98, 7);
+  background: rgba(251, 191, 36, 0.1);
+}
+
+/* Dark theme. */
+.dark .status-pending {
+  color: rgb(253, 230, 138);
+}

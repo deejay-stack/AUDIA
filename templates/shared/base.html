@@ -1,3 +1,6 @@
+<!-- MODULE: SHARED | COMPONENT: Global HTML shell
+     PURPOSE: Global HTML shell structure. CSS: assets/css/shared/base.css
+     JS: assets/js/shared/app.js; assets/js/shared/shared.js; assets/js/shared/theme.js. Preserve IDs and data-action/data-field hooks. -->
 <!doctype html>
 <html lang="en">
   <head>
@@ -32,11 +35,12 @@
       id="root"
       inert
       aria-busy="true"
-      class="min-h-screen bg-stone-50 text-zinc-950 transition-colors duration-300 dark:bg-ink dark:text-white"
+      class="base__root"
     >
       {% block content %}{% endblock %}
     </div>
-    {% block components %}{% endblock %} {% include 'shared/components.html' %}
+    {% block components %}{% endblock %} <!-- Component: components | CSS: assets/css/shared/components.css -->
+{% include 'shared/components.html' %}
     <script
       type="module"
       src="{{ url_for('static', filename='js/shared/app.js') }}"

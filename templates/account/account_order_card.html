@@ -1,0 +1,19 @@
+<!-- MODULE: ACCOUNT | COMPONENT: Account order card
+     PURPOSE: Account order card structure. CSS: assets/css/account/account_order_card.css
+     JS: assets/js/account/account.js. Preserve IDs and data-action/data-field hooks. -->
+<template id="order-card-template">
+  <article class="account-order">
+    <div>
+      <h3 class="account-order-card__id" data-field="id"></h3>
+      <p class="form-hint" data-field="date"></p>
+      <p class="account-order-card__product" data-field="product"></p>
+    </div>
+    <div class="account-order-actions">
+      <span class="order-status account-order-card__status" data-field="status"></span
+      ><strong data-field="amount"></strong
+      ><button class="secondary-btn" data-action="view-order">
+        View order
+      </button>
+    </div>
+  </article>
+</template>

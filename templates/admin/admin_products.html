@@ -1,0 +1,27 @@
+<!-- MODULE: ADMIN | COMPONENT: Admin products
+     PURPOSE: Admin products structure. CSS: assets/css/admin/admin_products.css
+     JS: assets/js/admin/admin.js. Preserve IDs and data-action/data-field hooks. -->
+<template id="admin-products-template">
+  <div>
+    <div class="admin-section-heading">
+      <div>
+        <p class="admin-products__catalog-management">Catalog management</p>
+        <h2 class="admin-products__products">Products</h2>
+      </div>
+      <button class="primary-btn" data-action="add-product">
+        <span aria-hidden="true">+</span> Add product
+      </button>
+    </div>
+    <label class="input-shell admin-products__input-shell"
+      ><input
+        class="admin-products__product-query"
+        data-field="product-query"
+        placeholder="Search inventory"
+        aria-label="Search inventory"
+    /></label>
+    <div
+      class="admin-products__admin-products"
+      data-field="admin-products"
+    ></div>
+  </div>
+</template>

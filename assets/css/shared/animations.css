@@ -1,0 +1,16 @@
+/* COMPONENT: Shared reveal animations.
+   HTML: data-motion components in catalog, auth, admin, cart, Finder and chatbot partials.
+   JS: assets/js/shared/shared.js; timing and initial poses still use the existing Web Animations flow.
+   Settled poses belong in CSS. Reduced-motion rules retain priority over these states. */
+
+[data-motion-state="ready"][data-motion-opacity="1"][data-motion-state] {
+  opacity: 1;
+}
+
+[data-motion-state="ready"][data-motion-transform="settled"][data-motion-state] {
+  transform: translate(0, 0) scale(1);
+}
+
+[data-motion-state="ready"][data-motion-height="auto"][data-motion-state] {
+  height: auto;
+}

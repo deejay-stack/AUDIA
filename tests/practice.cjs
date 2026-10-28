@@ -89,7 +89,8 @@ const base = process.env.AUDIA_BASE_URL || 'http://127.0.0.1:5056';
     for (const [cents, status] of [[-25, 'Too Flat'], [-10, 'Slightly Flat'], [10, 'Slightly Sharp'], [25, 'Too Sharp']]) {
       await page.evaluate(frequency => window.__audio.setPitch(frequency), 110 * 2 ** (cents / 1200));
       await page.getByText(status, { exact: true }).waitFor();
-      const position = await page.locator('#tuner-indicator').evaluate(node => parseFloat(node.style.left));
+      const position = await page.locator('#tuner-indicator').evaluate(node =>
+        parseFloat(getComputedStyle(node).left) / node.parentElement.getBoundingClientRect().width * 100);
       assert.ok(cents < 0 ? position < 50 : position > 50);
     }
     await page.evaluate(() => window.__audio.setVolume(0));

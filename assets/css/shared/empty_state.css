@@ -1,0 +1,12 @@
+/* COMPONENT: EMPTY STATE
+   HTML: created by empty() in assets/js/shared/shared.js.
+   PURPOSE: Shared dynamic feedback; no separate HTML template is used.
+   JS: assets/js/shared/shared.js. */
+
+.empty-state {
+  padding: 36px 20px;
+  color: var(--muted);
+  font-size: 14px;
+  text-align: center;
+  grid-column: 1 / -1;
+}
