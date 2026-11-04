@@ -53,7 +53,7 @@ export function mountAdmin(page, app) {
     ])
       text(row, key, sale[key]);
     text(row, "amount", peso(sale.amount));
-    if (!recent) text(row, "payment", `${sale.payment} · ${sale.payment_status}`);
+    if (!recent) text(row, "payment", `${sale.payment}${sale.is_demo ? " (demo)" : ""} · ${sale.payment_status}`);
     text(row, "status", sale.status);
     field(row, "status").className =
       `order-status status-${sale.status.toLowerCase().replaceAll(" ", "-")}`;
@@ -182,15 +182,15 @@ export function mountAdmin(page, app) {
     field(main, "report-period").value = period;
     const chart = field(main, "revenue-chart"),
       max = Math.max(...summary.chart.map((day) => day.amount), 0);
-    if (!max) empty(chart, "No delivered revenue in this period.");
+    if (!max) empty(chart, "No verified cash collections in this period.");
     else {
       const ns = "http://www.w3.org/2000/svg",
         svg = document.createElementNS(ns, "svg");
       svg.setAttribute("viewBox", "0 0 700 230");
       svg.setAttribute("role", "img");
-      svg.setAttribute("aria-label", "Delivered revenue by day");
+      svg.setAttribute("aria-label", "Verified cash collections by day");
       const title = document.createElementNS(ns, "title");
-      title.textContent = "Daily delivered revenue";
+      title.textContent = "Daily verified cash collections";
       svg.append(title);
       const width = 700 / summary.chart.length;
       summary.chart.forEach((day, index) => {
@@ -219,7 +219,7 @@ export function mountAdmin(page, app) {
         (sum, value) => sum + value,
         0,
       );
-    if (!total) empty(categories, "Category totals appear after delivery.");
+    if (!total) empty(categories, "Category totals appear after verified cash collection.");
     else
       categories.replaceChildren(
         ...Object.entries(summary.categories).map(([category, value]) => {
@@ -369,7 +369,7 @@ export function mountAdmin(page, app) {
     try { order = (await api(`/orders/${order.id}`)).order; }
     catch (error) { notice(error.message); return; }
     if (!alive) return;
-    const panel = orderDetails(order, { live: false }),
+    const panel = orderDetails(order, { live: false, customer: false }),
       choices = order.next_statuses || [];
     const canCollect = order.payment === "Cash on delivery" && order.payment_status === "Pending";
     if (!choices.length && !canCollect) return;
@@ -384,6 +384,7 @@ export function mountAdmin(page, app) {
       field(form, "collection").hidden = !collecting;
       form.elements.collection_confirmed.disabled = !collecting;
       form.elements.payment_reference.disabled = !collecting;
+      form.elements.payment_reference.required = collecting && form.elements.collection_confirmed.checked;
       field(form, "refund").hidden = !(order.payment_status === "Paid" && form.elements.status.value === "Refunded");
     }
     form.addEventListener("change", paymentControls);

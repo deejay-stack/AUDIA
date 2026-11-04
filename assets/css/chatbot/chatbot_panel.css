@@ -118,13 +118,13 @@
 
 /* Dark theme. */
 .dark .chatbot-panel__avatar {
-  background-color: rgb(184, 245, 208);
+  background-color: #B8F5D0;
   color: rgb(13, 12, 18);
 }
 
 /* Dark theme. */
 .dark .chatbot-panel__send {
-  background-color: rgb(27, 235, 86);
+  background-color: #B8F5D0;
   color: rgb(13, 12, 18);
 }
 
@@ -134,7 +134,7 @@
 }
 
 .chatbot-panel__input:focus-visible {
-  outline-color: #77a143;
+  outline-color: #B8F5D0;
 }
 
 /* Screen size or accessibility preference: (prefers-reduced-motion: reduce). */

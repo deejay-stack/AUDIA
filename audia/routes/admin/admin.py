@@ -38,7 +38,7 @@ def sales():
 @require_user(admin=True)
 def export_sales():
     output = io.StringIO(newline='')
-    columns = ['id', 'customer', 'email', 'product', 'date', 'amount', 'payment', 'status']
+    columns = ['id', 'customer', 'email', 'product', 'date', 'amount', 'payment', 'payment_status', 'is_demo', 'status']
     writer = csv.writer(output)
     writer.writerow(columns)
     query, status = request.args.get('q', '').lower(), request.args.get('status', 'All')
@@ -167,7 +167,7 @@ def summary():
     today = now().date()
     start = today - timedelta(days=days - 1)
     records = [order for order in sales_records() if order.created_at.date() >= start]
-    earned = [order for order in records if order.status == 'Delivered']
+    earned = [order for order in records if order.status == 'Delivered' and order.payment_record and order.payment_record.status == 'Paid' and order.payment == 'Cash on delivery']
     by_day, categories = defaultdict(float), defaultdict(float)
     for order in earned:
         by_day[order.created_at.date().isoformat()] += float(order.total)

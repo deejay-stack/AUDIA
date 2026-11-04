@@ -1,41 +1,14 @@
-/* ==================================================
-   COMPONENT: TUNER STRINGS
-   HTML FILE: templates/tuner/tuner_strings.html
-   PURPOSE: Tuner strings presentation; preserve existing colors, states and breakpoints.
-   JS: assets/js/tuner/tuner.js (pitch: assets/js/tuner/tuner_pitch.js).
-   ================================================== */
-
-.tuner-strings {
-  list-style: none;
-  margin-top: 24px;
-}
-
-.tuner-strings li {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  gap: 12px;
-  border-bottom: 1px solid var(--line);
-  padding: 12px 8px;
-  font-size: 12px;
-  color: orange;
-}
-
-.tuner-strings li > :last-child {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-.tuner-strings strong {
-  color: var(--text);
-  font-size: 20px;
-}
-
-.tuner-strings li[data-active] {
-  background: var(--soft);
-  border-radius: 8px;
-}
-
-.tuner-strings li[data-active] strong {
-  color: var(--accent);
-}
+.tuner-strings { list-style:none; margin:22px 0 0; padding:0; display:grid; gap:8px; }
+.tuner-strings li { border:1px solid var(--line); border-radius:12px; overflow:hidden; color:var(--muted); }
+.tuner-string-button { display:flex; align-items:center; gap:14px; width:100%; min-height:64px; padding:10px 14px; text-align:left; background:transparent; color:inherit; }
+.tuner-string-number { display:grid; place-items:center; border:1px solid var(--line); width:26px; height:26px; border-radius:50%; font-size:11px; }
+.tuner-strings strong { color:var(--text); font-family:"Space Grotesk",Inter,system-ui; font-size:23px; min-width:42px; }
+.tuner-string-details { display:grid; gap:4px; margin-left:auto; font-size:11px; font-variant-numeric:tabular-nums; }
+[data-reference-label] { font-size:10px; }
+.tuner-string-play { color:var(--accent); font-size:12px; }
+.tuner-strings li[data-active],.tuner-strings li[data-selected] { border-color:var(--accent); background:var(--soft); }
+.tuner-strings li[data-active] strong,.tuner-strings li[data-selected] strong { color:var(--accent); }
+.tuner-string-button:hover { background:var(--soft); }
+.tuner-string-button[data-playing] .tuner-string-play { animation:reference-pulse 1s ease-in-out infinite alternate; }
+@keyframes reference-pulse { to { opacity:.35; } }
+@media(prefers-reduced-motion:reduce) { .tuner-string-button[data-playing] .tuner-string-play { animation:none; } }

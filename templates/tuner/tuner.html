@@ -1,79 +1,53 @@
-<!-- MODULE: TUNER | COMPONENT: Tuner
-     PURPOSE: Tuner structure. CSS: assets/css/tuner/tuner.css
-     JS: assets/js/tuner/tuner.js (pitch: assets/js/tuner/tuner_pitch.js). Preserve IDs and data-action/data-field hooks. -->
-{% extends "shared/practice_base.html" %} {% block practice_content %}
+{% extends "shared/practice_base.html" %}
+{% block practice_content %}
 <div class="practice-heading">
   <p class="section-label">AUDIA practice studio</p>
-  <h1 class="section-title">Guitar Tuner</h1>
-  <p>
-    Six strings. One clear sound. Pluck a single open string and let it ring.
-  </p>
+  <h1 class="section-title">Find your perfect pitch.</h1>
+  <p>A quieter moment. A clearer sound. Tune one string at a time.</p>
 </div>
 <div class="tuner-layout">
   <section class="surface-card tuner-container" aria-label="Live guitar tuner">
+    <div class="tuner-topline"><span class="section-label">LIVE TUNER</span><span>A4 / 440 Hz</span></div>
     <div class="tuner-settings">
-      <label>Guitar type<select id="tuner-instrument"><option value="acoustic">Acoustic guitar</option><option value="electric">Electric guitar · higher sensitivity</option></select></label>
-      <label>Target string<select id="tuner-target-string"><option value="auto">Automatic detection</option>{% for note in ['E2','A2','D3','G3','B3','E4'] %}<option>{{ note }}</option>{% endfor %}</select></label>
+      <label>Instrument<select id="tuner-instrument"><option value="acoustic">Acoustic guitar</option><option value="electric">Electric guitar</option><option value="classical">Classical guitar</option></select></label>
+      <label>Tuning<select id="tuner-preset"><option value="standard">Standard · E A D G B E</option><option value="dropD">Drop D · D A D G B E</option><option value="halfStep">Half step down</option></select></label>
+      <label class="tuner-detection">Detection<select id="tuner-target-string"><option value="auto">Automatic · open strings</option><option value="chromatic">Chromatic · any note</option>{% for string, note in [(6,'E2'),(5,'A2'),(4,'D3'),(3,'G3'),(2,'B3'),(1,'E4')] %}<option value="{{ string }}">String {{ string }} · {{ note }}</option>{% endfor %}</select></label>
     </div>
-    <p id="tuner-target" class="form-hint">Automatic standard-string detection</p>
-    <p id="tuner-microphone" class="tuner-microphone" role="status">
-      Microphone inactive
-    </p>
-    <!-- tuner.js updates the live note, frequency, cents, and status as you play.
-         Appearance: tuner.css. Meter appearance and tuning colors: tuner_meter.css. -->
+    <p id="tuner-microphone" class="tuner-microphone" role="status">Microphone inactive</p>
     <div class="tuner-readout" aria-label="Detected pitch">
-      <p class="tuner-note">
-        <span id="tuner-note">—</span
-        ><span id="tuner-octave" class="tuner-octave"></span>
-      </p>
-      <p id="tuner-frequency" class="tuner-frequency">— Hz</p>
-      <p id="tuner-cents" class="tuner-cents">— cents</p>
+      <p class="tuner-note"><span id="tuner-note">—</span><span id="tuner-octave" class="tuner-octave"></span></p>
+      <div class="tuner-measurements"><p id="tuner-frequency">— Hz</p><span aria-hidden="true">/</span><p id="tuner-cents">— cents</p></div>
     </div>
     <p id="tuner-status" class="tuner-status" role="status">Play a string</p>
-    <!-- Component: tuner meter | CSS: assets/css/tuner/tuner_meter.css -->
+    <p id="tuner-target" class="form-hint">Automatic open-string detection · A4 = 440 Hz</p>
     {% include 'tuner/tuner_meter.html' %}
+    <p id="tuner-quality" class="tuner-quality">Waiting for a clear note</p>
     <div class="practice-actions tuner-controls">
-      <button id="tuner-start" type="button" class="primary-btn">
-        Start Tuner
-      </button>
-      <button id="tuner-stop" type="button" class="secondary-btn" disabled>
-        Stop Tuner
-      </button>
+      <button id="tuner-start" type="button" class="primary-btn">Start Tuner</button>
+      <button id="tuner-stop" type="button" class="secondary-btn" disabled>Stop Tuner</button>
     </div>
+    <label class="tuner-sensitivity" for="tuner-sensitivity">Microphone sensitivity <span>Lower noise ← → Quieter guitar</span>
+      <input id="tuner-sensitivity" type="range" min="0" max="100" value="50" aria-describedby="tuner-sensitivity-help">
+    </label>
+    <p id="tuner-sensitivity-help" class="form-hint">Raise sensitivity for quiet strings; lower it if background noise triggers notes.</p>
     <p id="tuner-error" class="form-error" role="alert" hidden></p>
-    <p class="tuner-privacy">
-      Audio is processed locally in your browser and is not recorded.
-    </p>
+    <p class="tuner-privacy">Microphone audio stays in your browser. Nothing is recorded or uploaded.</p>
   </section>
   <aside class="tuner-guide">
-    <section class="surface-card practice-card">
-      <p class="section-label">Standard tuning · A4 = 440 Hz</p>
-      <h2>Meet your six strings</h2>
-      <p>
-        From the thickest string to the thinnest. The matching string lights up
-        automatically.
-      </p>
-      <!-- Component: tuner strings | CSS: assets/css/tuner/tuner_strings.css -->
+    <section class="surface-card practice-card tuner-reference">
+      <p class="section-label">A real guitar. A familiar reference.</p>
+      <h2>Your six strings</h2>
+      <p>Tap a string to select its target and hear a recorded note. Tap again to stop.</p>
       {% include 'tuner/tuner_strings.html' %}
+      <p id="tuner-reference-status" class="tuner-reference-status" role="status">Reference playback turns the microphone off. Press Start Tuner when you are ready to play.</p>
+      <p class="form-hint">Representative steel, clean electric, or nylon recordings. Alternate tunings transpose the recorded notes.</p>
     </section>
     <section class="practice-card tuner-tips">
-      <h2>A little preparation</h2>
-      <p>
-        Use a quiet room and keep your microphone near the guitar. Mute the
-        other strings and pluck gently. Adjust the tuning peg a little at a
-        time, then pluck again.
-      </p>
-      <p>
-        Within ±5 cents of the target string is in tune. Choose a string manually
-        if the guitar is far out of tune. Both guitar types use E–A–D–G–B–E;
-        electric mode is more sensitive to quiet signals. Use a clean amplifier
-        near the microphone for a quiet electric guitar.
-      </p>
-      <a
-        class="practice-link"
-        href="{{ url_for('lessons.getting_started') }}#tuning"
-        >Learn standard tuning →</a
-      >
+      <p class="section-label">Make room for the note</p>
+      <h2>Pluck. Let it ring. Adjust.</h2>
+      <p>Mute the other strings and keep your microphone near the guitar. Use a clean amplifier or an audio interface for electric guitar. Avoid distortion and loud background audio.</p>
+      <p>Within ±5 cents is in tune. Flat means tighten slightly; sharp means loosen slightly. If the note or octave is far away, check your string before adjusting. Choose a manual target when the guitar is far out of tune.</p>
+      <a class="practice-link" href="{{ url_for('lessons.getting_started') }}#tuning">Learn standard tuning →</a>
     </section>
   </aside>
 </div>

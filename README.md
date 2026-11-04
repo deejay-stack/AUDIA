@@ -159,8 +159,10 @@ Authenticated customers can open **My Orders** at `/orders` from the shared navi
 Order lists and open tracking details refresh every 15 seconds while visible.
 Admin **Orders & payments** supports acceptance, rejection, processing, dispatch,
 delivery and recorded offline collection/refunds. COD stays pending until cash
-collection is explicitly confirmed after delivery. Card/e-wallet cards are previews
-only: they collect no payment details and cannot place a paid order.
+collection is explicitly confirmed after delivery. GCash, Maya, BPI and BDO now use
+an internal payment simulator with persistent attempts, cancellation, expiry and
+retry. They collect no financial credentials or money. Demo settlements are labelled
+`Demo paid` and excluded from collected revenue. See [the commerce delivery report](docs/COMMERCE_DELIVERY.md).
 
 The tuner uses real microphone input, with acoustic/electric sensitivity and
 manual/automatic standard-string targets. Learning now includes 20 chord shapes,
@@ -175,14 +177,14 @@ For an existing database, apply the additive migration before starting this vers
 
 The configured database in this workspace has already been upgraded. The command
 is repeatable and saves a private pre-upgrade row snapshot under `instance/backups/`.
-It creates three tables without altering existing records. Fresh databases continue
+It creates missing feature tables without altering existing records. Fresh databases continue
 to use `init-db`. Restart an already-running server to load Python changes.
 
 See [UPGRADE_NOTES.md](docs/UPGRADE_NOTES.md) for features, bug fixes, database changes,
-verification results and remaining limits. Tests and generated test artifacts were
-removed after verification as requested. Desktop/mobile browser inspection was
-blocked by the computer-use URL check; physical microphone and live external-service
-checks remain manual. Existing startup commands and dependencies are unchanged.
+historical verification results and remaining limits. Current payment and security
+tests are retained in `tests/`; browser screenshots and results are generated under
+`test-results/commerce/`. Physical microphone and live external-service checks remain
+manual. Existing startup commands and runtime dependencies are unchanged.
 
 ## Separate login portals and security regressions
 
@@ -203,8 +205,7 @@ correct portal; existing passwords and account records were not changed. Shared
 profile/password and practice features remain available, while customer-only shopping
 state and admin management are separated.
 
-This request adds a retained, self-contained security regression suite (the earlier
-commerce test artifacts remain removed):
+Run the retained security and payment regression suites:
 
 ```powershell
 .venv\Scripts\python.exe -B -m unittest discover -s tests -v

@@ -1,120 +1,39 @@
-/* ==================================================
-   COMPONENT: TUNER
-   HTML FILE: templates/tuner/tuner.html
-   PURPOSE: Tuner presentation; preserve existing colors, states and breakpoints.
-   JS: assets/js/tuner/tuner.js (pitch: assets/js/tuner/tuner_pitch.js).
-   ================================================== */
-
+/* Tuner page only; shared brand tokens and practice navigation are preserved. */
 @import url("../shared/practice.css");
 @import url("../shared/practice_base.css");
 @import url("tuner_meter.css");
 @import url("tuner_strings.css");
 
-.tuner-layout {
-  display: grid;
-  grid-template-columns: minmax(0px, 1.4fr) minmax(0px, 1fr);
-  gap: 24px;
-}
-
-.tuner-container {
-  padding: 32px;
-  text-align: center;
-  min-width: 0px;
-  align-self: start;
-}
-
-.tuner-microphone {
-  color: var(--muted);
-  font-size: 13px;
-  min-height: 24px;
-}
-
-.tuner-note {
-  font-family: "Space Grotesk", Inter, system-ui;
-  font-size: clamp(72px, 12vw, 116px);
-  font-weight: 600;
-  line-height: 1.2;
-  margin-top: 24px;
-}
-
-.tuner-octave {
-  font-size: 0.45em;
-  color: var(--muted);
-  margin-left: 4px;
-}
-
-.tuner-frequency {
-  color: var(--muted);
-  font-size: 18px;
-  font-variant-numeric: tabular-nums;
-}
-
-.tuner-cents {
-  margin-top: 8px;
-  color: var(--accent);
-  font-size: 16px;
-  font-variant-numeric: tabular-nums;
-}
-
-.tuner-status {
-  font-weight: 600;
-  margin-top: 24px;
-  color: var(--muted);
-}
-
-/* Appearance while this tuning state is active. */
-.tuner-container[data-tuning="in-tune"] .tuner-status {
-  color: var(--mint);
-}
-
-/* Appearance while this tuning state is active. */
-.tuner-container[data-tuning="flat"] .tuner-status {
-  color: var(--accent);
-}
-
-/* Appearance while this tuning state is active. */
-.tuner-container[data-tuning="sharp"] .tuner-status {
-  color: var(--accent);
-}
-
-.tuner-controls {
-  justify-content: center;
-  margin-top: 32px;
-}
-
-.tuner-privacy {
-  margin-top: 24px;
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.7;
-}
-
-.tuner-container .form-error {
-  margin-top: 20px;
-}
-
-.tuner-tips .practice-link {
-  display: inline-block;
-  margin-top: 16px;
-}
-
-/* Screen size or accessibility preference: (max-width: 767px). */
-@media (max-width: 767px) {
-  .tuner-layout {
-    grid-template-columns: minmax(0px, 1fr);
-  }
-
-  .tuner-container {
-    padding: 24px 20px;
-  }
-}
-
-/* Instrument sensitivity and explicit standard-string targets. */
-.tuner-settings { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: .8rem; margin-bottom: 1rem; text-align: left; }
-.tuner-settings label { display: grid; gap: .4rem; font-size: .8rem; color: var(--muted); }
-.tuner-settings select { width: 100%; background: var(--surface); color: var(--text); border: 1px solid var(--line); padding: .7rem .4rem; border-radius: 8px; }
-.tuner-string-button { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: .75rem; text-align: left; }
-.tuner-strings li[data-selected] { outline: 2px solid var(--accent); outline-offset: 2px; }
-@media (max-width: 480px) { .tuner-settings { grid-template-columns: minmax(0,1fr); } }
-
-.tuner-strings li { display: block; color: var(--muted); }
+.tuner-layout { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(0,1fr); gap:24px; }
+.tuner-container { padding:32px; text-align:center; min-width:0; align-self:start; overflow:hidden; }
+.tuner-topline { display:flex; align-items:center; justify-content:space-between; gap:12px; color:var(--muted); font:11px ui-monospace,monospace; margin-bottom:24px; }
+.tuner-settings { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; text-align:left; }
+.tuner-settings label { display:grid; gap:6px; color:var(--muted); font-size:12px; }
+.tuner-settings select { width:100%; min-height:44px; border:1px solid var(--line); background:var(--surface); color:var(--text); border-radius:10px; padding:10px; font:inherit; }
+.tuner-detection { grid-column:1/-1; }
+.tuner-microphone { color:var(--muted); font-size:12px; min-height:22px; margin-top:24px; }
+.tuner-readout { border-radius:50%; background:radial-gradient(ellipse,color-mix(in srgb,var(--accent) 9%,transparent),transparent 68%); padding:10px 0 20px; }
+.tuner-note { font-family:"Space Grotesk",Inter,system-ui; font-size:clamp(88px,12vw,136px); font-weight:600; line-height:1.15; letter-spacing:-.065em; min-height:1.15em; }
+.tuner-octave { font-size:.32em; color:var(--muted); margin-left:5px; letter-spacing:normal; }
+.tuner-measurements { display:flex; align-items:center; justify-content:center; gap:14px; color:var(--muted); font:14px ui-monospace,monospace; font-variant-numeric:tabular-nums; }
+#tuner-cents { color:var(--accent); }
+.tuner-status { font-weight:600; margin:4px 0 8px; min-height:24px; color:var(--text); }
+.tuner-container[data-tuning="in-tune"] .tuner-status { color:var(--success,var(--mint)); }
+.tuner-container[data-tuning="in-tune"] .tuner-readout { background:radial-gradient(ellipse,color-mix(in srgb,var(--mint) 12%,transparent),transparent 68%); }
+.tuner-quality { min-height:18px; margin-top:18px; color:var(--muted); font-size:11px; }
+.tuner-controls { justify-content:center; gap:10px; margin-top:24px; flex-wrap:wrap; }
+.tuner-controls button { min-height:46px; }
+.tuner-sensitivity { display:grid; grid-template-columns:1fr; gap:8px; margin-top:28px; padding-top:20px; border-top:1px solid var(--line); color:var(--text); font-size:12px; text-align:left; }
+.tuner-sensitivity span { color:var(--muted); font-size:11px; }
+.tuner-sensitivity input { width:100%; min-height:30px; accent-color:var(--accent); }
+.tuner-privacy { margin-top:24px; color:var(--muted); font-size:11px; line-height:1.7; }
+.tuner-container .form-error { margin-top:20px; }
+.tuner-guide { display:grid; align-content:start; gap:20px; min-width:0; }
+.tuner-reference h2,.tuner-tips h2 { margin-top:8px; }
+.tuner-reference-status { margin-top:20px; padding:12px; border:1px solid var(--line); border-radius:10px; background:var(--soft); color:var(--muted); font-size:12px; line-height:1.6; }
+.tuner-reference > .form-hint { margin-top:12px; }
+.tuner-tips p { margin-top:12px; }
+.tuner-tips .practice-link { display:inline-block; margin-top:16px; }
+.tuner-layout :is(button,select,input):focus-visible { outline:2px solid var(--accent); outline-offset:4px; }
+@media(max-width:900px) { .tuner-layout { grid-template-columns:minmax(0,1fr); } }
+@media(max-width:480px) { .tuner-container { padding:24px 18px; } .tuner-settings { grid-template-columns:minmax(0,1fr); } .tuner-settings select { font-size:16px; } .tuner-measurements { font-size:13px; gap:10px; } }

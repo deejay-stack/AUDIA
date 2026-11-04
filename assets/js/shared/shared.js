@@ -280,6 +280,8 @@ export function dialog(title, template) {
       node.close();
   });
   node.addEventListener("close", () => node.remove(), { once: true });
+  const previousFocus = document.activeElement;
+  node.addEventListener("close", () => { if (previousFocus?.isConnected) previousFocus.focus(); }, { once: true });
   const close = node.close.bind(node);
   node.close = () => {
     close();
@@ -308,9 +310,20 @@ export function empty(node, message) {
   node.replaceChildren(text);
 }
 
-export function orderDetails(order, { live = true } = {}) {
+export function orderDetails(order, { live = true, customer = true } = {}) {
   const panel = dialog(`Order ${order.id}`, "order-detail");
   function render(order) {
+    text(panel, "reference", order.payment_reference || "Not settled");
+    field(panel, "demo-notice").hidden = !order.is_demo;
+    field(panel, "attempt-history").hidden = !order.payment_attempts?.length;
+    field(panel, "attempts").replaceChildren(...(order.payment_attempts || []).map((attempt) => {
+      const row = document.createElement("li");
+      row.textContent = `${attempt.method} · ${attempt.status} · ${attempt.id} · ${new Date(attempt.created_at).toLocaleString()}`;
+      return row;
+    }));
+    const unpaid = order.status === "Pending" && order.payment_status === "Pending";
+    field(panel, "customer-order-actions").hidden = !customer || !unpaid;
+    field(panel, "retry-payment").hidden = !order.can_retry_payment;
     field(panel, "status").dataset.status = order.status;
     for (const key of [
       "status",
@@ -344,12 +357,35 @@ export function orderDetails(order, { live = true } = {}) {
     text(panel, "tracking-update", !order.history?.length ? "Earlier status timestamps were not recorded for this order." : live ? "Updates automatically while this window is open." : "Status shown when opened. Reopen to review later changes.");
   }
   render(order);
+  let updating = false;
+  field(panel, "retry-payment").addEventListener("click", async () => {
+    if (updating) return;
+    updating = true;
+    field(panel, "retry-payment").disabled = true;
+    try {
+      const { simulatePayment } = await import("./payments.js");
+      order = await simulatePayment(order);
+      if (panel.isConnected) render(order);
+    } finally { updating = false; field(panel, "retry-payment").disabled = false; }
+  });
+  field(panel, "cancel-order").addEventListener("click", async () => {
+    if (updating) return;
+    updating = true;
+    field(panel, "cancel-order").disabled = true;
+    try {
+      order = (await api(`/orders/${order.id}/cancel`, { method: "POST", body: {} })).order;
+      render(order);
+      notice("Unpaid order cancelled. Reserved stock has been released.");
+    } catch (error) {
+      text(panel, "order-error", error.message); field(panel, "order-error").hidden = false;
+    } finally { updating = false; field(panel, "cancel-order").disabled = false; }
+  });
   if (live) {
     const stop = poll(async () => {
       if (!panel.isConnected) return stop();
       try {
         const data = await api(`/orders/${encodeURIComponent(order.id)}`);
-        if (panel.isConnected) render(data.order);
+        if (panel.isConnected && !updating) { order = data.order; render(order); }
       } catch (error) { if (panel.isConnected) text(panel, "tracking-update", `Unable to refresh: ${error.message}`); }
     });
     panel.addEventListener("close", stop, { once: true });

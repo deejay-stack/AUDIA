@@ -1,4 +1,6 @@
 import { mountSearchFilter } from "../search_filter/search_filter.js";
+import { guitarAudio, previewURL } from "../shared/guitar_audio.js";
+import { simulatePayment } from "../shared/payments.js";
 import {
   imageSource,
   api,
@@ -29,7 +31,11 @@ export function mountStore(page, app) {
   let cartPanel;
   let mobile;
   const cards = new Map();
-  const soundTimers = new Map();
+  let soundButton = null;
+  const audioEvents = new AbortController();
+  const stopAudio = () => { void guitarAudio.dispose(); };
+  window.addEventListener("pagehide", stopAudio, { signal: audioEvents.signal });
+  document.addEventListener("visibilitychange", () => { if (document.hidden) stopAudio(); }, { signal: audioEvents.signal });
   let alive = true;
 
   const searchFilter = mountSearchFilter(page, app, { renderProducts, closeMobile, addToCart });
@@ -43,6 +49,7 @@ export function mountStore(page, app) {
     const activeIds = new Set(list.map((p) => p.id));
     for (const [id, card] of cards)
       if (!activeIds.has(id)) {
+        if (soundButton && card.contains(soundButton)) guitarAudio.stop();
         card.remove();
         cards.delete(id);
       }
@@ -57,6 +64,15 @@ export function mountStore(page, app) {
         card.dataset.motion = JSON.stringify(motion);
       }
       card.dataset.productId = product.id;
+      const sound = $(card, '[data-action="sound"]');
+      sound.dataset.audioCategory = product.category;
+      sound.disabled = !previewURL(product.category);
+      sound.title = sound.disabled ? "No licensed recording is available for this category." :
+        `Representative ${product.category.toLowerCase()} recording; not a recording of ${product.name}.`;
+      if (sound !== soundButton) {
+        $(sound, "span").textContent = sound.disabled ? "No recording" : "Test Sound";
+        sound.setAttribute("aria-label", sound.disabled ? "No recording available" : `Test Sound · representative ${product.category.toLowerCase()} recording`);
+      }
       const image = field(card, "image");
       image.src = imageSource(product.image);
       image.alt = product.name;
@@ -124,6 +140,7 @@ export function mountStore(page, app) {
           const row = clone("cart-item");
           row.dataset.productId = item.id;
           field(row, "image").src = imageSource(item.image);
+          field(row, "image").alt = item.name;
           text(row, "brand", item.brand);
           text(row, "name", item.name);
           text(row, "price", peso(item.price));
@@ -202,7 +219,7 @@ export function mountStore(page, app) {
     if (!cart.length) return;
     const panel = dialog("Your next chapter starts here.", "checkout");
     const form = panel.querySelector("form");
-    let submitting = false;
+    let submitting = false, pendingOrder = null;
     form.elements.address.value = app.user.address || "";
     form.elements.phone.value = app.user.phone || "";
     const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
@@ -214,9 +231,10 @@ export function mountStore(page, app) {
       return row;
     }));
     form.addEventListener("change", () => {
-      const preview = form.elements.payment_method.value !== "cod";
-      field(form, "payment-preview").hidden = !preview;
-      form.querySelector('[type="submit"]').disabled = preview || submitting;
+      const demo = form.elements.payment_method.value !== "cod";
+      text(form, "payment-preview", demo ? "Demonstration mode. Review and confirm on the next screen. No money is transferred." : "Pay with cash when your order arrives. No online payment is required.");
+      form.querySelector('[type="submit"]').textContent = demo ? "Proceed to payment" : "Place order";
+      form.querySelector('[type="submit"]').disabled = submitting;
     });
     field(form, "checkout-total").textContent = peso(
       cart.reduce((sum, item) => sum + item.price * item.qty, 0),
@@ -226,13 +244,13 @@ export function mountStore(page, app) {
       if (form.querySelector("[type=submit]").disabled) return;
       if (submitting) return;
       if (!form.reportValidity()) return;
-      if (form.elements.payment_method.value !== "cod") return;
       submitting = true;
       busy(form, true);
       formError(form, "");
       const body = {
         address: form.elements.address.value.trim(), phone: form.elements.phone.value.trim(),
         payment_method: form.elements.payment_method.value,
+        expected_total: subtotal.toFixed(2),
         items: cart.map((item) => ({ product_id: item.id, quantity: item.qty })),
       };
       // Keep the same key after a lost response or reopening the same checkout.
@@ -242,28 +260,37 @@ export function mountStore(page, app) {
       if (attempt?.signature !== signature) attempt = { signature, key: crypto.randomUUID() };
       sessionStorage.setItem("audia-checkout", JSON.stringify(attempt));
       try {
-        const data = await api("/orders", {
+        const data = pendingOrder ? { order: pendingOrder } : await api("/orders", {
           method: "POST",
           body: { ...body, request_key: attempt.key },
         });
-        for (const item of cart) {
-          const product = products.find((p) => p.id === item.id);
-          if (product) product.stock -= item.qty;
+        if (!pendingOrder) {
+          pendingOrder = data.order;
+          const inventory = await api("/products").catch(() => null);
+          if (inventory) products = inventory.products;
+          cart = [];
+          sessionStorage.removeItem("audia-checkout");
+          renderCart();
+          renderProducts();
+          closeCart();
+          // The saved order is immutable; retry its payment instead of placing it twice.
+          form.querySelectorAll('input,textarea').forEach((control) => { control.disabled = true; });
         }
-        cart = [];
-        sessionStorage.removeItem("audia-checkout");
-        renderCart();
-        renderProducts();
+        if (pendingOrder.is_demo) {
+          pendingOrder = await simulatePayment(pendingOrder);
+          if (pendingOrder.can_retry_payment) {
+            text(form, "payment-preview", `Order ${pendingOrder.id} saved and unpaid. Continue payment here or from My Orders. Cancel the unpaid order there to release reserved stock.`);
+            return;
+          }
+        }
         panel.close();
-        closeCart();
-        orderDetails(data.order);
-        notice("Order placed. Pay on delivery. Follow updates in My Orders.");
+        orderDetails(pendingOrder);
+        notice(pendingOrder.is_demo ? "Demo payment confirmed. Follow your order in My Orders." : "Order placed. Pay with cash on delivery.");
       } catch (error) {
         formError(form, error.message);
       } finally {
         submitting = false;
-        busy(form, false, "Place order");
-        form.querySelector('[type="submit"]').disabled = form.elements.payment_method.value !== "cod";
+        busy(form, false, pendingOrder?.is_demo ? "Retry demo payment" : form.elements.payment_method.value === "cod" ? "Place order" : "Proceed to payment");
       }
     });
   }
@@ -299,55 +326,28 @@ export function mountStore(page, app) {
     $(page, '[data-action="menu"]').replaceChildren(icon("x", 19));
   }
   function playSound(button) {
-    function display(playing) {
+    if (soundButton === button && guitarAudio.current) { guitarAudio.stop(); return; }
+    const url = previewURL(button.dataset.audioCategory);
+    if (!url) return;
+    void guitarAudio.play({ url, onState(state, message) {
+      const playing = state === "playing", loading = state === "loading";
+      if (loading) soundButton = button;
       const label = $(button, "span");
       const glyph = icon(playing ? "pause" : "play", 15);
       glyph.setAttribute("fill", "currentColor");
       button.replaceChildren(glyph);
       if (label) {
-        label.textContent = playing ? "Playing" : "Hear the tone";
+        label.textContent = loading ? "Loading…" : playing ? "Stop Sound" : "Test Sound";
         button.append(label);
       }
-    }
-    if (soundTimers.has(button)) {
-      clearTimeout(soundTimers.get(button));
-      soundTimers.delete(button);
-      display(false);
-      return;
-    }
-    display(true);
-    try {
-      const AudioCtx = window.AudioContext || window.webkitAudioContext;
-      const ctx = new AudioCtx();
-      [164.81, 196, 246.94, 329.63].forEach((frequency, index) => {
-        const oscillator = ctx.createOscillator();
-        const gain = ctx.createGain();
-        oscillator.type = "triangle";
-        oscillator.frequency.value = frequency;
-        gain.gain.setValueAtTime(0, ctx.currentTime + index * 0.18);
-        gain.gain.linearRampToValueAtTime(
-          0.055,
-          ctx.currentTime + index * 0.18 + 0.03,
-        );
-        gain.gain.exponentialRampToValueAtTime(
-          0.001,
-          ctx.currentTime + index * 0.18 + 0.72,
-        );
-        oscillator.connect(gain).connect(ctx.destination);
-        oscillator.start(ctx.currentTime + index * 0.18);
-        oscillator.stop(ctx.currentTime + index * 0.18 + 0.75);
-      });
-      soundTimers.set(
-        button,
-        setTimeout(() => {
-          soundTimers.delete(button);
-          display(false);
-          ctx.close();
-        }, 1450),
-      );
-    } catch {
-      display(false);
-    }
+      button.dataset.audioState = state;
+      button.setAttribute("aria-busy", String(loading));
+      button.setAttribute("aria-pressed", String(playing || loading));
+      button.setAttribute("aria-label", `${loading ? "Cancel loading" : playing ? "Stop Sound" : "Test Sound"} · representative ${button.dataset.audioCategory.toLowerCase()} recording`);
+      field(page,"audio-status").textContent = state === "error" ? message : playing ?
+        `Playing a representative ${button.dataset.audioCategory.toLowerCase()} recording, not this product model.` : loading ? "Loading guitar recording…" : "Sound stopped.";
+      if (!playing && !loading) soundButton = null;
+    }});
   }
 
   page.addEventListener("click", async (event) => {
@@ -361,6 +361,24 @@ export function mountStore(page, app) {
     if (searchFilter.handleAction(button)) return;
     const id = Number(button.closest("[data-product-id]")?.dataset.productId);
     switch (button.dataset.action) {
+      case "product-detail": {
+        const product = products.find((p) => p.id === id);
+        if (!product) break;
+        const panel = dialog(product.name, "product-detail");
+        field(panel, "detail-image").src = imageSource(product.image);
+        field(panel, "detail-image").alt = product.name;
+        text(panel, "detail-category", `${product.brand} · ${product.category}`);
+        text(panel, "detail-price", peso(product.price));
+        text(panel, "detail-description", product.description);
+        text(panel, "detail-stock", product.stock ? `${product.stock} in stock · Free standard delivery` : "Out of stock");
+        field(panel, "detail-specs").replaceChildren(...product.specs.map((spec) => {
+          const li = document.createElement("li"); li.textContent = spec; return li;
+        }));
+        const add = field(panel, "detail-add");
+        add.disabled = product.stock < 1;
+        add.addEventListener("click", () => { panel.close(); addToCart(product); });
+        break;
+      }
       case "home":
         window.scrollTo({ top: 0, behavior: "smooth" });
         break;
@@ -521,6 +539,8 @@ export function mountStore(page, app) {
   return {
     destroy() {
       alive = false;
+      stopAudio();
+      audioEvents.abort();
       searchFilter.destroy();
     },
   };

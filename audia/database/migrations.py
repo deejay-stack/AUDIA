@@ -11,7 +11,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from sqlalchemy import MetaData, inspect, select
-from .models import OrderEvent, OrderPayment, LessonProgress, User
+from .models import OrderEvent, OrderPayment, PaymentAttempt, LessonProgress, User
 
 
 def upgrade_database(app):
@@ -23,7 +23,7 @@ def upgrade_database(app):
     engine = app.extensions.get('engine')
     if engine is None:
         raise RuntimeError('Configure the existing database before upgrading.')
-    additions = [OrderEvent.__table__, OrderPayment.__table__, LessonProgress.__table__]
+    additions = [OrderEvent.__table__, OrderPayment.__table__, PaymentAttempt.__table__, LessonProgress.__table__]
     with engine.begin() as connection:
         if connection.dialect.name == 'postgresql':
             from sqlalchemy import text

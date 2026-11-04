@@ -1,0 +1,26 @@
+<template id="demo-payment-template">
+  <form class="stack-form demo-payment">
+    <p class="section-label">AUDIA payment simulator</p>
+    <div class="payment-preview">Demonstration only · No money will be transferred. Do not enter bank or e-wallet credentials.</div>
+    <div class="demo-payment__amount"><span class="form-hint" data-field="payment-method"></span><strong data-field="payment-amount"></strong></div>
+    <dl class="detail-list">
+      <dt>Order</dt><dd data-field="payment-order"></dd>
+      <dt>Reference</dt><dd data-field="payment-reference"></dd>
+      <dt>Expires</dt><dd data-field="payment-expiry"></dd>
+    </dl>
+    <label data-field="test-controls" hidden>Demo testing outcome
+      <select name="outcome">
+        <option value="success">Successful payment</option>
+        <option value="failure">Failed payment</option>
+        <option value="timeout">Payment timeout</option>
+      </select>
+      <span class="form-hint">Local demo test controls enabled by the server.</span>
+    </label>
+    <p class="form-error" role="alert" data-field="form-error" hidden></p>
+    <p class="payment-result" role="status" data-field="payment-result">Preparing your secure demo reference…</p>
+    <div class="form-actions">
+      <button type="button" class="secondary-btn" data-field="cancel-payment">Cancel payment</button>
+      <button type="submit" class="primary-btn" disabled>Confirm demo payment</button>
+    </div>
+  </form>
+</template>

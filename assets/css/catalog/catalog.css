@@ -2604,8 +2604,11 @@
 
 .catalog-product-card__sound {
   display: inline-flex;
-  height: 2.5rem;
-  width: 2.5rem;
+  min-height: 44px;
+  width: auto;
+  padding: 10px 14px;
+  gap: 7px;
+  font-size: 12px;
   align-items: center;
   justify-content: center;
   border-radius: 9999px;
@@ -2666,6 +2669,14 @@
 .catalog-product-card__sound:hover {
   transform: scale(1.05);
 }
+
+.catalog-audio-note,.catalog-audio-status { color:var(--muted); font-size:12px; line-height:1.6; max-width:580px; }
+.catalog-audio-status { min-height:20px; }
+[data-action="sound"][data-audio-state="playing"] { outline:2px solid var(--accent); outline-offset:3px; }
+[data-action="sound"][data-audio-state="playing"] svg { animation:catalog-audio-pulse 1s ease-in-out infinite alternate; }
+[data-action="sound"]:disabled { opacity:.65; cursor:default; }
+@keyframes catalog-audio-pulse { to { opacity:.35; } }
+@media(prefers-reduced-motion:reduce) { [data-action="sound"][data-audio-state="playing"] svg { animation:none; } }
 
 .is-hover-group:hover .catalog-product-card__image {
   transform: scale(1.04);

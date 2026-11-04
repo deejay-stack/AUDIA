@@ -25,4 +25,64 @@
 [data-cart-count] { display: inline-grid; place-items: center; min-width: 1.4rem; min-height: 1.4rem; padding: 0 .3rem; background: var(--soft); border: 1px solid var(--line); border-radius: 999px; font-size: .75rem; }
 :where(a,button,input,select,textarea,summary):focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .order-detail h3 { margin-top: 1rem; font-weight: 600; }
-@media (max-width: 480px) { .payment-option { padding: .8rem; gap: .6rem; } .payment-icon { display: none; } .detail-list { grid-template-columns: 95px minmax(0,1fr); } }
+@media (max-width: 480px) { .payment-option { padding: .8rem; gap: .6rem; } .detail-list { grid-template-columns: 95px minmax(0,1fr); } }
+
+/* Commerce uses the same surfaces, typography and interaction states as account/admin. */
+.app-dialog:has(.checkout-layout), .app-dialog:has(.product-detail) { width: min(960px, 100% - 32px); }
+.checkout-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); grid-template-rows: min-content 1fr; align-items: start; gap: var(--space-6); }
+.checkout-section { min-width: 0; padding: var(--space-5); border: 1px solid var(--line); border-radius: var(--radius-md); }
+.checkout-section h3 { font-size: var(--text-lg); font-weight: 600; }
+.checkout-review { grid-column: 1; grid-row: 1; background: var(--soft); }
+.checkout-delivery { grid-column: 1; grid-row: 2; }
+.checkout-payment { grid-column: 2; grid-row: 1 / span 2; }
+.checkout-layout .order-total { padding-block: var(--space-3); font-size: var(--text-sm); }
+.checkout-layout .catalog-checkout__stack-form-div { border-top: 0; padding-top: 0; font-size: var(--text-lg); }
+.checkout-items { list-style: none; margin: 0; font-size: var(--text-sm); line-height: var(--leading-body); }
+.payment-option { transition: border-color .15s, background .15s; }
+.payment-option:hover { border-color: var(--accent); }
+.payment-option:focus-within { outline: 2px solid var(--accent); outline-offset: 3px; }
+.payment-option > span:last-child { min-width: 0; }
+.payment-icon { display: inline-grid; place-items: center; width: 32px; height: 36px; flex-shrink: 0; font-size: 1.4rem; }
+.payment-option:has(input:disabled) { cursor: default; }
+.payment-option em { color: var(--info); background: var(--info-bg); }
+.payment-result { font-size: var(--text-sm); line-height: var(--leading-body); }
+.payment-result[data-status="Succeeded"] { color: var(--success); }
+.payment-result:is([data-status="Failed"],[data-status="Timed out"]) { color: var(--error); }
+.demo-payment__amount { display: grid; gap: var(--space-1); padding-block: var(--space-4); }
+.demo-payment__amount strong { font-family: var(--font-display); font-size: 2.25rem; letter-spacing: -.04em; }
+.detail-list dd, .order-history li { min-width: 0; overflow-wrap: anywhere; }
+.order-detail details { margin-block: var(--space-4); padding: var(--space-3); border: 1px solid var(--line); border-radius: var(--radius-sm); }
+.order-detail summary { cursor: pointer; font-size: var(--text-sm); font-weight: 600; min-height: 28px; }
+.product-detail { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: var(--space-8); align-items: start; }
+.product-detail__image { width: 100%; max-height: 440px; aspect-ratio: 4/5; object-fit: contain; border-radius: var(--radius-md); background: var(--soft); }
+.product-detail__copy { display: grid; gap: var(--space-4); min-width: 0; line-height: var(--leading-body); }
+.product-detail__price { font-size: 1.8rem; font-family: var(--font-display); font-weight: 600; }
+.product-detail__specs { padding-left: var(--space-5); list-style: disc; font-size: var(--text-sm); color: var(--muted); }
+.product-detail-link { text-align: left; font: inherit; color: inherit; cursor: pointer; }
+.product-detail-link:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 4px; }
+.storefront .product-card { height: 100%; display: flex; flex-direction: column; }
+.storefront .product-details { flex: 1; display: flex; flex-direction: column; }
+.catalog-product-card__product-details-div-audia-demo-electric-0-0 { margin-top: auto; padding-top: var(--space-4); }
+.storefront .catalog-product-card__description { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; min-height: 3.75rem; }
+.storefront .catalog-product-card__add, .storefront .catalog-product-card__like { min-width: 44px; min-height: 44px; }
+.icon-btn { min-width: 44px; min-height: 44px; }
+.input-shell:focus-within { outline: 2px solid var(--accent); outline-offset: 3px; }
+.primary-btn:active, .dark .primary-btn:active { background: var(--primary-active); transform: translateY(0); }
+.account-order > div { min-width: 0; }
+.account-order-actions { flex-shrink: 0; }
+.admin-main, .admin-content { min-width: 0; }
+.admin-page .table-wrap { max-width: 100%; overflow-x: auto; }
+@media (max-width: 767px) {
+  .checkout-layout, .product-detail { grid-template-columns: minmax(0,1fr); grid-template-rows: none; gap: var(--space-4); }
+  .checkout-review, .checkout-delivery, .checkout-payment { grid-column: auto; grid-row: auto; }
+  .checkout-section { padding: var(--space-4); }
+  .product-detail__image { max-height: 280px; aspect-ratio: 1; }
+  .demo-payment .form-actions { flex-direction: column-reverse; }
+  .demo-payment .form-actions > button { width: 100%; }
+}
+@media (max-width: 480px) {
+  .app-dialog { padding: var(--space-4); }
+  .dialog__dialog-title { font-size: 1.25rem; line-height: 1.5; }
+  .checkout-section { padding: var(--space-3); }
+  .payment-option { border-radius: var(--radius-sm); }
+}

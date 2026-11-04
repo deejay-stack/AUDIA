@@ -1,13 +1,11 @@
-<!-- MODULE: TUNER | COMPONENT: Tuner strings
-     PURPOSE: Tuner strings structure. CSS: assets/css/tuner/tuner_strings.css
-     JS: assets/js/tuner/tuner.js (pitch: assets/js/tuner/tuner_pitch.js). Preserve IDs and data-action/data-field hooks. -->
 <ol class="tuner-strings" reversed>
-        {% for note, frequency in [('E2', '82.41'), ('A2', '110.00'), ('D3',
-        '146.83'), ('G3', '196.00'), ('B3', '246.94'), ('E4', '329.63')] %}
-        <li data-tuning-note="{{ note }}">
-          <button type="button" class="tuner-string-button" data-string-target="{{ note }}" aria-label="Tune string {{ 7 - loop.index }} to {{ note }}">
-          <span>String {{ 7 - loop.index }}</span><strong>{{ note }}</strong
-          ><span>{{ frequency }} Hz</span></button>
-        </li>
-        {% endfor %}
-      </ol>
+  {% for string, note, frequency in [(6,'E2','82.41'),(5,'A2','110.00'),(4,'D3','146.83'),(3,'G3','196.00'),(2,'B3','246.94'),(1,'E4','329.63')] %}
+  <li data-tuning-string="{{ string }}">
+    <button type="button" class="tuner-string-button" data-string-target="{{ string }}" aria-pressed="false" aria-label="Select string {{ string }}, {{ note }}, and play its recorded reference">
+      <span class="tuner-string-number">{{ string }}</span><strong>{{ note }}</strong>
+      <span class="tuner-string-details"><span data-string-frequency>{{ frequency }} Hz</span><span data-reference-label>Play reference</span></span>
+      <span class="tuner-string-play" aria-hidden="true">▶</span>
+    </button>
+  </li>
+  {% endfor %}
+</ol>

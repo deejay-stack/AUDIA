@@ -37,8 +37,8 @@ def update_order(order, data, actor):
         raise ValueError('That order status transition is not allowed.')
     payment = data.get('payment_status')
     record = order.payment_record
-    if changed and status in ('Confirmed', 'Processing', 'Shipped', 'Out for Delivery', 'Delivered') and order.payment != 'Cash on delivery':
-        raise ValueError('This payment method is not connected. Unverified preview payments cannot be accepted or dispatched.')
+    if changed and status in ('Confirmed', 'Processing', 'Shipped', 'Out for Delivery', 'Delivered') and order.payment != 'Cash on delivery' and (not record or record.status != 'Demo paid'):
+        raise ValueError('Complete the demo payment before accepting or dispatching this order.')
     if 'payment_status' in data:
         if payment != 'Paid':
             raise ValueError('Payment can only be recorded after actual collection.')
@@ -61,6 +61,22 @@ def update_order(order, data, actor):
             record.collected_by = actor.id
             order.events.append(OrderEvent(status=status, kind='payment', note='Cash collection recorded by the store.', actor_id=actor.id))
     if changed:
+        if status in ('Cancelled', 'Rejected') and record is None:
+            record = OrderPayment(status='Cancelled')
+            order.payment_record = record
+        if status in ('Cancelled', 'Rejected') and record and record.status == 'Demo paid':
+            record.status = 'Demo refunded'
+            order.events.append(OrderEvent(status=status, kind='payment', note='Demo payment reversed; no money transferred.', actor_id=actor.id))
+        elif status in ('Cancelled', 'Rejected') and record and record.status == 'Pending':
+            record.status = 'Cancelled'
+        if status in ('Cancelled', 'Rejected'):
+            for attempt in order.payment_attempts:
+                if attempt.status == 'Pending':
+                    attempt.status = 'Cancelled'
+                    attempt.completed_at = now()
+        if status == 'Refunded' and record and record.status == 'Demo paid':
+            record.status = 'Demo refunded'
+            order.events.append(OrderEvent(status=status, kind='payment', note='Demo refund recorded; no money transferred.', actor_id=actor.id))
         if status in ('Cancelled', 'Rejected', 'Refunded'):
             for item in sorted(order.items, key=lambda item: item.product_id):
                 product = db().scalar(select(Product).where(Product.id == item.product_id).with_for_update())
@@ -73,4 +89,5 @@ def update_order(order, data, actor):
             record.status = 'Refunded'
             order.events.append(OrderEvent(status=status, kind='payment', note='Offline refund confirmed by the store.', actor_id=actor.id))
         order.status = status
-        order.events.append(OrderEvent(status=status, kind='status', note='Status updated by the store.', actor_id=actor.id))
+        note = 'Status updated by the store.' if actor.role == 'admin' else 'Unpaid order cancelled by the customer.'
+        order.events.append(OrderEvent(status=status, kind='status', note=note, actor_id=actor.id))

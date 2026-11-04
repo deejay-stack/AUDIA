@@ -105,6 +105,7 @@ class Order(Base):
     items: Mapped[list['OrderItem']] = relationship(cascade='all, delete-orphan', lazy='selectin')
     events: Mapped[list['OrderEvent']] = relationship(lazy='selectin', order_by='OrderEvent.id')
     payment_record: Mapped['OrderPayment | None'] = relationship(lazy='selectin', uselist=False)
+    payment_attempts: Mapped[list['PaymentAttempt']] = relationship(lazy='selectin', order_by='PaymentAttempt.created_at')
     __table_args__ = (UniqueConstraint('user_id', 'request_key'),)
 
     def public(self):
@@ -116,6 +117,10 @@ class Order(Base):
                     items=[item.public() for item in self.items],
                     subtotal=float(self.total), shipping_fee=0,
                     payment_status=self.payment_record.status if self.payment_record else 'Pending',
+                    is_demo=self.payment in ('GCash', 'Maya', 'BPI', 'BDO'),
+                    payment_reference=self.payment_record.reference if self.payment_record else '',
+                    payment_attempts=[attempt.public() for attempt in self.payment_attempts],
+                    can_retry_payment=self.payment in ('GCash', 'Maya', 'BPI', 'BDO') and self.status == 'Pending' and (not self.payment_record or self.payment_record.status == 'Pending'),
                     payment_collected_at=utc_iso(self.payment_record.collected_at) if self.payment_record and self.payment_record.collected_at else None,
                     history=[event.public() for event in self.events],
                     next_statuses=TRANSITIONS.get(self.status, []))
@@ -169,13 +174,32 @@ class OrderEvent(Base):
 
 
 class OrderPayment(Base):
-    """Payment collection metadata only. No card numbers, CVV, or simulated charges."""
+    """COD collection or explicitly labelled demo settlement; never stores financial credentials."""
     __tablename__ = 'order_payments'
     order_id: Mapped[str] = mapped_column(ForeignKey('orders.id'), primary_key=True)
     status: Mapped[str] = mapped_column(String(16), default='Pending')
     reference: Mapped[str] = mapped_column(String(200), default='')
     collected_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     collected_by: Mapped[int | None] = mapped_column(ForeignKey('users.id'), nullable=True)
+
+
+class PaymentAttempt(Base):
+    """Internal simulation only; an immutable outcome and unique retry identity per attempt."""
+    __tablename__ = 'payment_attempts'
+    id: Mapped[str] = mapped_column(String(40), primary_key=True)
+    order_id: Mapped[str] = mapped_column(ForeignKey('orders.id'), index=True)
+    request_key: Mapped[str] = mapped_column(String(80))
+    method: Mapped[str] = mapped_column(String(16))
+    status: Mapped[str] = mapped_column(String(16), default='Pending')
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)
+    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    completed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    __table_args__ = (UniqueConstraint('order_id', 'request_key'),)
+
+    def public(self):
+        return dict(id=self.id, method=self.method, status=self.status, is_demo=True,
+                    created_at=utc_iso(self.created_at), expires_at=utc_iso(self.expires_at),
+                    completed_at=utc_iso(self.completed_at) if self.completed_at else None)
 
 
 class LessonProgress(Base):

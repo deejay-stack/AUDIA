@@ -6,12 +6,14 @@ Related: routes.auth and database User/Product/Order/OrderItem mappings.
 Debugging: Trace request_key, locked inventory rows, and validation rollback handling.
 """
 import secrets
-from decimal import Decimal
+import re
+from decimal import Decimal, InvalidOperation
 from flask import Blueprint, g, jsonify
 from sqlalchemy import select
 from ..auth import payload, require_user, string
 from audia.database import db
 from audia.database.models import Order, OrderItem, OrderEvent, OrderPayment, Product, User
+from audia.services.payments import METHODS, begin_attempt, confirm_attempt
 
 orders = Blueprint('orders', __name__, url_prefix='/api/orders')
 
@@ -47,11 +49,13 @@ def checkout():
     existing = db().scalar(select(Order).where(Order.user_id == g.user.id, Order.request_key == key))
     if existing:
         return jsonify(order=existing.public()), 200
-    # Demo payment cards are previews. Only the existing COD workflow places orders.
-    if data.get('payment_method', 'cod') != 'cod':
-        raise ValueError('Card and e-wallet options are previews only. Choose Cash on Delivery to place an order.')
+    method = data.get('payment_method', 'cod')
+    if not isinstance(method, str) or method not in METHODS:
+        raise ValueError('Choose GCash, Maya, BPI, BDO, or Cash on Delivery.')
     address = string(data, 'address', 500, 10)
     phone = string(data, 'phone', 30, 7)
+    if not re.fullmatch(r'\+?[\d ()-]+', phone) or not 7 <= len(re.sub(r'\D', '', phone)) <= 15:
+        raise ValueError('Enter a valid contact number with 7–15 digits.')
     items = data.get('items')
     if not isinstance(items, list) or not 1 <= len(items) <= 50:
         raise ValueError('Your cart must contain between 1 and 50 products.')
@@ -68,8 +72,8 @@ def checkout():
         raise ValueError('An item is no longer available. Please update your cart.')
     order = Order(id='AUD-' + secrets.token_hex(6).upper(), user_id=g.user.id, customer=g.user.name,
                   email=g.user.email, address=address, phone=phone, total=Decimal('0'), request_key=key,
-                  payment='Cash on delivery', payment_record=OrderPayment(status='Pending'))
-    order.events.append(OrderEvent(status='Pending', note='Order placed; awaiting store confirmation.', actor_id=g.user.id))
+                  payment=METHODS[method], payment_record=OrderPayment(status='Pending'))
+    order.events.append(OrderEvent(status='Pending', note='Order placed; ' + ('pay with cash on delivery.' if method == 'cod' else 'awaiting demo payment. No money is transferred.'), actor_id=g.user.id))
     for product in products:
         quantity = quantities[product.id]
         if not product.active or product.stock < quantity:
@@ -78,6 +82,59 @@ def checkout():
         order.total += product.price * quantity
         order.items.append(OrderItem(product_id=product.id, name=product.name, category=product.category,
                                      quantity=quantity, price=product.price))
+    if 'expected_total' in data:
+        try:
+            expected = Decimal(str(data['expected_total']))
+        except InvalidOperation as error:
+            raise ValueError('The checkout total is invalid. Refresh your cart and try again.') from error
+        if not expected.is_finite() or expected != order.total:
+            raise ValueError('Product prices changed. Refresh your cart and review the updated total before ordering.')
     db().add(order)
     db().commit()
     return jsonify(order=order.public()), 201
+
+
+def own_locked_order(order_id):
+    return db().scalar(select(Order).where(Order.id == order_id.upper(), Order.user_id == g.user.id).with_for_update())
+
+
+@orders.post('/<order_id>/payment-attempts')
+@require_user(role='customer')
+def start_payment(order_id):
+    order = own_locked_order(order_id)
+    if not order:
+        return jsonify(error='No order found for this account.'), 404
+    attempt = begin_attempt(order, payload(), g.user)
+    db().commit()
+    from flask import current_app
+    return jsonify(order=order.public(), attempt=attempt.public(), test_controls=bool(current_app.config.get('DEMO_PAYMENT_TEST_CONTROLS')))
+
+
+@orders.post('/<order_id>/payment-attempts/<attempt_id>/confirm')
+@require_user(role='customer')
+def complete_payment(order_id, attempt_id):
+    order = own_locked_order(order_id)
+    if not order:
+        return jsonify(error='No order found for this account.'), 404
+    attempt = next((item for item in order.payment_attempts if item.id == attempt_id), None)
+    if not attempt:
+        return jsonify(error='Payment attempt not found.'), 404
+    confirm_attempt(order, attempt, payload(), g.user)
+    db().commit()
+    return jsonify(order=order.public(), attempt=attempt.public())
+
+
+@orders.post('/<order_id>/cancel')
+@require_user(role='customer')
+def cancel_unpaid_order(order_id):
+    order = own_locked_order(order_id)
+    if not order:
+        return jsonify(error='No order found for this account.'), 404
+    if order.status == 'Cancelled':
+        return jsonify(order=order.public())
+    if order.status != 'Pending' or (order.payment_record and order.payment_record.status != 'Pending'):
+        raise ValueError('Only pending, unpaid orders can be cancelled here. Contact the store for assistance.')
+    from audia.services.orders import update_order
+    update_order(order, {'status': 'Cancelled'}, g.user)
+    db().commit()
+    return jsonify(order=order.public())

@@ -47,7 +47,7 @@ export function mountAccount(page, app) {
             field(card, key).textContent = order[key];
           field(card, "amount").textContent = peso(order.amount);
           field(card, "status").dataset.status = order.status;
-          field(card, "payment").textContent = `${order.payment} · ${order.payment_status}`;
+          field(card, "payment").textContent = `${order.payment}${order.is_demo ? " (demo)" : ""} · ${order.payment_status}`;
           field(card, "tracking").textContent = order.status === "Pending" ? "Awaiting store confirmation" : `Tracking: ${order.status}`;
           return card;
         }),

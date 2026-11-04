@@ -82,6 +82,8 @@ from audia.config.database import build_database_url
 # ---------------------------------------------------------
 
 app.config.update(
+    # Outcome overrides are opt-in and apply exclusively to the internal simulator.
+    DEMO_PAYMENT_TEST_CONTROLS=os.getenv('DEMO_PAYMENT_TEST_CONTROLS', 'false').lower() == 'true',
     DATABASE_URL=build_database_url(),
 
     SECRET_KEY=os.getenv(

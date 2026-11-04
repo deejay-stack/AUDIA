@@ -45,6 +45,9 @@
   --text-sm: .875rem;
   --text-base: 1rem;
   --text-lg: 1.125rem;
+  --text-xl: 1.5rem;
+  --text-title: clamp(1.8rem, 3.5vw, 3rem);
+  --primary-active: #572bb2;
   --leading-body: 1.6;
   --radius-sm: 8px;
   --radius-md: 14px;
@@ -64,6 +67,7 @@ html.dark {
   --shadow: 0 12px 40px -24px rgba(0, 0, 0, 0.65);
   --primary: #b8f5d0;
   --primary-hover: #d5ffe5;
+  --primary-active: #98ddb4;
   --on-primary: #132b20;
   --success: #b8f5d0;
   --success-bg: #173529;
