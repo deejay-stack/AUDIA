@@ -1,0 +1,10 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{ refund.id }} | Refund confirmation</title><link rel="stylesheet" href="{{ url_for('static',filename='css/shared/receipt.css') }}">
+<script src="{{ url_for('static',filename='js/shared/receipt.js') }}" defer></script></head><body><main class="receipt">
+<nav class="receipt-actions"><a href="/receipts/{{ order.id }}">Original receipt</a><button id="print-receipt" type="button">Print / Save PDF</button></nav>
+<header><p class="eyebrow">STORE-ISSUED REFUND CONFIRMATION</p><h1>{{ store }}</h1><p>Test environment — payment is simulated. No funds are transferred.</p></header>
+<dl><dt>Refund receipt / reference</dt><dd>{{ refund.id }}</dd><dt>Original order</dt><dd>{{ order.id }}</dd>
+<dt>Amount refunded</dt><dd>₱{{ '{:,.2f}'.format(refund.amount) }}</dd><dt>Method / destination</dt><dd>{{ request_item.destination if request_item else order.payment }}</dd>
+<dt>Status</dt><dd>{{ refund.status }}</dd><dt>Recorded (UTC)</dt><dd>{{ refund.created_at }}</dd><dt>Reason</dt><dd>{{ refund.reason }}</dd></dl>
+{% if request_item %}<h2>Requested products</h2><ul>{% for item in request_item.public()['items'] %}<li>{{ item.name }} × {{ item.quantity }}</li>{% endfor %}</ul>{% endif %}
+<p>The original collection is preserved. This refund is a separate internal ledger entry.</p></main></body></html>

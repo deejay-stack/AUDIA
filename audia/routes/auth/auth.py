@@ -37,6 +37,7 @@ from audia.database.models import (
     RateLimit,
     ResetToken,
     User,
+    AccountStatus,
     now,
 )
 
@@ -171,7 +172,7 @@ def require_page(role=None):
         @wraps(function)
         def wrapped(*args, **kwargs):
             if not g.get('user'):
-                return redirect(url_for('admin_login_page' if role == 'admin' else 'login_page'))
+                return redirect(url_for('admin_login_page' if role == 'admin' else 'login_page', **({'next':request.full_path.rstrip('?')} if request.path.startswith(('/verify/','/receipts/','/refunds/')) else {})))
             if g.user.role not in ('admin', 'customer') or (role and g.user.role != role):
                 raise Forbidden('Access denied for this account.')
             return function(*args, **kwargs)
@@ -404,6 +405,9 @@ def install_security(app):
         if token and "engine" in app.extensions:
             record = db().get(LoginSession, digest(token)) if isinstance(token, str) and len(token) <= 256 else None
             user = db().get(User, record.user_id) if record is not None and not expired(record.expires_at) else None
+            account_status = db().get(AccountStatus, user.id) if user else None
+            if account_status and account_status.suspended:
+                user = None
             if user is not None and user.role in ("admin", "customer") and session.get("auth_role") == user.role:
                 g.user = user
             else:
@@ -672,6 +676,9 @@ def login_for_role(expected_role):
         ),
         password,
     )
+    account_status = db().get(AccountStatus, user.id) if user else None
+    if account_status and account_status.suspended:
+        valid = False
 
     if (
         not valid

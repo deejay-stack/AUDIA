@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{ payment.receipt_number }} | AUDIA receipt</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/shared/receipt.css') }}">
+<script src="{{ url_for('static', filename='js/shared/receipt.js') }}" defer></script>
+</head><body><main class="receipt">
+<nav class="receipt-actions"><a href="{{ '/admin' if g.user.role == 'admin' else '/orders' }}">Back to {{ 'administration' if g.user.role == 'admin' else 'orders' }}</a><button type="button" id="print-receipt">Print / Save PDF</button></nav>
+<header><p class="store-wordmark" aria-label="AUDIA store">A U D I A</p><p class="eyebrow">SYSTEM-ISSUED TRANSACTION RECEIPT</p><h1>{{ store }}</h1>
+<p>Test Mode — No real funds transferred</p>
+{% if not payment.is_simulated %}<p class="muted">Original collection: historical store-issued offline record.</p>{% endif %}
+<p class="muted">Internal store record. This is not a bank or e-wallet confirmation.</p></header>
+<dl><dt>Receipt</dt><dd>{{ payment.receipt_number }}</dd><dt>Transaction</dt><dd>{{ payment.reference }}</dd>
+<dt>Order</dt><dd>{{ order.id }}</dd><dt>Customer</dt><dd>{{ order.customer }}</dd><dt>Contact</dt><dd>{{ order.email }} {{ order.phone }}</dd>
+<dt>Address</dt><dd>{{ order.address }}</dd><dt>Collected</dt><dd>{{ paid_at }}</dd><dt>Sales channel</dt><dd>{{ 'Counter POS' if order.channel == 'pos' else 'Online store' }}</dd>
+<dt>Method / status</dt><dd>{{ order.payment }} · {{ payment.status }}</dd></dl>
+{% if payer_number_masked %}<dl><dt>GCash number</dt><dd>{{ payer_number_masked }}</dd></dl>{% endif %}
+<div class="table-wrap"><table><thead><tr><th>Item</th><th>Qty</th><th>Unit price</th><th>Line total</th></tr></thead>
+<tbody>{% for item in order.items %}<tr><td>{{ item.name }}<small>Product #{{ item.product_id }}</small></td><td>{{ item.quantity }}</td><td>₱{{ '{:,.2f}'.format(item.price) }}</td><td>₱{{ '{:,.2f}'.format(item.price * item.quantity) }}</td></tr>{% endfor %}</tbody></table></div>
+<dl class="totals"><dt>Merchandise subtotal</dt><dd>₱{{ '{:,.2f}'.format(order.subtotal) }}</dd><dt>Discount</dt><dd>−₱{{ '{:,.2f}'.format(order.discount) }}</dd>
+<dt>Tax (no additional tax)</dt><dd>₱{{ '{:,.2f}'.format(order.tax) }}</dd><dt>Shipping</dt><dd>₱{{ '{:,.2f}'.format(order.shipping_fee) }}</dd>
+<dt><strong>Total collected</strong></dt><dd><strong>₱{{ '{:,.2f}'.format(payment.amount) }}</strong></dd><dt>Refunded</dt><dd>₱{{ '{:,.2f}'.format(refunded) }}</dd><dt>Net collection</dt><dd>₱{{ '{:,.2f}'.format(payment.amount - refunded) }}</dd></dl>
+{% if payment.refunds %}<h2>Refund history</h2><ul>{% for refund in payment.refunds %}<li><a href="/refunds/{{ refund.id }}">{{ refund.id }}</a> · ₱{{ '{:,.2f}'.format(refund.amount) }} · {{ refund.reason }}</li>{% endfor %}</ul>{% endif %}
+<section class="receipt-verification"><img src="{{ qr_url }}" width="150" height="150" alt="QR code for authorized store receipt verification">
+<div><h2>Verify this receipt</h2><p>Scan to open the internal transaction record. Sign in as the purchaser or administrator.</p><a href="{{ verification_url }}">Open verification page</a></div></section>
+<footer>{{ receipt_footer }}<br>Test Mode — No real funds transferred</footer>
+</main></body></html>

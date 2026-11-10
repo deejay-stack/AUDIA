@@ -1,0 +1,7 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Verify receipt | AUDIA</title><link rel="stylesheet" href="{{ url_for('static',filename='css/shared/receipt.css') }}"></head>
+<body><main class="receipt"><header><p class="eyebrow">STORE RECEIPT VERIFICATION</p><h1>Record verified</h1>
+<p>This receipt exists in AUDIA's school payment system.</p><p>Test environment — payment is simulated. No funds are transferred.</p></header>
+<dl><dt>Receipt</dt><dd>{{ payment.receipt_number }}</dd><dt>Order</dt><dd>{{ order.id }}</dd><dt>Internal transaction</dt><dd>{{ payment.reference }}</dd>
+<dt>Payment status</dt><dd>{{ payment.status }}</dd><dt>Original collection</dt><dd>₱{{ '{:,.2f}'.format(payment.amount) }}</dd><dt>Method</dt><dd>{{ order.payment }}</dd></dl>
+<p>Refunds and reversals remain visible on the original receipt.</p><a href="{{ url_for('commerce.receipt',order_id=order.id) }}">View full store receipt</a></main></body></html>

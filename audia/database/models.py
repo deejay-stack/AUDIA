@@ -6,7 +6,8 @@ Related: database.connection and auth/catalog/orders/admin route handlers.
 Debugging: Inspect mapping and public() for serialization errors; preserve schema definitions.
 """
 from datetime import datetime, timezone
-from sqlalchemy import Boolean, DateTime, ForeignKey, Index, Integer, Numeric, String, Text, UniqueConstraint, text
+from decimal import Decimal
+from sqlalchemy import Boolean, CheckConstraint, DateTime, ForeignKey, Index, Integer, Numeric, String, Text, UniqueConstraint, text
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 
@@ -70,7 +71,7 @@ class Product(Base):
     name: Mapped[str] = mapped_column(String(150))
     brand: Mapped[str] = mapped_column(String(80))
     category: Mapped[str] = mapped_column(String(30))
-    price: Mapped[float] = mapped_column(Numeric(12, 2))
+    price: Mapped[Decimal] = mapped_column(Numeric(12, 2))
     stock: Mapped[int] = mapped_column(Integer)
     level: Mapped[str] = mapped_column(String(30), default='Beginner')
     color: Mapped[str] = mapped_column(String(60), default='')
@@ -97,12 +98,18 @@ class Order(Base):
     email: Mapped[str] = mapped_column(String(254))
     address: Mapped[str] = mapped_column(Text)
     phone: Mapped[str] = mapped_column(String(30))
-    total: Mapped[float] = mapped_column(Numeric(12, 2))
+    total: Mapped[Decimal] = mapped_column(Numeric(12, 2))
+    subtotal: Mapped[Decimal] = mapped_column(Numeric(12, 2), default=0, server_default='0')
+    discount: Mapped[Decimal] = mapped_column(Numeric(12, 2), default=0, server_default='0')
+    shipping_fee: Mapped[Decimal] = mapped_column(Numeric(12, 2), default=0, server_default='0')
+    tax: Mapped[Decimal] = mapped_column(Numeric(12, 2), default=0, server_default='0')
+    channel: Mapped[str] = mapped_column(String(16), default='online', server_default='online', index=True)
+    staff_id: Mapped[int | None] = mapped_column(ForeignKey('users.id'), nullable=True)
     status: Mapped[str] = mapped_column(String(24), default='Pending')
     payment: Mapped[str] = mapped_column(String(30), default='Cash on delivery')
     request_key: Mapped[str] = mapped_column(String(80))
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)
-    items: Mapped[list['OrderItem']] = relationship(cascade='all, delete-orphan', lazy='selectin')
+    items: Mapped[list['OrderItem']] = relationship(cascade='all, delete-orphan', lazy='selectin', order_by='OrderItem.id')
     events: Mapped[list['OrderEvent']] = relationship(lazy='selectin', order_by='OrderEvent.id')
     payment_record: Mapped['OrderPayment | None'] = relationship(lazy='selectin', uselist=False)
     payment_attempts: Mapped[list['PaymentAttempt']] = relationship(lazy='selectin', order_by='PaymentAttempt.created_at')
@@ -110,19 +117,31 @@ class Order(Base):
 
     def public(self):
         from audia.services.orders import TRANSITIONS
+        from audia.services.settings import settings
+        config = settings()
         return dict(id=self.id, customer=self.customer, email=self.email, address=self.address,
                     phone=self.phone, amount=float(self.total), status=self.status, payment=self.payment,
                     date=self.created_at.strftime('%b %d, %Y'), created_at=utc_iso(self.created_at),
                     product=', '.join(f'{item.name} × {item.quantity}' for item in self.items),
                     items=[item.public() for item in self.items],
-                    subtotal=float(self.total), shipping_fee=0,
+                    subtotal=float(self.subtotal), discount=float(self.discount), tax=float(self.tax), shipping_fee=float(self.shipping_fee),
+                    channel=self.channel, staff_id=self.staff_id,
+                    can_cancel=config['allow_cancellation'] == 'true' and self.status in ('Pending','Confirmed','Processing','Packed'),
+                    can_request_refund=self.status in ('Shipped','Out for Delivery','Delivered','Returned') and bool(self.payment_record and self.payment_record.status in ('Paid','Partially Refunded')),
                     payment_status=self.payment_record.status if self.payment_record else 'Pending',
-                    is_demo=self.payment in ('GCash', 'Maya', 'BPI', 'BDO'),
+                    is_demo=self.payment != 'Cash on delivery',
+                    is_simulated=self.payment_record.is_simulated if self.payment_record else False,
+                    receipt_url=f'/receipts/{self.id}' if self.payment_record and self.payment_record.receipt_number else None,
+                    receipt_number=self.payment_record.receipt_number if self.payment_record else None,
+                    verification_url=f'/verify/receipts/{self.payment_record.receipt_number}' if self.payment_record and self.payment_record.receipt_number else None,
+                    qr_url=f'/receipts/qr/{self.payment_record.receipt_number}.svg' if self.payment_record and self.payment_record.receipt_number else None,
+                    refunded_amount=float(self.payment_record.amount if self.payment_record.status == 'Refunded' and not self.payment_record.refunds else sum((r.amount for r in self.payment_record.refunds), start=0)) if self.payment_record else 0,
                     payment_reference=self.payment_record.reference if self.payment_record else '',
                     payment_attempts=[attempt.public() for attempt in self.payment_attempts],
-                    can_retry_payment=self.payment in ('GCash', 'Maya', 'BPI', 'BDO') and self.status == 'Pending' and (not self.payment_record or self.payment_record.status == 'Pending'),
+                    can_retry_payment=self.payment != 'Cash on delivery' and self.status == 'Pending' and (not self.payment_record or self.payment_record.status in ('Pending', 'Processing', 'Failed', 'Cancelled')),
                     payment_collected_at=utc_iso(self.payment_record.collected_at) if self.payment_record and self.payment_record.collected_at else None,
                     history=[event.public() for event in self.events],
+                    payment_history=[dict(status=e.new_status, kind='payment', note=e.action, at=utc_iso(e.created_at)) for e in self.payment_record.events] if self.payment_record else [],
                     next_statuses=TRANSITIONS.get(self.status, []))
 
 
@@ -133,11 +152,11 @@ class OrderItem(Base):
     product_id: Mapped[int] = mapped_column(ForeignKey('products.id'))
     name: Mapped[str] = mapped_column(String(150))
     quantity: Mapped[int] = mapped_column(Integer)
-    price: Mapped[float] = mapped_column(Numeric(12, 2))
+    price: Mapped[Decimal] = mapped_column(Numeric(12, 2))
     category: Mapped[str] = mapped_column(String(30))
 
     def public(self):
-        return dict(product_id=self.product_id, name=self.name, quantity=self.quantity, price=float(self.price))
+        return dict(id=self.id, product_id=self.product_id, name=self.name, quantity=self.quantity, price=float(self.price), line_total=float(self.price * self.quantity))
 
 
 class Wishlist(Base):
@@ -177,10 +196,44 @@ class OrderPayment(Base):
     """COD collection or explicitly labelled demo settlement; never stores financial credentials."""
     __tablename__ = 'order_payments'
     order_id: Mapped[str] = mapped_column(ForeignKey('orders.id'), primary_key=True)
-    status: Mapped[str] = mapped_column(String(16), default='Pending')
+    status: Mapped[str] = mapped_column(String(24), default='Pending')
     reference: Mapped[str] = mapped_column(String(200), default='')
+    amount: Mapped[Decimal] = mapped_column(Numeric(12, 2), default=0, server_default='0')
+    currency: Mapped[str] = mapped_column(String(3), default='PHP', server_default='PHP')
+    is_simulated: Mapped[bool] = mapped_column(Boolean, default=True, server_default='true')
+    receipt_number: Mapped[str | None] = mapped_column(String(40), nullable=True, unique=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now, server_default=text('CURRENT_TIMESTAMP'))
     collected_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     collected_by: Mapped[int | None] = mapped_column(ForeignKey('users.id'), nullable=True)
+    refunds: Mapped[list['Refund']] = relationship(lazy='selectin', order_by='Refund.created_at')
+    events: Mapped[list['PaymentEvent']] = relationship(lazy='selectin', order_by='PaymentEvent.id')
+
+
+class PaymentEvent(Base):
+    """Append-only internal payment state audit. Written only by backend services."""
+    __tablename__ = 'payment_events'
+    id: Mapped[int] = mapped_column(primary_key=True)
+    payment_id: Mapped[str] = mapped_column(ForeignKey('order_payments.order_id'), index=True)
+    previous_status: Mapped[str] = mapped_column(String(24))
+    new_status: Mapped[str] = mapped_column(String(24))
+    action: Mapped[str] = mapped_column(String(300))
+    actor_id: Mapped[int | None] = mapped_column(ForeignKey('users.id'), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)
+
+
+class Refund(Base):
+    __tablename__ = 'refunds'
+    id: Mapped[str] = mapped_column(String(40), primary_key=True)
+    payment_id: Mapped[str] = mapped_column(ForeignKey('order_payments.order_id'), index=True)
+    request_key: Mapped[str] = mapped_column(String(80))
+    amount: Mapped[Decimal] = mapped_column(Numeric(12, 2))
+    merchandise_amount: Mapped[Decimal] = mapped_column(Numeric(12, 2))
+    reason: Mapped[str] = mapped_column(String(300))
+    status: Mapped[str] = mapped_column(String(16), default='Completed')
+    actor_id: Mapped[int | None] = mapped_column(ForeignKey('users.id'), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)
+    __table_args__ = (UniqueConstraint('payment_id', 'request_key'), CheckConstraint('amount > 0'),
+                      CheckConstraint('merchandise_amount >= 0 AND merchandise_amount <= amount'))
 
 
 class PaymentAttempt(Base):
@@ -191,13 +244,16 @@ class PaymentAttempt(Base):
     request_key: Mapped[str] = mapped_column(String(80))
     method: Mapped[str] = mapped_column(String(16))
     status: Mapped[str] = mapped_column(String(16), default='Pending')
+    manual_review: Mapped[bool] = mapped_column(Boolean, default=False, server_default='false')
+    payer_number_masked: Mapped[str] = mapped_column(String(20), default='', server_default=text("''"))
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)
     expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
     completed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     __table_args__ = (UniqueConstraint('order_id', 'request_key'),)
 
     def public(self):
-        return dict(id=self.id, method=self.method, status=self.status, is_demo=True,
+        return dict(id=self.id, method=self.method, status=self.status, is_demo=True, manual_review=self.manual_review,
+                    payer_number_masked=self.payer_number_masked,
                     created_at=utc_iso(self.created_at), expires_at=utc_iso(self.expires_at),
                     completed_at=utc_iso(self.completed_at) if self.completed_at else None)
 
@@ -208,3 +264,115 @@ class LessonProgress(Base):
     user_id: Mapped[int] = mapped_column(ForeignKey('users.id'), primary_key=True)
     lesson_slug: Mapped[str] = mapped_column(String(80), primary_key=True)
     completed_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)
+
+
+class RefundRequest(Base):
+    """Customer request, separate from the immutable completed-refund ledger."""
+    __tablename__ = 'refund_requests'
+    id: Mapped[str] = mapped_column(String(40), primary_key=True)
+    order_id: Mapped[str] = mapped_column(ForeignKey('orders.id'), index=True)
+    request_key: Mapped[str] = mapped_column(String(80))
+    kind: Mapped[str] = mapped_column(String(16), default='refund')
+    status: Mapped[str] = mapped_column(String(24), default='Requested', index=True)
+    reason: Mapped[str] = mapped_column(String(300))
+    explanation: Mapped[str] = mapped_column(Text, default='')
+    destination: Mapped[str] = mapped_column(String(100))
+    items_json: Mapped[str] = mapped_column(Text, default='[]')
+    amount: Mapped[Decimal] = mapped_column(Numeric(12, 2))
+    approved_amount: Mapped[Decimal | None] = mapped_column(Numeric(12, 2), nullable=True)
+    refund_id: Mapped[str | None] = mapped_column(ForeignKey('refunds.id'), nullable=True, unique=True)
+    restocked: Mapped[bool] = mapped_column(Boolean, default=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)
+    events: Mapped[list['RequestEvent']] = relationship(lazy='selectin', order_by='RequestEvent.id')
+    __table_args__ = (UniqueConstraint('order_id', 'request_key'), CheckConstraint('amount > 0'))
+
+    def public(self):
+        import json
+        return dict(id=self.id, order_id=self.order_id, kind=self.kind, status=self.status,
+                    reason=self.reason, explanation=self.explanation, destination=self.destination,
+                    items=json.loads(self.items_json), amount=float(self.amount),
+                    approved_amount=float(self.approved_amount) if self.approved_amount is not None else None,
+                    refund_id=self.refund_id, restocked=self.restocked, created_at=utc_iso(self.created_at),
+                    confirmation_url=f'/refunds/{self.refund_id}' if self.refund_id else None,
+                    events=[e.public() for e in self.events])
+
+
+class RequestEvent(Base):
+    __tablename__ = 'refund_request_events'
+    id: Mapped[int] = mapped_column(primary_key=True)
+    request_id: Mapped[str] = mapped_column(ForeignKey('refund_requests.id'), index=True)
+    status: Mapped[str] = mapped_column(String(24))
+    note: Mapped[str] = mapped_column(String(300))
+    actor_id: Mapped[int] = mapped_column(ForeignKey('users.id'))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)
+
+    def public(self):
+        return dict(status=self.status, note=self.note, at=utc_iso(self.created_at), actor_id=self.actor_id)
+
+
+class Upload(Base):
+    __tablename__ = 'uploads'
+    id: Mapped[str] = mapped_column(String(40), primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey('users.id'))
+    request_id: Mapped[str | None] = mapped_column(ForeignKey('refund_requests.id'), nullable=True, index=True)
+    purpose: Mapped[str] = mapped_column(String(16))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)
+
+
+class InventoryMovement(Base):
+    __tablename__ = 'inventory_movements'
+    id: Mapped[int] = mapped_column(primary_key=True)
+    product_id: Mapped[int] = mapped_column(ForeignKey('products.id'), index=True)
+    order_id: Mapped[str | None] = mapped_column(ForeignKey('orders.id'), nullable=True, index=True)
+    delta: Mapped[int] = mapped_column(Integer)
+    balance: Mapped[int] = mapped_column(Integer)
+    reason: Mapped[str] = mapped_column(String(200))
+    actor_id: Mapped[int] = mapped_column(ForeignKey('users.id'))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)
+
+    def public(self):
+        return dict(id=self.id, product_id=self.product_id, order_id=self.order_id, delta=self.delta,
+                    balance=self.balance, reason=self.reason, actor_id=self.actor_id, at=utc_iso(self.created_at))
+
+
+class Delivery(Base):
+    __tablename__ = 'deliveries'
+    order_id: Mapped[str] = mapped_column(ForeignKey('orders.id'), primary_key=True)
+    method: Mapped[str] = mapped_column(String(100), default='School delivery simulation')
+    reference: Mapped[str] = mapped_column(String(100), default='')
+    window: Mapped[str] = mapped_column(String(150), default='')
+    route_json: Mapped[str] = mapped_column(Text, default='[]')
+    progress: Mapped[int] = mapped_column(Integer, default=0)
+    note: Mapped[str] = mapped_column(String(300), default='')
+
+    def public(self):
+        import json
+        return dict(method=self.method, reference=self.reference, window=self.window,
+                    route=json.loads(self.route_json), progress=self.progress, note=self.note, simulated=True)
+
+
+class AccountStatus(Base):
+    __tablename__ = 'account_statuses'
+    user_id: Mapped[int] = mapped_column(ForeignKey('users.id'), primary_key=True)
+    suspended: Mapped[bool] = mapped_column(Boolean, default=False)
+    reason: Mapped[str] = mapped_column(String(200))
+    actor_id: Mapped[int] = mapped_column(ForeignKey('users.id'))
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)
+
+
+class Notification(Base):
+    __tablename__ = 'notifications'
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey('users.id'), index=True)
+    order_id: Mapped[str] = mapped_column(ForeignKey('orders.id'), index=True)
+    message: Mapped[str] = mapped_column(String(300))
+    read: Mapped[bool] = mapped_column(Boolean, default=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)
+
+
+class AdminAudit(Base):
+    __tablename__ = 'admin_audits'
+    id: Mapped[int] = mapped_column(primary_key=True)
+    actor_id: Mapped[int] = mapped_column(ForeignKey('users.id'))
+    action: Mapped[str] = mapped_column(String(300))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)

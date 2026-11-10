@@ -1,0 +1,30 @@
+{% for section,title,subtitle in [('refunds','Returns & Refunds','Review customer requests and record inspected returns.'),('inventory','Inventory movements','Trace stock reservations, releases and staff adjustments.'),('delivery','Fulfillment & Delivery','Manage stored simulated routes and delivery updates.')] %}
+<template id="{{ section }}-template"><section class="surface-card finance-panel operations-workspace">
+<p class="section-label">Store operations</p><h2>{{ title }}</h2><p class="form-hint">{{ subtitle }}</p>
+<form class="ledger-filters stack-form" data-form="operations-filter"><label>Search<input name="q" placeholder="Order, customer or request"></label>
+{% if section == 'refunds' %}<label>Status<select name="status"><option value="">All statuses</option>{% for s in ['Requested','Under Review','Approved','Rejected','Awaiting Return','Item Received','Refund Processing','Partially Refunded','Refunded','Closed'] %}<option>{{ s }}</option>{% endfor %}</select></label><label>Sort<select name="sort"><option value="date">Newest first</option><option value="amount">Largest amount</option></select></label>{% endif %}
+{% if section == 'inventory' %}<label>Product ID<input name="product_id" type="number" min="1"></label>{% endif %}
+<button type="submit" class="secondary-btn">Apply / Retry</button></form>
+<p class="form-error" data-field="operations-error" role="alert" hidden></p><div data-field="operations-rows" class="operations-rows"></div>
+<div class="form-actions"><button type="button" class="secondary-btn" data-field="operations-prev">Previous</button><span data-field="operations-count" role="status"></span><button type="button" class="secondary-btn" data-field="operations-next">Next</button></div>
+</section></template>
+{% endfor %}
+<template id="review-request-template"><div class="stack-form">
+<dl class="detail-list" data-field="review-info"></dl><div class="evidence-gallery" data-field="review-evidence"></div>
+<h3>Request history</h3><ol class="order-history" data-field="review-events"></ol>
+<a class="secondary-btn" data-field="review-confirmation" target="_blank" rel="noopener" hidden>Refund confirmation</a>
+<form class="stack-form" data-form="review-request"><label>Next action<select name="status" required></select></label>
+<label>Approved amount (PHP)<input name="amount" type="number" min="0.01" step="0.01"></label>
+<label>Review / inspection note<textarea name="note" required minlength="3" maxlength="300" rows="3"></textarea></label>
+<label class="confirmation-option"><input type="checkbox" name="restock"> Restock the selected items after inspection (Item Received → Refund Processing only).</label>
+<p class="form-error" data-field="form-error" role="alert" hidden></p><button class="primary-btn" type="submit">Save review</button></form></div></template>
+<template id="delivery-editor-template"><form class="stack-form" data-form="delivery-editor">
+<p class="form-hint">School delivery simulation. Route points and progress are store-controlled, not live courier GPS.</p>
+<label>Delivery method<input name="method" value="School delivery simulation" maxlength="100" required></label>
+<label>Tracking reference<input name="reference" maxlength="100" placeholder="Store-issued SIM reference"></label>
+<label>Estimated delivery window (optional)<input name="window" maxlength="150" placeholder="Set only when supported"></label>
+<label>Simulated route points: latitude, longitude (one per line)<textarea name="route" rows="5" required placeholder="Add dispatch, waypoints and destination coordinates"></textarea></label>
+<label>Current route point<input name="progress" type="number" min="1" value="1" required></label>
+<label>Fulfillment status<select name="status"></select></label><label>Delivery update<textarea name="note" required minlength="3" maxlength="250" rows="2"></textarea></label>
+<p class="form-error" data-field="form-error" role="alert" hidden></p><button type="submit" class="primary-btn">Save delivery update</button>
+</form></template>

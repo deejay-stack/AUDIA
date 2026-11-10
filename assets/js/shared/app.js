@@ -58,6 +58,8 @@ const app = {
   login(account) {
     user = account;
     localStorage.setItem("audia-auth-event", `login:${Date.now()}`);
+    const next=new URLSearchParams(location.search).get('next');
+    if(next && /^\/(receipts|verify|refunds)\//.test(next)) {location.assign(next);return;}
     app.navigate(account.role === "admin" ? "dashboard" : "storefront");
   },
   async logout() {
@@ -194,3 +196,12 @@ if (!followOldBookmark()) {
     root.removeAttribute("aria-busy");
   }
 }
+
+// Normal route navigation starts at the top; preserve intentional hash anchors.
+if (!location.hash && performance.getEntriesByType("navigation")[0]?.type === "navigate") {
+  history.scrollRestoration = "manual"; window.scrollTo(0, 0);
+}
+document.addEventListener("error", (event) => {
+  const logo = event.target.closest?.(".provider-logo img");
+  if (logo) { logo.hidden = true; logo.nextElementSibling.hidden = false; }
+}, true);

@@ -1,0 +1,4 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{{ code }} | AUDIA</title>
+<link rel="stylesheet" href="{{ url_for('static',filename='css/shared/receipt.css') }}"></head><body><main class="receipt">
+<p class="eyebrow">AUDIA · {{ code }}</p><h1>{{ 'Page unavailable' if code == 404 else 'Please try again' }}</h1><p>{{ message }}</p>
+<nav class="receipt-actions"><a href="/">Store home</a><a href="{{ request.path }}">Retry</a><a href="{{ '/admin' if g.user and g.user.role == 'admin' else '/orders' }}">{{ 'Administration' if g.user and g.user.role == 'admin' else 'My orders' }}</a></nav></main></body></html>

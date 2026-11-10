@@ -1,3 +1,4 @@
+@import url("admin_finance.css");
 /* ==================================================
    COMPONENT: ADMIN
    HTML FILE: templates/admin/admin.html
@@ -86,6 +87,18 @@
 .admin-page td {
   font-variant-numeric: tabular-nums;
 }
+
+@media (min-width:1024px) {
+  .admin-header__sidebar { display:inline-grid; }
+  .admin-page.sidebar-collapsed aside { transform:translateX(-100%); }
+  .admin-page.sidebar-collapsed .admin__admin-page-div { padding-left:0; }
+}
+.admin-page aside { overflow-y:auto; }
+.finance-bar[role="button"] { cursor:pointer; }
+.admin-global-search { display:flex; align-items:center; gap:.5rem; max-width:360px; margin-inline:auto; }
+.admin-global-search input { width:100%; min-width:0; padding:.6rem .8rem; border:1px solid var(--line); border-radius:9px; background:var(--surface); }
+.admin-profile-link { font-size:.7rem; color:var(--accent); text-align:left; }
+@media (max-width:1100px) { .admin-global-search { display:none; } }
 
 .admin-section-heading {
   display: flex;

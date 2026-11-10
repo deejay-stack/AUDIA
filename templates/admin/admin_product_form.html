@@ -3,6 +3,7 @@
      JS: assets/js/admin/admin.js. Preserve IDs and data-action/data-field hooks. -->
 <template id="product-form-template">
   <form method="post" class="form-grid" data-form="product">
+    <div class="form-wide" data-field="product-history"></div>
     <label class="form-wide"
       >Product name<input name="name" required minlength="2" maxlength="150"
     /></label>
@@ -49,6 +50,7 @@
     <label class="checkbox-label"
       ><input type="checkbox" name="active" checked /> Visible in store</label
     >
+    <label class="form-wide">Upload product image<input type="file" name="upload_image" accept="image/png,image/jpeg,image/webp"></label>
     <label class="form-wide"
       >Image URL or local path<input
         name="image"

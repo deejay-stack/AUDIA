@@ -1,26 +1,44 @@
 <template id="demo-payment-template">
   <form class="stack-form demo-payment">
-    <p class="section-label">AUDIA payment simulator</p>
-    <div class="payment-preview">Demonstration only · No money will be transferred. Do not enter bank or e-wallet credentials.</div>
-    <div class="demo-payment__amount"><span class="form-hint" data-field="payment-method"></span><strong data-field="payment-amount"></strong></div>
+    <p class="section-label" data-field="payment-store">AUDIA checkout</p>
+    <div class="provider-logo" data-field="payment-logo"></div>
+    <p class="form-hint">Test environment — payment is simulated. No funds are transferred. Do not enter bank or e-wallet credentials.</p>
+    <div data-field="payment-review"><div class="demo-payment__amount"><span class="form-hint" data-field="payment-method"></span><strong data-field="payment-amount"></strong></div>
     <dl class="detail-list">
       <dt>Order</dt><dd data-field="payment-order"></dd>
       <dt>Reference</dt><dd data-field="payment-reference"></dd>
       <dt>Expires</dt><dd data-field="payment-expiry"></dd>
+      <dt>Recipient</dt><dd data-field="payment-recipient"></dd>
+      <dt>Test account identifier</dt><dd data-field="payment-account"></dd>
+      <dt>Authorization</dt><dd data-field="payment-mode"></dd>
     </dl>
-    <label data-field="test-controls" hidden>Demo testing outcome
+    <p class="form-hint" data-field="payment-instructions"></p></div>
+    <section data-field="gcash-authorization" class="gcash-authorization" hidden>
+      <h2>Enter your GCash number</h2>
+      <p class="form-hint">Authorize this store-controlled simulated payment. No funds are transferred.</p>
+      <div class="demo-payment__amount"><span>Amount to pay</span><strong data-field="gcash-amount"></strong></div>
+      <label>GCash mobile number<input name="gcash_number" type="tel" inputmode="tel" autocomplete="off" maxlength="16" pattern="(09[0-9]{9}|\+639[0-9]{9})" placeholder="09XXXXXXXXX" aria-describedby="gcash-number-hint"></label>
+      <p class="form-hint" id="gcash-number-hint">Use a test number for this school simulation. Only its masked form is saved. No PIN or OTP is needed.</p>
+    </section>
+    <label data-field="test-controls" hidden>Test outcome
       <select name="outcome">
         <option value="success">Successful payment</option>
         <option value="failure">Failed payment</option>
         <option value="timeout">Payment timeout</option>
       </select>
-      <span class="form-hint">Local demo test controls enabled by the server.</span>
+      <span class="form-hint">Test controls enabled by the server.</span>
     </label>
     <p class="form-error" role="alert" data-field="form-error" hidden></p>
-    <p class="payment-result" role="status" data-field="payment-result">Preparing your secure demo reference…</p>
+    <p class="payment-result" role="status" data-field="payment-result">Preparing your internal transaction reference…</p>
+    <section data-field="payment-success" class="payment-success" hidden><span class="payment-success__check" aria-hidden="true">✓</span><h2>Payment Successful</h2>
+      <strong class="success-amount" data-field="success-amount"></strong><p data-field="success-method"></p><p data-field="success-number" class="form-hint"></p>
+      <p class="form-hint">Test environment — payment is simulated. No funds are transferred.</p>
+      <p>Recorded by the store. Your internal receipt is ready.</p><dl class="detail-list"><dt>Order</dt><dd data-field="success-order"></dd><dt>Transaction</dt><dd data-field="success-reference"></dd><dt>Paid at</dt><dd data-field="success-date"></dd></dl>
+      <img class="success-qr" data-field="success-qr" alt="QR for the store's authorized receipt verification page" width="140" height="140">
+      <a class="primary-btn" data-field="success-receipt" target="_blank" rel="noopener">View receipt &amp; QR</a><a class="secondary-btn" href="/orders">Track order</a><a class="secondary-btn" href="/shop">Continue shopping</a></section>
     <div class="form-actions">
       <button type="button" class="secondary-btn" data-field="cancel-payment">Cancel payment</button>
-      <button type="submit" class="primary-btn" disabled>Confirm demo payment</button>
+      <button type="submit" class="primary-btn" disabled>Confirm payment</button>
     </div>
   </form>
 </template>

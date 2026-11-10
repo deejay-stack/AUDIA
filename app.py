@@ -14,6 +14,7 @@ import click
 from dotenv import load_dotenv
 from flask import (
     Flask,
+    abort,
     current_app,
     g,
     jsonify,
@@ -25,6 +26,7 @@ from flask import (
 from sqlalchemy import select, text
 from sqlalchemy.exc import IntegrityError, OperationalError
 from werkzeug.security import generate_password_hash
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 
 # ---------------------------------------------------------
@@ -41,6 +43,8 @@ load_dotenv(ROOT / ".env")
 # ---------------------------------------------------------
 
 from audia.routes.admin import admin
+from audia.routes.admin.commerce import commerce
+from audia.routes.admin.operations import operations
 from audia.routes.auth import (
     auth,
     install_security,
@@ -69,6 +73,13 @@ app = Flask(
     instance_path=str(ROOT / "instance"),
 )
 
+# Trust forwarded origin headers only when explicitly behind this many known proxies.
+# Direct local development keeps this disabled; never trust arbitrary client headers.
+trusted_proxies = int(os.getenv('TRUSTED_PROXY_HOPS', '0'))
+if trusted_proxies:
+    app.wsgi_app = ProxyFix(app.wsgi_app, x_for=trusted_proxies, x_proto=trusted_proxies,
+                           x_host=trusted_proxies, x_port=trusted_proxies)
+
 
 # ---------------------------------------------------------
 # 4. Build PostgreSQL database URL
@@ -82,6 +93,8 @@ from audia.config.database import build_database_url
 # ---------------------------------------------------------
 
 app.config.update(
+    # Keep templates in sync with edited JavaScript during local development.
+    TEMPLATES_AUTO_RELOAD=os.getenv('TEMPLATES_AUTO_RELOAD', 'true').lower() == 'true',
     # Outcome overrides are opt-in and apply exclusively to the internal simulator.
     DEMO_PAYMENT_TEST_CONTROLS=os.getenv('DEMO_PAYMENT_TEST_CONTROLS', 'false').lower() == 'true',
     DATABASE_URL=build_database_url(),
@@ -107,7 +120,7 @@ app.config.update(
         days=30
     ),
 
-    MAX_CONTENT_LENGTH=64 * 1024,
+    MAX_CONTENT_LENGTH=5 * 1024 * 1024,
 
     MAIL_BACKEND=os.getenv(
         "MAIL_BACKEND",
@@ -201,6 +214,8 @@ app.register_blueprint(auth)
 app.register_blueprint(catalog)
 app.register_blueprint(orders)
 app.register_blueprint(admin)
+app.register_blueprint(commerce)
+app.register_blueprint(operations)
 
 # Gemini chatbot
 app.register_blueprint(chatbot)
@@ -325,14 +340,18 @@ def orders_page():
 
 
 @app.route("/admin")
+@app.route('/admin/<section>')
 @require_page(role='admin')
-def dashboard():
+def dashboard(section='overview'):
     """Administrator workspace; customers receive a 403 before rendering."""
+    if section not in ('overview','pos','transactions','sales','products','customers','settings','refunds','inventory','delivery'):
+        abort(404)
     return render_template(
         "admin/admin.html",
         title="Administration",
         page_name="dashboard",
         stylesheet="admin/admin",
+        admin_section=section,
     )
 
 
@@ -377,6 +396,8 @@ def database_unavailable(error):
     if g.get("db"):
         g.db.rollback()
 
+    if not request.path.startswith('/api/'):
+        return render_template('shared/error.html', code=503, message='The database is unavailable. Please try again shortly.'), 503
     return jsonify(
         error=(
             "The database is unavailable. "
@@ -403,6 +424,22 @@ def request_too_large(error):
     return jsonify(
         error="This request is too large."
     ), 413
+
+
+@app.errorhandler(404)
+def page_not_found(error):
+    if request.path.startswith('/api/'):
+        return jsonify(error='The requested record was not found.'), 404
+    return render_template('shared/error.html', code=404, message='This page or record is unavailable for your account.'), 404
+
+
+@app.errorhandler(500)
+def unexpected_failure(error):
+    if g.get('db'):
+        g.db.rollback()
+    if request.path.startswith('/api/'):
+        return jsonify(error='The operation could not be completed. Retry with the same request to recover safely.'), 500
+    return render_template('shared/error.html', code=500, message='Something went wrong. Please retry.'), 500
 
 
 # ---------------------------------------------------------

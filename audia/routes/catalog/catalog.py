@@ -17,11 +17,13 @@ catalog = Blueprint('catalog', __name__, url_prefix='/api')
 
 @catalog.get('/store')
 def store_info():
-    values = {'store_name': 'AUDIA Flagship', 'support_email': 'support@audia.ph'}
+    from audia.services.settings import settings, DEFAULTS
+    values = DEFAULTS.copy()
     if 'engine' in current_app.extensions:
-        values.update({item.key: item.value for item in db().scalars(select(Setting))
-                       if item.key in values})
-    return jsonify(store=values)
+        values = settings()
+    keys = ('store_name','support_email','contact_phone','shipping_fee','delivery_options',
+            'cancellation_policy','return_policy','checkout_instructions','enabled_methods','categories')
+    return jsonify(store={k:values[k] for k in keys})
 
 
 def products_data():

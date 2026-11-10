@@ -95,7 +95,7 @@
             <option>Shipped</option>
             <option>Delivered</option>
             <option>Cancelled</option>
-            <option>Processing</option>
+            <option>Processing</option><option>Packed</option><option>Returned</option>
             <option>Pending</option>
             <option>Confirmed</option>
             <option>Out for Delivery</option>
@@ -119,6 +119,7 @@
           </svg>
         </label>
       </div>
+      <div class="ledger-filters stack-form"><label>Payment status<select data-field="sales-payment"><option value="">All payment statuses</option>{% for s in ['Pending','Processing','Pending Verification','Paid','Failed','Cancelled','Partially Refunded','Refunded'] %}<option>{{ s }}</option>{% endfor %}</select></label><label>Sort orders<select data-field="sales-sort"><option value="newest">Newest first</option><option value="amount">Highest total</option><option value="customer">Customer name</option></select></label></div>
       <div class="admin-sales__surface-card-div-all-shipped-delivered-cancelled-processing">
         <table class="admin-sales__surface-card-table">
           <thead>

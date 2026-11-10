@@ -1,3 +1,5 @@
+import { mountPos, mountTransactions, renderFinanceSummary } from "./finance.js";
+import { mountOperations, customerProfile } from './operations.js';
 import {
   imageSource,
   $,
@@ -20,10 +22,13 @@ import {
 
 const labels = {
   overview: "Overview",
+  pos: "Point of sale",
+  transactions: "Payments & transactions",
   sales: "Orders & payments",
   products: "Products",
   customers: "Customers",
   settings: "Settings",
+  refunds: 'Returns & Refunds', inventory: 'Inventory movements', delivery: 'Fulfillment & Delivery',
 };
 
 export function mountAdmin(page, app) {
@@ -33,13 +38,15 @@ export function mountAdmin(page, app) {
     customers = [],
     query = "",
     status = "All",
+    paymentFilter = '', salesSort = 'newest',
     pageNumber = 0,
-    period = "week";
+    period = "week", group = "day", reportStart = "", reportEnd = "", ledgerDefaults = {}, stopLedger;
   let alive = true,
     generation = 0,
     backdrop,
     summary;
   const main = field(page, "admin-view");
+  page.addEventListener('audia:ledger-filter',event=>{ledgerDefaults=event.detail;void navigate('transactions');});
   text(page, "admin-name", app.user.name);
   function saleRow(sale, recent = false) {
     const row = clone(recent ? "recent-sale" : "sale-row");
@@ -53,7 +60,7 @@ export function mountAdmin(page, app) {
     ])
       text(row, key, sale[key]);
     text(row, "amount", peso(sale.amount));
-    if (!recent) text(row, "payment", `${sale.payment}${sale.is_demo ? " (demo)" : ""} · ${sale.payment_status}`);
+    if (!recent) text(row, "payment", `${sale.payment} · ${sale.payment_status}`);
     text(row, "status", sale.status);
     field(row, "status").className =
       `order-status status-${sale.status.toLowerCase().replaceAll(" ", "-")}`;
@@ -62,12 +69,13 @@ export function mountAdmin(page, app) {
   function renderSales() {
     const filtered = sales.filter(
       (sale) =>
-        (status === "All" || sale.status === status) &&
+        (status === "All" || sale.status === status) && (!paymentFilter || sale.payment_status === paymentFilter) &&
         `${sale.id} ${sale.customer} ${sale.email} ${sale.product}`
           .toLowerCase()
           .includes(query.toLowerCase()),
     );
     const recent = active === "overview";
+    filtered.sort((a,b)=>salesSort==='amount'?b.amount-a.amount:salesSort==='customer'?a.customer.localeCompare(b.customer):b.created_at.localeCompare(a.created_at));
     pageNumber = Math.max(
       0,
       Math.min(pageNumber, Math.ceil(filtered.length / 10) - 1),
@@ -136,6 +144,9 @@ export function mountAdmin(page, app) {
     field(main, "customers").replaceChildren(
       ...filtered.map((customer) => {
         const card = clone("customer");
+        card.tabIndex=0;card.setAttribute('role','button');card.setAttribute('aria-label',`View ${customer.name}`);
+        card.addEventListener('click',()=>void customerProfile(customer.id));
+        card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();void customerProfile(customer.id);}});
         text(
           card,
           "initials",
@@ -154,88 +165,9 @@ export function mountAdmin(page, app) {
     );
   }
   function renderSummary() {
-    for (const key of [
-      "gross_revenue",
-      "total_orders",
-      "new_customers",
-      "low_stock_items",
-    ])
-      text(
-        main,
-        key,
-        key === "gross_revenue" ? peso(summary[key]) : summary[key],
-      );
-    text(
-      main,
-      "today",
-      new Date().toLocaleDateString("en-PH", {
-        weekday: "long",
-        month: "long",
-        day: "numeric",
-      }),
-    );
-    text(
-      main,
-      "admin-greeting",
-      `Welcome back, ${app.user.name.split(" ")[0]}.`,
-    );
-    field(main, "report-period").value = period;
-    const chart = field(main, "revenue-chart"),
-      max = Math.max(...summary.chart.map((day) => day.amount), 0);
-    if (!max) empty(chart, "No verified cash collections in this period.");
-    else {
-      const ns = "http://www.w3.org/2000/svg",
-        svg = document.createElementNS(ns, "svg");
-      svg.setAttribute("viewBox", "0 0 700 230");
-      svg.setAttribute("role", "img");
-      svg.setAttribute("aria-label", "Verified cash collections by day");
-      const title = document.createElementNS(ns, "title");
-      title.textContent = "Daily verified cash collections";
-      svg.append(title);
-      const width = 700 / summary.chart.length;
-      summary.chart.forEach((day, index) => {
-        const rect = document.createElementNS(ns, "rect"),
-          height = (day.amount / max) * 185;
-        for (const [name, value] of Object.entries({
-          x: index * width + 3,
-          y: 200 - height,
-          width: Math.max(width - 6, 1),
-          height,
-          rx: 4,
-        }))
-          rect.setAttribute(name, String(value));
-        const title = document.createElementNS(ns, "title");
-        title.textContent = `${day.date}: ${peso(day.amount)}`;
-        rect.append(title);
-        svg.append(rect);
-      });
-      const caption = document.createElement("p");
-      caption.className = "form-hint";
-      caption.textContent = `${summary.chart[0].date} — ${summary.chart.at(-1).date} · Peak ${peso(max)}`;
-      chart.replaceChildren(svg, caption);
-    }
-    const categories = field(main, "category-report"),
-      total = Object.values(summary.categories).reduce(
-        (sum, value) => sum + value,
-        0,
-      );
-    if (!total) empty(categories, "Category totals appear after verified cash collection.");
-    else
-      categories.replaceChildren(
-        ...Object.entries(summary.categories).map(([category, value]) => {
-          const row = document.createElement("div"),
-            label = document.createElement("p"),
-            meter = document.createElement("meter");
-          label.textContent = `${category} · ${Math.round((value / total) * 100)}%`;
-          meter.min = 0;
-          meter.max = total;
-          meter.value = value;
-          meter.setAttribute("aria-label", `${category} revenue`);
-          row.append(label, meter);
-          return row;
-        }),
-      );
+    renderFinanceSummary(main, summary, app, period, group);
   }
+
   function closeSidebar() {
     const sidebar = $(page, "aside");
     sidebar.classList.add("is-sidebar-closed");
@@ -247,9 +179,14 @@ export function mountAdmin(page, app) {
   }
   async function navigate(next) {
     if (!alive) return;
+    stopLedger?.(); stopLedger = null;
     active = next;
+    const url=next==='overview'?'/admin':'/admin/'+next;
+    if(location.pathname!==url)history.replaceState(null,'',url);
+    window.scrollTo({top:0, behavior:"instant"});
     query = "";
     status = "All";
+    paymentFilter='';salesSort='newest';
     pageNumber = 0;
     const request = ++generation;
     main.replaceChildren(clone(next === "products" ? "admin-products" : next));
@@ -264,7 +201,7 @@ export function mountAdmin(page, app) {
     try {
       if (next === "overview") {
         const [report, orders] = await Promise.all([
-          api(`/admin/summary?period=${period}`),
+          api(`/admin/summary?${new URLSearchParams({period, group, ...(reportStart ? {start:reportStart,end:reportEnd} : {})})}`),
           api("/admin/sales"),
         ]);
         if (!alive || request !== generation) return;
@@ -273,6 +210,13 @@ export function mountAdmin(page, app) {
         renderSummary();
         renderSales();
         text(page, "order-count", sales.length);
+      } else if (next === "pos") {
+        await mountPos(main);
+      } else if (['refunds','inventory','delivery'].includes(next)) {
+        stopLedger=await mountOperations(main,next);
+      } else if (next === "transactions") {
+        stopLedger = await mountTransactions(main, ledgerDefaults);
+        ledgerDefaults = {};
       } else if (next === "sales") {
         const data = await api("/admin/sales");
         if (!alive || request !== generation) return;
@@ -294,6 +238,8 @@ export function mountAdmin(page, app) {
         const form = main.querySelector("form");
         for (const [key, value] of Object.entries(data.settings))
           if (form.elements[key]) form.elements[key].value = value;
+        const audit=await api('/admin/audit');if(!alive||request!==generation)return;
+        field(main,'settings-audit').replaceChildren(...audit.events.map(e=>{const li=document.createElement('li');li.textContent=`${new Date(e.at).toLocaleString()} · ${e.action} · Actor #${e.actor_id}`;return li;}));
       }
     } catch (error) {
       if (!alive || request !== generation) return;
@@ -316,6 +262,20 @@ export function mountAdmin(page, app) {
         "product-form",
       ),
       form = panel.querySelector("form");
+    if(product){
+      const history=document.createElement('button');history.type='button';history.className='secondary-btn';history.textContent='View product sales history';field(form,'product-history').append(history);
+      history.addEventListener('click',async()=>{try{const data=await api(`/admin/products/${product.id}/history`),p=dialog(`${product.name} · Sales history`),body=field(p,'dialog-body');if(!data.orders.length)empty(body,'No orders for this product.');for(const order of data.orders){const b=document.createElement('button');b.type='button';b.className='secondary-btn';b.textContent=`${order.id} · ${order.customer} · ${order.payment_status} · ${peso(order.amount)}`;b.addEventListener('click',()=>orderDetails(order,{customer:false}));body.append(b);}}catch(e){notice(e.message);}});
+    }
+    api('/admin/settings').then(({settings})=>{
+      form.elements.category.replaceChildren(...settings.categories.split(',').map(c=>new Option(c,c)));
+      if(product)form.elements.category.value=product.category;
+    }).catch(e=>formError(form,e.message));
+    const upload=form.querySelector('[name=upload_image]');
+    upload.addEventListener('change',async()=>{
+      if(!upload.files.length)return;
+      const body=new FormData();body.set('purpose','product');body.set('image',upload.files[0]);
+      busy(form,true);try{form.elements.image.value=(await api('/uploads',{method:'POST',body})).url;notice('Product image uploaded. Save the product to use it.');}catch(e){formError(form,e.message);}finally{busy(form,false,'Save product');}
+    });
     if (product)
       for (const [key, value] of Object.entries(product)) {
         if (!form.elements[key]) continue;
@@ -343,6 +303,7 @@ export function mountAdmin(page, app) {
       busy(form, true);
       formError(form, "");
       const values = Object.fromEntries(new FormData(form));
+      delete values.upload_image;
       values.price = Number(values.price);
       values.stock = Number(values.stock);
       values.active = form.elements.active.checked;
@@ -399,6 +360,7 @@ export function mountAdmin(page, app) {
           method: "PATCH",
           body: {
             status: form.elements.status.value, expected_status: order.status,
+            reason:form.elements.reason.value,
             ...(form.elements.collection_confirmed.checked && !form.elements.collection_confirmed.disabled ? {
               payment_status: "Paid", collection_confirmed: true,
               payment_reference: form.elements.payment_reference.value,
@@ -420,12 +382,28 @@ export function mountAdmin(page, app) {
     const button = event.target.closest("[data-action]");
     if (!button) return;
     const action = button.dataset.action;
-    if (labels[action]) navigate(action);
+    if (labels[action]) {
+      if (action === "transactions" && button.dataset.metric && summary) {
+        const key = button.dataset.metric === "pending_payments" ? "pending_collection" : button.dataset.metric;
+        ledgerDefaults = {start:summary.start,end:summary.end};
+        if (["pending_collection","gross_sales","net_sales","collected_total","refunded_total","paid_orders","products_sold","refunded_transactions"].includes(key)) ledgerDefaults.metric = key;
+
+        else ledgerDefaults.metric = "revenue";
+        const today = new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Manila',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+        if (key === 'today_revenue') ledgerDefaults.start = ledgerDefaults.end = today;
+        if (key === 'monthly_revenue') {ledgerDefaults.start=today.slice(0,8)+'01';ledgerDefaults.end=today;}
+        if (key === 'weekly_revenue') {const d=new Date(today+'T00:00:00Z');d.setUTCDate(d.getUTCDate()-(d.getUTCDay()+6)%7);ledgerDefaults.start=d.toISOString().slice(0,10);ledgerDefaults.end=today;}
+      }
+      navigate(action);
+    }
+    if (action === 'report-dates') {reportStart=field(main,'report-start').value;reportEnd=field(main,'report-end').value;group=field(main,'report-group').value;navigate('overview');}
+    if (action === 'print-report') window.print();
     if (action === "store") app.navigate("landing");
     if (action === "admin-account") app.navigate("account");
     if (action === "logout") app.logout();
     if (action === "close-sidebar") closeSidebar();
     if (action === "sidebar") {
+      if(matchMedia('(min-width:1024px)').matches){page.classList.toggle('sidebar-collapsed');return;}
       const sidebar = $(page, "aside");
       sidebar.classList.remove("is-sidebar-closed");
       sidebar.classList.add("is-sidebar-open");
@@ -462,7 +440,7 @@ export function mountAdmin(page, app) {
     if (action === "export-sales") {
       try {
         const response = await fetch(
-          `/api/admin/sales/export?${new URLSearchParams({ q: query, status })}`,
+          `/api/admin/sales/export?${new URLSearchParams({ q: query, status, payment_status:paymentFilter })}`,
         );
         if (!response.ok)
           throw new Error(
@@ -485,6 +463,8 @@ export function mountAdmin(page, app) {
         if (!panel.isConnected) return;
         const alerts = [
           `${data.pending_orders} orders awaiting processing.`,
+          `${data.refund_requests} cancellation / refund requests awaiting review.`,
+          `${data.verification_pending} simulated bank payments awaiting verification.`,
           ...data.low_stock.map(
             (product) => `${product.name}: ${product.stock} left in stock.`,
           ),
@@ -518,17 +498,23 @@ export function mountAdmin(page, app) {
     }
   });
   page.addEventListener("change", (event) => {
+    if(event.target.dataset.field==='sales-payment'){paymentFilter=event.target.value;pageNumber=0;renderSales();}
+    if(event.target.dataset.field==='sales-sort'){salesSort=event.target.value;pageNumber=0;renderSales();}
     if (event.target.dataset.field === "sales-status") {
       status = event.target.value;
       pageNumber = 0;
       renderSales();
     }
+    if (event.target.dataset.field === "report-group") {group=event.target.value;navigate("overview");}
     if (event.target.dataset.field === "report-period") {
-      period = event.target.value;
+      period = event.target.value; reportStart = reportEnd = "";
       navigate("overview");
     }
   });
   page.addEventListener("submit", async (event) => {
+    if(event.target.dataset.form==='admin-search'){
+      event.preventDefault();const value=event.target.elements.q.value;await navigate('sales');query=value;field(main,'sales-query').value=value;renderSales();return;
+    }
     if (event.target.dataset.form !== "settings") return;
     event.preventDefault();
     const form = event.target;
@@ -553,13 +539,18 @@ export function mountAdmin(page, app) {
       if (alive) text(page, "store-name", data.settings.store_name);
     })
     .catch(() => {});
-  navigate("overview");
+  navigate(document.body.dataset.adminSection || 'overview');
   const stopPolling = poll(async () => {
     if (!alive || !["overview", "sales"].includes(active)) return;
     const view = active;
     try {
       const data = await api("/admin/sales");
       if (!alive || view !== active) return;
+      if (active === "overview") {
+        summary = await api(`/admin/summary?${new URLSearchParams({period,group,...(reportStart?{start:reportStart,end:reportEnd}:{})})}`);
+        if (!alive || view !== active) return;
+        renderSummary();
+      }
       if (JSON.stringify(data.sales) !== JSON.stringify(sales)) {
         sales = data.sales; renderSales(); text(page, "order-count", sales.length);
       }
@@ -569,7 +560,7 @@ export function mountAdmin(page, app) {
     destroy() {
       alive = false;
       generation++;
-      stopPolling();
+      stopPolling(); stopLedger?.();
     },
   };
 }

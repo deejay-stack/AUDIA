@@ -17,7 +17,7 @@ from flask import Blueprint, current_app, g, jsonify, request, Response
 from sqlalchemy import select
 from ..auth import payload, require_user, string, validate_email
 from audia.database import db
-from audia.database.models import Order, Product, Setting, User, now
+from audia.database.models import Order, Product, Setting, User, InventoryMovement, Upload, RefundRequest, AdminAudit, OrderEvent, now
 from audia.services.orders import update_order as apply_order_update
 
 admin = Blueprint('admin', __name__, url_prefix='/api/admin')
@@ -45,6 +45,8 @@ def export_sales():
     for order in sales_records():
         row = order.public()
         if status != 'All' and row['status'] != status:
+            continue
+        if request.args.get('payment_status') and row['payment_status'] != request.args['payment_status']:
             continue
         if query not in ' '.join(str(row[key]) for key in ('id', 'customer', 'email', 'product')).lower():
             continue
@@ -87,7 +89,8 @@ def product_values(data):
     values = {key: string(data, key, maximum, minimum) for key, maximum, minimum in (
         ('name', 150, 2), ('brand', 80, 1), ('category', 30, 1), ('level', 30, 1),
         ('color', 60, 0), ('badge', 40, 0), ('image', 2000, 1), ('description', 3000, 1))}
-    if values['category'] not in ('Electric', 'Acoustic', 'Bass', 'Classical', 'Accessories', 'Bundles'):
+    from audia.services.settings import settings
+    if values['category'] not in settings()['categories'].split(','):
         raise ValueError('Choose a valid product category.')
     if values['level'] not in ('Beginner', 'Intermediate', 'Advanced'):
         raise ValueError('Choose a valid experience level.')
@@ -98,7 +101,8 @@ def product_values(data):
         local_image = (image_root / values['image'].removeprefix('/static/images/')).resolve()
         is_local = (local_image.is_relative_to(image_root) and local_image.is_file()
                     and local_image.suffix.lower() in ('.png', '.jpg', '.jpeg', '.webp', '.svg'))
-    if not is_local and (url.scheme != 'https' or not url.netloc):
+    is_upload = values['image'].startswith('/uploads/') and db().scalar(select(Upload.id).where(Upload.id == values['image'].removeprefix('/uploads/'), Upload.purpose == 'product')) is not None
+    if not is_local and not is_upload and (url.scheme != 'https' or not url.netloc):
         raise ValueError('Use an HTTPS image URL or an existing /static/images/ file.')
     try:
         price = Decimal(str(data.get('price')))
@@ -121,6 +125,9 @@ def product_values(data):
 def add_product():
     product = Product(**product_values(payload()))
     db().add(product)
+    db().flush()
+    db().add(InventoryMovement(product_id=product.id, delta=product.stock, balance=product.stock, reason='Product created', actor_id=g.user.id))
+    db().add(AdminAudit(actor_id=g.user.id, action=f'Created product #{product.id}.'))
     db().commit()
     return jsonify(product=product.public()), 201
 
@@ -131,8 +138,13 @@ def edit_product(product_id):
     product = db().scalar(select(Product).where(Product.id == product_id).with_for_update())
     if not product:
         return jsonify(error='Product not found.'), 404
+    previous_stock = product.stock
     for key, value in product_values(payload()).items():
         setattr(product, key, value)
+    db().add(AdminAudit(actor_id=g.user.id, action=f'Updated product #{product.id}.'))
+    if previous_stock != product.stock:
+        db().add(InventoryMovement(product_id=product.id, delta=product.stock-previous_stock, balance=product.stock,
+                                  reason='Administrator stock adjustment', actor_id=g.user.id))
     db().commit()
     return jsonify(product=product.public())
 
@@ -144,6 +156,7 @@ def archive_product(product_id):
     if not product:
         return jsonify(error='Product not found.'), 404
     product.active = False
+    db().add(AdminAudit(actor_id=g.user.id, action=f'Archived product #{product.id}.'))
     db().commit()
     return jsonify(message='Product archived. Existing order records are preserved.')
 
@@ -151,46 +164,40 @@ def archive_product(product_id):
 @admin.get('/customers')
 @require_user(admin=True)
 def customers():
-    totals = defaultdict(lambda: {'orders': 0, 'amount': 0})
+    totals = defaultdict(lambda: {'orders': 0, 'amount': Decimal('0.00')})
     for order in sales_records():
         totals[order.user_id]['orders'] += 1
-        if order.status not in ('Cancelled', 'Refunded'):
-            totals[order.user_id]['amount'] += float(order.total)
-    return jsonify(customers=[dict(user.public(), **totals[user.id]) for user in
+        if order.payment_record and order.payment_record.status in ('Paid', 'Partially Refunded'):
+            totals[order.user_id]['amount'] += order.total - sum((r.amount for r in order.payment_record.refunds), Decimal('0'))
+    return jsonify(customers=[dict(user.public(), orders=totals[user.id]['orders'], amount=float(totals[user.id]['amount'])) for user in
                               db().scalars(select(User).where(User.role == 'customer').order_by(User.created_at.desc()))])
 
 
 @admin.get('/summary')
 @require_user(admin=True)
 def summary():
-    days = 30 if request.args.get('period') == 'month' else 7
-    today = now().date()
-    start = today - timedelta(days=days - 1)
-    records = [order for order in sales_records() if order.created_at.date() >= start]
-    earned = [order for order in records if order.status == 'Delivered' and order.payment_record and order.payment_record.status == 'Paid' and order.payment == 'Cash on delivery']
-    by_day, categories = defaultdict(float), defaultdict(float)
-    for order in earned:
-        by_day[order.created_at.date().isoformat()] += float(order.total)
-        for item in order.items:
-            categories[item.category] += float(item.price * item.quantity)
+    from audia.services.reporting import report, in_range, date_range
+    data = report(sales_records(), request.args)
+    start, end = date_range(request.args)
     low_stock = list(db().scalars(select(Product).where(Product.active.is_(True), Product.stock <= 4)))
     customers = list(db().scalars(select(User).where(User.role == 'customer')))
-    pending = sum(order.status == 'Pending' for order in sales_records())
-    return jsonify(gross_revenue=sum(float(order.total) for order in earned), total_orders=len(records),
-                   new_customers=sum(user.created_at.date() >= start for user in customers),
-                   low_stock_items=len(low_stock), low_stock=[p.public() for p in low_stock], pending_orders=pending,
-                   chart=[dict(date=(start + timedelta(days=i)).isoformat(), amount=by_day[(start + timedelta(days=i)).isoformat()])
-                          for i in range(days)], categories=dict(categories), period_days=days)
+    requests = list(db().scalars(select(RefundRequest)))
+    return jsonify(**data, new_customers=sum(in_range(u.created_at, start, end) for u in customers),
+                   recent_activity=[dict(e.public(),order_id=e.order_id) for e in db().scalars(select(OrderEvent).order_by(OrderEvent.created_at.desc()).limit(8))],
+                   refund_requests=sum(r.status not in ('Rejected','Closed','Refunded','Partially Refunded') for r in requests),
+                   completed_refunds=sum(r.refund_id is not None for r in requests),
+                   verification_pending=sum(o.payment_record is not None and o.payment_record.status == 'Pending Verification' for o in sales_records()),
+                   low_stock_items=len(low_stock), low_stock=[p.public() for p in low_stock],
+                   pending_orders=sum(o.status == 'Pending' for o in sales_records()))
 
 
 @admin.route('/settings', methods=['GET', 'PUT'])
 @require_user(admin=True)
 def settings():
+    from audia.services.settings import settings as store_settings, save_settings
     if request.method == 'PUT':
         data = payload()
-        name = string(data, 'store_name', 100, 2)
-        email = validate_email(data.get('support_email'))
-        for key, value in dict(store_name=name, support_email=email).items():
-            db().merge(Setting(key=key, value=value))
+        save_settings(data)
+        db().add(AdminAudit(actor_id=g.user.id, action='Updated store settings: ' + ', '.join(sorted(data))[:275]))
         db().commit()
-    return jsonify(settings={item.key: item.value for item in db().scalars(select(Setting))})
+    return jsonify(settings=store_settings())

@@ -5,15 +5,12 @@ Main components: history, detail, checkout.
 Related: routes.auth and database User/Product/Order/OrderItem mappings.
 Debugging: Trace request_key, locked inventory rows, and validation rollback handling.
 """
-import secrets
-import re
-from decimal import Decimal, InvalidOperation
 from flask import Blueprint, g, jsonify
 from sqlalchemy import select
 from ..auth import payload, require_user, string
 from audia.database import db
-from audia.database.models import Order, OrderItem, OrderEvent, OrderPayment, Product, User
-from audia.services.payments import METHODS, begin_attempt, confirm_attempt
+from audia.database.models import Order
+from audia.services.payments import begin_attempt, confirm_attempt
 
 orders = Blueprint('orders', __name__, url_prefix='/api/orders')
 
@@ -42,56 +39,10 @@ def checkout():
     Uses locked Product/User rows and server prices; ValueError reaches the
     auth validation handler, which rolls back incomplete transactions.
     """
-    data = payload()
-    key = string(data, 'request_key', 80, 16)
-    # Serializes checkouts for the same user, including concurrent retries.
-    db().scalar(select(User).where(User.id == g.user.id).with_for_update())
-    existing = db().scalar(select(Order).where(Order.user_id == g.user.id, Order.request_key == key))
-    if existing:
-        return jsonify(order=existing.public()), 200
-    method = data.get('payment_method', 'cod')
-    if not isinstance(method, str) or method not in METHODS:
-        raise ValueError('Choose GCash, Maya, BPI, BDO, or Cash on Delivery.')
-    address = string(data, 'address', 500, 10)
-    phone = string(data, 'phone', 30, 7)
-    if not re.fullmatch(r'\+?[\d ()-]+', phone) or not 7 <= len(re.sub(r'\D', '', phone)) <= 15:
-        raise ValueError('Enter a valid contact number with 7–15 digits.')
-    items = data.get('items')
-    if not isinstance(items, list) or not 1 <= len(items) <= 50:
-        raise ValueError('Your cart must contain between 1 and 50 products.')
-    quantities = {}
-    for item in items:
-        if not isinstance(item, dict) or type(item.get('product_id')) is not int or type(item.get('quantity')) is not int:
-            raise ValueError('A cart item is invalid.')
-        product_id, quantity = item['product_id'], item['quantity']
-        if not 1 <= quantity <= 99 or product_id in quantities:
-            raise ValueError('Please check the quantities in your cart.')
-        quantities[product_id] = quantity
-    products = list(db().scalars(select(Product).where(Product.id.in_(quantities)).order_by(Product.id).with_for_update()))
-    if len(products) != len(quantities):
-        raise ValueError('An item is no longer available. Please update your cart.')
-    order = Order(id='AUD-' + secrets.token_hex(6).upper(), user_id=g.user.id, customer=g.user.name,
-                  email=g.user.email, address=address, phone=phone, total=Decimal('0'), request_key=key,
-                  payment=METHODS[method], payment_record=OrderPayment(status='Pending'))
-    order.events.append(OrderEvent(status='Pending', note='Order placed; ' + ('pay with cash on delivery.' if method == 'cod' else 'awaiting demo payment. No money is transferred.'), actor_id=g.user.id))
-    for product in products:
-        quantity = quantities[product.id]
-        if not product.active or product.stock < quantity:
-            raise ValueError(f'{product.name} does not have enough stock. Please update your cart.')
-        product.stock -= quantity
-        order.total += product.price * quantity
-        order.items.append(OrderItem(product_id=product.id, name=product.name, category=product.category,
-                                     quantity=quantity, price=product.price))
-    if 'expected_total' in data:
-        try:
-            expected = Decimal(str(data['expected_total']))
-        except InvalidOperation as error:
-            raise ValueError('The checkout total is invalid. Refresh your cart and try again.') from error
-        if not expected.is_finite() or expected != order.total:
-            raise ValueError('Product prices changed. Refresh your cart and review the updated total before ordering.')
-    db().add(order)
+    from audia.services.checkout import create_order
+    order, created = create_order(payload(), g.user)
     db().commit()
-    return jsonify(order=order.public()), 201
+    return jsonify(order=order.public()), 201 if created else 200
 
 
 def own_locked_order(order_id):
@@ -107,7 +58,8 @@ def start_payment(order_id):
     attempt = begin_attempt(order, payload(), g.user)
     db().commit()
     from flask import current_app
-    return jsonify(order=order.public(), attempt=attempt.public(), test_controls=bool(current_app.config.get('DEMO_PAYMENT_TEST_CONTROLS')))
+    from audia.services.settings import payment_profile
+    return jsonify(order=order.public(), attempt=attempt.public(), profile=payment_profile(order), test_controls=bool(current_app.config.get('DEMO_PAYMENT_TEST_CONTROLS')))
 
 
 @orders.post('/<order_id>/payment-attempts/<attempt_id>/confirm')
@@ -132,9 +84,19 @@ def cancel_unpaid_order(order_id):
         return jsonify(error='No order found for this account.'), 404
     if order.status == 'Cancelled':
         return jsonify(order=order.public())
-    if order.status != 'Pending' or (order.payment_record and order.payment_record.status != 'Pending'):
-        raise ValueError('Only pending, unpaid orders can be cancelled here. Contact the store for assistance.')
+    data = payload()
+    from audia.services.settings import settings
+    if settings()['allow_cancellation'] != 'true':
+        raise ValueError('Order cancellation is disabled by current store policy.')
+    if order.payment_record and order.payment_record.status in ('Paid', 'Partially Refunded'):
+        from audia.services.returns import request_refund, request_public
+        item = request_refund(order, data, g.user, kind='cancellation')
+        db().commit()
+        return jsonify(order=order.public(), request=request_public(item))
+    if order.status not in ('Pending', 'Confirmed', 'Processing', 'Packed'):
+        raise ValueError('Dispatched orders use the return/refund workflow.')
     from audia.services.orders import update_order
-    update_order(order, {'status': 'Cancelled'}, g.user)
+    reason = string(data, 'reason', 250) or 'Customer cancelled unpaid order.'
+    update_order(order, {'status': 'Cancelled', 'reason':reason}, g.user)
     db().commit()
     return jsonify(order=order.public())

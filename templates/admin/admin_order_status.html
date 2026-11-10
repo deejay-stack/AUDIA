@@ -4,15 +4,15 @@
 <template id="order-status-template">
   <form method="post" class="stack-form admin-order-status__stack-form">
     <label>Update order status<select name="status" required></select></label>
+    <label>Reason / fulfillment note<input name="reason" maxlength="250" placeholder="Cancellation reason or fulfillment update"></label>
     <div data-field="collection" hidden>
-      <label class="confirmation-option"><input type="checkbox" name="collection_confirmed"> I confirm the cash payment was actually collected.</label>
+      <label class="confirmation-option"><input type="checkbox" name="collection_confirmed"> I confirm this simulated cash collection.</label>
       <label>Receipt / collection verification note<input name="payment_reference" minlength="3" maxlength="200" placeholder="Receipt number or collection record"></label>
       <p class="form-hint">COD can be accepted and dispatched while payment stays pending. Record collection only after delivery.</p>
     </div>
-    <div data-field="refund" hidden><label class="confirmation-option"><input type="checkbox" name="refund_confirmed"> I confirm the offline refund has actually been completed.</label></div>
+    <div data-field="refund" hidden><label class="confirmation-option"><input type="checkbox" name="refund_confirmed"> I confirm this internal test refund.</label></div>
     <p class="form-hint">
-      Cancelled and refunded orders return their items to inventory. Refund
-      status records an offline refund; it does not transfer money.
+      Cancellation releases reserved stock. Refunds and returns do not automatically restock items. Test Mode — No real funds transferred.
     </p>
     <p class="form-error" data-field="form-error" role="alert" hidden></p>
     <button type="submit" class="primary-btn">Update order</button>

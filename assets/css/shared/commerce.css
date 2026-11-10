@@ -86,3 +86,33 @@
   .checkout-section { padding: var(--space-3); }
   .payment-option { border-radius: var(--radius-sm); }
 }
+
+.provider-logo{display:inline-grid;place-items:center;width:70px;height:36px;flex:0 0 70px;background:white;border-radius:5px;padding:5px}.provider-logo img{width:100%;height:100%;object-fit:contain}.provider-fallback{color:#24212d;font-size:.75rem;font-weight:600}
+
+.payment-option:has(input[value="bdo"]) .provider-logo,.payment-option:has(input[value="metrobank"]) .provider-logo{background:#12305b}
+.payment-success { padding: 1.25rem; border: 1px solid var(--success); border-radius: 14px; background: var(--soft); display: grid; gap: 1rem; }
+.payment-success__check { display:grid; place-items:center; width:48px; height:48px; background:#167942; color:white; border-radius:50%; font-size:1.8rem; animation:payment-confirm .3s ease-out; }
+@keyframes payment-confirm { from {transform:scale(.7);opacity:0} to {transform:scale(1);opacity:1} }
+.delivery-panel, .request-card { padding:1rem; border:1px solid var(--line); border-radius:12px; margin-block:1rem; }
+.delivery-panel .delivery-map { height:320px; width:100%; margin-top:1rem; border-radius:10px; background:var(--soft); color:#20202a; isolation:isolate; }
+.request-history, .request-card, .request-products { display:grid; gap:.75rem; }
+.request-card { overflow-wrap:anywhere; font-size:.85rem; }
+.request-card small { color:var(--muted); }
+.request-products label { display:grid; grid-template-columns:minmax(0,1fr) 90px; align-items:center; gap:1rem; }
+.operations-rows { display:grid; gap:1rem; margin-block:1.25rem; }
+.operations-row { display:flex; flex-wrap:wrap; gap:.75rem; align-items:center; padding:1rem; border:1px solid var(--line); border-radius:12px; }
+.operations-row strong, .operations-row p { flex-basis:100%; overflow-wrap:anywhere; }
+.operations-row p { color:var(--muted); font-size:.85rem; }
+.operations-summary { display:flex; flex-wrap:wrap; gap:.75rem; }
+.evidence-gallery { display:flex; flex-wrap:wrap; gap:.75rem; }
+.evidence-gallery img { width:110px; height:110px; object-fit:cover; border-radius:8px; }
+.notification-panel { padding:1.25rem; margin-block:1.5rem; }
+.notification-item { border-bottom:1px solid var(--line); padding:.75rem 0; font-size:.85rem; color:var(--muted); overflow-wrap:anywhere; }
+.notification-item[data-read="false"] { color:var(--text); }
+.success-qr { background:white; padding:.25rem; border-radius:8px; }
+.demo-payment .provider-logo:is([data-provider="BDO"],[data-provider="Metrobank"]) { background:#12305b; }
+.payment-success h2 { font-family:var(--font-display); font-size:1.5rem; font-weight:600; }
+.payment-success .success-amount { font-size:2rem; font-family:var(--font-display); }
+.gcash-authorization { display:grid; gap:1rem; padding:1.25rem; background:var(--soft); border:1px solid var(--line); border-radius:14px; }
+.gcash-authorization h2 { font-family:var(--font-display); font-size:1.4rem; font-weight:600; }
+@media (prefers-reduced-motion:reduce) { .payment-success__check { animation:none; } }

@@ -22,6 +22,13 @@ export function mountAccount(page, app) {
   if (profile) for (const name of ["name", "email", "phone", "address"])
     profile.elements[name].value = app.user[name] || "";
   let loadingOrders = false, loadedOrders = false, snapshot = "";
+  async function loadNotifications(){
+    const target=field(page,'account-notifications');if(!target)return;
+    try{const data=await api('/account/notifications');if(!alive)return;
+      if(!data.notifications.length)return empty(target,'Order, payment and refund updates will appear here.');
+      target.replaceChildren(...data.notifications.map(n=>{const p=document.createElement('p');p.className='notification-item';p.dataset.read=n.read;p.textContent=`${n.read?'':'● '}${n.order_id} · ${n.message} · ${new Date(n.at).toLocaleString()}`;return p;}));
+    }catch(e){if(alive)empty(target,e.message);}
+  }
   async function loadOrders() {
     if (loadingOrders) return;
     loadingOrders = true;
@@ -29,6 +36,7 @@ export function mountAccount(page, app) {
       const data = await api("/orders");
       if (!alive) return;
       textUpdate("Tracking up to date. Automatically refreshes every 15 seconds.");
+      void loadNotifications();
       const next = JSON.stringify(data.orders);
       if (snapshot === next) return;
       snapshot = next;
@@ -47,7 +55,7 @@ export function mountAccount(page, app) {
             field(card, key).textContent = order[key];
           field(card, "amount").textContent = peso(order.amount);
           field(card, "status").dataset.status = order.status;
-          field(card, "payment").textContent = `${order.payment}${order.is_demo ? " (demo)" : ""} · ${order.payment_status}`;
+          field(card, "payment").textContent = `${order.payment} · ${order.payment_status}`;
           field(card, "tracking").textContent = order.status === "Pending" ? "Awaiting store confirmation" : `Tracking: ${order.status}`;
           return card;
         }),
@@ -123,6 +131,7 @@ export function mountAccount(page, app) {
     if (action === "store") app.navigate(app.user.role === "admin" ? "dashboard" : "storefront");
     if (action === "logout") app.logout();
     if (action === "refresh-orders") loadOrders();
+    if (action === 'read-notifications') {try{await api('/account/notifications/read',{method:'POST',body:{}});await loadNotifications();}catch(e){notice(e.message);}}
     if (action === "view-order")
       orderDetails(
         orders.find(

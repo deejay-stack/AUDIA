@@ -2,6 +2,19 @@
 
 A Flask storefront and administration workspace with HTML templates, CSS, and vanilla JavaScript. Run the application from the root `app.py`; no frontend build is required.
 
+The current [full-stack enhancement report](docs/ENHANCEMENT_REPORT.md) covers
+customer return/refund requests, paid cancellation review, bank verification,
+QR receipts, delivery maps, inventory movements, customer controls, store policies,
+database preservation and executed tests. The configured database has received the
+additive upgrade; existing accounts and historical records are preserved.
+
+Install the updated `requirements.txt` before starting this version (QR/image
+validation uses qrcode/Pillow). Start at `/orders`, `/admin/refunds`,
+`/admin/transactions`, `/admin/delivery`, `/admin/inventory` or `/admin/settings`.
+Electronic payments and refunds remain store-controlled simulations. Google Maps
+is optional; Leaflet/OSM provides the default map with no API key. Use
+`TRUSTED_PROXY_HOPS` only behind a known trusted reverse proxy.
+
 ## Run locally
 
 ```powershell
@@ -43,13 +56,13 @@ For an HTTPS deployment, set `COOKIE_SECURE=true` and set `APP_URL` to the publi
 | Account | Profile and delivery details, saved instruments, saved Finder preferences, order history and order details |
 | Public landing | System overview, category studio photos, how it works, and account entry points |
 | Storefront (sign-in required) | Search, categories, sorting, stock availability, sound previews, cart quantities, bundles, accessories, and support information |
-| Checkout | Cash on delivery orders, server-calculated prices, transactional inventory checks, and duplicate-request protection |
+| Checkout | COD and six electronic payment simulations, server prices, inventory checks, duplicate protection and receipts |
 | Tracking | Signed-in customers can retrieve only their own orders; administrators can inspect store orders |
 | Administration | Inventory create/edit/archive/restore, customer directory/search, sales search/filter/pagination, CSV export, fulfillment status changes, store settings, and stock/order notifications |
-| Reporting | Revenue from delivered orders, date-range totals, category totals, recent orders, and low stock |
+| Reporting | Collection-date revenue minus refunds, POS/online channels, date filters, chart grouping, supporting transactions, CSV and printing |
 | Assistance | Four-step Guitar Finder and the AUDI chatbot connected to the existing Flask AI/RAG service |
 
-Payments are **cash on delivery**. There is no online payment gateway or carrier integration. Admin delivery and refund statuses record the store's actions; they do not charge cards, transfer funds, or call a shipping carrier. Cancellation and refund return the recorded quantities to inventory.
+Payments support GCash, Maya, BDO, BPI, Metrobank, LandBank and Cash on Delivery. All new collections run in **Test Mode - No real funds transferred**. Admin counter POS supports cash and electronic simulations through the same ledger. COD counts only after explicit collection; refunds reduce revenue and do not automatically restock goods. See [the commerce delivery report](docs/COMMERCE_DELIVERY.md) for architecture, formulas, database changes, workflows, tests and limits.
 
 The interface uses violet/mint accents, light/dark themes, responsive catalog and administration layouts, and a split sign-in screen. The uploaded guitars are served locally from `assets/images/{electric,acoustic,bass,classical}/`; `guitar_performance.jpg` appears on the authentication screen. `guitar_front.jpg` is the landing image, and the four `*_studio.jpg` files illustrate guitar families. Inventory accepts existing `/static/images/` paths and HTTPS image URLs. If an image fails, an uploaded studio photograph is shown with alternative text explaining that it is illustrative.
 
@@ -75,17 +88,17 @@ Reset requests use a generic response for unknown accounts. Links expire after 3
 
 ## Structure
 
-Start with [CSS_EDITING_GUIDE.md](docs/CSS_EDITING_GUIDE.md) for beginner steps
+Start with CSS_EDITING_GUIDE.md (historical guide not included in this checkout) for beginner steps
 to find a component, change its appearance, and understand dynamic text.
 
-Use [FRONTEND_COMPONENT_MAP.md](docs/FRONTEND_COMPONENT_MAP.md) for the current
+Use FRONTEND_COMPONENT_MAP.md (historical guide not included in this checkout) for the current
 HTML/CSS/JavaScript file pairs and student debugging steps. The frontend now uses
 traditional component CSS, with no Tailwind utilities or build dependency.
-See [UPGRADE_NOTES.md](docs/UPGRADE_NOTES.md) for the current features and verification results.
+See UPGRADE_NOTES.md (historical guide not included in this checkout) for the current features and verification results.
 
-See [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) for the current folder tree,
+See PROJECT_STRUCTURE.md (historical guide not included in this checkout) for the current folder tree,
 backend responsibilities and a guide to editing each feature.
-Use [DEBUGGING_GUIDE.md](DEBUGGING_GUIDE.md) to find the files/functions for a broken component.
+Use DEBUGGING_GUIDE.md (historical guide not included in this checkout) to find the files/functions for a broken component.
 
 ```text
 app.py                       Flask app, settings, @app.route pages, CLI, entry point
@@ -155,14 +168,13 @@ To test manually, run the configured Flask app, open `/`, and click **Ask AUDI, 
 
 ## Orders, payments and learning updates
 
-Authenticated customers can open **My Orders** at `/orders` from the shared navigation.
-Order lists and open tracking details refresh every 15 seconds while visible.
-Admin **Orders & payments** supports acceptance, rejection, processing, dispatch,
-delivery and recorded offline collection/refunds. COD stays pending until cash
-collection is explicitly confirmed after delivery. GCash, Maya, BPI and BDO now use
-an internal payment simulator with persistent attempts, cancellation, expiry and
-retry. They collect no financial credentials or money. Demo settlements are labelled
-`Demo paid` and excluded from collected revenue. See [the commerce delivery report](docs/COMMERCE_DELIVERY.md).
+Authenticated customers can open **My Orders** at `/orders`. Order and payment
+history, retry, cancellation and receipts use persisted backend records. Admins
+have **Point of sale**, **Payments & transactions**, order fulfillment and COD
+collection controls. Successful internal collections count toward revenue; pending
+and failed payments do not. Refunds have separate audited records. Overview and
+ledger views refresh while visible. Details and verification results are in
+[COMMERCE_DELIVERY.md](docs/COMMERCE_DELIVERY.md).
 
 The tuner uses real microphone input, with acoustic/electric sensitivity and
 manual/automatic standard-string targets. Learning now includes 20 chord shapes,
@@ -177,10 +189,10 @@ For an existing database, apply the additive migration before starting this vers
 
 The configured database in this workspace has already been upgraded. The command
 is repeatable and saves a private pre-upgrade row snapshot under `instance/backups/`.
-It creates missing feature tables without altering existing records. Fresh databases continue
+It adds commerce tables/columns, normalizes legacy payment labels, and records missing historical balances as unpaid without inventing collection evidence. Fresh databases continue
 to use `init-db`. Restart an already-running server to load Python changes.
 
-See [UPGRADE_NOTES.md](docs/UPGRADE_NOTES.md) for features, bug fixes, database changes,
+See UPGRADE_NOTES.md (historical guide not included in this checkout) for features, bug fixes, database changes,
 historical verification results and remaining limits. Current payment and security
 tests are retained in `tests/`; browser screenshots and results are generated under
 `test-results/commerce/`. Physical microphone and live external-service checks remain
@@ -211,5 +223,5 @@ Run the retained security and payment regression suites:
 .venv\Scripts\python.exe -B -m unittest discover -s tests -v
 ```
 
-See [SECURITY_REVIEW.md](docs/SECURITY_REVIEW.md) for every modified file, the test
+See SECURITY_REVIEW.md (historical guide not included in this checkout) for every modified file, the test
 matrix, shared color/spacing tokens, recovery checkpoints and verification limits.

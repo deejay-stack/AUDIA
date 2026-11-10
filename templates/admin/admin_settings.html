@@ -19,10 +19,27 @@
           maxlength="254"
           required
       /></label>
+      <h3>Checkout &amp; store policies</h3>
+      {% for key,label in [('contact_phone','Contact phone'),('delivery_options','Delivery options'),('recipient_name','Simulated payment recipient'),('enabled_methods','Available payment methods (cod,gcash,maya,bdo,bpi,metrobank,landbank)'),('categories','Catalog categories (comma separated)'),('cod_refund_destination','COD refund destination (simulation)')] %}
+      <label>{{ label }}<input name="{{ key }}" maxlength="1000"></label>{% endfor %}
+      <label>Shipping fee (PHP)<input name="shipping_fee" type="number" min="0" max="10000" step="0.01" required></label>
+      <label>Return period (days)<input name="return_days" type="number" min="1" max="90" required></label>
+      {% for key,label in [('cancellation_policy','Cancellation policy'),('return_policy','Return / refund policy'),('checkout_instructions','Checkout instructions'),('receipt_footer','Receipt footer')] %}
+      <label>{{ label }}<textarea name="{{ key }}" rows="3" maxlength="2000"></textarea></label>{% endfor %}
+      {% for key,label in [('allow_cancellation','Allow cancellation before dispatch'),('allow_partial_refunds','Allow partial refunds'),('return_required','Require physical return (except missing / undelivered goods)'),('notifications_enabled','Customer activity notifications')] %}
+      <label>{{ label }}<select name="{{ key }}"><option value="true">Enabled</option><option value="false">Disabled</option></select></label>{% endfor %}
+      <h3>Bank payment verification</h3><label>Bank simulation mode<select name="bank_mode"><option value="automatic">Automatic internal authorization</option><option value="manual">Manual administrator verification</option></select></label>
+      <p class="form-hint">Mode is captured when authorization starts. These fictional identifiers cannot receive funds.</p>
+      {% for bank in ['bdo','bpi','metrobank','landbank'] %}<label>{{ bank|upper }} test account identifier<input name="test_account_{{ bank }}" pattern="TEST-[A-Z]+-[A-Z0-9-]{1,20}" required></label>{% endfor %}
+      <h3>Delivery maps</h3><label>Map provider<select name="map_provider"><option value="leaflet">Leaflet / OpenStreetMap (no key)</option><option value="google">Google Maps with Leaflet fallback</option></select></label>
+      <label>Google Maps browser API key<input name="google_maps_key" maxlength="200" autocomplete="off"></label><p class="form-hint">Restrict the key to your deployed website origins and Maps JavaScript API in Google Cloud. A browser key is visible to signed-in map viewers.</p>
+      <label>HTTPS map tile URL<input name="map_tile_url" required></label><p class="form-hint">Use tiles with permission and retain visible OpenStreetMap attribution. Default: https://tile.openstreetmap.org/{z}/{x}/{y}.png</p>
+      <p class="form-hint">Administrative financial actions remain restricted to the existing single administrator role.</p>
       <p class="form-error" data-field="form-error" role="alert" hidden></p>
       <button class="primary-btn" type="submit">Save settings</button>
     </form>
     <div class="settings-security">
+      <details><summary>Recent administrative changes</summary><ul data-field="settings-audit" class="order-history"></ul></details>
       <h3 class="admin-settings__your-administrator-account">Your administrator account</h3>
       <p class="form-hint admin-settings__form-hint">Update your profile or change your password.</p>
       <button class="secondary-btn admin-settings__admin-account" data-action="admin-account">

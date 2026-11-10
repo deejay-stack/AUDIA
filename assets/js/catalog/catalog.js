@@ -219,7 +219,17 @@ export function mountStore(page, app) {
     if (!cart.length) return;
     const panel = dialog("Your next chapter starts here.", "checkout");
     const form = panel.querySelector("form");
-    let submitting = false, pendingOrder = null;
+    let submitting = false, pendingOrder = null, shipping = 0, policyReady = false;
+    form.querySelector('[type=submit]').disabled = true;
+    api('/store').then(({store}) => {
+      if(!panel.isConnected)return;
+      shipping=Number(store.shipping_fee); policyReady=true;
+      text(form,'checkout-shipping',peso(shipping));text(form,'checkout-total',peso(subtotal+shipping));
+      for(const input of form.querySelectorAll('[name=payment_method]')) {input.disabled=!store.enabled_methods.split(',').includes(input.value);input.closest('label').hidden=input.disabled;}
+      if(form.elements.payment_method.value && form.querySelector('[name=payment_method]:checked')?.disabled) form.querySelector('[name=payment_method]:not(:disabled)')?.click();
+      text(form,'payment-preview',store.checkout_instructions);
+      form.querySelector('[type=submit]').disabled=false;
+    }).catch(error=>formError(form,error.message+' Close and reopen checkout to retry.'));
     form.elements.address.value = app.user.address || "";
     form.elements.phone.value = app.user.phone || "";
     const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
@@ -234,7 +244,7 @@ export function mountStore(page, app) {
       const demo = form.elements.payment_method.value !== "cod";
       text(form, "payment-preview", demo ? "Demonstration mode. Review and confirm on the next screen. No money is transferred." : "Pay with cash when your order arrives. No online payment is required.");
       form.querySelector('[type="submit"]').textContent = demo ? "Proceed to payment" : "Place order";
-      form.querySelector('[type="submit"]').disabled = submitting;
+      form.querySelector('[type="submit"]').disabled = submitting || !policyReady;
     });
     field(form, "checkout-total").textContent = peso(
       cart.reduce((sum, item) => sum + item.price * item.qty, 0),
@@ -250,7 +260,7 @@ export function mountStore(page, app) {
       const body = {
         address: form.elements.address.value.trim(), phone: form.elements.phone.value.trim(),
         payment_method: form.elements.payment_method.value,
-        expected_total: subtotal.toFixed(2),
+        expected_total: (subtotal + shipping).toFixed(2),
         items: cart.map((item) => ({ product_id: item.id, quantity: item.qty })),
       };
       // Keep the same key after a lost response or reopening the same checkout.
@@ -285,12 +295,12 @@ export function mountStore(page, app) {
         }
         panel.close();
         orderDetails(pendingOrder);
-        notice(pendingOrder.is_demo ? "Demo payment confirmed. Follow your order in My Orders." : "Order placed. Pay with cash on delivery.");
+        notice(pendingOrder.payment_status === 'Pending Verification' ? 'Payment awaits store verification. Follow updates in My Orders.' : pendingOrder.is_demo ? "Payment confirmed. Follow your order in My Orders." : "Order placed. Pay with cash on delivery.");
       } catch (error) {
         formError(form, error.message);
       } finally {
         submitting = false;
-        busy(form, false, pendingOrder?.is_demo ? "Retry demo payment" : form.elements.payment_method.value === "cod" ? "Place order" : "Proceed to payment");
+        busy(form, false, pendingOrder?.is_demo ? "Retry payment" : form.elements.payment_method.value === "cod" ? "Place order" : "Proceed to payment");
       }
     });
   }
@@ -370,7 +380,7 @@ export function mountStore(page, app) {
         text(panel, "detail-category", `${product.brand} · ${product.category}`);
         text(panel, "detail-price", peso(product.price));
         text(panel, "detail-description", product.description);
-        text(panel, "detail-stock", product.stock ? `${product.stock} in stock · Free standard delivery` : "Out of stock");
+        text(panel, "detail-stock", product.stock ? `${product.stock} in stock · Delivery fee shown at checkout` : "Out of stock");
         field(panel, "detail-specs").replaceChildren(...product.specs.map((spec) => {
           const li = document.createElement("li"); li.textContent = spec; return li;
         }));

@@ -7,7 +7,7 @@
 <div
     class="announcement catalog__announcement"
   >
-    Free nationwide delivery over ₱15,000
+    AUDIA school store · Delivery fees shown at checkout
     <span class="catalog__announcement-span">•</span> Professional setup included
   </div>
 
@@ -1898,9 +1898,9 @@
     <h3>Review your order</h3>
     <ul class="checkout-items" data-field="checkout-items"></ul>
     <div class="order-total"><span>Subtotal</span><strong data-field="checkout-subtotal"></strong></div>
-    <div class="order-total"><span>Shipping · free standard delivery</span><strong data-field="checkout-shipping"></strong></div>
+    <div class="order-total"><span>Shipping</span><strong data-field="checkout-shipping"></strong></div>
     <p class="form-hint">
-      Free standard delivery. Stock and prices are verified by the store when you place your order.
+      Stock, prices and delivery fees are verified by the store when you place your order.
     </p>
     </section>
     <section class="checkout-section checkout-delivery stack-form">
@@ -1932,12 +1932,12 @@
       <legend>Payment method</legend>
       <label class="payment-option"><input type="radio" name="payment_method" value="cod" checked required>
         <span class="payment-icon" aria-hidden="true">₱</span><span><strong>Cash on Delivery</strong><small>Pay cash to the courier when your order arrives.</small></span></label>
-      {% for method, name, kind in [('gcash', 'GCash', 'E-wallet'), ('maya', 'Maya', 'E-wallet'), ('bpi', 'BPI', 'Bank transfer'), ('bdo', 'BDO', 'Bank transfer')] %}
+      {% for method, name, kind in [('gcash', 'GCash', 'E-wallet'), ('maya', 'Maya', 'E-wallet'), ('bpi', 'BPI', 'Bank transfer'), ('bdo', 'BDO', 'Bank transfer'), ('metrobank', 'Metrobank', 'Bank transfer'), ('landbank', 'LandBank', 'Bank transfer')] %}
       <label class="payment-option"><input type="radio" name="payment_method" value="{{ method }}">
-        <span class="payment-icon" aria-hidden="true">{{ '▣' if kind == 'E-wallet' else '▤' }}</span><span><strong>{{ name }} <em>Demo</em></strong><small>{{ kind }} · confirm a simulated payment.</small></span></label>
+        <span class="provider-logo">{% if method == 'landbank' %}<span class="provider-fallback">LandBank</span>{% else %}<img src="{{ url_for('static', filename='images/payments/' ~ method ~ ('.png' if method == 'metrobank' else '.svg')) }}" alt="" loading="lazy"><span class="provider-fallback" hidden>{{ name }}</span>{% endif %}</span><span><strong>{{ name }}</strong><small>{{ kind }} · internal payment confirmation.</small></span></label>
       {% endfor %}
     </fieldset>
-    <p class="form-hint">E-wallet and bank payments run in demonstration mode. No money is transferred and no financial credentials are collected. Generic icons identify payment categories; no provider endorsement is implied.</p>
+    <p class="form-hint">Test Mode — No real funds transferred. No banking credentials are requested. Provider names identify payment choices; no partnership is implied.</p>
     <p class="payment-preview" data-field="payment-preview" role="status">Pay with cash when your order arrives. No online payment is required.</p>
     <p class="form-error" role="alert" data-field="form-error" hidden></p>
     <button type="submit" class="primary-btn">Place order</button>

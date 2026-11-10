@@ -1,4 +1,5 @@
 // Shared browser helpers: DOM, API requests, images, cart storage and dialogs.
+import { customerRequest, loadRequestHistory, mountDelivery } from './order_operations.js';
 
 // DOM
 // Native HTML template helpers. Content from API responses is always assigned as text.
@@ -134,7 +135,8 @@ export async function dismiss(node, type = "fade") {
 let csrf = "";
 export async function api(path, options = {}) {
   const headers = { ...options.headers };
-  if (options.body !== undefined) headers["Content-Type"] = "application/json";
+  const multipart = options.body instanceof FormData;
+  if (options.body !== undefined && !multipart) headers["Content-Type"] = "application/json";
   if (options.method && !["GET", "HEAD"].includes(options.method))
     headers["X-CSRF-Token"] = csrf;
   let response;
@@ -144,8 +146,9 @@ export async function api(path, options = {}) {
       headers,
       credentials: "same-origin",
       cache: "no-store",
+      signal: options.signal || AbortSignal.timeout(20000),
       body:
-        options.body === undefined ? undefined : JSON.stringify(options.body),
+        options.body === undefined ? undefined : multipart ? options.body : JSON.stringify(options.body),
     });
   } catch {
     throw new Error(
@@ -181,6 +184,14 @@ document.addEventListener(
   "error",
   (event) => {
     const image = event.target;
+    // Map tiles manage their own retry/empty state. Evidence and verification
+    // images must never be replaced with an unrelated catalog photograph.
+    if (image instanceof HTMLImageElement && (image.closest('.delivery-map, .evidence-gallery') || image.classList.contains('success-qr'))) return;
+    if (image instanceof HTMLImageElement && image.closest('.provider-logo')) {
+      image.hidden = true;
+      image.nextElementSibling.hidden = false;
+      return;
+    }
     if (image instanceof HTMLImageElement && !image.dataset.fallback) {
       image.dataset.fallback = "true";
       image.alt =
@@ -312,17 +323,25 @@ export function empty(node, message) {
 
 export function orderDetails(order, { live = true, customer = true } = {}) {
   const panel = dialog(`Order ${order.id}`, "order-detail");
+  const refreshDelivery = mountDelivery(panel, order);
   function render(order) {
     text(panel, "reference", order.payment_reference || "Not settled");
-    field(panel, "demo-notice").hidden = !order.is_demo;
+    field(panel, "demo-notice").hidden = !order.is_simulated;
+    field(panel, "receipt").hidden = !order.receipt_url;
+    field(panel, "receipt").href = order.receipt_url || "#";
+    text(panel, "discount", peso(order.discount || 0));
+    text(panel, "tax", peso(order.tax || 0));
     field(panel, "attempt-history").hidden = !order.payment_attempts?.length;
     field(panel, "attempts").replaceChildren(...(order.payment_attempts || []).map((attempt) => {
       const row = document.createElement("li");
-      row.textContent = `${attempt.method} · ${attempt.status} · ${attempt.id} · ${new Date(attempt.created_at).toLocaleString()}`;
+      row.textContent = `${attempt.method} · ${attempt.status} · ${attempt.id}${attempt.payer_number_masked ? ' · '+attempt.payer_number_masked : ''} · ${new Date(attempt.created_at).toLocaleString()}`;
       return row;
     }));
-    const unpaid = order.status === "Pending" && order.payment_status === "Pending";
-    field(panel, "customer-order-actions").hidden = !customer || !unpaid;
+    const unpaid = order.status === "Pending" && ["Pending", "Processing", "Failed", "Cancelled"].includes(order.payment_status);
+    field(panel, "customer-order-actions").hidden = !customer || !(order.can_cancel || order.can_request_refund || order.can_retry_payment);
+    field(panel, "cancel-order").hidden = !order.can_cancel;
+    field(panel, "cancel-order").textContent = unpaid ? 'Cancel unpaid order' : 'Request cancellation';
+    field(panel, "request-refund").hidden = !order.can_request_refund;
     field(panel, "retry-payment").hidden = !order.can_retry_payment;
     field(panel, "status").dataset.status = order.status;
     for (const key of [
@@ -349,12 +368,13 @@ export function orderDetails(order, { live = true, customer = true } = {}) {
     text(panel, "subtotal", peso(order.subtotal ?? order.amount));
     text(panel, "shipping", peso(order.shipping_fee ?? 0));
     renderTracking(field(panel, "tracking"), order);
-    field(panel, "history").replaceChildren(...(order.history || []).map((event) => {
+    field(panel, "history").replaceChildren(...[...(order.history || []), ...(order.payment_history || [])].sort((a,b)=>a.at.localeCompare(b.at)).map((event) => {
       const row = document.createElement("li");
-      row.textContent = `${new Date(event.at).toLocaleString()} · ${event.kind === "payment" ? event.note : event.status}`;
+      row.textContent = `${new Date(event.at).toLocaleString()} · ${event.status}${event.note ? ' · '+event.note : ''}`;
       return row;
     }));
     text(panel, "tracking-update", !order.history?.length ? "Earlier status timestamps were not recorded for this order." : live ? "Updates automatically while this window is open." : "Status shown when opened. Reopen to review later changes.");
+    void loadRequestHistory(panel, order);
   }
   render(order);
   let updating = false;
@@ -373,19 +393,26 @@ export function orderDetails(order, { live = true, customer = true } = {}) {
     updating = true;
     field(panel, "cancel-order").disabled = true;
     try {
-      order = (await api(`/orders/${order.id}/cancel`, { method: "POST", body: {} })).order;
-      render(order);
-      notice("Unpaid order cancelled. Reserved stock has been released.");
+      const requestPanel = await customerRequest(order, true);
+      requestPanel.addEventListener('request-submitted',async()=>{
+        try{order=(await api(`/orders/${order.id}`)).order;render(order);
+          notice(order.status==='Cancelled'?'Order cancelled. Reserved stock released.':'Cancellation request submitted for review.');}
+        catch(e){text(panel,'order-error',e.message);field(panel,'order-error').hidden=false;}
+      });
     } catch (error) {
       text(panel, "order-error", error.message); field(panel, "order-error").hidden = false;
     } finally { updating = false; field(panel, "cancel-order").disabled = false; }
+  });
+  field(panel,'request-refund').addEventListener('click',async()=>{
+    const requestPanel=await customerRequest(order);
+    requestPanel.addEventListener('request-submitted',()=>{void loadRequestHistory(panel,order);notice('Refund request submitted for review.');});
   });
   if (live) {
     const stop = poll(async () => {
       if (!panel.isConnected) return stop();
       try {
         const data = await api(`/orders/${encodeURIComponent(order.id)}`);
-        if (panel.isConnected && !updating) { order = data.order; render(order); }
+        if (panel.isConnected && !updating) { order = data.order; render(order); await refreshDelivery(); }
       } catch (error) { if (panel.isConnected) text(panel, "tracking-update", `Unable to refresh: ${error.message}`); }
     });
     panel.addEventListener("close", stop, { once: true });
@@ -394,12 +421,14 @@ export function orderDetails(order, { live = true, customer = true } = {}) {
 }
 
 export function renderTracking(node, order) {
-  const stages = ["Pending", "Confirmed", "Processing", "Shipped", "Out for Delivery", "Delivered"];
+  const stages = ["Pending", "Confirmed", "Processing", "Packed", "Shipped", "Out for Delivery", "Delivered"];
   const current = stages.indexOf(order.status);
-  node.replaceChildren(...stages.map((status, index) => {
+  const visibleStages = current < 0 ? stages.filter(status => (order.history || []).some(e=>e.kind==='status'&&e.status===status)) : stages;
+  node.replaceChildren(...visibleStages.map((status) => {
+    const index=stages.indexOf(status);
     const item = document.createElement("li");
-    item.textContent = status === "Pending" ? "Pending confirmation" : status;
-    item.dataset.state = current === index ? "current" : current > index ? "done" : "waiting";
+    item.textContent = status === "Pending" ? "Awaiting acceptance" : status;
+    item.dataset.state = current < 0 ? 'done' : current === index ? "current" : current > index ? "done" : "waiting";
     if (current === index) item.setAttribute("aria-current", "step");
     const recorded = (order.history || []).find((event) => event.kind === "status" && event.status === status);
     if (recorded) {
@@ -413,6 +442,7 @@ export function renderTracking(node, order) {
   placed.textContent = `Order placed · ${new Date(order.created_at).toLocaleString()}`;
   placed.dataset.state = "done";
   node.prepend(placed);
+  if(order.payment_collected_at){const paid=document.createElement('li');paid.textContent=`Payment confirmed · ${new Date(order.payment_collected_at).toLocaleString()}`;paid.dataset.state='done';placed.after(paid);}
   if (current < 0) {
     const terminal = document.createElement("li");
     terminal.textContent = `Order ${order.status.toLowerCase()}`;

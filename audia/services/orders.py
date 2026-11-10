@@ -7,87 +7,77 @@ Debugging: Callers must lock the Order row; changes commit together in the route
 """
 from sqlalchemy import select
 from audia.database import db
-from audia.database.models import OrderEvent, OrderPayment, Product, now
+from audia.database.models import OrderEvent, Product, InventoryMovement, now
 
 TRANSITIONS = {
     'Pending': ['Confirmed', 'Processing', 'Cancelled', 'Rejected'],
     'Confirmed': ['Processing', 'Cancelled'],
-    'Processing': ['Shipped', 'Cancelled'],
+    'Processing': ['Packed', 'Shipped', 'Cancelled'],
+    'Packed': ['Shipped', 'Cancelled'],
     'Shipped': ['Out for Delivery', 'Delivered'],
     'Out for Delivery': ['Delivered'],
-    'Delivered': ['Refunded'], 'Cancelled': [], 'Rejected': [], 'Refunded': [],
+    'Delivered': ['Returned', 'Refunded'], 'Returned': ['Refunded'], 'Cancelled': [], 'Rejected': [], 'Refunded': [],
 }
 
 
 def update_order(order, data, actor):
-    """Apply validated status/collection input to a locked order; return None.
-
-    Raises ValueError before commit for invalid transitions or unverified payment.
-    Existing legacy status shortcuts stay valid; repeated updates are idempotent.
-    """
+    """Validate fulfillment separately from collections/refunds; caller holds order lock."""
+    from audia.services.ledger import SETTLED, collect, payment_event, refund, ZERO
     if not any(key in data for key in ('status', 'payment_status')):
-        raise ValueError('Choose an order status or record a collected payment.')
+        raise ValueError('Choose an order status or record a collection.')
     status = data.get('status', order.status)
     if data.get('expected_status', order.status) != order.status:
-        raise ValueError('This order changed since you opened it. Close it and review the latest status.')
+        raise ValueError('This order changed. Reopen it and review the current status.')
     if not isinstance(status, str) or status not in TRANSITIONS:
         raise ValueError('Choose a valid order status.')
     changed = status != order.status
     if changed and status not in TRANSITIONS.get(order.status, []):
         raise ValueError('That order status transition is not allowed.')
-    payment = data.get('payment_status')
     record = order.payment_record
-    if changed and status in ('Confirmed', 'Processing', 'Shipped', 'Out for Delivery', 'Delivered') and order.payment != 'Cash on delivery' and (not record or record.status != 'Demo paid'):
-        raise ValueError('Complete the demo payment before accepting or dispatching this order.')
+    reason = data.get('reason', '')
+    if not isinstance(reason, str) or len(reason.strip()) > 250:
+        raise ValueError('Enter a short fulfillment or cancellation note (at most 250 characters).')
+    paid = record and record.status in SETTLED
+    if changed and status in ('Confirmed', 'Processing', 'Packed', 'Shipped', 'Out for Delivery', 'Delivered') and order.payment != 'Cash on delivery' and (not paid or record.status == 'Refunded'):
+        raise ValueError('Complete payment before accepting or dispatching this order.')
     if 'payment_status' in data:
-        if payment != 'Paid':
-            raise ValueError('Payment can only be recorded after actual collection.')
-        if order.payment != 'Cash on delivery':
-            raise ValueError('Demo or unsupported payment methods cannot be verified as real payments.')
-        if status != 'Delivered':
-            raise ValueError('Record COD collection only when delivery has been completed.')
+        if data['payment_status'] != 'Paid' or order.payment != 'Cash on delivery' or status != 'Delivered':
+            raise ValueError('COD collection requires a delivered order.')
         if data.get('collection_confirmed') is not True:
-            raise ValueError('Confirm that the cash payment was actually collected.')
+            raise ValueError('Confirm the simulated cash collection.')
         reference = data.get('payment_reference', '')
         if not isinstance(reference, str) or not 3 <= len(reference.strip()) <= 200:
-            raise ValueError('Add a collection receipt or verification note (3–200 characters).')
-        if record is None or record.status != 'Paid':
-            if record is None:
-                record = OrderPayment(status='Pending')
-                order.payment_record = record
-            record.status = 'Paid'
-            record.reference = reference.strip()
-            record.collected_at = now()
-            record.collected_by = actor.id
-            order.events.append(OrderEvent(status=status, kind='payment', note='Cash collection recorded by the store.', actor_id=actor.id))
-    if changed:
-        if status in ('Cancelled', 'Rejected') and record is None:
-            record = OrderPayment(status='Cancelled')
-            order.payment_record = record
-        if status in ('Cancelled', 'Rejected') and record and record.status == 'Demo paid':
-            record.status = 'Demo refunded'
-            order.events.append(OrderEvent(status=status, kind='payment', note='Demo payment reversed; no money transferred.', actor_id=actor.id))
-        elif status in ('Cancelled', 'Rejected') and record and record.status == 'Pending':
-            record.status = 'Cancelled'
-        if status in ('Cancelled', 'Rejected'):
-            for attempt in order.payment_attempts:
-                if attempt.status == 'Pending':
-                    attempt.status = 'Cancelled'
-                    attempt.completed_at = now()
-        if status == 'Refunded' and record and record.status == 'Demo paid':
-            record.status = 'Demo refunded'
-            order.events.append(OrderEvent(status=status, kind='payment', note='Demo refund recorded; no money transferred.', actor_id=actor.id))
-        if status in ('Cancelled', 'Rejected', 'Refunded'):
-            for item in sorted(order.items, key=lambda item: item.product_id):
-                product = db().scalar(select(Product).where(Product.id == item.product_id).with_for_update())
-                if product is None:
-                    raise ValueError('An ordered product is missing. Contact store support.')
-                product.stock += item.quantity
-        if status == 'Refunded' and record and record.status == 'Paid':
-            if data.get('refund_confirmed') is not True:
-                raise ValueError('Confirm the offline refund was completed before marking a paid order refunded.')
-            record.status = 'Refunded'
-            order.events.append(OrderEvent(status=status, kind='payment', note='Offline refund confirmed by the store.', actor_id=actor.id))
-        order.status = status
-        note = 'Status updated by the store.' if actor.role == 'admin' else 'Unpaid order cancelled by the customer.'
-        order.events.append(OrderEvent(status=status, kind='status', note=note, actor_id=actor.id))
+            raise ValueError('Add a collection verification note (3-200 characters).')
+        if record is None:
+            from audia.services.ledger import create_payment
+            create_payment(order, actor)
+            record = order.payment_record
+        collect(order, actor, 'COD collection confirmed by administrator. ' + reference.strip())
+    if not changed:
+        return
+    if status in ('Cancelled', 'Rejected', 'Refunded') and paid:
+        if status == 'Refunded' and data.get('refund_confirmed') is not True:
+            raise ValueError('Confirm the internal refund before changing fulfillment status.')
+        remaining = ZERO if record.status == 'Refunded' else record.amount - sum((r.amount for r in record.refunds), ZERO)
+        if remaining > 0:
+            refund(order, {'request_key': 'status-refund-' + order.id,
+                          'amount': str(remaining), 'reason': reason.strip() or 'Order ' + status.lower()}, actor)
+    elif status in ('Cancelled', 'Rejected') and record:
+        payment_event(order, 'Cancelled', 'Order cancelled; no collection.', actor)
+    if status in ('Cancelled', 'Rejected'):
+        for attempt in order.payment_attempts:
+            if attempt.status in ('Pending', 'Awaiting review'):
+                attempt.status, attempt.completed_at = 'Cancelled', now()
+        # Release reservations only before dispatch. Refunds/returns never auto-restock.
+        for item in sorted(order.items, key=lambda item: item.product_id):
+            product = db().scalar(select(Product).where(Product.id == item.product_id).with_for_update())
+            if product is None:
+                raise ValueError('An ordered product is missing.')
+            product.stock += item.quantity
+            db().add(InventoryMovement(product_id=product.id, order_id=order.id, delta=item.quantity,
+                                      balance=product.stock, reason='Reservation released: ' + status, actor_id=actor.id))
+    order.status = status
+    from audia.services.notifications import notify
+    notify(order, 'Order status updated: ' + status + '.')
+    order.events.append(OrderEvent(status=status, actor_id=actor.id,
+                        note=(reason.strip() or ('Status updated by store.' if actor.role == 'admin' else 'Unpaid order cancelled by customer.'))[:300]))

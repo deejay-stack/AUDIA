@@ -22,24 +22,43 @@
     <h3 class="order-detail__instruments-gear">Instruments &amp; gear</h3>
     <ul class="order-items order-detail__items" data-field="items"></ul>
     <div class="order-total"><span>Subtotal</span><span data-field="subtotal"></span></div>
+    <div class="order-total"><span>Discount</span><span data-field="discount"></span></div><div class="order-total"><span>Tax</span><span data-field="tax"></span></div>
     <div class="order-total"><span>Shipping</span><span data-field="shipping"></span></div>
     <div class="order-total order-detail__order-detail-div">
       <span>Total</span><strong data-field="total"></strong>
     </div>
+    <a class="secondary-btn" data-field="receipt" target="_blank" rel="noopener" hidden>View / print receipt</a>
     <h3>Track your order</h3>
     <ol class="order-timeline" data-field="tracking" aria-label="Order tracking"></ol>
     <p class="form-hint" data-field="tracking-update" role="status"></p>
+    <section class="delivery-panel"><h3>Delivery information</h3><p data-field="delivery-summary" class="form-hint"></p>
+      <button type="button" class="secondary-btn" data-field="show-delivery-map">Open delivery map</button>
+      <div class="delivery-map" data-field="delivery-map" hidden></div><p data-field="delivery-map-error" role="status" class="form-hint"></p>
+    </section>
+    <section><h3>Returns &amp; refunds</h3><div data-field="request-history" class="request-history"></div></section>
     <details><summary>Status and payment history</summary><ul class="order-history" data-field="history"></ul></details>
-    <details data-field="attempt-history" hidden><summary>Demo payment attempts</summary><ul class="order-history" data-field="attempts"></ul></details>
-    <p class="payment-preview" data-field="demo-notice" hidden>Demo order · payments and refunds are simulated. No money is transferred.</p>
+    <details data-field="attempt-history" hidden><summary>Payment attempts</summary><ul class="order-history" data-field="attempts"></ul></details>
+    <p class="form-hint" data-field="demo-notice" hidden>Test Mode — No real funds transferred. Payments and refunds are internal store records.</p>
     <p class="form-error" data-field="order-error" role="alert" hidden></p>
     <div class="form-actions" data-field="customer-order-actions" hidden>
-      <button class="secondary-btn" type="button" data-field="cancel-order">Cancel unpaid order</button>
-      <button class="primary-btn" type="button" data-field="retry-payment">Continue demo payment</button>
+      <button class="secondary-btn" type="button" data-field="cancel-order">Cancel order</button>
+      <button class="primary-btn" type="button" data-field="retry-payment">Continue payment</button>
+      <button class="secondary-btn" type="button" data-field="request-refund">Return / Refund</button>
     </div>
     <p class="form-hint">
       For changes or delivery assistance, contact the store with your order
       number.
     </p>
   </div>
+</template>
+<template id="customer-request-template">
+  <form class="stack-form" data-form="customer-request">
+    <p class="form-hint" data-field="request-summary"></p>
+    <div data-field="request-products" class="request-products"></div>
+    <label>Reason<select name="reason" required></select></label>
+    <label>Additional explanation<textarea name="explanation" maxlength="2000" rows="3"></textarea></label>
+    <label data-field="evidence-input">Optional product images (up to 4, 4 MB each)<input type="file" name="evidence" accept="image/png,image/jpeg,image/webp" multiple></label>
+    <p class="form-hint" data-field="request-policy"></p><p class="form-hint">Refunds are reviewed by the store and recorded in the simulated ledger. No funds are transferred.</p>
+    <p class="form-error" data-field="form-error" role="alert" hidden></p><button type="submit" class="primary-btn">Submit request</button>
+  </form>
 </template>
